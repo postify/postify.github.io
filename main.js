@@ -2,6 +2,7 @@
 //====| Gather DOM elements, then make a global data model for the app |====//
 $.holder =  // outer div of the project
 $.app =     // the app div
+$.btnAuth = // buttonto authorize google drive
 //$.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 $.attachDomObjects();
@@ -27,6 +28,10 @@ $(window).on("load", function(){
         model.windowWidth = window.innerWidth;
         model.windowHeight = window.innerHeight;
         model.resized = true;
+    });
+    $(window).on("mousedown", function(e){
+        var targetId = e.target.id;
+        if(targetId === "btnAuth"){document.location.assign("quickstart.html");}
     });
 
     //=====| update the view (GUI) with this polling timer |====//
