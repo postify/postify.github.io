@@ -2,3 +2,5 @@
 
 secret:
 EmgzN0XybgIx55v6msJc9e9a
+
+git remote add origin https://github.com/postify/postify.github.io.git
