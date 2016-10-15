@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" 
+            content="width=device-width
+            initial-scale=1
+            maximum-scale=1
+            minimum-scale=1
+            user-scalable=no">
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">        
+        <title>Test audio event timeupdate</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="prefixfree.js"></script>
+
+        <script src="api$.js"></script>
+    </head>
+    <body>
+    
+        <div id="holder">            
+           <div id="app">
+             <audio id='player' controls src="https://SabbaKilam.github.io/music/Anugama - Silk Tree.mp3"></audio>
+             <div id='timeMsg'>timeupdate events</div>
+             <div id="progressMsg">progress events</div>
+             <textarea id='eventsList' cols="35" rows="35"></textarea>
+           </div>           
+        </div>
+        
+    <script src="main.js"></script>
+    </body>
+</html>

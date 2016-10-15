@@ -14,7 +14,7 @@ var model = {
     
 };
 $.initialize = function initialize(){
-    $.adjustRem(1, 100);
+    $.adjustRem(10, 30);
     //etc.
 };
 
