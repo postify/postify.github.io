@@ -1,52 +1,89 @@
 /*global $*/
-document.location.assign("../../GoogleDriveAuthorize.html");
-//====| Gather DOM elements, then make a global data model for the app |====//
-$.holder =  // outer div of the project
-$.app =     // the app div
-//$.etc =   // describe each DOM object to be accessed in this app project
-"domObjects";// dummy string variable
-$.attachDomObjects();
+var view = $;
 
-//====| Make the global data model object that holds the app's state variables |====//
+//================//
+//====| VIEW |====//
+//================//
+view.holder =  // outer div of the project
+view.app =     // the app div
+view.msg = // place where test results are explained
+view.folderName = // user's type sht name of the folder here
+//view.etc =   // describe each DOM object to be accessed in this app project
+"domObjects";// dummy string variable
+view.attachDomObjects();
+//---| attach all DOM-related items |---//
+view.initialize = function initialize(){
+    view.adjustRem(8, 20);
+    //etc.
+};
+
+//=================//
+//====| MODEL |====//
+//=================//
 var model = {
      windowWidth: window.innerWidth
     ,windowHeight: window.innerHeight
     ,resized: false
-    
+    ,pendingEvents: []
+    ,updateModelBusy: false
+    ,eventCount: 0
 };
-$.initialize = function initialize(){
-    $.adjustRem(10, 30);
-    //etc.
+
+//======================//
+//====| CONTROLLER |====//
+//======================//
+var controller = {
+     registerEvent: function registerEvent(e){
+         model.pendingEvents.push(e);
+         model.eventCount += 1;
+         while(model.pendingEvents.length !== 0 && !model.updateModelBusy){
+             let nextEventObject = model.pendingEvents.shift();
+             controller.updateModel(nextEventObject, controller.updateView);
+         }
+     }
+    ,updateModel: function updateModel(e, updateView){
+        model.updateModelBusy = true;
+        //---------------------------//
+        // update model here
+        if(e.type === "resize"){
+            model.windowWidth = window.innerWidth;
+            model.windowHeight = window.innerHeight;
+            model.resized = true;
+        }
+        //---------------------------//
+        model.updateModelBusy = false;
+        updateView(e);
+    }
+    ,updateView: function updateView(e){
+        $(view.msg).html(e.target.id + ": "+ e.type);
+        view.folderName.value = model.eventCount;
+        
+        if(model.resized){
+            $.adjustRem();
+        }
+    }
+    ,monitoredEvents: [
+        ,"keydown"
+        ,"keyup"
+        ,"mousedown"
+        ,"mouseup"
+        ,"mouseover"
+        ,"mouseout"
+        ,"resize"
+        ,"focus"
+        ,"mousemove"
+    ]
 };
 
 //====| app "starts" here |====//
-$(window).on("load", function(){
-    $.initialize();
-    //====| write short handlers for dom events: only change model data |====//
-    // Note: handlers should only change model flags and model data, not the DOM.
-    $(window).on("resize", function(){
-        model.windowWidth = window.innerWidth;
-        model.windowHeight = window.innerHeight;
-        model.resized = true;
-    });
-
-    //=====| update the view (GUI) with this polling timer |====//
-    /* 
-        Note: the real handlers are in updateView,
-        which checks the model for changes, and updates the GUI accordingly
-    */
-    setInterval(updateView, 16.667); // polls the model at 60 frames/second
-    function updateView(){
-        if(model.resized){
-            $.adjustRem();
-            model.resized = false;
-        }
-        if(true){}
-        if(true){}
-        if(true){}
-        if(true){}
-        if(true){}
-        //etc.
-    };
+view(window).on("load", function(){
+    view.initialize();
+    $(view.msg).html("testing");
+    controller.monitoredEvents.forEach(eventType=>{
+        $(window).on(eventType, e=>{
+            e.stopPropagation(); // prevent target from seeing it own event
+            controller.registerEvent(e);
+        }, true); // "capture" the event early (on the way down)
+     });
 });
 //====| app "ends" here |====//
