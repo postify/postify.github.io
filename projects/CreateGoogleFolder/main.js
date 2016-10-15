@@ -8,6 +8,7 @@ view.holder =  // outer div of the project
 view.app =     // the app div
 view.msg = // place where test results are explained
 view.folderName = // user's type sht name of the folder here
+view.slider = //range type input
 //view.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 view.attachDomObjects();
@@ -37,12 +38,13 @@ var controller = {
          model.pendingEvents.push(e);
          model.eventCount += 1;
          while(model.pendingEvents.length !== 0 && !model.updateModelBusy){
-             let nextEventObject = model.pendingEvents.shift();
-             controller.updateModel(nextEventObject, controller.updateView);
+            model.updateModelBusy = true;             
+            let nextEventObject = model.pendingEvents.shift();
+            controller.updateModel(nextEventObject, controller.updateView);
          }
      }
     ,updateModel: function updateModel(e, updateView){
-        model.updateModelBusy = true;
+
         //---------------------------//
         // update model here
         if(e.type === "resize"){
@@ -51,8 +53,10 @@ var controller = {
             model.resized = true;
         }
         //---------------------------//
-        model.updateModelBusy = false;
-        updateView(e);
+        setTimeout(function(){
+            updateView(e);            
+            model.updateModelBusy = false;
+        },1);
     }
     ,updateView: function updateView(e){
         $(view.msg).html(e.target.id + ": "+ e.type);
@@ -72,13 +76,15 @@ var controller = {
         ,"resize"
         ,"focus"
         ,"mousemove"
+        ,"input"
     ]
 };
 
 //====| app "starts" here |====//
 view(window).on("load", function(){
+    
     view.initialize();
-    $(view.msg).html("testing");
+    
     controller.monitoredEvents.forEach(eventType=>{
         $(window).on(eventType, e=>{
             e.stopPropagation(); // prevent target from seeing it own event
