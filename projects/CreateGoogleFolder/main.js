@@ -36,9 +36,9 @@ var model = {
 var controller = {
      registerEvent: function registerEvent(e){
          model.pendingEvents.push(e);
-         model.eventCount += 1;
          while(model.pendingEvents.length !== 0 && !model.updateModelBusy){
-            model.updateModelBusy = true;             
+            model.updateModelBusy = true; 
+            model.eventCount += 1;            
             let nextEventObject = model.pendingEvents.shift();
             controller.updateModel(nextEventObject, controller.updateView);
          }
