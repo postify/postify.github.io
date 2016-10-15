@@ -57,8 +57,10 @@ var controller = {
 
     }
     ,updateView: function updateView(evt){
-        $(view.msg).html(evt.target.id + ": "+ evt.type);
-        view.folderName.value = model.eventCount;
+        if(!(evt.type === "mousemove" && evt.target.id === 'slider')){        
+            $(view.msg).html(evt.target.id + ": "+ evt.type);
+            view.folderName.value = model.eventCount;            
+        }
         
         if(model.resized){
             $.adjustRem();
