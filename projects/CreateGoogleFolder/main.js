@@ -58,8 +58,8 @@ var controller = {
             model.updateModelBusy = false;
         },1);
     }
-    ,updateView: function updateView(e){
-        $(view.msg).html(e.target.id + ": "+ e.type);
+    ,updateView: function updateView(evt){
+        $(view.msg).html(evt.target.id + ": "+ evt.type);
         view.folderName.value = model.eventCount;
         
         if(model.resized){
