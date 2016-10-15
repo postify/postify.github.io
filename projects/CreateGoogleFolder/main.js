@@ -37,14 +37,12 @@ var controller = {
      registerEvent: function registerEvent(e){
          model.pendingEvents.push(e);
          while(model.pendingEvents.length !== 0 && !model.updateModelBusy){
-            model.updateModelBusy = true; 
-            model.eventCount += 1;            
             let nextEventObject = model.pendingEvents.shift();
             controller.updateModel(nextEventObject, controller.updateView);
          }
      }
     ,updateModel: function updateModel(e, updateView){
-
+        model.updateModelBusy = true;        
         //---------------------------//
         // update model here
         if(e.type === "resize"){
@@ -52,11 +50,11 @@ var controller = {
             model.windowHeight = window.innerHeight;
             model.resized = true;
         }
+        model.eventCount += 1;         
         //---------------------------//
-        setTimeout(function(){
-            updateView(e);            
-            model.updateModelBusy = false;
-        },1);
+        updateView(e);            
+        model.updateModelBusy = false;
+
     }
     ,updateView: function updateView(evt){
         $(view.msg).html(evt.target.id + ": "+ evt.type);
