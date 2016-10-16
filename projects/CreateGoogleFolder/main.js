@@ -116,8 +116,8 @@ view.initialize = function initialize(){
     $.player2 = document.createElement('audio');
     $.player2.src = model.musicSource;
     $.player2.volume = 0.5;
-    $.player.play();
     /*
+    $.player.play();    
     setTimeout(function(){
         $.player2.play();
     },48000);
