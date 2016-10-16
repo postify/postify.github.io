@@ -1,6 +1,21 @@
+//=================//
+//====| MODEL |====//
+//=================//
+//Anugama - Silk Tree.mp3
+var model = {
+     windowWidth: window.innerWidth
+    ,windowHeight: window.innerHeight
+    ,resized: false    
+    ,player: document.createElement('audio')
+    ,musicSource: "https://HussMalik.github.io/music/Chicago - Introduction.mp3"
+    ,pendingEvents: []
+    ,updateModelBusy: false
+    ,eventCount: 0
+    ,sliderMaximum: 10000
+};
+
 /*global $*/
 var view = $;
-
 //================//
 //====| VIEW |====//
 //================//
@@ -13,22 +28,12 @@ view.slider = //range type input
 //view.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 view.attachDomObjects();
-
-
-//=================//
-//====| MODEL |====//
-//=================//
-//Anugama - Silk Tree.mp3
-var model = {
-     windowWidth: window.innerWidth
-    ,windowHeight: window.innerHeight
-    ,player: document.createElement('audio')
-    ,musicSource: "https://HussMalik.github.io/music/Chicago - Introduction.mp3"
-    ,resized: false
-    ,pendingEvents: []
-    ,updateModelBusy: false
-    ,eventCount: 0
-    ,sliderMaximum: 10000
+view.initialize = function initialize(){
+    view.adjustRem(8, 30);
+    $.slider.value = 0;
+    $.player = model.player;
+    $.player.src = model.musicSource;
+    $.player.play();
 };
 
 //======================//
@@ -39,13 +44,12 @@ var controller = {
          model.pendingEvents.push(e);
          while(model.pendingEvents.length !== 0 && !model.updateModelBusy){
             let nextEventObject = model.pendingEvents.shift();
-            controller.updateModel(nextEventObject, controller.updateView);
+            controller.updateModel(nextEventObject);
          }
      }
-    ,updateModel: function updateModel(e, updateView){
+    ,updateModel: function updateModel(e){
         model.updateModelBusy = true;        
         //---------------------------//
-        // update model here
         if(e.type === "resize"){
             model.windowWidth = window.innerWidth;
             model.windowHeight = window.innerHeight;
@@ -53,7 +57,7 @@ var controller = {
         }
         model.eventCount += 1;         
         //---------------------------//
-        updateView(e);            
+        controller.updateView(e);            
         model.updateModelBusy = false;
 
     }
@@ -94,7 +98,6 @@ var controller = {
         ,"mousemove"
         ,"input"
         //music player events
-
     ]
     ,monitoredAudioEvents: [
          "timeupdate"
@@ -102,53 +105,39 @@ var controller = {
         ,"volumechange"
         ,"progress"
         ,"error"
-        
     ]
 };
 
-view.initialize = function initialize(){
-    view.adjustRem(8, 30);
-    $.slider.value = 0;
-    $.player = model.player;
-    $.player.src = model.musicSource;
-    $.player.setAttribute("controls", "controls");
-    $.player.setAttribute("id", "player");
-    $.player2 = document.createElement('audio');
-    $.player2.src = model.musicSource;
-    $.player2.volume = 0.5;
-    /*
-    $.player.play();    
-    setTimeout(function(){
-        $.player2.play();
-    },48000);
-    */
-    //etc.
-};
-
-//====| app "starts" here |====//
+//=====================//
+//====| APP START |====//
+//=====================//
 view(window).on("load", function(){
     
     view.initialize();
-    
+    /**
+        After initializing
+        1.) Catch all user-generated event objects
+            of interest at a high level of the DOM element tree. Here we 
+            catch them all at the window (global) object.
+        2.) Catch all audio player generated events at the player.
+        3.) That's it. Let the controller do all the work:
+                a.) Register all event objects in a "wait your turn" queue (an array).
+                b.) RegisterEvent calls upddateModel, which "calls back" updateView.
+    */
     controller.monitoredDomEvents.forEach(eventType=>{
         $(window).on(eventType, e=>{
-            e.stopPropagation(); // prevent target from seeing it own event
+            e.stopPropagation(); // prevent target from seeing its own event
             controller.registerEvent(e);
-        }, true); // "capture" the event early (on the way down)
+        }, true); // "capture" the event early (on the way down the DOM tree)
      });
      
     controller.monitoredAudioEvents.forEach(eventType=>{
         $($.player).on(eventType, e=>{
-            e.stopPropagation(); // prevent target from seeing it own event
+            e.stopPropagation(); // prevent target from seeing its own event
             controller.registerEvent(e);
-        }, true); // "capture" the event early (on the way down)
+        }, true); // "capture" the event early (on the way down the DOM tree)
      }); 
      
-    controller.monitoredAudioEvents.forEach(eventType=>{
-        $($.player2).on(eventType, e=>{
-            e.stopPropagation(); // prevent target from seeing it own event
-            controller.registerEvent(e);
-        }, true); // "capture" the event early (on the way down)
-     });      
-});
-//====| app "ends" here |====//
+});//================//
+//====| APP END |====//
+//===================//
