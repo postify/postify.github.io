@@ -45,6 +45,7 @@ body{
     right: 0;
     margin: auto;
 }
+
 input[type="range"]{
     display: inline-block;
     width: 100%;
