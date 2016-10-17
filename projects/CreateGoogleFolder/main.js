@@ -85,25 +85,17 @@ var controller = {
 
     }
     ,createFolder: function createFolder(){
-        var fileMetadata = {
-            'name': model.folderName
-            ,'mimeType': 'application/vnd.google-aps.folder'
-        };
-        var mainObject = {
-            resource: fileMetadata
-            ,fields: 'id'
-        };        
-        function errorFileFunction(error, file ){
-            if(error){
-                alert(error);
-            }
-            else{
-                model.folderId = file.id;
-                alert("folder id: " + model.folderId);
-            }
-        }        
-        var request = gapi.drive.files.create(mainObject, errorFileFunction);
-        request.execute(function(){});
+       var request = gapi.client.request({
+           'path': '/drive/v3/files/',
+           'method': 'POST',
+           'body':{
+               "title" : "Folder",
+               "mimeType" : "application/vnd.google-apps.folder",
+           }
+       });
+       request.execute( function(response) { 
+           alert("Created folder: " +response.title); 
+       });
     }
     ,monitoredDomEvents: [
          "keydown"
