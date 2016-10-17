@@ -85,9 +85,13 @@ var controller = {
 
     }
     ,createFolder: function createFolder(){
+        //http://stackoverflow.com/questions/12698541/how-to-create-a-folder-on-google-drive-using-javascript
        var request = gapi.client.request({
            'path': '/drive/v3/files/',
            'method': 'POST',
+           'headers': {
+               'Content-Type': 'application/json'            
+           },   
            'body':{
                "title" : model.folderName,
                "mimeType" : "application/vnd.google-apps.folder",
