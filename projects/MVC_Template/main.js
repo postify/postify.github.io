@@ -1,5 +1,4 @@
 /*global $*/
-/*global gapi*/
 var view = $;
 //================//
 //====| VIEW |====//
@@ -7,28 +6,35 @@ var view = $;
 //---| attach all DOM-related items |---//
 view.holder =  // outer div of the project
 view.app =     // the app div
-view.msg = // place where test results are explained
-view.folderName = // user's type sht name of the folder here
+view.slider = // range type inpuit slider
+view.msg = //div that holds results of tests, etc.
 //view.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 view.attachDomObjects();
 view.initialize = function initialize(){
     view.adjustRem(8, 30);
+    $.slider.value = 0;
+    $.player = model.player;
+    $.player.setAttribute("id","player");
+    $.player.src = model.musicSource;
+    $.player.volume = 0;
+    $.player.play();
 };
-
 
 //=================//
 //====| MODEL |====//
 //=================//
 //Anugama - Silk Tree.mp3
 var model = {
-     resized: false 
+     windowWidth: window.innerWidth
+    ,windowHeight: window.innerHeight
+    ,resized: false    
+    ,player: document.createElement('audio')
+    ,musicSource: "https://HussMalik.github.io/music/Chicago - Introduction.mp3"
     ,pendingEvents: []
     ,updateModelBusy: false
+    ,eventCount: 0
     ,sliderMaximum: 10000
-    //drive info
-    ,folderName: ""
-    ,folderId: ""
 };
 
 //======================//
@@ -46,15 +52,11 @@ var controller = {
         model.updateModelBusy = true;        
         //---------------------------//
         if(e.type === "resize"){
+            model.windowWidth = window.innerWidth;
+            model.windowHeight = window.innerHeight;
             model.resized = true;
         }
-        //====| KEYUP for drive name |====//
-        if(e.type === "keyup"){
-            if(e.keyCode === 13){
-                model.folderName = view.folderName.value.trim();
-                this.createFolder();
-            }
-        }
+        model.eventCount += 1;         
         //---------------------------//
         controller.updateView(e);            
         model.updateModelBusy = false;
@@ -63,49 +65,27 @@ var controller = {
     ,updateView: function updateView(evt){
         if(!(evt.type === "mousemove" && evt.target.id === 'slider')){        
             $(view.msg).html(evt.target.id + ": "+ evt.type);
+           
         }
-        if(model.resized){
-            $.adjustRem();
-        }
-
-        /*
         if(evt.type === "timeupdate" && evt.target.id === 'player'){
             if(model.player.duration !== 0 && !isNaN( model.player.duration) ){
                 let fraction = model.player.currentTime / model.player.duration;
-                //etc.
+                $.slider.value = fraction * model.sliderMaximum;   
             }
         }
         if(evt.type === "input" && evt.target.id === "slider"){
            if(model.player.duration !== 0 && !isNaN( model.player.duration) ){
                let fraction = 1*$.slider.value / model.sliderMaximum;
-               //etc.
-            }
+               model.player.currentTime = model.player.duration * fraction;
+           }
         }
-        */
-
-    }
-    ,createFolder: function createFolder(){
-        var fileMetadata = {
-            'name': model.folderName
-            ,'mimeType': 'application/vnd.google-aps.folder'
-        };
-        var mainObject = {
-            resource: fileMetadata
-            ,fields: 'id'
-        };        
-        function errorFileFunction(error, file ){
-            if(error){
-                alert(error);
-            }
-            else{
-                model.folderId = file.id;
-                alert("folder id: " + model.folderId);
-            }
-        }        
-        gapi.client.drive.files.create(mainObject, errorFileFunction);
-
-
-        //alert(model.folderName);
+        if(evt.type === 'ended' && evt.target.id === 'player'){
+            $.player.currentTime = 0;
+            $.slider.value = 0;
+        }
+        if(model.resized){
+            $.adjustRem();
+        }
     }
     ,monitoredDomEvents: [
          "keydown"
@@ -127,7 +107,6 @@ var controller = {
         ,"progress"
         ,"error"
     ]
-    
 };
 
 //=====================//
@@ -152,14 +131,13 @@ view(window).on("load", function(){
             controller.registerEvent(e);
         }, true); // "capture" the event early (on the way down the DOM tree)
      });
-     /*
+     
     controller.monitoredAudioEvents.forEach(eventType=>{
         $($.player).on(eventType, e=>{
             e.stopPropagation(); // prevent target from seeing its own event
             controller.registerEvent(e);
         }, true); // "capture" the event early (on the way down the DOM tree)
      }); 
-     */
      
 });//================//
 //====| APP END |====//
