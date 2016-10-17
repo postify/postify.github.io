@@ -99,8 +99,8 @@ var controller = {
        });
        request.execute( function(error, file) { 
            if(error){
-               alert("ERROR: " + error);
-               alert(Object.keys(error));
+               alert("ERROR: " + error.error);
+               //alert(Object.keys(error));
            }
            else{
                alert("FOLDER ID" + file.id);
