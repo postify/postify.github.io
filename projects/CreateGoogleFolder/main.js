@@ -95,10 +95,10 @@ var controller = {
        });
        request.execute( function(error, file) { 
            if(error){
-               alert(error);
+               alert("ERROR: " + error);
            }
            else{
-               alert(file.id);
+               alert("FOLDER ID" + file.id);
            }
        });
     }
