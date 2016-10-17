@@ -91,7 +91,8 @@ var controller = {
            'path': '/drive/v3/files/',
            'method': 'POST',
            'headers': {
-               'Content-Type': 'application/json'            
+               'Content-Type': 'application/json',
+               'Authorization': 'Bearer '+ gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token.access_token
            },   
            'body':{
                "title" : model.folderName,
