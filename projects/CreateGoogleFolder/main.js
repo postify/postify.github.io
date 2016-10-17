@@ -52,7 +52,8 @@ var controller = {
         if(e.type === "keyup"){
             if(e.keyCode === 13){
                 model.folderName = view.folderName.value.trim();
-                gapi.client.load('drive', 'v3', this.createFolder);
+                //gapi.client.load('drive', 'v3', this.createFolder);
+                this.createFolder();
             }
         }
         //---------------------------//
