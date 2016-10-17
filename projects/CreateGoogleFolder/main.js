@@ -100,7 +100,10 @@ var controller = {
        request.execute( function(error, file) { 
            if(error){
                //alert("ERROR: " + error.error);
-               alert(Object.keys(error.error));
+               alert(Object.keys(error.error.errors));
+               alert(Object.keys(error.error.code));
+               alert(Object.keys(error.error.message));
+               
            }
            else{
                alert("FOLDER ID" + file.id);
