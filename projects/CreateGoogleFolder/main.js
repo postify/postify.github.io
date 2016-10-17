@@ -89,12 +89,17 @@ var controller = {
            'path': '/drive/v3/files/',
            'method': 'POST',
            'body':{
-               "title" : "Folder",
+               "title" : model.folderName,
                "mimeType" : "application/vnd.google-apps.folder",
            }
        });
-       request.execute( function(response) { 
-           alert("Created folder: " +response.title); 
+       request.execute( function(error, file) { 
+           if(error){
+               alert(error);
+           }
+           else{
+               alert(file.id);
+           }
        });
     }
     ,monitoredDomEvents: [
