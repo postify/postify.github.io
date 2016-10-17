@@ -52,8 +52,8 @@ var controller = {
         if(e.type === "keyup"){
             if(e.keyCode === 13){
                 model.folderName = view.folderName.value.trim();
-                //gapi.client.load('drive', 'v3', this.createFolder);
-                this.createFolder();
+                gapi.client.load('drive', 'v3', this.createFolder);
+                //this.createFolder();
             }
         }
         //---------------------------//
@@ -87,7 +87,7 @@ var controller = {
     }
     ,createFolder: function createFolder(){
         //http://stackoverflow.com/questions/12698541/how-to-create-a-folder-on-google-drive-using-javascript
-       var request = gapi.client.files.insert({
+       var request = gapi.client.request({
            'path': '/drive/v3/files/',
            'method': 'POST',
            'headers': {
