@@ -102,7 +102,8 @@ var controller = {
                 alert("folder id: " + model.folderId);
             }
         }        
-        gapi.drive.files.create(mainObject, errorFileFunction);
+        var request = gapi.drive.files.create(mainObject, errorFileFunction);
+        request.execute(function(){});
     }
     ,monitoredDomEvents: [
          "keydown"
