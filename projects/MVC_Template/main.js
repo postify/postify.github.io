@@ -1,8 +1,10 @@
 /*global $*/
 var view = $;
+
 //================//
 //====| VIEW |====//
 //================//
+
 //---| attach all DOM-related items |---//
 view.holder =  // outer div of the project
 view.app =     // the app div
