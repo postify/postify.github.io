@@ -90,9 +90,9 @@ var controller = {
        var request = gapi.client.request({
            'path': '/drive/v3/files/',
            'method': 'POST',
-           'headers': {
-               'Content-Type': 'application/json'
-           },   
+           //'headers': {
+            //   'Content-Type': 'application/json'
+           //},   
            'body':{
                "title" : model.folderName,
                "mimeType" : "application/vnd.google-apps.folder",
