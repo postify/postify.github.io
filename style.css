@@ -64,9 +64,8 @@ input{
     border-radius: 0.5rem;
 
 }
-#btnShroud span{
+#btnShroud div{
     position: absolute;
-    display: block;
     top:0;
     bottom: 0;
     left: 0;
