@@ -107,7 +107,7 @@ var controller = {
             controller.authorizeUser(false, handleAuthResult);
         }
         if(evt.type == "change" && evt.target.id == "fileElement"){
-            alert("file changed");
+            $($.msg).html("New file chosen");
         }
     }
     ,monitoredDomEvents: [
