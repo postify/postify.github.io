@@ -63,6 +63,7 @@ input{
     height: 10%;
     border-radius: 0.5rem;
     color: white;
+    line-height: 200%;
 }
 .btnPressed{
     background: linear-gradient(gray, lightgray);
