@@ -85,9 +85,9 @@ var controller = {
         function handleAuthResult(authResult){
             var authorized = authResult && ! authResult.error;
             if(authorized){
-                alert("You are authorized.");
+                $($.msg).html("You are authorized.");
             }else{
-                alert("You are NOT authorized.");
+                $($.msg).html("You are NOT authorized.");
             }
         }
         //-----------------------//  
