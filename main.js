@@ -54,7 +54,7 @@ var controller = {
     ,authorizeUser: function authorizeUser(){
         var authObject = {
             'client_id': model.CLIENT_ID
-            ,'scopes': 'https://www.googleapis.com/auth/drive.appfolder'
+            ,'scope': 'https://www.googleapis.com/auth/drive.appfolder'
             ,'immediate': true
         };
         function handleAuthResult(authResult){
