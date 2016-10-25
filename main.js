@@ -97,7 +97,7 @@ var controller = {
         if(model.resized){
             $.adjustRem();
         }
-        if(evt.type == "click" && evt.target.id == "fileElement"){
+        if(evt.type == "change" && evt.target == view.fileElement){
             $($.msg).html("New file chosen");
         }        
         if(evt.type == "keyup" && evt.keyCode == 13){
@@ -122,6 +122,7 @@ var controller = {
         ,"mousemove"
         ,"input"
         ,"click"
+        ,"change"
     ]
 };
 
