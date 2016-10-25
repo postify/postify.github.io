@@ -55,7 +55,7 @@ var controller = {
         var authObject = {
             'client_id': model.CLIENT_ID
             ,'scope': 'https://www.googleapis.com/auth/drive.appfolder'
-            ,'immediate': true
+            ,'immediate': false
         };
         function handleAuthResult(authResult){
             if(authResult && ! authResult.error){
