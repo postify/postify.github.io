@@ -20,7 +20,7 @@
 var model = {
     CLIENT_ID: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
     ,SCOPES: ['https://www.googleapis.com/auth/drive.appfolder',
-        'https://www.googleapis.com/auth/drive.apps.readonly'
+        'https://www.googleapis.com/auth/drive.metadata.readonly'
     ]
     ,windowWidth: window.innerWidth
     ,windowHeight: window.innerHeight
