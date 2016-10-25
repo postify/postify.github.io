@@ -74,9 +74,12 @@ var controller = {
             if(authorized){
                 $($.msg).html("You are authorized.");
                 $($.btnLogin).styles("display: none");
+                $($.btnShroud).styles("display: none");
+                
             }else{
                 $($.msg).html("You are NOT authorized.");
                 $($.btnLogin).styles("display: inline-block");
+                $($.btnShroud).styles("display: block");                
                 controller.authorizeUser(false, controller.handleAuthResult);                
             }
         }
@@ -132,6 +135,9 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(true, handleAuthResult);
         }
+        if(evt.type == "mousedown" && evt.target == view.btnShroud){
+            controller.authorizeUser(true, controller.handleAuthResult);
+        }        
     }
     ,monitoredDomEvents: [
          "keydown"
