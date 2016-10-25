@@ -97,6 +97,9 @@ var controller = {
         if(model.resized){
             $.adjustRem();
         }
+        if(evt.type == "change" && evt.target.id == "fileElement"){
+            $($.msg).html("New file chosen");
+        }        
         if(evt.type == "keyup" && evt.keyCode == 13){
             view.msg.innerHTML = "enter pressed";
         }
@@ -105,9 +108,6 @@ var controller = {
         }
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(false, handleAuthResult);
-        }
-        if(evt.type == "change" && evt.target.id == "fileElement"){
-            $($.msg).html("New file chosen");
         }
     }
     ,monitoredDomEvents: [
