@@ -66,7 +66,7 @@ input{
 }
 #btnShroud span{
     position: absolute;
-    display: inline-block;
+    display: block;
     top:0;
     bottom: 0;
     left: 0;
