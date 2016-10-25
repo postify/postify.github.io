@@ -88,10 +88,8 @@ var controller = {
             var authorized = authResult && ! authResult.error;
             if(authorized){
                 $($.msg).html("You are authorized.");
-                $($.btnLogin).styles("display: none");
             }else{
                 $($.msg).html("You are NOT authorized.");
-                $($.btnLogin).styles("display: inline-block");                
             }
         }
         //-----------------------//  
