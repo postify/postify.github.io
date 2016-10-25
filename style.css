@@ -64,7 +64,7 @@ input{
     border-radius: 0.5rem;
 
 }
-#btnShroud.span{
+#btnShroud span{
     position: absolute;
     display: inline-block;
     top:0;
