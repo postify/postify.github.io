@@ -69,6 +69,7 @@ var controller = {
             ,'immediate': booleanImmediate
         };
         gapi.auth.authorize(authObject, handleAuthResult);
+        return false;
     }
     ,handleAuthResult: function handleAuthResult(authResult){
             var authorized = authResult && ! authResult.error;
