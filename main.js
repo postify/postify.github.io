@@ -56,7 +56,7 @@ view.attachDomObjects();
 var controller = {
     initialize: function initialize(){
         view.adjustRem(8, 30);
-        controller.authorizeUser(true, controller.handleAuthResult );
+        controller.authorizeUser(false, controller.handleAuthResult );
     }
     
     ,authorizeUser: function authorizeUser(booleanImmediate, handleAuthResult){
