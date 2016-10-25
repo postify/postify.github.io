@@ -48,6 +48,7 @@ view.login = //
 view.fileElement = //
 view.shroud = //
 view.btnShroud = //
+view.btnShroudOverlay = //
 //view.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 view.attachDomObjects();
@@ -135,7 +136,7 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(true, handleAuthResult);
         }
-        if(evt.type == "mousedown" && evt.target == view.btnShroud){
+        if(evt.type == "mousedown" && evt.target == view.btnShroudOverlay){
             controller.authorizeUser(true, controller.handleAuthResult);
         }        
     }
