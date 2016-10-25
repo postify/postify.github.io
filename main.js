@@ -19,7 +19,9 @@
 //=================//
 var model = {
     CLIENT_ID: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
-    ,SCOPES: ['https://www.googleapis.com/auth/drive.appfolder']
+    ,SCOPES: ['https://www.googleapis.com/auth/drive.appfolder',
+        'https://www.googleapis.com/auth/drive.appdata'
+    ]
     ,windowWidth: window.innerWidth
     ,windowHeight: window.innerHeight
     ,resized: false    
