@@ -116,7 +116,8 @@ var controller = {
             }else{
                 $($.msg).html("You are NOT authorized.");
                 $($.btnLogin).styles("display: inline-block");
-                controller.authorizeUser(false, controller.handleAuthResult);                
+                //controller.authorizeUser(false, controller.handleAuthResult);
+                view.btnShroudOverlay.click();
             }
         }
         //-----------------------//  
@@ -139,7 +140,7 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(true, handleAuthResult);
         }
-        if(evt.type == "mousedown" && evt.target == view.btnShroudOverlay){
+        if(evt.type == "click" && evt.target == view.btnShroudOverlay){
             controller.authorizeUser(true, controller.handleAuthResult);
         }        
     }
