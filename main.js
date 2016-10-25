@@ -106,7 +106,7 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(false, handleAuthResult);
         }
-        if(evt.type == "change" && evt.target == view.fileElement){
+        if(evt.type == "change" && evt.target.id == "fileElement"){
             alert("file changed");
         }
     }
