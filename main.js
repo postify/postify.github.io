@@ -107,7 +107,7 @@ var controller = {
             controller.authorizeUser(false, handleAuthResult);
         }
         if(evt.type == "change" && evt.target == view.fileElement){
-            alert($fileElement.files[0].name);
+            alert($.fileElement.files[0].name);
         }
     }
     ,monitoredDomEvents: [
