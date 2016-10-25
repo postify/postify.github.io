@@ -65,7 +65,7 @@ input{
     border-radius: 0.5rem;
     color: gray;
     text-shadow: 0 1px 0 white;
-    padding: 1%;
+    padding-top: 1%;
 }
 .btnPressed{
     background: linear-gradient(gray, lightgray);
