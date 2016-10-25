@@ -101,7 +101,7 @@ var controller = {
             $(view.msg).html("Create folder");
         }
         if(evt.type == "click" && evt.target == view.btnLogin){
-            controller.authorizeUser(false, handleAuthResult);
+            controller.authorizeUser(true, handleAuthResult);
         }
     }
     ,monitoredDomEvents: [
