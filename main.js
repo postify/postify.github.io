@@ -43,6 +43,7 @@ view.folderName = //
 view.btnCreateFolder =//
 view.btnLogin = //
 view.login = //
+view.fileElement = //
 //view.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 view.attachDomObjects();
@@ -104,6 +105,9 @@ var controller = {
         }
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(false, handleAuthResult);
+        }
+        if(evt.type == "change" && evt.target == view.fileElement){
+            alert(evt.files[0].name);
         }
     }
     ,monitoredDomEvents: [
