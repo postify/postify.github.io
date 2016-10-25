@@ -61,7 +61,9 @@ var controller = {
         view.adjustRem(8, 30);
         //controller.authorizeUser(false, controller.handleAuthResult );
     }
-    
+    ,checkAuth: function checkAuth(){
+        controller.authorizeUser(false, controller.handleAuthResult);
+    }
     ,authorizeUser: function authorizeUser(booleanImmediate, handleAuthResult){
         var authObject = {
             'client_id': model.CLIENT_ID
