@@ -1,19 +1,19 @@
 /**
 <div id="holder">
-    <center>
-        <h3>Authorized!</h3>
-    </center>            
-   <div id="app">
-       <span id="msg">(Resize Screen To Test REM Response)</span>
-       <br/>Folder to Create:</br>
-       <input id="folderName">
-       <br/><br/>
-       <button id="btnCreateFolder">Create Folder</button>
-       <br/><br/>
+    
+    <input type="file" id="fileElement">
+      <div id="app">
+        <button id="btnLogin">Login Google Account </button><br/>
+        <span id="msg"></span>
+        <br/>Folder to Create:</br>
+        <input id="folderName">
+        <br/><br/>
+        <button id="btnCreateFolder">Create Folder</button>
+        <br/><br/>
+
    </div>           
 </div>
 */
-
 
 
 //=================//
