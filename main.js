@@ -62,7 +62,7 @@ var controller = {
         //controller.authorizeUser(false, controller.handleAuthResult );
     }
     ,checkAuth: function checkAuth(){
-        controller.authorizeUser(false, controller.handleAuthResult);
+        controller.authorizeUser(true, controller.handleAuthResult);
     }
     ,authorizeUser: function authorizeUser(booleanImmediate, handleAuthResult){
         var authObject = {
@@ -84,7 +84,7 @@ var controller = {
                 $($.msg).html("You are NOT authorized.");
                 $($.btnLogin).styles("display: inline-block");
                 $($.shroud).styles("display: block");                
-                controller.authorizeUser(false, controller.handleAuthResult);
+                controller.authorizeUser(true, controller.handleAuthResult);
             }
         }
     ,registerEvent: function registerEvent(e){
