@@ -97,7 +97,7 @@ var controller = {
             $.adjustRem();
         }
         if(evt.type == "change" && evt.target == view.fileElement){
-            if(view.fileElement.files[0].name){
+            if(view.fileElement.files[0]){
                 $(view.msg).html(view.fileElement.files[0].name);                
             }
         }        
