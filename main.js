@@ -1,8 +1,7 @@
 /**
 <div id="holder">
-    
     <input type="file" id="fileElement">
-      <div id="app">
+    <div id="app">
         <button id="btnLogin">Login Google Account </button><br/>
         <span id="msg"></span>
         <br/>Folder to Create:</br>
@@ -10,11 +9,9 @@
         <br/><br/>
         <button id="btnCreateFolder">Create Folder</button>
         <br/><br/>
-
-   </div>           
+    </div>
 </div>
 */
-
 
 //=================//
 //====| MODEL |====//
@@ -107,19 +104,6 @@ var controller = {
         model.updateModelBusy = false;
     }
     ,updateView: function updateView(evt){
-        //----| helper |----//
-        function handleAuthResult(authResult){
-            var authorized = authResult && ! authResult.error;
-            if(authorized){
-                $($.msg).html("You are authorized.");
-                $($.btnLogin).styles("display: none");
-            }else{
-                $($.msg).html("You are NOT authorized.");
-                $($.btnLogin).styles("display: inline-block");
-                controller.authorizeUser(false, controller.handleAuthResult);
-            }
-        }
-        //-----------------------//  
         if(model.resized){
             $.adjustRem();
         }
@@ -137,10 +121,10 @@ var controller = {
             $(view.msg).html("Create folder");
         }
         if(evt.type == "click" && evt.target == view.btnLogin){
-            controller.authorizeUser(false, handleAuthResult);
+            controller.authorizeUser(true, controller.handleAuthResult);
         }
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
-            controller.authorizeUser(false, controller.handleAuthResult);
+            controller.authorizeUser(true, controller.handleAuthResult);
         }        
     }
     ,monitoredDomEvents: [
