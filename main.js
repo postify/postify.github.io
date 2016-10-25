@@ -19,7 +19,9 @@
 //=================//
 var model = {
     CLIENT_ID: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
-    ,SCOPES: []
+    ,SCOPES: ['https://www.googleapis.com/auth/drive.appfolder',
+        'https://www.googleapis.com/auth/drive.apps.readonly'
+    ]
     ,windowWidth: window.innerWidth
     ,windowHeight: window.innerHeight
     ,resized: false    
@@ -54,7 +56,7 @@ var controller = {
     ,authorizeUser: function authorizeUser(){
         var authObject = {
             'client_id': model.CLIENT_ID
-            ,'scope': 'https://www.googleapis.com/auth/drive.appfolder'
+            ,'scope': model.SCOPES.join(' ')
             ,'immediate': false
         };
         function handleAuthResult(authResult){
