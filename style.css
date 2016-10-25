@@ -61,11 +61,20 @@ input{
     margin: auto;
     width: 20%;
     height: 7%;
-    font-size: 0.90rem;
     border-radius: 0.5rem;
+
+}
+#btnShroud span{
+    position: absolute;
+    display: inline-block;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 0.90rem;
     color: gray;
-    text-shadow: 0 1px 0 white;
-    padding-top: 1%;
+    text-shadow: 0 1px 0 white;    
 }
 .btnPressed{
     background: linear-gradient(gray, lightgray);
