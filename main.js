@@ -19,9 +19,7 @@
 //=================//
 var model = {
     CLIENT_ID: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
-    ,SCOPES: ['https://www.googleapis.com/auth/drive.appfolder',
-        'https://www.googleapis.com/auth/drive.metadata.readonly'
-    ]
+    ,SCOPES: ['https://www.googleapis.com/auth/drive.appfolder']
     ,windowWidth: window.innerWidth
     ,windowHeight: window.innerHeight
     ,resized: false    
@@ -41,6 +39,8 @@ view.app =  // the app div
 view.msg = //div that holds results of tests, etc.
 view.folderName = //
 view.btnCreateFolder =//
+view.btnLogin = //
+view.login = //
 //view.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 view.attachDomObjects();
@@ -51,21 +51,14 @@ view.attachDomObjects();
 var controller = {
     initialize: function initialize(){
         view.adjustRem(8, 30);
-        this.authorizeUser();
+        //this.authorizeUser();
     }
-    ,authorizeUser: function authorizeUser(){
+    ,authorizeUser: function authorizeUser(booleanImmediate, handleAuthResult){
         var authObject = {
             'client_id': model.CLIENT_ID
             ,'scope': model.SCOPES.join(' ')
-            ,'immediate': false
+            ,'immediate': booleanImmediate
         };
-        function handleAuthResult(authResult){
-            if(authResult && ! authResult.error){
-                alert("You are authorized.");
-            }else{
-                alert("You are NOT authorized.");
-            }
-        }
         gapi.auth.authorize(authObject, handleAuthResult);
     }    
     ,registerEvent: function registerEvent(e){
@@ -88,6 +81,16 @@ var controller = {
         model.updateModelBusy = false;
     }
     ,updateView: function updateView(evt){
+        //----| helper |----//
+        function handleAuthResult(authResult){
+            var authorized = authResult && ! authResult.error;
+            if(authorized){
+                alert("You are authorized.");
+            }else{
+                alert("You are NOT authorized.");
+            }
+        }
+        //-----------------------//  
         if(model.resized){
             $.adjustRem();
         }
@@ -96,6 +99,9 @@ var controller = {
         }
         if(evt.type == "click" && evt.target == view.btnCreateFolder ){
             $(view.msg).html("Create folder");
+        }
+        if(evt.type == "click" && evt.target == view.btnLogin){
+            controller.authorizeUser(false, handleAuthResult);
         }
     }
     ,monitoredDomEvents: [
