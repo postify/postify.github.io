@@ -62,7 +62,8 @@ input{
     width: 20%;
     height: 5%;
     border-radius: 0.5rem;
-    color: white;
+    color: gray;
+    text-shadow: 0 1px 0 white;
     line-height: 200%;
 }
 .btnPressed{
