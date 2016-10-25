@@ -97,7 +97,9 @@ var controller = {
             $.adjustRem();
         }
         if(evt.type == "change" && evt.target == view.fileElement){
-            $(view.msg).html(view.fileElement.files[0].name);
+            if(view.fileElement.files[0].name){
+                $(view.msg).html(view.fileElement.files[0].name);                
+            }
         }        
         if(evt.type == "keyup" && evt.keyCode == 13){
             view.msg.innerHTML = "enter pressed";
