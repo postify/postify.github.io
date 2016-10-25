@@ -46,6 +46,8 @@ view.btnCreateFolder =//
 view.btnLogin = //
 view.login = //
 view.fileElement = //
+view.shroud = //
+view.btnShroud = //
 //view.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 view.attachDomObjects();
