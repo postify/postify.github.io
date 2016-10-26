@@ -128,7 +128,7 @@ var controller = {
         if(evt.type === "mouseup" || evt.type === "mouseout"){
             if(evt.target.classList.contains("btnPressed")){
                 evt.target.classList.remove("btnPressed");
-                evt.target.classList.add("");                
+                evt.target.classList.add("btnReleased");                
             }
         }else if(evt.type === "mousedown" ){
             if(evt.target.classList.contains("btnReleased")){
