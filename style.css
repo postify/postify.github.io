@@ -131,7 +131,8 @@ td{
 }
 tr{
     position: relative;
-    width: 45%;
+    width: 100%;
+    height: 45%;
 }
 .button{
     width: 40%;
