@@ -123,6 +123,7 @@ table{
 }
 td{
     display: inline-block;
+    padding-top: 1%;
     width: 47%;
     height: 100%;
     border: 1px solid black;
@@ -141,10 +142,9 @@ tr{
     right: 0;
     margin: auto;
     font-size: 0.85rem;
-    color: #555;
     text-shadow: 0 1px 0 white;
     cursor: pointer;
-    padding: 0.25rem;
+    color: #555;    
     background: linear-gradient(lightgray, gray);
     border-radius: 0.5rem;
 }
