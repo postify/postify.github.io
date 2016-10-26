@@ -42,7 +42,7 @@ input{
     display: block;
     opacity: 1;
     visibility: visible;
-    transition: all 0.5s ease;
+    transition: all 0.25s ease;
     position: absolute;
     height: 100%;
     width: 100%;
