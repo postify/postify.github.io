@@ -112,7 +112,15 @@ var controller = {
             $.adjustRem();
         }
         if(model.shroudButtonIsPressed){
-            $(view.btnShroud).attribs("class=buttonPressed");
+            /**
+                The simplest is element.classList which has
+                remove(name), add(name), toggle(name), 
+                and contains(name) methods and is now supported 
+                by all major browsers.
+            */
+            view.btnShroud.classList.remove("btnReleased");
+            view.btnShroud.classList.add("btnPressed");
+            //$(view.btnShroud).attribs("class=buttonPressed");
         }
         if(evt.type == "change" && evt.target == view.fileElement){
             if(view.fileElement.files[0]){
