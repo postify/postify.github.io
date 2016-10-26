@@ -85,7 +85,7 @@ var controller = {
                 $($.btnLogin).styles("display: inline-block");
                 $($.shroud).styles
                     ("opacity: 1")               
-                    ("visibility: hidden")
+                    ("visibility: visible")
                 ;
                 controller.authorizeUser(false, controller.handleAuthResult);
             }
