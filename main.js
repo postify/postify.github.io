@@ -111,9 +111,6 @@ var controller = {
         if(model.resized){
             $.adjustRem();
         }
-     
-            
-        }
         if(model.shroudButtonIsPressed){
             /**
                 The simplest is element.classList which has
