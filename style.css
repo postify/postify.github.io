@@ -29,12 +29,15 @@ body{
     left: 0;
     right: 0;
     overflow-x: hidden;
-    overflow-y: hidden;    
+    overflow-y: hidden;
+    background: radial-gradient(lightgray, gray);    
 }
 
 #app{
     position: absolute;
     border: 1px solid black;
+    border-radius: 0.5rem;    
+    background: #eee;
     width: 85%;
     height: 85%;
     top: 0;
@@ -43,7 +46,7 @@ body{
     right: 0;
     margin: auto;
     padding-top: 2%;
-    border-radius: 0.5rem;
+
 }
 
 input{
