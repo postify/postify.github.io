@@ -132,14 +132,16 @@ tr{
 }
 .button{
     position: absolute;
-    top:0;
-    bottom: 0;
+    width: 45%;
+    height: 10%;
+    top:1%;
     left: 0;
     right: 0;
     margin: auto;
     font-size: 0.95rem;
     color: #555;
-    padding-top: 4.5%;
     text-shadow: 0 1px 0 white;
     cursor: pointer;
+    color: #555;
+    background: linear-gradient(lightgray, gray);       
 }
