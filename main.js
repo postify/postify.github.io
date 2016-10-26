@@ -26,6 +26,7 @@ var model = {
     ,resized: false    
     ,pendingEvents: []
     ,updateModelBusy: false
+    ,shroudButtonIsPressed: false
 };
 
 /*global $*/
@@ -98,6 +99,9 @@ var controller = {
             model.windowWidth = window.innerWidth;
             model.windowHeight = window.innerHeight;
             model.resized = true;
+        }
+        if(e.type === 'mousedown' && e.target === view.btnShroudOverlay){
+            $($.btnShround).attribs("class=buttonPressed");
         }
         //---------------------------//
         controller.updateView(e);            

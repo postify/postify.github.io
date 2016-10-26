@@ -79,6 +79,7 @@ input{
 }
 .btnPressed{
     background: linear-gradient(gray, lightgray);
+    color: black;
 }
 .btnReleased{
     background: linear-gradient(lightgray, gray);    
