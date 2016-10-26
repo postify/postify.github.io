@@ -106,6 +106,9 @@ var controller = {
         if(e.type === 'mouseup' && e.target === view.btnShroudOverlay){
             model.shroudButtonIsPressed = false;
         }
+        if(e.type === 'mouseout' && e.target === view.btnShroudOverlay){
+            model.shroudButtonIsPressed = false;
+        }        
         
         //---------------------------//
         controller.updateView(e);            
