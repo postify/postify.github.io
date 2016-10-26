@@ -128,6 +128,7 @@ td{
     border-radius: 0.5rem;    
 }
 tr{
+    position: relative;
     width: 45%;
 }
 .button{
