@@ -111,7 +111,7 @@ var controller = {
         if(model.resized){
             $.adjustRem();
         }
-        if(){
+     
             
         }
         if(model.shroudButtonIsPressed){
