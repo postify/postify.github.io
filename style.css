@@ -39,6 +39,8 @@ input{
 }
 
 #shroud{
+    display: block;
+    transition: display 0.5s ease;
     position: absolute;
     height: 100%;
     width: 100%;
