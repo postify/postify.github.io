@@ -127,7 +127,7 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(true, controller.handleAuthResult);
         }
-        if(evt.type == "click" && evt.target == view.btnShroudOverlay){
+        if(evt.type == "mousedown" && evt.target == view.btnShroudOverlay){
             controller.authorizeUser(true, controller.handleAuthResult);
         }        
     }
