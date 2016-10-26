@@ -125,6 +125,18 @@ var controller = {
             view.btnShroud.classList.add("btnReleased");            
         }
         
+        if(evt.type === "mouseup" || evt.type === "mouseout"){
+            if(evt.target.classList.contains("btnPressed")){
+                evt.target.classList.remove("btnPressed");
+                evt.target.classList.add("");                
+            }
+        }else if(evt.type === "mousedown" ){
+            if(evt.target.classList.contains("btnReleased")){
+                evt.target.classList.remove("btnReleased");
+                evt.target.classList.add("btnPressed");    
+            }
+        }
+        
         if(evt.type == "change" && evt.target == view.fileElement){
             if(view.fileElement.files[0]){
                 $(view.msg).html(view.fileElement.files[0].name);                
