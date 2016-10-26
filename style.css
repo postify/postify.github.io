@@ -123,6 +123,7 @@ table{
     font-size: 0.85rem;
 }
 td{
+    display: block;
     width: 45%;
     border: 1px solid black;
     border-radius: 0.5rem;    
@@ -133,7 +134,7 @@ tr{
 }
 .button{
     position: absolute;
-    width: 45%;
+    width: 30%;
     height: 10%;
     top:1%;
     left: 0;
