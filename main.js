@@ -76,13 +76,17 @@ var controller = {
             if(authorized){
                 $($.msg).html("You are authorized.");
                 $($.btnLogin).styles("display: none");
-                $($.shroud).styles("visibility: hidden");
-                $($.shroud).styles("opacity: 0");
+                $($.shroud).styles
+                    ("opacity: 0")
+                    ("visibility: hidden")                   
+                ;
             }else{
                 $($.msg).html("You are NOT authorized.");
                 $($.btnLogin).styles("display: inline-block");
-                $($.shroud).styles("visibility: visible");
-                $($.shroud).styles("opacity: 0");                
+                $($.shroud).styles
+                    ("opacity: 0")               
+                    ("visibility: visible")
+                ;
                 controller.authorizeUser(false, controller.handleAuthResult);
             }
         }
