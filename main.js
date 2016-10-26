@@ -84,8 +84,8 @@ var controller = {
                 $($.msg).html("You are NOT authorized.");
                 $($.btnLogin).styles("display: inline-block");
                 $($.shroud).styles
-                    ("opacity: 0")               
-                    ("visibility: visible")
+                    ("opacity: 1")               
+                    ("visibility: hidden")
                 ;
                 controller.authorizeUser(false, controller.handleAuthResult);
             }
