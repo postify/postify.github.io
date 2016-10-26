@@ -85,3 +85,6 @@ input{
     color: gray;
     background: linear-gradient(lightgray, gray);    
 }
+#btnShroudOverlay:active{
+    color: black;
+}
