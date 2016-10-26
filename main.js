@@ -126,12 +126,12 @@ var controller = {
         }
         
         if(evt.type === "mouseup" || evt.type === "mouseout"){
-            if(evt.target.classList.contains("btnPressed")){
+            if(evt.target.classList.contains("button")){
                 evt.target.classList.remove("btnPressed");
                 evt.target.classList.add("btnReleased");                
             }
         }else if(evt.type === "mousedown" ){
-            if(evt.target.classList.contains("btnReleased")){
+            if(evt.target.classList.contains("button")){
                 evt.target.classList.remove("btnReleased");
                 evt.target.classList.add("btnPressed");    
             }
