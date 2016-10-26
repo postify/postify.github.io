@@ -101,7 +101,7 @@ var controller = {
             model.resized = true;
         }
         if(e.type === 'mousedown' && e.target === view.btnShroudOverlay){
-            $($.btnShround).attribs("class=buttonPressed");
+            model.shroudButtonIsPressed = true;
         }
         //---------------------------//
         controller.updateView(e);            
@@ -110,6 +110,9 @@ var controller = {
     ,updateView: function updateView(evt){
         if(model.resized){
             $.adjustRem();
+        }
+        if(model.shroudButtonIsPressed){
+            $($.btnShround).attribs("class=buttonPressed");
         }
         if(evt.type == "change" && evt.target == view.fileElement){
             if(view.fileElement.files[0]){
