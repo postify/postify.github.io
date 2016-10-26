@@ -125,7 +125,7 @@ table{
 td{
     display: inline-block;
     width: 45%;
-    height: 45%;
+    height: 100%;
     border: 1px solid black;
     border-radius: 0.5rem;    
 }
@@ -134,13 +134,13 @@ tr{
     width: 45%;
 }
 .button{
-    width: 30%;
+    width: 40%;
     height: 10%;
     top:1%;
     left: 0;
     right: 0;
     margin: auto;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #555;
     text-shadow: 0 1px 0 white;
     cursor: pointer;
