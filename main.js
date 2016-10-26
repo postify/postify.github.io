@@ -78,8 +78,6 @@ var controller = {
                 $($.btnLogin).styles("display: none");
                 $($.shroud).styles("visibility: hidden");
                 $($.shroud).styles("opacity: 0");
-                
-                
             }else{
                 $($.msg).html("You are NOT authorized.");
                 $($.btnLogin).styles("display: inline-block");
