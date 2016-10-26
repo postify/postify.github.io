@@ -124,7 +124,7 @@ table{
 }
 td{
     display: inline-block;
-    width: 45%;
+    width: 50%;
     height: 100%;
     border: 1px solid black;
     border-radius: 0.5rem;    
@@ -136,7 +136,7 @@ tr{
 .button{
     width: 40%;
     height: 10%;
-    top:1%;
+    top:5%;
     left: 0;
     right: 0;
     margin: auto;
@@ -144,6 +144,6 @@ tr{
     color: #555;
     text-shadow: 0 1px 0 white;
     cursor: pointer;
-    color: #555;
-    background: linear-gradient(lightgray, gray);       
+    background: linear-gradient(lightgray, gray);
+    border-radius: 0.5rem;
 }
