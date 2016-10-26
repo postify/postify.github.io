@@ -149,3 +149,18 @@ tr{
     background: linear-gradient(lightgray, gray);
     border-radius: 0.5rem;
 }
+.pushedButton{
+    width: 60%;
+    height: 2.5rem;
+    top:5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding-top: 4.5%;    
+    font-size: 0.90rem;
+    text-shadow: 0 1px 0 white;
+    cursor: pointer;
+    color: black;    
+    background: linear-gradient(gray, lightgray);
+    border-radius: 0.5rem;    
+}

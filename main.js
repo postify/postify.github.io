@@ -126,14 +126,14 @@ var controller = {
         }
         
         if(evt.type === "mouseup" || evt.type === "mouseout"){
-            if(evt.target.classList.contains("button")){
-                evt.target.classList.remove("btnPressed");
-                evt.target.classList.add("btnReleased");                
+            if(evt.target.classList.contains("pushedButton")){
+                evt.target.classList.remove("pushedButton");
+                evt.target.classList.add("button");                
             }
         }else if(evt.type === "mousedown" ){
             if(evt.target.classList.contains("button")){
-                evt.target.classList.remove("btnReleased");
-                evt.target.classList.add("btnPressed");
+                evt.target.classList.remove("button");
+                evt.target.classList.add("pushedButton");
                 alert("should look pressed.")
             }
         }
