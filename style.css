@@ -78,8 +78,9 @@ input{
     cursor: pointer;
 }
 .btnPressed{
+    color: black;    
     background: linear-gradient(gray, lightgray);
-    color: black;
+
     /*====| All the old stuff, too |===*/
     /*
     position: absolute;
