@@ -19,16 +19,27 @@
     <body>
         
         <div id="holder">
+            <input type="file" id="fileElement">
               <div id="app">
-                  
+                <button id="btnLogin">Login Google Account </button><br/>
+                <span id="msg"></span>
+                <br/>Folder to Create:</br>
+                <input id="folderName">
+                <br/><br/>
+                <button id="btnCreateFolder">Create Folder</button>
+                <br/><br/>
               </div>
               <div id="shroud">
                   <div id="btnShroud" class="btnReleased">
-                      <div id="btnShroudOverlay">Gimme My Music :)</div>
+                      <div id="btnShroudOverlay">Login to App</div>
                   </div>
               </div>
         </div>
       
     <script src="main.js"></script>
+    <!--
+    <script src="https://apis.google.com/js/client.js?onload=controller.checkAuth"></script>       
+    -->
+    
     </body>
 </html>

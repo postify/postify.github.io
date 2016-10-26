@@ -1,13 +1,15 @@
 /**
 <div id="holder">
-      <div id="app">
-          
-      </div>
-      <div id="shroud">
-          <div id="btnShroud" class="btnReleased">
-              <div id="btnShroudOverlay">Gimme My Music :)</div>
-          </div>
-      </div>
+    <input type="file" id="fileElement">
+    <div id="app">
+        <button id="btnLogin">Login Google Account </button><br/>
+        <span id="msg"></span>
+        <br/>Folder to Create:</br>
+        <input id="folderName">
+        <br/><br/>
+        <button id="btnCreateFolder">Create Folder</button>
+        <br/><br/>
+    </div>
 </div>
 */
 
@@ -36,6 +38,12 @@ var view = $;
 //---| attach all DOM-related items |---//
 view.holder =  // outer div of the project
 view.app =  // the app div
+view.msg = //div that holds results of tests, etc.
+view.folderName = //
+view.btnCreateFolder =//
+view.btnLogin = //
+view.login = //
+view.fileElement = //
 view.shroud = //
 view.btnShroud = //
 view.btnShroudOverlay = //
@@ -66,11 +74,15 @@ var controller = {
     ,handleAuthResult: function handleAuthResult(authResult){
             var authorized = authResult && ! authResult.error;
             if(authorized){
+                $($.msg).html("You are authorized.");
+                $($.btnLogin).styles("display: none");
                 $($.shroud).styles
                     ("opacity: 0")
                     ("visibility: hidden")                   
                 ;
             }else{
+                $($.msg).html("You are NOT authorized.");
+                $($.btnLogin).styles("display: inline-block");
                 $($.shroud).styles
                     ("opacity: 1")               
                     ("visibility: visible")
