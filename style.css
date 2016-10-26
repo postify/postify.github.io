@@ -40,6 +40,8 @@ input{
 
 #shroud{
     display: block;
+    opacity: 1;
+    visibility: visible;
     transition: all 5s ease;
     position: absolute;
     height: 100%;
