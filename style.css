@@ -124,6 +124,7 @@ table{
 }
 td{
     width: 45%;
+    border: 1px solid black;
 }
 tr{
     width: 45%;
