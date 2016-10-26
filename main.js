@@ -133,7 +133,8 @@ var controller = {
         }else if(evt.type === "mousedown" ){
             if(evt.target.classList.contains("button")){
                 evt.target.classList.remove("btnReleased");
-                evt.target.classList.add("btnPressed");    
+                evt.target.classList.add("btnPressed");
+                alert("should look pressed.")
             }
         }
         
