@@ -80,6 +80,17 @@ input{
 .btnPressed{
     background: linear-gradient(gray, lightgray);
     color: black;
+    /*====| All the old stuff, too |===*/
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 0.95rem;
+    padding-top: 4.5%;
+    text-shadow: 0 1px 0 white;
+    cursor: pointer;
 }
 .btnReleased{
     background: linear-gradient(lightgray, gray);    
