@@ -103,6 +103,10 @@ var controller = {
         if(e.type === 'mousedown' && e.target === view.btnShroudOverlay){
             model.shroudButtonIsPressed = true;
         }
+        if(e.type === 'mouseup' && e.target === view.btnShroudOverlay){
+            model.shroudButtonIsPressed = false;
+        }
+        
         //---------------------------//
         controller.updateView(e);            
         model.updateModelBusy = false;
@@ -120,8 +124,11 @@ var controller = {
             */
             view.btnShroud.classList.remove("btnReleased");
             view.btnShroud.classList.add("btnPressed");
-            //$(view.btnShroud).attribs("class=buttonPressed");
+        }else{
+            view.btnShroud.classList.remove("btnPressed");
+            view.btnShroud.classList.add("btnReleased");            
         }
+        
         if(evt.type == "change" && evt.target == view.fileElement){
             if(view.fileElement.files[0]){
                 $(view.msg).html(view.fileElement.files[0].name);                
@@ -138,7 +145,7 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnLogin){
             controller.authorizeUser(true, controller.handleAuthResult);
         }
-        if(evt.type == "mousedown" && evt.target == view.btnShroudOverlay){
+        if(evt.type == "click" && evt.target == view.btnShroudOverlay){
             controller.authorizeUser(true, controller.handleAuthResult);
         }        
     }
