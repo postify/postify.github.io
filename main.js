@@ -134,8 +134,7 @@ var controller = {
             if(evt.target.classList.contains("button")){
                 evt.target.classList.remove("button");
                 evt.target.classList.add("pushedButton");
-                alert("should look pressed.")
-            }
+           }
         }
         
         if(evt.type == "change" && evt.target == view.fileElement){
