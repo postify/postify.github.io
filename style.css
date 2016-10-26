@@ -127,7 +127,8 @@ td{
     width: 47%;
     height: 100%;
     border: 1px solid black;
-    border-radius: 0.5rem;    
+    border-radius: 0.5rem;
+    background: teal;
 }
 tr{
     position: relative;
