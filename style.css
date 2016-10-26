@@ -72,7 +72,7 @@ input{
     right: 0;
     margin: auto;
     font-size: 0.95rem;
-    color: gray;
+    color: #555;
     padding-top: 4.5%;
     text-shadow: 0 1px 0 white;
     cursor: pointer;
@@ -82,7 +82,7 @@ input{
     background: linear-gradient(gray, lightgray);
 }
 .btnReleased{
-    color: gray;
+    color: #555;
     background: linear-gradient(lightgray, gray);    
 }
 #btnShroudOverlay:active{
