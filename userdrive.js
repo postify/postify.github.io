@@ -30,12 +30,12 @@ var userdrive = {
     ,handleLoginAttempt: function handleLoginAttempt(authResult){
         var authorized = authResult && ! authResult.error;
         if(authorized){
-            $(view.shroud).styles
+            $($.shroud).styles
                 ("opacity: 0")
                 ("visibility: hidden")                   
             ;
         }else{
-            $(view.shroud).styles
+            $($.shroud).styles
                 ("opacity: 1")               
                 ("visibility: visible")
             ;
