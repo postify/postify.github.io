@@ -3,7 +3,7 @@
 /*global view*/
 /*global model*/
 /*global gapi*/
-window.userdrive = {
+var userdrive = {
     clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
@@ -39,7 +39,7 @@ window.userdrive = {
                 ("opacity: 1")               
                 ("visibility: visible")
             ;
-            this.authorizeUser(gapi, false, this.handleLoginAttempt);
+            userdrive.authorizeUser(gapi, false, this.handleLoginAttempt);
         }         
     }
 };
