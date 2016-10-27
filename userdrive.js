@@ -39,7 +39,7 @@ var userdrive = {
                 ("opacity: 1")               
                 ("visibility: visible")
             ;
-            userdrive.authorizeUser(gapi, false, this.handleLoginAttempt);
+            userdrive.authorizeUser(gapi, false, userdrive.handleLoginAttempt);
         }         
     }
 };

@@ -191,9 +191,9 @@ var controller = {
             userdrive.rmFile("remove file");
         }
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
-            //controller.authorizeUser(true, controller.handleAuthResult);
+            controller.authorizeUser(true, controller.handleAuthResult);
             //----------------------------//
-            userdrive.authorizeUser(gapi, true, userdrive.handleLoginAttempt);
+            //userdrive.authorizeUser(gapi, true, userdrive.handleLoginAttempt);
             //----------------------------//
         }        
         
