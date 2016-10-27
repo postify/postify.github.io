@@ -174,5 +174,6 @@ tr{
     border-radius: 0.5rem;    
 }
 textarea{
-    width: 60%;
+    width: 85%;
+    height: 60%;
 }
