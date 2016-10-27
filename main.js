@@ -140,9 +140,9 @@ var controller = {
         }
         if(model.shroudButtonIsPressed){
             /**
-                The simplest is element.classList which has
+                Use element.classList which has
                 remove(name), add(name), toggle(name), 
-                and contains(name) methods and is now supported 
+                and contains(name) methods, and is now supported 
                 by all major browsers.
             */
             view.btnShroud.classList.remove("btnReleased");
@@ -181,7 +181,27 @@ var controller = {
             controller.authorizeUser(true, controller.handleAuthResult);
         }
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
-            controller.authorizeUser(true, controller.handleAuthResult);
+            //controller.authorizeUser(true, controller.handleAuthResult);
+            //----------------------------//
+            userdrive.authorizeUser(gapi, true, function(authResult){
+                var authorized = authResult && ! authResult.error;
+                if(authorized){
+                    $($.shroud).styles
+                        ("opacity: 0")
+                        ("visibility: hidden")                   
+                    ;
+                }else{
+                    $($.shroud).styles
+                        ("opacity: 1")               
+                        ("visibility: visible")
+                    ;
+                    userdrive.authorizeUser(false, controller.handleAuthResult);
+                }                
+            });
+
+            
+            
+            //----------------------------//
         }
         //--------------------------//
         //----| DRIVE REQUESTS |----//
