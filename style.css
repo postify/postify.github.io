@@ -178,6 +178,7 @@ textarea{
     height: 60%;
 }
 #dirname{
+    display: inline-block;
     width: 5rem;
     height: 1rem;
 }
