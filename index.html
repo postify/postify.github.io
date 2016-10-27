@@ -23,18 +23,21 @@
                   <table>
                       <tr>
                           <td>
-                              <div class="button" id="showData" >Show Metadata</div><br/>
+                              <div class="button" id="btnShowData" >Show Metadata</div><br/>
                               <textarea readonly></textarea>
                           </td>
-                          <td><div class="button" id="saveFiles">Save Files</div></td>
+                          <td><div class="button" id="btnSaveFiles">Save Files</div></td>
                       </tr>
                       <tr>
                           <td>
-                              <div class="button" id="mkdir">Make a Directory</div><br/>
+                              <div class="button" id="btnMkdir">Make a Directory</div><br/>
                               Folder Name:<br/> 
-                              <input type="text" size="20" id="dirname">
+                              <input type="text" size="20" class="textBox" id="txtMkdir">
                           </td>
-                          <td><div class="button" "rmFile">Remove a File</div></td>
+                          <td>
+                              <div class="button" "btnRmFile">Remove a File</div>
+                              <input type="text" size="20" class="textBox" id="txtRmFile">                              
+                          </td>
                       </tr>
                   </table>
                   
