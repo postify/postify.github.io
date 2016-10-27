@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" 
+            content="width=device-width
+            initial-scale=1
+            maximum-scale=1
+            minimum-scale=1
+            user-scalable=no">
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">        
+        <title>Music on Your Gooogle Dirive</title> 
+        <link rel="stylesheet" href="style.css">
+        <script src="prefixfree.js"></script>  
+        <script src="api$.js"></script>
+        <script src="userdrive.js"></script>
+        <script src="googleclient.js"></script>
+    </head>
+    <body>
+        
+        <div id="holder">
+              <div id="app">
+                  <table>
+                      <tr>
+                          <td>
+                              <div class="button" id="btnShowMetaData" >Show Metadata</div><br/>
+                              <textarea readonly></textarea>
+                          </td>
+                          <td><div class="button" id="btnSaveFiles">Save Files</div></td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <div class="button" id="btnMkDir">Make a Directory</div><br/>
+                              Folder Name:<br/> 
+                              <input type="text" size="20" class="textBox" id="txtMkDir">
+                          </td>
+                          <td>
+                              <div class="button" id="btnRmFile">Remove a File</div><br/>
+                              File To Remove:<br/>                              
+                              <input type="text" size="20" class="textBox" id="txtRmFile">                              
+                          </td>
+                      </tr>
+                  </table>
+                  
+              </div>
+              <div id="shroud">
+                  <div id="btnShroud" class="btnReleased">
+                      <div id="btnShroudOverlay">Gimme My Music :)</div>
+                  </div>
+              </div>
+        </div>
+      
+    <script src="main.js"></script>
+    </body>
+</html>
