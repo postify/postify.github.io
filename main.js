@@ -1,6 +1,16 @@
 /**
 <div id="holder">
       <div id="app">
+          <table>
+              <tr>
+                  <td><div class="button" id="showData" >Show Metadata</div></td>
+                  <td><div class="button" id="saveFiles">Save Files</div></td>
+              </tr>
+              <tr>
+                  <td><div class="button" id="mkdir">Make a Directory</div></td>
+                  <td><div class="button" "rmFile">Remove a File</div></td>
+              </tr>
+          </table>
           
       </div>
       <div id="shroud">
@@ -36,6 +46,10 @@ var view = $;
 //---| attach all DOM-related items |---//
 view.holder =  // outer div of the project
 view.app =  // the app div
+view.showData = //
+view.saveFiles = //
+view.mkdir = //
+view.rmFile = //
 view.shroud = //
 view.btnShroud = //
 view.btnShroudOverlay = //
