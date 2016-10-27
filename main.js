@@ -195,10 +195,7 @@ var controller = {
             //----------------------------//
             userdrive.authorizeUser(gapi, true, userdrive.handleLoginAttempt);
             //----------------------------//
-        }        
-        
-
-        
+        } 
     }
     ,monitoredDomEvents: [
          "keydown"
