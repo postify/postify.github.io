@@ -187,7 +187,6 @@ textarea{
     width: 85%;
     height: 60%;
     background: #ccc;
-    overflow-y: scroll;
 }
 .textBox{
     display: inline-block;

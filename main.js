@@ -186,20 +186,6 @@ var controller = {
         //--------------------------//
         //----| DRIVE REQUESTS |----//
         //--------------------------//
-        /**
-            ,showMetaData: function showMetaData(arg){
-                alert(arg);
-            }
-            ,mkDir: function mkDir(arg){
-                alert(arg);        
-            }
-            ,rmFile: function rmFile(arg){
-                alert(arg);        
-            }
-            ,saveFiles: function saveFiles(arg){
-                alert(arg);        
-            }
-        */
         if(evt.target === view.btnShowMetaData && evt.type === "mousedown"){
             userdrive.showMetaData("show meta data");
         }
