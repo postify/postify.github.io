@@ -1,4 +1,8 @@
 //object that holds most relevant google drive methods
+/*global $*/
+/*global view*/
+/*global model*/
+/*global gapi*/
 window.userdrive = {
     clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
@@ -22,5 +26,20 @@ window.userdrive = {
         };
         gapi.auth.authorize(authObject, handleAuthResult);
         return false;
-    }  
+    }
+    ,handleLoginAttempt: function handleLoginAttempt(authResult){
+        var authorized = authResult && ! authResult.error;
+        if(authorized){
+            $(view.shroud).styles
+                ("opacity: 0")
+                ("visibility: hidden")                   
+            ;
+        }else{
+            $(view.shroud).styles
+                ("opacity: 1")               
+                ("visibility: visible")
+            ;
+            this.authorizeUser(gapi, false, this.handleLoginAttempt);
+        }         
+    }
 };

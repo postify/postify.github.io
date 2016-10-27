@@ -174,35 +174,7 @@ var controller = {
         if(evt.type == "keyup" && evt.keyCode == 13){
 
         }
-        if(evt.type == "click" && evt.target == view.btnCreateFolder ){
-            $(view.msg).html("Create folder");
-        }
-        if(evt.type == "click" && evt.target == view.btnLogin){
-            controller.authorizeUser(true, controller.handleAuthResult);
-        }
-        if(evt.type == "click" && evt.target == view.btnShroudOverlay){
-            //controller.authorizeUser(true, controller.handleAuthResult);
-            //----------------------------//
-            userdrive.authorizeUser(gapi, true, function(authResult){
-                var authorized = authResult && ! authResult.error;
-                if(authorized){
-                    $($.shroud).styles
-                        ("opacity: 0")
-                        ("visibility: hidden")                   
-                    ;
-                }else{
-                    $($.shroud).styles
-                        ("opacity: 1")               
-                        ("visibility: visible")
-                    ;
-                    userdrive.authorizeUser(false, controller.handleAuthResult);
-                }                
-            });
 
-            
-            
-            //----------------------------//
-        }
         //--------------------------//
         //----| DRIVE REQUESTS |----//
         //--------------------------//
@@ -218,6 +190,12 @@ var controller = {
         if(evt.target === view.btnRmFile && evt.type === "mousedown"){
             userdrive.rmFile("remove file");
         }
+        if(evt.type == "click" && evt.target == view.btnShroudOverlay){
+            //controller.authorizeUser(true, controller.handleAuthResult);
+            //----------------------------//
+            userdrive.authorizeUser(gapi, true, userdrive.handleLoginAttempt);
+            //----------------------------//
+        }        
         
 
         
