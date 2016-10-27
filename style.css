@@ -173,3 +173,6 @@ tr{
     background: linear-gradient(gray, lightgray);
     border-radius: 0.5rem;    
 }
+textarea{
+    width: 60%;
+}
