@@ -176,6 +176,7 @@ tr{
 textarea{
     width: 85%;
     height: 60%;
+    background: #ccc;
 }
 #dirname{
     display: inline-block;
