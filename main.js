@@ -159,7 +159,7 @@ var controller = {
             }
         }        
         if(evt.type == "keyup" && evt.keyCode == 13){
-            view.msg.innerHTML = "enter pressed";
+
         }
         if(evt.type == "click" && evt.target == view.btnCreateFolder ){
             $(view.msg).html("Create folder");
