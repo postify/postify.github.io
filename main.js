@@ -200,16 +200,16 @@ var controller = {
                 alert(arg);        
             }
         */
-        if(evt.target === view.btnShowMetaData){
+        if(evt.target === view.btnShowMetaData && evt.type === "mousedown"){
             userdrive.showMetaData("show meta data");
         }
-        if(evt.target === view.btnSaveFiles){
+        if(evt.target === view.btnSaveFiles && evt.type === "mousedown"){
             userdrive.saveFiles("save files");
         }
-        if(evt.target === view.btnMkDir){
+        if(evt.target === view.btnMkDir && evt.type === "mousedown"){
             userdrive.mkDir("make directory");
         }
-        if(evt.target === view.btnRmFile){
+        if(evt.target === view.btnRmFile && evt.type === "mousedown"){
             userdrive.rmFile("remove file");
         }
         
