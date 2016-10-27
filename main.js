@@ -49,6 +49,7 @@ var model = {
 
 /*global $*/
 /*global gapi*/
+/*global userdrive*/
 var view = $;
 //================//
 //====| VIEW |====//
@@ -56,11 +57,11 @@ var view = $;
 //---| attach all DOM-related items |---//
 view.holder =  // outer div of the project
 view.app =  // the app div
-view.btnShowData = //
+view.btnShowMetaData = //
 view.btnSaveFiles = //
-view.btnMkdir = //
+view.btnMkDir = //
 view.btnRmFile = //
-view.txtMkdir = //
+view.txtMkDir = //
 view.txtRmFile = //
 view.shroud = //
 view.btnShroud = //
@@ -181,7 +182,39 @@ var controller = {
         }
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
             controller.authorizeUser(true, controller.handleAuthResult);
-        }        
+        }
+        //--------------------------//
+        //----| DRIVE REQUESTS |----//
+        //--------------------------//
+        /**
+            ,showMetaData: function showMetaData(arg){
+                alert(arg);
+            }
+            ,mkDir: function mkDir(arg){
+                alert(arg);        
+            }
+            ,rmFile: function rmFile(arg){
+                alert(arg);        
+            }
+            ,saveFiles: function saveFiles(arg){
+                alert(arg);        
+            }
+        */
+        if(evt.target === view.btnShowMetaData){
+            userdrive.showMetaData("show meta data");
+        }
+        if(evt.target === view.btnSaveFiles){
+            userdrive.saveFiles("save files");
+        }
+        if(evt.target === view.btnMkDir){
+            userdrive.mkDir("make directory");
+        }
+        if(evt.target === view.btnRmFile){
+            userdrive.rmFile("remove file");
+        }
+        
+
+        
     }
     ,monitoredDomEvents: [
          "keydown"
