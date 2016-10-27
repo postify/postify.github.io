@@ -127,6 +127,7 @@ table{
     width: 95%;
     height: 95%;
     font-size: 0.85rem;
+    overflow: hidden;
 }
 td{
     display: inline-block;
