@@ -193,7 +193,7 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
             //controller.authorizeUser(true, controller.handleAuthResult);
             //----------------------------//
-            userdrive.authorizeUser(true, userdrive.handleLoginAttempt);
+            userdrive.authorizeUser(gapi, true, userdrive.handleLoginAttempt);
             //----------------------------//
         } 
     }
@@ -214,65 +214,17 @@ var controller = {
 };
 
 //=====================//
-//====| USERDRIVE |====//
-//=====================//
-//object that holds most relevant google drive methods
-var userdrive = {
-    clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
-    ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
-    ,showMetaData: function showMetaData(arg){
-        alert(arg);
-    }
-    ,mkDir: function mkDir(arg){
-        alert(arg);        
-    }
-    ,rmFile: function rmFile(arg){
-        alert(arg);        
-    }
-    ,saveFiles: function saveFiles(arg){
-        this.authorizeUser(true, this.handleLoginAttempt);
-    }
-    ,authorizeUser: function authorizeUser(booleanImmediate, handleAuthResult){
-        var authObject = {
-            'client_id': this.clientId
-            ,'scope': this.scope
-            ,'immediate': booleanImmediate
-        };
-        gapi.auth.authorize(authObject, handleAuthResult);
-        return false;
-    }
-    ,handleLoginAttempt: function handleLoginAttempt(authResult){
-        var authorized = authResult && ! authResult.error;
-        if(authorized){
-            $($.shroud).styles
-                ("opacity: 0")
-                ("visibility: hidden")                   
-            ;
-        }else{
-            $($.shroud).styles
-                ("opacity: 1")               
-                ("visibility: visible")
-            ;
-            userdrive.authorizeUser(false, userdrive.handleLoginAttempt);
-        }         
-    }
-};
-
-//=====================//
 //====| APP START |====//
 //=====================//
 view(window).on("load", function(){
-    
     controller.initialize();
-    
     controller.monitoredDomEvents.forEach(eventType=>{
         $(window).on(eventType, e=>{
             e.stopPropagation(); // prevent target from seeing its own event
             controller.registerEvent(e);
         }, true); // "capture" the event early (on the way down the DOM tree)
      });
+
 });//================//
 //====| APP END |====//
 //===================//
-
-

@@ -72,8 +72,8 @@ input{
 
 #shroud{
     display: block;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
     transition: all 1.5s ease;
     position: absolute;
     height: 100%;
