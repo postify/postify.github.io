@@ -162,7 +162,7 @@ var controller = {
             userdrive.rmFile("remove file");
         }
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
-            userdrive.authorizeUser(true, userdrive.AuthorizeAttempt, ()=>alert("logged in!"));
+            userdrive.authorizeUser(userdrive.AuthorizeAttempt, ()=>alert("logged in!"));
         } 
     }
     ,monitoredDomEvents: [
@@ -198,9 +198,10 @@ var userdrive = {
         alert(arg);        
     }
     ,saveFiles: function saveFiles(arg){
-        this.authorizeUser(true, this.AuthorizeAttempt);
+        this.authorizeUser(this.AuthorizeAttempt);
     }
-    ,authorizeUser: function authorizeUser(bolImmediate, AuthorizeAttempt, doAction){
+    ,authorizeUser: function authorizeUser(AuthorizeAttempt, doAction, bolImmediate){
+        bolImmediate = !!bolImmediate || true;
         var authObject = {
             'client_id': this.clientId
             ,'scope': this.scope
