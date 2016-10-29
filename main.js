@@ -198,7 +198,7 @@ var userdrive = {
         alert(arg);        
     }
     ,saveFiles: function saveFiles(arg){
-        this.authorizeUser(this.AuthorizeAttempt);
+        this.authorizeUser(this.AuthorizeAttempt, function(){alert("Save files.");});
     }
     ,authorizeUser: function authorizeUser(AuthorizeAttempt, doAction, bolImmediate){
         if(bolImmediate === undefined){bolImmediate = true;}
