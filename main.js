@@ -190,25 +190,21 @@ var userdrive = {
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
         this.driveAction(function(){
-            alert("show files");
             alert(arg);
         });
     }
     ,mkDir: function mkDir(arg){
         this.driveAction(function(){
-            alert("make directory");
             alert(arg);            
         });
     }
     ,rmFile: function rmFile(arg){
         this.driveAction(function(){
-            alert('remove files');
             alert(arg);            
         });
     }
     ,saveFiles: function saveFiles(arg){
         this.authorizeUser(this.AuthorizeAttempt, function(){
-            alert("Save files.");
             alert(arg);
         });
     }
