@@ -150,7 +150,11 @@ var controller = {
         //----| DRIVE REQUESTS |----//
         //--------------------------//
         if(evt.target === view.btnShowMetaData && evt.type === "mousedown"){
-            userdrive.showMetaData("show meta data");
+                var actionSpecs = {
+                'pageSize': 50,
+                'fields': "nextPageToken, files(id, name)"
+            };
+            userdrive.showMetaData(actionSpecs);
         }
         if(evt.target === view.btnSaveFiles && evt.type === "mousedown"){
             userdrive.saveFiles("save files");
