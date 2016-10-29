@@ -195,10 +195,15 @@ var userdrive = {
         alert(arg);        
     }
     ,rmFile: function rmFile(arg){
-        alert(arg);        
+        this.driveAction(function(){
+            alert(arg);             
+        });
     }
     ,saveFiles: function saveFiles(arg){
         this.authorizeUser(this.AuthorizeAttempt, function(){alert("Save files.");});
+    }
+    ,driveAction: function driveAction(doAction){
+        this.authorizeUser(this.AuthorizeAttempt, doAction, true);
     }
     ,authorizeUser: function authorizeUser(AuthorizeAttempt, doAction, bolImmediate){
         if(bolImmediate === undefined){bolImmediate = true;}
