@@ -201,7 +201,7 @@ var userdrive = {
         this.authorizeUser(this.AuthorizeAttempt);
     }
     ,authorizeUser: function authorizeUser(AuthorizeAttempt, doAction, bolImmediate){
-        bolImmediate = !!bolImmediate || true;
+        if(bolImmediate === undefined){bolImmediate = true;}
         var authObject = {
             'client_id': this.clientId
             ,'scope': this.scope
@@ -227,7 +227,7 @@ var userdrive = {
                     ("opacity: 1")               
                     ("visibility: visible")
                 ;
-                userdrive.authorizeUser(false, userdrive.AuthorizeAttempt, doAction);
+                userdrive.authorizeUser(userdrive.AuthorizeAttempt, doAction, false);
             }
         }
     }
