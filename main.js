@@ -189,26 +189,32 @@ var userdrive = {
     clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
-        arg = arg;
-        this.driveAction(function(arg){
+        this.driveAction(function(){
+            alert("show files");
             alert(arg);
         });
     }
     ,mkDir: function mkDir(arg){
-        var argx = arg;        
-        this.driveAction(function(argx){
-            alert(argx);             
+        this.driveAction(function(){
+            alert("make directory");
+            alert(arg);            
         });
     }
     ,rmFile: function rmFile(arg){
-        var argx = arg;        
-        this.driveAction(function(argx){
-            alert(argx);             
+        this.driveAction(function(){
+            alert('remove files');
+            alert(arg);            
         });
     }
     ,saveFiles: function saveFiles(arg){
-        this.authorizeUser(this.AuthorizeAttempt, function(){alert("Save files.");});
+        this.authorizeUser(this.AuthorizeAttempt, function(){
+            alert("Save files.");
+            alert(arg);
+        });
     }
+    //--------------------------------------------------------------//
+    //----| googldrive's "Three Ring Circus" for authorization |----//
+    //--------------------------------------------------------------//
     ,driveAction: function driveAction(doAction){
         this.authorizeUser(this.AuthorizeAttempt, doAction, true);
     }
