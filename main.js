@@ -49,7 +49,6 @@ var model = {
 
 /*global $*/
 /*global gapi*/
-/*global userdrive*/
 var view = $;
 //================//
 //====| VIEW |====//
@@ -163,10 +162,7 @@ var controller = {
             userdrive.rmFile("remove file");
         }
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
-            //controller.authorizeUser(true, controller.handleAuthResult);
-            //----------------------------//
-            userdrive.authorizeUser(true, userdrive.AuthorizeAttempt);
-            //----------------------------//
+            userdrive.authorizeUser(true, userdrive.AuthorizeAttempt, ()=>alert("logged in!"));
         } 
     }
     ,monitoredDomEvents: [
