@@ -162,7 +162,7 @@ var controller = {
             userdrive.rmFile("remove file");
         }
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
-            userdrive.authorizeUser(userdrive.AuthorizeAttempt, ()=>alert("logged in!"), true);
+            userdrive.authorizeUser(userdrive.AuthorizeAttempt, function(){alert('Logged in.');});
         } 
     }
     ,monitoredDomEvents: [
