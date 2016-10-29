@@ -76,35 +76,7 @@ view.attachDomObjects();
 var controller = {
     initialize: function initialize(){
         view.adjustRem(8, 30);
-        //controller.authorizeUser(false, controller.handleAuthResult );
     }
-    ,checkAuth: function checkAuth(){
-        controller.authorizeUser(true, controller.handleAuthResult);
-    }
-    ,authorizeUser: function authorizeUser(booleanImmediate, handleAuthResult){
-        var authObject = {
-            'client_id': model.CLIENT_ID
-            ,'scope': model.SCOPES.join(' ')
-            ,'immediate': booleanImmediate
-        };
-        gapi.auth.authorize(authObject, handleAuthResult);
-        return false;
-    }
-    ,handleAuthResult: function handleAuthResult(authResult){
-            var authorized = authResult && ! authResult.error;
-            if(authorized){
-                $($.shroud).styles
-                    ("opacity: 0")
-                    ("visibility: hidden")                   
-                ;
-            }else{
-                $($.shroud).styles
-                    ("opacity: 1")               
-                    ("visibility: visible")
-                ;
-                controller.authorizeUser(false, controller.handleAuthResult);
-            }
-        }
     ,registerEvent: function registerEvent(e){
          model.pendingEvents.push(e);
          while(model.pendingEvents.length !== 0 && !model.updateModelBusy){
@@ -193,7 +165,7 @@ var controller = {
         if(evt.type == "click" && evt.target == view.btnShroudOverlay){
             //controller.authorizeUser(true, controller.handleAuthResult);
             //----------------------------//
-            userdrive.authorizeUser(true, userdrive.handleLoginAttempt);
+            userdrive.authorizeUser(true, userdrive.AuthorizeAttempt);
             //----------------------------//
         } 
     }
@@ -230,31 +202,37 @@ var userdrive = {
         alert(arg);        
     }
     ,saveFiles: function saveFiles(arg){
-        this.authorizeUser(true, this.handleLoginAttempt);
+        this.authorizeUser(true, this.AuthorizeAttempt);
     }
-    ,authorizeUser: function authorizeUser(booleanImmediate, handleAuthResult){
+    ,authorizeUser: function authorizeUser(bolImmediate, AuthorizeAttempt, doAction){
         var authObject = {
             'client_id': this.clientId
             ,'scope': this.scope
-            ,'immediate': booleanImmediate
+            ,'immediate': bolImmediate
         };
-        gapi.auth.authorize(authObject, handleAuthResult);
+        this.AuthorizeAttempt(authObject, doAction);
         return false;
     }
-    ,handleLoginAttempt: function handleLoginAttempt(authResult, doRequestedAction){
-        var authorized = authResult && ! authResult.error;
-        if(authorized){
-            $($.shroud).styles
-                ("opacity: 0")
-                ("visibility: hidden")                   
-            ;
-        }else{
-            $($.shroud).styles
-                ("opacity: 1")               
-                ("visibility: visible")
-            ;
-            userdrive.authorizeUser(false, userdrive.handleLoginAttempt);
-        }         
+    ,AuthorizeAttempt: function AuthorizeAttempt(authObject, doAction){
+        gapi.auth.authorize(authObject, handleAuthResult);
+        function handleAuthResult(authResult){
+            var authorized = authResult && ! authResult.error;
+            if(authorized){
+                $($.shroud).styles
+                    ("opacity: 0")
+                    ("visibility: hidden")                   
+                ;
+                if(typeof doAction === 'function'){
+                    doAction();                    
+                }
+            }else{
+                $($.shroud).styles
+                    ("opacity: 1")               
+                    ("visibility: visible")
+                ;
+                userdrive.authorizeUser(false, userdrive.AuthorizeAttempt, doAction);
+            }
+        }
     }
 };
 
