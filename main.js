@@ -241,7 +241,7 @@ var userdrive = {
         gapi.auth.authorize(authObject, handleAuthResult);
         return false;
     }
-    ,handleLoginAttempt: function handleLoginAttempt(authResult){
+    ,handleLoginAttempt: function handleLoginAttempt(authResult, doRequestedAction){
         var authorized = authResult && ! authResult.error;
         if(authorized){
             $($.shroud).styles
