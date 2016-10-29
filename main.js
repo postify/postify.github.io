@@ -189,9 +189,9 @@ var userdrive = {
     clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
-        var argx = arg;
-        this.driveAction(function(argx){
-            alert(argx);            
+        arg = arg;
+        this.driveAction(function(arg){
+            alert(arg);
         });
     }
     ,mkDir: function mkDir(arg){
@@ -202,7 +202,7 @@ var userdrive = {
     }
     ,rmFile: function rmFile(arg){
         var argx = arg;        
-        this.driveAction(argx,function(argx){
+        this.driveAction(function(argx){
             alert(argx);             
         });
     }
