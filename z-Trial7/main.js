@@ -192,7 +192,7 @@ var controller = {
 //object that holds most relevant google drive methods
 var userdrive = {
     clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
-    ,scope: 'https://www.googleapis.com/auth/drive.appfolder'// https://www.googleapis.com/auth/drive.appdata'
+    ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
         this.driveAction(loadDriveApi);
       /**
