@@ -211,12 +211,13 @@ var userdrive = {
             'fields': "nextPageToken, files(id, name)"
           });
           request.execute(function(resp) {
-            view.txtaFileInfo.value = ('Files:\n');
+            view.txtaFileInfo.value = "" ; //clear previous metadata;
+            view.txtaFileInfo.value += ('Files:\n');
             var files = resp.files;
             if (files && files.length > 0) {
               for (var i = 0; i < files.length; i++) {
                 var file = files[i];
-                view.txtaFileInfo.value = (file.name + ' (' + file.id + ')\n');
+                view.txtaFileInfo.value += (file.name + ' (' + file.id + ')\n');
               }
             } else {
               view.txtaFileInfo.value = ('No files found.\n');
