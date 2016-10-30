@@ -62,6 +62,7 @@ view.btnMkDir = //
 view.btnRmFile = //
 view.txtMkDir = //
 view.txtRmFile = //
+view.txtSaveFile = //
 view.shroud = //
 view.btnShroud = //
 view.btnShroudOverlay = //
@@ -211,10 +212,10 @@ var userdrive = {
             'pageSize': 50,
             'fields': "nextPageToken, files(id, name)"
           });
-          request.execute(function(resp) {
+          request.execute(function(response) {
             view.txtaFileInfo.value = "" ; //clear previous metadata;
             view.txtaFileInfo.value += ('Files:\n');
-            var files = resp.files;
+            var files = response.files;
             if (files && files.length > 0) {
               for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -238,11 +239,11 @@ var userdrive = {
     }
     ,saveFiles: function saveFiles(arg){
         this.authorizeUser(this.AuthorizeAttempt, function(){
-            alert(arg);
+            alert(arg +": " + view.txtSaveFile.value);
         });
     }
     //--------------------------------------------------------------//
-    //----| googldrive's "Three Ring Circus" for authorization |----//
+    //----| googledrive's "Three Ring Circus" for authorization |----//
     //--------------------------------------------------------------//
     ,driveAction: function driveAction(doAction){
         this.authorizeUser(this.AuthorizeAttempt, doAction, true);
