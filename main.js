@@ -195,7 +195,6 @@ var userdrive = {
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
         gapi.client.load('drive', 'v3', function(){
-            alert(Object.keys(arg));
             var request = gapi.client.drive.files.list(arg);   
             request.execute(function(response) {
                 view.txtaFileInfo.value = ('Files:\n');
