@@ -266,6 +266,8 @@ var userdrive = {
                     ("opacity: 0")
                     ("visibility: hidden")                   
                 ;
+                //clear all previous user's data
+                view.txtaFileInfo.value = "";
                 if(typeof doAction === 'function'){
                     doAction();                    
                 }
