@@ -194,25 +194,20 @@ var userdrive = {
     clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
-        this.driveAction(function(){
-            //alert(Object.keys(arg));
+        gapi.client.load('drive', 'v3', function(){
+            alert(Object.keys(arg));
             var request = gapi.client.drive.files.list(arg);   
             request.execute(function(response) {
-                try{
-                    view.txtaFileInfo.value = ('Files:\n');
-                    var files = response.files;
-                    if (files && files.length > 0) {
-                      for (var i = 0; i < files.length; i++) {
-                        var file = files[i];
-                        view.txtaFileInfo.value = (file.name + ' (' + file.id + ')\n');
-                      }
-                    } else {
-                      view.txtaFileInfo.value = ('No files found.\n');
-                    }                    
-                }catch(e){
-                      view.txtaFileInfo.value = ('No files found.\n');                    
+                view.txtaFileInfo.value = ('Files:\n');
+                var files = response.files;
+                if (files && files.length > 0) {
+                  for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    view.txtaFileInfo.value = (file.name + ' (' + file.id + ')\n');
+                  }
+                } else {
+                  view.txtaFileInfo.value = ('No files found.\n');
                 }
-
             });            
         });
     }
