@@ -239,6 +239,9 @@ var userdrive = {
     }
     ,saveFiles: function saveFiles(arg){
         this.authorizeUser(this.AuthorizeAttempt, function(){
+            var fileElement = document.createElement("input");
+            $(fileElement).attribs("type=file");
+            fileElement.click();
             alert(arg +": " + view.txtSaveFile.value);
         });
     }
