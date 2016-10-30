@@ -194,22 +194,36 @@ var userdrive = {
     clientId: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com'
     ,scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.appdata'
     ,showMetaData: function showMetaData(arg){
-        gapi.client.load('drive', 'v3', function(){
-            var request = gapi.client.drive.files.list(arg);   
-            request.execute(function(response) {
-                view.txtaFileInfo.value = ('Files:\n');
-                var files = response.files;
-                if (files && files.length > 0) {
-                  for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    view.txtaFileInfo.value = (file.name + ' (' + file.id + ')\n');
-                  }
-                } else {
-                  view.txtaFileInfo.value = ('No files found.\n');
-                }
-            });            
-        });
-    }
+        this.driveAction(loadDriveApi);
+      /**
+       * Load Drive API client library.
+       */
+      function loadDriveApi() {
+        gapi.client.load('drive', 'v3', listFiles);
+      }
+
+      /**
+       * Print files.
+       */
+      function listFiles() {
+        var request = gapi.client.drive.files.list({
+            'pageSize': 50,
+            'fields': "nextPageToken, files(id, name)"
+          });
+          request.execute(function(resp) {
+            view.txtaFileInfo.value = ('Files:\n');
+            var files = resp.files;
+            if (files && files.length > 0) {
+              for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                view.txtaFileInfo.value = (file.name + ' (' + file.id + ')\n');
+              }
+            } else {
+              view.txtaFileInfo.value = ('No files found.\n');
+            }
+          });
+      }//----| END of listFiles() |----//
+    }//----| END showMetaData |----//
     ,mkDir: function mkDir(arg){
         this.driveAction(function(){
             alert(arg);            
