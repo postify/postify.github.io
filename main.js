@@ -240,7 +240,7 @@ var userdrive = {
     }
     ,saveFiles: function saveFiles(arg){
         this.authorizeUser(this.AuthorizeAttempt, function(){
-            view.fileElement.click();
+            alert("save file");
         });
     }
     //--------------------------------------------------------------//
