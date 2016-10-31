@@ -60,6 +60,7 @@ view.btnShowMetaData = //
 view.btnSaveFiles = //
 view.btnMkDir = //
 view.btnRmFile = //
+view.fileElement = //
 view.txtMkDir = //
 view.txtRmFile = //
 view.txtSaveFile = //
@@ -239,10 +240,7 @@ var userdrive = {
     }
     ,saveFiles: function saveFiles(arg){
         this.authorizeUser(this.AuthorizeAttempt, function(){
-            var fileElement = document.createElement("input");
-            $(fileElement).attribs("type=file");
-            setTimeout(function(){fileElement.click();},10);
-            //alert(arg +": " + view.txtSaveFile.value);
+            view.fileElement.click();
         });
     }
     //--------------------------------------------------------------//
