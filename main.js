@@ -239,8 +239,8 @@ var userdrive = {
         });
     }
     ,saveFiles: function saveFiles(arg){
-        this.authorizeUser(this.AuthorizeAttempt, function(){
-            alert("save file");
+        this.driveAction(function(){
+            alert(arg);            
         });
     }
     //--------------------------------------------------------------//
