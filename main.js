@@ -148,7 +148,9 @@ var controller = {
         if(evt.type == "keyup" && evt.keyCode == 13){
 
         }
-
+        if(evt.type == "click" && evt.target == view.fileElement){
+            view.btnSaveFiles.click();
+        }
         //--------------------------//
         //----| DRIVE REQUESTS |----//
         //--------------------------//
@@ -159,7 +161,7 @@ var controller = {
             };
             userdrive.showMetaData(actionSpecs);
         }
-        if(evt.target === view.btnSaveFiles && evt.type === "mousedown"){
+        if(evt.target === view.btnSaveFiles && evt.type === "click"){
             userdrive.saveFiles("save files");
         }
         if(evt.target === view.btnMkDir && evt.type === "mousedown"){
