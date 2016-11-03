@@ -1,0 +1,28 @@
+#app{
+    position: absolute;
+    border-radius: 1rem;
+    border: 1px solid black;
+    height: 33.333%;
+    width: 50%;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background: teal;
+}
+#loginScreen{
+    position: absolute;    
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10%;
+    background-color: lightgray;
+    visibility: visible;
+    opacity: 1;
+    text-align: center;
+}
+    
