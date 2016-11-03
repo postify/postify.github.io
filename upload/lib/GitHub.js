@@ -5,7 +5,7 @@
  *             Github.js is freely distributable.
  */
 /* eslint valid-jsdoc: ["error", {"requireReturnDescription": false}] */
-/*
+
 import Gist from './Gist';
 import User from './User';
 import Issue from './Issue';
@@ -15,7 +15,7 @@ import Repository from './Repository';
 import Organization from './Organization';
 import Team from './Team';
 import Markdown from './Markdown';
-*/
+/*
 import Gist from 'lib/Gist';
 import User from 'lib/User';
 import Issue from 'lib/Issue';
@@ -25,6 +25,7 @@ import Repository from 'lib/Repository';
 import Organization from 'lib/Organization';
 import Team from 'lib/Team';
 import Markdown from 'lib/Markdown';
+*/
 /**
  * GitHub encapsulates the functionality to create various API wrapper objects.
  */
