@@ -9,7 +9,7 @@
          var CREDENTIALS = {
             username: "",
             password: "",
-            repository: 'abbasuploads'
+            repository: ""
          };
       </script>
       <style>
@@ -72,7 +72,10 @@
             <br>
             Password:&nbsp;&nbsp;<input type="password" id="txtPassword">
             <br>
-            <input type="button" id="btnLogin" value="Login"></input>             
+            Repository: <input type="text"  id="txtRepo">
+            <br>            
+            <input type="button" id="btnLogin" value="Login"></input>  
+            
          </div>
       </div>
       
@@ -80,13 +83,16 @@
          var loginScreen = document.querySelector("#loginScreen");
          var txtUser = document.querySelector("#txtUser");
          var txtPassword = document.querySelector("#txtPassword");
+         var txtRepo = document.querySelector("#txtRepo");
          var btnLogin = document.querySelector("#btnLogin");
+         
          btnLogin.addEventListener("click", function(e){
             e.stopPropagation();
             var notBlank = (txtUser.value !== "" ) && ( txtPassword.value !== "");
             if(notBlank){
                CREDENTIALS.username = txtUser.value;
                CREDENTIALS.password = txtPassword.value;
+               CREDENTIALS.repository = txtRepo.value;
                loginScreen.style.opacity = 0;
                loginScreen.style.visibility = "hidden";
             }
