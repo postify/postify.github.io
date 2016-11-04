@@ -1,11 +1,11 @@
 'use strict';
-
+/*global CREDENTIALS*/
 var GitHub = require('./github');
 var config = {
-   username: 'SabbaKilam',
-   password: 'kilmaAssir1', // Either your password or an authentication token if two-factor authentication is enabled
+   username: CREDENTIALS.username, 
+   password: CREDENTIALS.password,  // Either your password or an authentication token if two-factor authentication is enabled
    auth: 'basic',
-   repository: 'sabbakilam.github.io',
+   repository: CREDENTIALS.repository,
    branchName: 'master'
 };
 var gitHub = new GitHub(config);
