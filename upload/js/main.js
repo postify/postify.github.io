@@ -10,6 +10,9 @@ var config = {
 };
 var gitHub = new GitHub(config);
 
+//abbas
+gitHub.repository = config.repository;
+
 /**
  * Reads the content of the file provided. Returns a promise whose resolved value is an object literal containing the
  * name (<code>filename</code> property) and the content (<code>content</code> property) of the file.
