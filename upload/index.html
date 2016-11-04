@@ -5,8 +5,17 @@
       <meta name="viewport" content="width=device-width" />
       <title>Upload files using the GitHub APIs</title>
       <link rel="stylesheet" href="css/style.css" />
+      <script>
+         var CREDENTIALS = {
+            username: "",
+            password: ""
+         }
+      </script>
       <style>
          #loginScreen{
+            visibility: visible;
+            opacity: 1;
+            transition: all 0.5s ease;
             text-align: center;
             background-color: lightgray;
             position: absolute;
@@ -54,7 +63,20 @@
          <br>
          <input type="button" id="btnLogin" value="Login"></input>            
       </div>
-
+      <script>
+         var loginScreen = document.querySelector("#loginScreen");
+         var txtUser = document.querySelector("#txtUser");
+         var txtPassword = document.querySelector("#txtPassword");
+         var btnLogin = document.querySelector("#btnLogin");
+         btnLogin.addEventListener("click", function(e){
+            e.stopPropagation();
+            var notBlank = (txtUser !== "") && ( txtPassword !== "");
+            if(notBlank){
+               loginScreen.style.opacity = 0;
+               loginScreen.style.visibility = "hidden";
+            }
+         }, false);
+      </script>
       <script src="dist.js" defer async></script>
    </body>
 </html>
