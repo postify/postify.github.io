@@ -8,8 +8,9 @@
       <script>
          var CREDENTIALS = {
             username: "",
-            password: ""
-         }
+            password: "",
+            repo: "SabbaKilam.github.io"
+         };
       </script>
       <style>
          #loginScreen{
@@ -70,8 +71,10 @@
          var btnLogin = document.querySelector("#btnLogin");
          btnLogin.addEventListener("click", function(e){
             e.stopPropagation();
-            var notBlank = (txtUser !== "") && ( txtPassword !== "");
+            var notBlank = (txtUser.value !== "" ) && ( txtPassword.value !== "");
             if(notBlank){
+               CREDENTIALS.username = txtUser.value;
+               CREDENTIALS.password = txtPassword.value;
                loginScreen.style.opacity = 0;
                loginScreen.style.visibility = "hidden";
             }
