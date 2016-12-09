@@ -8,51 +8,18 @@
             maximum-scale=1
             minimum-scale=1
             user-scalable=no">
-        <meta  http-equiv="X-UA-Compatible" content="IE=edge">        
-        <title>Authorize Drive Actions</title> 
+        <title>Test Custom Google Drive API</title> 
         <link rel="stylesheet" href="style.css">
-        <script src="prefixfree.js"></script>
-        <script src="api$.js"></script>
         <script src="googleclient.js"></script>
+        <script src="x.js"></script>        
     </head>
     <body>
-        
-        <div id="holder">
-              <div id="app">
-                  <table>
-                      <tr>
-                          <td>
-                              <div class="button" id="btnShowMetaData" >Show Files</div><br/>
-                              <textarea id="txtaFileInfo"readonly></textarea>
-                          </td>
-                          <td><div class="button" id="btnSaveFiles">Save File</div><br/>
-                              File Name:<br/> 
-                              <input type="text" size="20" class="textBox" id="txtSaveFile"><br/>
-                              <input type="file" id="fileElement" >
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>
-                              <div class="button" id="btnMkDir">Make a Directory</div><br/>
-                              Folder Name:<br/> 
-                              <input type="text" size="20" class="textBox" id="txtMkDir">
-                          </td>
-                          <td>
-                              <div class="button" id="btnRmFile">Remove a File</div><br/>
-                              File To Remove:<br/>                              
-                              <input type="text" size="20" class="textBox" id="txtRmFile">                              
-                          </td>
-                      </tr>
-                  </table>
-                  
-              </div>
-              <div id="shroud">
-                  <div id="btnShroud" class="btnReleased">
-                      <div id="btnShroudOverlay">Gimme My Music :)</div>
-                  </div>
-              </div>
+        <div id="app">
+            <button id="btnShowFiles">Show Files</button> <input id="txtShowFiles" type="text" size="30"><br><br>
+            <button id="btnSaveFile">Save File</button> <input id="txtSaveFile" type="text" size="30"><br><br>
+            <button id="btnGetFile">Get File</button> <input id="txtGetFile" type="text" size="30"><br><br>
+            <button id="btnDeleteFile"> Delete File</button> <input id="txtDeleteFile" type="text" size="30">           
         </div>
-      
     <script src="main.js"></script>
     </body>
 </html>

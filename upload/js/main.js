@@ -30,7 +30,7 @@ function readFile(file) {
 
          // Strip out the information about the mime type of the file and the encoding
          // at the beginning of the file (e.g. data:image/gif;base64,).
-         content = atob(content.replace(/^(.+,)/, ''));
+         content = window.atob(content.replace(/^(.+,)/, ''));
 
          resolve({
             filename: file.name,
