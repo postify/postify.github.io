@@ -31,9 +31,15 @@ x.saveFile = function(filepath = "dummy/path/filename"){
             if not, create a folder
         3. save file to music folder
     */
-    m.authToken.immediate = false;
-    gapi.auth.authorize(m.authToken, x.handleAuthResult);
-    
+
+    var authToken = {
+        client_id: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com',
+        scope: 'https://www.googleapis.com/auth/drive.appfolder',
+        immediate: true
+    }
+    authToken.immediate = false;    
+    alert(authToken.client_id +", "+ authToken.scope +", " + authToken.immediate);
+    gapi.auth.authorize(authToken, x.handleAuthResult);
     
     //alert(filepath);
 };
