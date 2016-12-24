@@ -37,8 +37,7 @@ a.saveFile = function(filepath = "dummy/path/filename"){
         scope: 'https://www.googleapis.com/auth/drive.appfolder',
         immediate: true
     };
-    authToken.immediate = false;    
-    //alert(authToken.client_id +", "+ authToken.scope +", " + authToken.immediate);
+    //authToken.immediate = false;    
     gapi.auth.authorize(authToken, a.handleAuthResult);
     
     //alert(filepath);
@@ -50,10 +49,10 @@ a.deleteFile = function(filepath = "dummy/path/filename"){
 
 a.handleAuthResult = function(authResult){
     if(authResult && ! authResult.error){
-        alert("you are authorized already");
+        alert("you are authorized.");
     }
     else{
-        alert("you need authorization");
+        alert("you need authorization.");
     }
 };
 //aliases, etc.

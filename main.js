@@ -77,7 +77,6 @@ c.updateView = function(e){
 //=========| STARTUP|==========//
 //=============================//
 window.onload = function(){
-    alert(Object.keys(gapi));
     ["mousedown",
      "mouseup",
      "mouseover",
