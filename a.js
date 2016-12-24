@@ -64,10 +64,6 @@ a.deleteFile = function(filepath = "dummy/path/filename"){
     a.authorizeAndPerform(deleteFile);
 };
 a.handleAuthResult = function(authResult, callBack){
-    //helper
-    function dummy(authResult){
-        v.authMsg.innerHTML = "Click Again to Authorize";
-    }    
     if(authResult && ! authResult.error){
         //alert("you are authorized.");
         a.authorized = true;
@@ -76,7 +72,6 @@ a.handleAuthResult = function(authResult, callBack){
     }
     else{
         a.authorized = false;
-        //gapi.auth.authorize(a.authToken, dummy);
         a.authorizeAndPerform(callBack);       
     }
 };
