@@ -37,24 +37,30 @@ a.saveFile = function(filepath = "dummy/path/filename"){
             if not, create a folder
         3. save file to music folder
     */
-    if(a.authorized){
-        a.authToken.immediate = true;
+    function authorizeAndCallback(callBack){
+        if(a.authorized){
+            a.authToken.immediate = true;
+        }
+        else{
+            a.authToken.immediate = false;        
+        }
+        gapi.auth.authorize(a.authToken, function(authResult){
+            a.handleAuthResult(authResult, callBack);
+        });        
     }
-    else{
-        a.authToken.immediate = false;        
+    //-----| callback for saving file |----//
+    function saveFile(){
+        alert("You are Authorized to SAVE A FILE: " + filepath);
     }
-    gapi.auth.authorize(a.authToken, function(authResult){
-        a.handleAuthResult(authResult, "testing");
-    });
-    
-    //alert(filepath);
+    //--------------------------------------------//
+    authorizeAndCallback(saveFile);
 };
 
 a.deleteFile = function(filepath = "dummy/path/filename"){
     alert(filepath);
 };
 
-a.handleAuthResult = function(authResult, string){
+a.handleAuthResult = function(authResult, callBack){
     //helper
     function dummy(authResult){
         v.btnSaveFile.innerHTML = "Click Again to Authorize";
@@ -63,7 +69,7 @@ a.handleAuthResult = function(authResult, string){
       //  alert("you are authorized.");
         a.authorized = true;
         v.btnSaveFile.innerHTML = "Save File";
-        alert(string);
+        callBack();
     }
     else{
         a.authorized = false;
