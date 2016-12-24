@@ -48,7 +48,7 @@ c.updateModel = function(e, updateView){
     var target = e.target;//source of the event
     var id = target.id; //id of event source
     var type = e.type; //type of event
-    showEvent(e);
+    //showEvent(e);
     updateView(e);
     //----| helpers |----//
     function showEvent(e){
