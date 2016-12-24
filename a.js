@@ -55,12 +55,12 @@ a.deleteFile = function(filepath = "dummy/path/filename"){
 a.handleAuthResult = function(authResult){
     //helper
     function dummy(authResult){
-        v.btnSaveFile.value = "Click Again to Authorize";
+        v.btnSaveFile.innerHTML = "Click Again to Authorize";
     }    
     if(authResult && ! authResult.error){
       //  alert("you are authorized.");
         a.authorized = true;
-        v.btnSaveFile.value = "Save";
+        v.btnSaveFile.value = "Save File";
     }
     else{
         a.authorized = false;
