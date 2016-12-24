@@ -6,8 +6,8 @@ html{
 #app{
     text-align: center;
     position: absolute;
-    height: 25%;
-    width: 50%;
+    height: 60%;
+    width: 75%;
     margin: auto;
     top:0;
     bottom:0;
@@ -18,7 +18,20 @@ html{
     padding: 1%;
     padding-top: 2%;
     background-color: teal;
-    color: white;    
+    color: hsl(180, 50%, 5%);
+    text-shadow: 0 0.5px 0 hsl(180, 50%, 50%);;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+#controls{
+    position: absolute;    
+    margin: auto;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    height: 50%;
 }
 input[type="text"]{
     width: 40%;
