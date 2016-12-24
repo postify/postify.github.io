@@ -34,21 +34,10 @@ a.showFiles = function (filepath ="dummy/path"){
 a.getFile = function(filepath = "dummy/path/filename"){
     //-----| callback for saving file |----//
     function getFile(){
-        alert("You are Authorized to DELETE A FILE: " + filepath);
+        alert("You are Authorized to GET A FILE: " + filepath);
     }
     //--------------------------------------------//
     a.authorizeAndPerform(getFile);
-};
-a.authorizeAndPerform = function authorizeAndPerform(callBack){
-    if(a.authorized){
-        a.authToken.immediate = true;
-    }
-    else{
-        a.authToken.immediate = false;        
-    }
-    gapi.auth.authorize(a.authToken, function(authResult){
-        a.handleAuthResult(authResult, callBack);
-    });        
 };
 a.saveFile = function(filepath = "dummy/path/filename"){
     /*
@@ -66,7 +55,6 @@ a.saveFile = function(filepath = "dummy/path/filename"){
     //--------------------------------------------//
     a.authorizeAndPerform(saveFile);
 };
-
 a.deleteFile = function(filepath = "dummy/path/filename"){
 
     //-----| callback for saving file |----//
@@ -76,7 +64,6 @@ a.deleteFile = function(filepath = "dummy/path/filename"){
     //--------------------------------------------//
     a.authorizeAndPerform(deleteFile);
 };
-
 a.handleAuthResult = function(authResult, callBack){
     //helper
     function dummy(authResult){
@@ -92,6 +79,17 @@ a.handleAuthResult = function(authResult, callBack){
         a.authorized = false;
         gapi.auth.authorize(a.authToken, dummy);
     }
+};
+a.authorizeAndPerform = function authorizeAndPerform(callBack){
+    if(a.authorized){
+        a.authToken.immediate = true;
+    }
+    else{
+        a.authToken.immediate = false;        
+    }
+    gapi.auth.authorize(a.authToken, function(authResult){
+        a.handleAuthResult(authResult, callBack);
+    });        
 };
 //aliases, etc.
 a.makeFolder = a.createFolder;
