@@ -40,17 +40,16 @@ a.getFile = function(filepath = "dummy/path/filename"){
     a.authorizeAndPerform(getFile);
 };
 a.saveFile = function(filepath = "dummy/path/filename"){
-    /*
-        1. Assume user is authenticated (immediate = true)
-            if not, request authentication
-        2. Verify an existing music folder
-            if not, create a folder
-        3. save file to music folder
-    */
 
     //-----| callback for saving file |----//
     function saveFile(){
         alert("You are Authorized to SAVE A FILE: " + filepath);
+    /*
+        1. Assume user is authenticated (immediate = true)
+        2. Verify an existing music folder
+            if not, create a folder
+        3. save file to music folder
+    */        
     }
     //--------------------------------------------//
     a.authorizeAndPerform(saveFile);
@@ -70,14 +69,15 @@ a.handleAuthResult = function(authResult, callBack){
         v.authMsg.innerHTML = "Click Again to Authorize";
     }    
     if(authResult && ! authResult.error){
-      //  alert("you are authorized.");
+        //alert("you are authorized.");
         a.authorized = true;
         v.authMsg.innerHTML = "";
         callBack();
     }
     else{
         a.authorized = false;
-        gapi.auth.authorize(a.authToken, dummy);
+        //gapi.auth.authorize(a.authToken, dummy);
+        a.authorizeAndPerform(callBack);       
     }
 };
 a.authorizeAndPerform = function authorizeAndPerform(callBack){
