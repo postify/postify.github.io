@@ -51,7 +51,7 @@ a.handleAuthResult = function(authResult){
        alert("you need authorization."); 
     }    
     if(authResult && ! authResult.error){
-        alert("you are authorized.");
+      //  alert("you are authorized.");
     }
     else{
         a.authToken = true;
