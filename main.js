@@ -1,8 +1,8 @@
 
-/*global x*/
-//========================//
-//======| MODEL |=========//
-//========================//
+/*global a*/
+//=============================//
+//=========| MODEL |===========//
+//=============================//
 var m = {
     CLIENT_ID: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com',
     SCOPE: 'https://www.googleapis.com/auth/drive.appfolder',
@@ -17,19 +17,11 @@ var m = {
     savedFile: "", //most recently saved music file (which hopefully contains a picture)
 };
 
-//========================//
-//=======| VIEW |=========//
-//========================//
-/*
-<div id="app">
-    <button id="btnCreateFolder">Create Folder</button> <input id="txtCreateFolder"type="text" size="30"><br><br>
-    <button id="btnShowFiles">Show Files</button> <input id="txtShowFiles" type="text" size="30"><br><br>
-    <button id="btnSaveFile">Save File</button> <input id="txtSaveFile" type="text" size="30"><br><br>
-    <button id="btnGetFile">Get File</button> <input id="txtGetFile" type="text" size="30"><br><br>
-    <button id="btnDeleteFile"> Delete File</button> <input id="txtDeleteFile" type="text" size="30">           
-</div>
-*/
-var v = {};
+//=============================//
+//==========| VIEW |===========//
+//=============================//
+//make v (our view) an alias for our api a
+var v = a;
 v.id = function(idString){
     return document.getElementById(idString);
 };
@@ -37,43 +29,67 @@ v.btnShowFiles=v.id("btnShowFiles");
 v.btnSaveFile=v.id("btnSaveFile");
 v.btnGetFile=v.id("btnGetFile");
 v.btnDeleteFile=v.id("btnDeleteFile");
+v.msg = v.id("msg");
 v.app = v.id("app");
+v.window = this;
+v.window.id = "window";
 
 
-//========================//
-//====| CONTROLLER |======//
-//========================//
+//=============================//
+//=======| CONTROLLER |========//
+//=============================//
 var c = {};
-c.handler = function(e){
+//------------------------//
+//-----| UPDATE MODEL |---//
+//------------------------//
+c.updateModel = function(e, updateView){
     var target = e.target;//source of the event
     var id = target.id; //id of event source
     var type = e.type; //type of event
-    
-    if (target === v.btnShowFiles){
-        x.showFiles("asdfasdfsadfafasdf");
+    showEvent(e);
+    updateView(e);
+    //----| helpers |----//
+    function showEvent(e){
+        v.msg.innerHTML = `${id}, ${type}`;
     }
-    else if (target === v.btnSaveFile){
-        x.saveFile();
+};
+//------------------------//
+//-----| UPDATE VIEW |---//
+//------------------------//
+c.updateView = function(e){
+
+    if (e.target === v.btnShowFiles && e.type === "mousedown"){
+        v.showFiles("asdfasdfsadfafasdf");
     }
-    else if (target === v.btnGetFile){
-        x.getFile();
+    else if (e.target === v.btnSaveFile && e.type === "mousedown"){
+        v.saveFile();
     }
-    else if (target === v.btnDeleteFile){
-        x.deleteFile("kill this file!!!");
+    else if (e.target === v.btnGetFile && e.type === "mousedown"){
+        v.getFile();
     }
-    
-    /*
-    if(target !== v.app){
-        alert(type + ": "+ id);        
+    else if (e.target === v.btnDeleteFile && e.type === "mousedown"){
+        v.deleteFile("kill this file!!!");
     }
-    */
 };
 
-//========================//
-//======| STARTUP|========//
-//========================//
+//=============================//
+//=========| STARTUP|==========//
+//=============================//
+window.onload = function(){
+    ["mousedown",
+     "mouseup",
+     "mouseover",
+     "mouseout",
+     "resize"].forEach(eventType=>{
+        window.addEventListener(eventType, function(event){
+           c.updateModel(event, c.updateView);
+        });        
+    });
+};
+
+
 window.addEventListener("load", function(e){
-    window.addEventListener("click", c.handler);
+
     //window.addEventListener("mouseover", c.handler);
     
 });    

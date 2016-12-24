@@ -1,5 +1,5 @@
 /*
-    x.js is an attempt to wrap our own api around the JavaScript Google api
+    a.js is an attempt to wrap our own api around the JavaScript Google api
     to simplify using the Google Drive api
 */
 /*global gapi*/
@@ -7,23 +7,23 @@
 /*global v*/
 /*global c*/
 
-var x = {};
+var a = {};
 
-x.createFolder = function(folderpath="dummy/path/foldername"){
+a.createFolder = function(folderpath="dummy/path/foldername"){
     //assume immediate authorization
     //if not, ask permission
     alert(folderpath);
 };
 
-x.showFiles = function (path="dummy/path"){
+a.showFiles = function (path="dummy/path"){
     alert(path);
 };
 
-x.getFile = function(filepath = "dummy/path/filename"){
+a.getFile = function(filepath = "dummy/path/filename"){
     alert(filepath);
 };
 
-x.saveFile = function(filepath = "dummy/path/filename"){
+a.saveFile = function(filepath = "dummy/path/filename"){
     /*
         1. Assume user is authenticated (immediate = true)
             if not, request authentication
@@ -36,19 +36,19 @@ x.saveFile = function(filepath = "dummy/path/filename"){
         client_id: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com',
         scope: 'https://www.googleapis.com/auth/drive.appfolder',
         immediate: true
-    }
+    };
     authToken.immediate = false;    
     alert(authToken.client_id +", "+ authToken.scope +", " + authToken.immediate);
-    gapi.auth.authorize(authToken, x.handleAuthResult);
+    gapi.auth.authorize(authToken, a.handleAuthResult);
     
     //alert(filepath);
 };
 
-x.deleteFile = function(filepath = "dummy/path/filename"){
+a.deleteFile = function(filepath = "dummy/path/filename"){
     alert(filepath);
 };
 
-x.handleAuthResult = function(authResult){
+a.handleAuthResult = function(authResult){
     if(authResult && ! authResult.error){
         alert("you are authorized already");
     }
@@ -57,6 +57,6 @@ x.handleAuthResult = function(authResult){
     }
 };
 //aliases, etc.
-x.makeFolder = x.createFolder;
+a.makeFolder = a.createFolder;
 
 

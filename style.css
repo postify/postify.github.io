@@ -1,5 +1,7 @@
 html{
     background-color: gray;
+    user-select: none;
+
 }
 #app{
     text-align: center;
@@ -12,7 +14,12 @@ html{
     left:0;
     right:0;
     border-radius: 0.5rem;
-    border: 1px solid black;
-    padding: 2%;
+    box-shadow: 2px 2px 8px black;
+    padding: 1%;
+    padding-top: 2%;
     background-color: teal;
+    color: white;    
+}
+input[type="text"]{
+    width: 40%;
 }
