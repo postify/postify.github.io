@@ -28,7 +28,17 @@ a.showFiles = function (path="dummy/path"){
 a.getFile = function(filepath = "dummy/path/filename"){
     alert(filepath);
 };
-
+a.authorizeAndPerform = function (callBack){
+    if(a.authorized){
+        a.authToken.immediate = true;
+    }
+    else{
+        a.authToken.immediate = false;        
+    }
+    gapi.auth.authorize(a.authToken, function(authResult){
+        a.handleAuthResult(authResult, callBack);
+    });        
+};
 a.saveFile = function(filepath = "dummy/path/filename"){
     /*
         1. Assume user is authenticated (immediate = true)
@@ -37,27 +47,23 @@ a.saveFile = function(filepath = "dummy/path/filename"){
             if not, create a folder
         3. save file to music folder
     */
-    function authorizeAndCallback(callBack){
-        if(a.authorized){
-            a.authToken.immediate = true;
-        }
-        else{
-            a.authToken.immediate = false;        
-        }
-        gapi.auth.authorize(a.authToken, function(authResult){
-            a.handleAuthResult(authResult, callBack);
-        });        
-    }
+
     //-----| callback for saving file |----//
     function saveFile(){
         alert("You are Authorized to SAVE A FILE: " + filepath);
     }
     //--------------------------------------------//
-    authorizeAndCallback(saveFile);
+    a.authorizeAndPerform(saveFile);
 };
 
 a.deleteFile = function(filepath = "dummy/path/filename"){
-    alert(filepath);
+
+    //-----| callback for saving file |----//
+    function deleteFile(){
+        alert("You are Authorized to DELETE A FILE: " + filepath);
+    }
+    //--------------------------------------------//
+    a.authorizeAndPerform(deleteFile);
 };
 
 a.handleAuthResult = function(authResult, callBack){
