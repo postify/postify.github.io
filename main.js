@@ -1,5 +1,6 @@
 
 /*global a*/
+/*global gapi*/
 //=============================//
 //=========| MODEL |===========//
 //=============================//
@@ -76,6 +77,7 @@ c.updateView = function(e){
 //=========| STARTUP|==========//
 //=============================//
 window.onload = function(){
+    alert(typeof gapi.auth);
     ["mousedown",
      "mouseup",
      "mouseover",
