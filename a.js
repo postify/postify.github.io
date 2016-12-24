@@ -43,7 +43,9 @@ a.saveFile = function(filepath = "dummy/path/filename"){
     else{
         a.authToken.immediate = false;        
     }
-    gapi.auth.authorize(a.authToken, a.handleAuthResult);
+    gapi.auth.authorize(a.authToken, function(authResult){
+        a.handleAuthResult(authResult, "testing");
+    });
     
     //alert(filepath);
 };
@@ -52,7 +54,7 @@ a.deleteFile = function(filepath = "dummy/path/filename"){
     alert(filepath);
 };
 
-a.handleAuthResult = function(authResult){
+a.handleAuthResult = function(authResult, string){
     //helper
     function dummy(authResult){
         v.btnSaveFile.innerHTML = "Click Again to Authorize";
