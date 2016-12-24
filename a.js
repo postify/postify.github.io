@@ -13,6 +13,7 @@ a.authToken = {
     scope: 'https://www.googleapis.com/auth/drive.appfolder',
     immediate: false
 };
+a.authorized = false;
 
 a.createFolder = function(folderpath="dummy/path/foldername"){
     //assume immediate authorization
@@ -36,6 +37,12 @@ a.saveFile = function(filepath = "dummy/path/filename"){
             if not, create a folder
         3. save file to music folder
     */
+    if(a.authorized){
+        a.authToken.immediate = true;
+    }
+    else{
+        a.authToken.immediate = false;        
+    }
     gapi.auth.authorize(a.authToken, a.handleAuthResult);
     
     //alert(filepath);
@@ -52,10 +59,11 @@ a.handleAuthResult = function(authResult){
     }    
     if(authResult && ! authResult.error){
       //  alert("you are authorized.");
+        a.authorized = true;
     }
     else{
-        a.authToken = true;
-        gapi.auth.authorize(a.authToken, dummy);
+        a.authToken = false;
+        //gapi.auth.authorize(a.authToken, dummy);
     }
 };
 //aliases, etc.
