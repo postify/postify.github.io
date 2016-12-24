@@ -34,12 +34,11 @@ a.saveFile = function(filepath = "dummy/path/filename"){
 
     var authToken = {
         client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
-        //client_id: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com',
         scope: 'https://www.googleapis.com/auth/drive.appfolder',
         immediate: true
     };
     authToken.immediate = false;    
-    alert(authToken.client_id +", "+ authToken.scope +", " + authToken.immediate);
+    //alert(authToken.client_id +", "+ authToken.scope +", " + authToken.immediate);
     gapi.auth.authorize(authToken, a.handleAuthResult);
     
     //alert(filepath);
