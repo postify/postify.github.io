@@ -60,7 +60,7 @@ a.handleAuthResult = function(authResult){
     if(authResult && ! authResult.error){
       //  alert("you are authorized.");
         a.authorized = true;
-        v.btnSaveFile.value = "Save File";
+        v.btnSaveFile.innerHTML = "Save File";
     }
     else{
         a.authorized = false;
