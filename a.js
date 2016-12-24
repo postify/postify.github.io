@@ -46,13 +46,16 @@ a.deleteFile = function(filepath = "dummy/path/filename"){
 };
 
 a.handleAuthResult = function(authResult){
+    //helper
+    function dummy(authResult){
+       alert("you need authorization."); 
+    }    
     if(authResult && ! authResult.error){
         alert("you are authorized.");
     }
     else{
-        alert("you need authorization.");
         a.authToken = false;
-        gapi.auth.authorize(a.authToken, a.handleAuthResult);        
+        gapi.auth.authorize(a.authToken, dummy);
     }
 };
 //aliases, etc.
