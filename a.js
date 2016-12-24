@@ -8,6 +8,11 @@
 /*global c*/
 
 var a = {};
+a.authToken = {
+    client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
+    scope: 'https://www.googleapis.com/auth/drive.appfolder',
+    immediate: true
+};
 
 a.createFolder = function(folderpath="dummy/path/foldername"){
     //assume immediate authorization
@@ -31,14 +36,7 @@ a.saveFile = function(filepath = "dummy/path/filename"){
             if not, create a folder
         3. save file to music folder
     */
-
-    var authToken = {
-        client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/drive.appfolder',
-        immediate: true
-    };
-    //authToken.immediate = false;    
-    gapi.auth.authorize(authToken, a.handleAuthResult);
+    gapi.auth.authorize(a.authToken, a.handleAuthResult);
     
     //alert(filepath);
 };
@@ -53,6 +51,8 @@ a.handleAuthResult = function(authResult){
     }
     else{
         alert("you need authorization.");
+        a.authToken = false;
+        gapi.auth.authorize(a.authToken, a.handleAuthResult);        
     }
 };
 //aliases, etc.
