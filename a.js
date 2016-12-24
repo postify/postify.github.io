@@ -2,6 +2,7 @@
     a.js is an attempt to wrap our own api around the JavaScript Google api
     to simplify using the Google Drive api
 */
+
 /*global gapi*/
 /*global m*/
 /*global v*/
@@ -21,14 +22,24 @@ a.createFolder = function(folderpath="dummy/path/foldername"){
     alert(folderpath);
 };
 
-a.showFiles = function (path="dummy/path"){
-    alert(path);
+a.showFiles = function (filepath ="dummy/path"){
+    //-----| callback for saving file |----//
+    function showFiles(){
+        alert("You are Authorized to SHOW FILES: " + filepath);
+    }
+    //--------------------------------------------//
+    a.authorizeAndPerform(showFiles);
 };
 
 a.getFile = function(filepath = "dummy/path/filename"){
-    alert(filepath);
+    //-----| callback for saving file |----//
+    function getFile(){
+        alert("You are Authorized to DELETE A FILE: " + filepath);
+    }
+    //--------------------------------------------//
+    a.authorizeAndPerform(getFile);
 };
-a.authorizeAndPerform = function (callBack){
+a.authorizeAndPerform = function authorizeAndPerform(callBack){
     if(a.authorized){
         a.authToken.immediate = true;
     }
