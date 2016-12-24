@@ -88,10 +88,6 @@ window.onload = function(){
         });        
     });
 };
-
-
-window.addEventListener("load", function(e){
-
-    //window.addEventListener("mouseover", c.handler);
-    
-});    
+//=================================//
+//==========| END OF APP|==========//
+//=================================//
