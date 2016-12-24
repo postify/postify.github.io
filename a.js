@@ -11,7 +11,7 @@ var a = {};
 a.authToken = {
     client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
     scope: 'https://www.googleapis.com/auth/drive.appfolder',
-    immediate: true
+    immediate: false
 };
 
 a.createFolder = function(folderpath="dummy/path/foldername"){
@@ -54,7 +54,7 @@ a.handleAuthResult = function(authResult){
         alert("you are authorized.");
     }
     else{
-        a.authToken = false;
+        a.authToken = true;
         gapi.auth.authorize(a.authToken, dummy);
     }
 };
