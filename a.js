@@ -63,7 +63,7 @@ a.handleAuthResult = function(authResult){
     }
     else{
         a.authToken = false;
-        //gapi.auth.authorize(a.authToken, dummy);
+        gapi.auth.authorize(a.authToken, dummy);
     }
 };
 //aliases, etc.
