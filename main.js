@@ -32,6 +32,7 @@ v.btnGetFile=v.id("btnGetFile");
 v.btnDeleteFile=v.id("btnDeleteFile");
 v.msg = v.id("msg");
 v.app = v.id("app");
+v.authMsg = v.id("authMsg");
 v.window = this;
 v.window.id = "window";
 
