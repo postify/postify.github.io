@@ -83,7 +83,6 @@ c.updateView = function(e){
             v.deleteFile(v.txtDeleteFile.value);
         }
     }
-    
     //keycode
     if(keyCode && keyCode === enter){
         if (source === v.txtShowFiles){
