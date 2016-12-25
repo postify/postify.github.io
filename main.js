@@ -1,5 +1,10 @@
+//===================================//
+//==========| START OF APP|==========//
+//===================================//
+
+// "a" is our api object from file a.js loaded with index.html
 /*global a*/
-/*global gapi*/
+
 //=============================//
 //=========| MODEL |===========//
 //=============================//
@@ -21,7 +26,7 @@ var m = {
 //==========| VIEW |===========//
 //=============================//
 //make v (our view) an alias for our api a
-var v = a;
+var v = a; // "a" is our api object from file a.js loaded with index.html
 v.id = function(idString){
     return document.getElementById(idString);
 };
@@ -40,6 +45,12 @@ v.window.id = "window";
 //=======| CONTROLLER |========//
 //=============================//
 var c = {};
+c.initialize = function initialize(){
+    //get authorized to verify a folder on the site named "music"
+    //else get authorized to create one, and ...
+    //welcome noew user
+    
+};
 //------------------------//
 //-----| UPDATE MODEL |---//
 //------------------------//
@@ -49,6 +60,7 @@ c.updateModel = function(e, updateView){
     var type = e.type; //type of event
     showEvent(e);
     updateView(e);
+    m.musicFolderExists;
     //----| helpers |----//
     function showEvent(e){
         v.msg.innerHTML = `${id}, ${type}`;
@@ -77,6 +89,8 @@ c.updateView = function(e){
 //=========| STARTUP|==========//
 //=============================//
 window.onload = function(){
+    c.initialize();
+    
     ["mousedown",
      "mouseup",
      "mouseover",
