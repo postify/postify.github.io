@@ -19,14 +19,17 @@ var v = a; // "a" is our api object from file a.js loaded with index.html
 v.id = function(idString){
     return document.getElementById(idString);
 };
-v.btnShowFiles=v.id("btnShowFiles");
-v.btnSaveFile=v.id("btnSaveFile");
-v.btnGetFile=v.id("btnGetFile");
-v.btnDeleteFile=v.id("btnDeleteFile");
+v.btnShowFiles = v.id("btnShowFiles");
+v.btnSaveFile = v.id("btnSaveFile");
+v.btnGetFile = v.id("btnGetFile");
+v.btnCreateFolder = v.id("btnCreateFolder");
+v.btnDeleteFile = v.id("btnDeleteFile");
 v.txtShowFiles = v.id("txtShowFiles");
 v.txtSaveFile = v.id("txtSaveFile");
 v.txtGetFile = v.id("txtGetFile");
 v.txtDeleteFile = v.id("txtDeleteFile");
+v.txtCreateFolder = v.id("txtCreateFolder");
+
 v.msg = v.id("msg");
 v.app = v.id("app");
 v.authMsg = v.id("authMsg");
@@ -82,6 +85,9 @@ c.updateView = function(e){
         else if (source === v.btnDeleteFile){
             v.deleteFile(v.txtDeleteFile.value);
         }
+        else if (source === v.btnCreateFolder){
+            v.createFolder(v.txtCreateFolder.value);
+        }        
     }
     
     //keycode

@@ -22,7 +22,15 @@ a.savedFile = "";
 a.createFolder = function(folderpath="music"){
     //assume immediate authorization
     //if not, ask permission
-    alert(folderpath);
+    alert("Not yet Authorized: " + folderpath);
+    /*
+    //-----| callback for showing files |----//
+    function showFiles(){
+        alert("You are Authorized to SHOW FILES: " + filepath);
+    }
+    //--------------------------------------------//
+    a.authorizeAndPerform(showFiles);    
+    */    
 };
 
 a.showFiles = function (filepath ="dummy/path"){
