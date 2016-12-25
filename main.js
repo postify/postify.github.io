@@ -68,6 +68,7 @@ c.updateView = function(e){
     var source = e.target;
     var type = e.type;
     
+    //buttons
     if(type === "mousedown"){
         if (source === v.btnShowFiles){
             v.showFiles(v.txtShowFiles.value);
@@ -81,13 +82,11 @@ c.updateView = function(e){
         else if (source === v.btnDeleteFile){
             v.deleteFile(v.txtDeleteFile.value);
         }
-        //keycode
-        if(keyCode && keyCode === enter){
-            alert("key to go");
-        }
-        
-        
     }
+    //keycode
+    if(keyCode && keyCode === enter){
+        alert("key to go");
+    }    
 };
 
 //=============================//
@@ -101,7 +100,8 @@ window.onload = function(){
      "mouseup",
      "mouseover",
      "mouseout",
-     "resize"].forEach(eventType=>{
+     "resize",
+     "keypress"].forEach(eventType=>{
         window.addEventListener(eventType, function(event){
            c.updateModel(event, c.updateView);
         });        
