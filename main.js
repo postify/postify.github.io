@@ -63,7 +63,8 @@ c.updateModel = function(e, updateView){
 //-----| UPDATE VIEW |----//
 //------------------------//
 c.updateView = function(e){
-    
+    var keyCode = e.keyCode;
+    var enter = 13;
     var source = e.target;
     var type = e.type;
     
@@ -79,7 +80,13 @@ c.updateView = function(e){
         }
         else if (source === v.btnDeleteFile){
             v.deleteFile(v.txtDeleteFile.value);
-        }        
+        }
+        //keycode
+        if(keyCode && keyCode === enter){
+            alert("key to go");
+        }
+        
+        
     }
 };
 
