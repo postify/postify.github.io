@@ -9,6 +9,7 @@
 //=========| MODEL |===========//
 //=============================//
 var m = {
+    /*
     CLIENT_ID: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com',
     SCOPE: 'https://www.googleapis.com/auth/drive.appfolder',
     IMMEDIATE: true,
@@ -17,7 +18,8 @@ var m = {
         scope: this.SCOPE,
         immediate: this.IMMEDIATE
     },
-    musicFolderExists: false,
+    */
+
     songListJson: {},
     savedFile: "", //most recently saved music file (which hopefully contains a picture)
 };

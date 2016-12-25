@@ -15,7 +15,7 @@ a.authToken = {
     immediate: null
 };
 a.authorized = true;
-
+a.musicFolderExists = false,
 a.createFolder = function(folderpath="music"){
     //assume immediate authorization
     //if not, ask permission
