@@ -67,7 +67,7 @@ c.updateModel = function(e, updateView){
     }
 };
 //------------------------//
-//-----| UPDATE VIEW |---//
+//-----| UPDATE VIEW |----//
 //------------------------//
 c.updateView = function(e){
 
