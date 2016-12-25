@@ -13,7 +13,7 @@ var m = {
         immediate: this.IMMEDIATE
     },
     musicFolderExists: false,
-    songListJason: {},
+    songListJson: {},
     savedFile: "", //most recently saved music file (which hopefully contains a picture)
 };
 
