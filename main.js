@@ -9,19 +9,9 @@
 //=========| MODEL |===========//
 //=============================//
 var m = {
-    /*
-    CLIENT_ID: '152061817422-vkr6fn8jtikb6lhkmqtjfja1o9uooseb.apps.googleusercontent.com',
-    SCOPE: 'https://www.googleapis.com/auth/drive.appfolder',
-    IMMEDIATE: true,
-    authToken: {
-        client_id: this.CLIENT_ID,
-        scope: this.SCOPE,
-        immediate: this.IMMEDIATE
-    },
-    */
-
     songListJson: {},
-    savedFile: "", //most recently saved music file (which hopefully contains a picture)
+    savedFile: ""
+    //most recently saved music file (which hopefully contains a picture)
 };
 
 //=============================//
