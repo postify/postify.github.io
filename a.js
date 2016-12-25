@@ -15,7 +15,7 @@ a.authToken = {
     immediate: null
 };
 a.authorized = true;
-a.musicFolderExists = false;
+a.musicFolderExists = null;
 //most recently saved music file (which hopefully contains a picture)
 a.savedFile = "";
 

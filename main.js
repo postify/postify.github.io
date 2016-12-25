@@ -40,8 +40,8 @@ v.window.id = "window";
 var c = {};
 c.initialize = function initialize(){
     //get authorized to verify a folder on the site named "music"
-    //else get authorized to create one, and ...
-    //welcome noew user
+    //else get authorized to create one, save some intro music files there, and ...
+    //welcome new user
     
 };
 //------------------------//
@@ -63,18 +63,23 @@ c.updateModel = function(e, updateView){
 //-----| UPDATE VIEW |----//
 //------------------------//
 c.updateView = function(e){
-
-    if (e.target === v.btnShowFiles && e.type === "mousedown"){
-        v.showFiles(v.txtShowFiles.value);
-    }
-    else if (e.target === v.btnSaveFile && e.type === "mousedown"){
-        v.saveFile(v.txtSaveFile.value);
-    }
-    else if (e.target === v.btnGetFile && e.type === "mousedown"){
-        v.getFile(v.txtGetFile.value);
-    }
-    else if (e.target === v.btnDeleteFile && e.type === "mousedown"){
-        v.deleteFile(v.txtDeleteFile.value);
+    
+    var source = e.target;
+    var type = e.type;
+    
+    if(type === "mousedown"){
+        if (source === v.btnShowFiles){
+            v.showFiles(v.txtShowFiles.value);
+        }
+        else if (source === v.btnSaveFile){
+            v.saveFile(v.txtSaveFile.value);
+        }
+        else if (source === v.btnGetFile){
+            v.getFile(v.txtGetFile.value);
+        }
+        else if (source === v.btnDeleteFile){
+            v.deleteFile(v.txtDeleteFile.value);
+        }        
     }
 };
 
