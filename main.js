@@ -63,7 +63,7 @@ c.updateModel = function(e, updateView){
 //-----| UPDATE VIEW |----//
 //------------------------//
 c.updateView = function(e){
-    var keyCode = e.keyCode;
+    var keyCode = e.which;
     var enter = 13;
     var source = e.target;
     var type = e.type;
