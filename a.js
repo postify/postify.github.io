@@ -16,14 +16,14 @@ a.authToken = {
 };
 a.authorized = false;
 
-a.createFolder = function(folderpath="dummy/path/foldername"){
+a.createFolder = function(folderpath="music"){
     //assume immediate authorization
     //if not, ask permission
     alert(folderpath);
 };
 
 a.showFiles = function (filepath ="dummy/path"){
-    //-----| callback for saving file |----//
+    //-----| callback for showing files |----//
     function showFiles(){
         alert("You are Authorized to SHOW FILES: " + filepath);
     }
@@ -32,7 +32,7 @@ a.showFiles = function (filepath ="dummy/path"){
 };
 
 a.getFile = function(filepath = "dummy/path/filename"){
-    //-----| callback for saving file |----//
+    //-----| callback for getting file |----//
     function getFile(){
         alert("You are Authorized to GET A FILE: " + filepath);
     }
@@ -56,7 +56,7 @@ a.saveFile = function(filepath = "dummy/path/filename"){
 };
 a.deleteFile = function(filepath = "dummy/path/filename"){
 
-    //-----| callback for saving file |----//
+    //-----| callback for deleting a file |----//
     function deleteFile(){
         alert("You are Authorized to DELETE A FILE: " + filepath);
     }
