@@ -104,6 +104,9 @@ c.updateView = function(e){
         else if (source === v.txtDeleteFile){
             v.deleteFile(v.txtDeleteFile.value);
         }
+        else if (source === v.txtCreateFolder){
+            v.createFolder(v.txtCreateFolder.value);
+        }
     }    
 };
 
