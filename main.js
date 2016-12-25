@@ -85,7 +85,18 @@ c.updateView = function(e){
     }
     //keycode
     if(keyCode && keyCode === enter){
-        alert("key to go");
+        if (source === v.txtShowFiles){
+            v.showFiles(v.txtShowFiles.value);
+        }
+        else if (source === v.txtSaveFile){
+            v.saveFile(v.txtSaveFile.value);
+        }
+        else if (source === v.txtGetFile){
+            v.getFile(v.txtGetFile.value);
+        }
+        else if (source === v.txtDeleteFile){
+            v.deleteFile(v.txtDeleteFile.value);
+        }
     }    
 };
 
