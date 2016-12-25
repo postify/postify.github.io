@@ -8,11 +8,8 @@
 //=============================//
 //=========| MODEL |===========//
 //=============================//
-var m = {
-    songListJson: {},
-    savedFile: ""
-    //most recently saved music file (which hopefully contains a picture)
-};
+var m = {};
+m.songListJson = {};
 
 //=============================//
 //==========| VIEW |===========//
@@ -26,6 +23,10 @@ v.btnShowFiles=v.id("btnShowFiles");
 v.btnSaveFile=v.id("btnSaveFile");
 v.btnGetFile=v.id("btnGetFile");
 v.btnDeleteFile=v.id("btnDeleteFile");
+v.txtShowFiles = v.id("txtShowFiles");
+v.txtSaveFile = v.id("txtSaveFile");
+v.txtGetFile = v.id("txtGetFile");
+v.txtDeleteFile = v.id("txtDeleteFile");
 v.msg = v.id("msg");
 v.app = v.id("app");
 v.authMsg = v.id("authMsg");
@@ -64,16 +65,16 @@ c.updateModel = function(e, updateView){
 c.updateView = function(e){
 
     if (e.target === v.btnShowFiles && e.type === "mousedown"){
-        v.showFiles("asdfasdfsadfafasdf");
+        v.showFiles(v.txtShowFiles.value);
     }
     else if (e.target === v.btnSaveFile && e.type === "mousedown"){
-        v.saveFile();
+        v.saveFile(v.txtSaveFile.value);
     }
     else if (e.target === v.btnGetFile && e.type === "mousedown"){
-        v.getFile();
+        v.getFile(v.txtGetFile.value);
     }
     else if (e.target === v.btnDeleteFile && e.type === "mousedown"){
-        v.deleteFile("kill this file!!!");
+        v.deleteFile(v.txtDeleteFile.value);
     }
 };
 
@@ -81,6 +82,7 @@ c.updateView = function(e){
 //=========| STARTUP|==========//
 //=============================//
 window.onload = function(){
+    
     c.initialize();
     
     ["mousedown",
