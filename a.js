@@ -18,19 +18,27 @@ a.authorized = true;
 a.musicFolderExists = null;
 //most recently saved music file (which hopefully contains a picture)
 a.savedFile = "";
+a.musicFolderId = null;
 
-a.createFolder = function(folderpath="music"){
-    //assume immediate authorization
-    //if not, ask permission
-    alert("Not yet Authorized: " + folderpath);
-    /*
-    //-----| callback for showing files |----//
-    function showFiles(){
-        alert("You are Authorized to SHOW FILES: " + filepath);
-    }
-    //--------------------------------------------//
-    a.authorizeAndPerform(showFiles);    
-    */    
+a.createFolder = function(folderName = "music"){
+    gapi.client.load('drive', 'v2', function() {
+       //Create request object
+        var request = gapi.client.request({
+            'path': '/',
+            'method': 'POST',
+            'body': {
+                "title" : folderName,
+                "mimeType" : "application/vnd.google-apps.folder",
+                "description" : "Main music folder"
+            }
+        });//---| END of creating request object |---//
+     
+      //execute request. The response should be the file id or folder id
+      request.execute( function(resp){
+          a.musicFolderId = resp;
+          alert(a.folderId); 
+      });
+   });   
 };
 
 a.showFiles = function (filepath ="dummy/path"){
