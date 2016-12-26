@@ -38,8 +38,7 @@ a.createFolder = function(folderName){
         });
         request.execute(function(resp, raw_resp) {
             a.musicFolderId = resp.id;
-            alert(a.musicFolderId);
-            alert(raw_resp);
+            a.showFiles();
         });        
     }//--| END of internal 'createFolder' | ---/
 };
