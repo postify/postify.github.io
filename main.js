@@ -45,8 +45,6 @@ c.initialize = function initialize(){
     //get authorized to verify a folder on the site named "music"
     //else get authorized to create one, save some intro music files there, and ...
     //welcome new user
-    alert(typeof googleAuth);
-    
 };
 //------------------------//
 //-----| UPDATE MODEL |---//
