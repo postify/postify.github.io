@@ -20,7 +20,8 @@ a.musicFolderExists = null;
 a.savedFile = "";
 a.musicFolderId = null;
 
-a.createFolder = function(folderName = "music"){
+a.createFolder = function(folderName){
+    folderName = folderName || "music";
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', createFolder);
