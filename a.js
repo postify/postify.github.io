@@ -98,7 +98,6 @@ a.handleAuthResult = function(authResult, callBack){
 a.authorizeAndPerform = function authorizeAndPerform(callBack){
     if(a.authorized){
         a.authToken.immediate = true;
-        callBack();
     }
     else{
         a.authToken.immediate = false;        
