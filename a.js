@@ -11,7 +11,7 @@
 var a = {};
 a.authToken = {
     client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
-    scope: 'https://www.googleapis.com/auth/drive.appfolder',
+    scope: 'https://www.googleapis.com/auth/drive',
     immediate: null
 };
 a.authorized = true;
