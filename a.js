@@ -25,7 +25,7 @@ a.createFolder = function(folderName = "music"){
         gapi.client.load('drive', 'v2', function() {
            //Create request object
             var request = gapi.client.request({
-                'path': '/',
+                'path': '/drive/v2/files/',
                 'method': 'POST',
                 'body': {
                     "title" : folderName,
