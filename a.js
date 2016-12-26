@@ -21,22 +21,25 @@ a.savedFile = "";
 a.musicFolderId = null;
 
 a.createFolder = function(folderName = "music"){
-    function createFolder(){
-        //http://stackoverflow.com/questions/34905363/create-file-with-google-drive-api-v3-javascript
-        var fileMetadata = {
-            'name' : folderName,
-            'mimeType' : 'application/vnd.google-apps.folder'
-        };
-
-        gapi.client.drive.files.create({
-            resource: fileMetadata,
-            fields: 'id'
-        }).execute(function(resp, raw_resp) {
-            a.musicFolderId = resp.id;
-            alert(a.musicFolderId); 
-        });        
-    }//--| END of internal 'createFolder' | ---/
-    a.authorizeAndPerform(createFolder);   
+    function loadDriveApi(){
+        gapi.client.load('drive', 'v3', createFolder);
+    }
+            function createFolder(){
+                //http://stackoverflow.com/questions/34905363/create-file-with-google-drive-api-v3-javascript
+                var fileMetadata = {
+                    'name' : folderName,
+                    'mimeType' : 'application/vnd.google-apps.folder'
+                };
+        
+                gapi.client.drive.files.create({
+                    resource: fileMetadata,
+                    fields: 'id'
+                }).execute(function(resp, raw_resp) {
+                    a.musicFolderId = resp.id;
+                    alert(a.musicFolderId); 
+                });        
+            }//--| END of internal 'createFolder' | ---/
+    a.authorizeAndPerform(loadDriveApi);   
 };
 
 a.showFiles = function (filepath ="dummy/path"){
