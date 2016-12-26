@@ -21,24 +21,27 @@ a.savedFile = "";
 a.musicFolderId = null;
 
 a.createFolder = function(folderName = "music"){
-    gapi.client.load('drive', 'v2', function() {
-       //Create request object
-        var request = gapi.client.request({
-            'path': '/',
-            'method': 'POST',
-            'body': {
-                "title" : folderName,
-                "mimeType" : "application/vnd.google-apps.folder",
-                "description" : "Main music folder"
-            }
-        });//---| END of creating request object |---//
-     
-      //execute request. The response should be the file id or folder id
-      request.execute( function(resp){
-          a.musicFolderId = resp;
-          alert(a.musicFolderId); 
-      });
-   });   
+    function createFolder(){
+        gapi.client.load('drive', 'v2', function() {
+           //Create request object
+            var request = gapi.client.request({
+                'path': '/',
+                'method': 'POST',
+                'body': {
+                    "title" : folderName,
+                    "mimeType" : "application/vnd.google-apps.folder",
+                    "description" : "Main music folder"
+                }
+            });//---| END of creating request object |---//
+         
+          //execute request. The response should be the file id or folder id
+          request.execute( function(resp){
+              a.musicFolderId = resp;
+              alert(a.musicFolderId); 
+          });
+       });        
+    }//--| END of internal 'createFolder' | ---/
+    a.authorizeAndPerform(createFolder);   
 };
 
 a.showFiles = function (filepath ="dummy/path"){
