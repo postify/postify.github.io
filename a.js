@@ -56,10 +56,10 @@ a.showFiles = function (filepath ="dummy/path"){
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         request.execute(function(response){
-            v.filesInfo.innerHTML = "files:\n";
+            v.filesInfo.innerHTML = "files: <br>";
             var filesArray = response.files;
             filesArray.forEach(file=>{
-                v.filesInfo.innerHTML += `Filename: ${file.name}, FileID: ${file.id} \n `;
+                v.filesInfo.innerHTML += `Filename: ${file.name}, FileID: ${file.id} <br> `;
             });
         });
     }
