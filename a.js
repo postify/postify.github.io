@@ -22,24 +22,19 @@ a.musicFolderId = null;
 
 a.createFolder = function(folderName = "music"){
     function createFolder(){
-        gapi.client.load('drive', 'v2', function() {
-           //Create request object
-            var request = gapi.client.request({
-                'path': '/drive/v2/files/',
-                'method': 'POST',
-                'body': {
-                    "title" : folderName,
-                    "mimeType" : "application/vnd.google-apps.folder",
-                    "description" : "Main music folder"
-                }
-            });//---| END of creating request object |---//
-         
-          //execute request. The response should be the file id or folder id
-          request.execute( function(resp){
-              a.musicFolderId = resp;
-              alert(a.musicFolderId); 
-          });
-       });        
+        //http://stackoverflow.com/questions/34905363/create-file-with-google-drive-api-v3-javascript
+        var fileMetadata = {
+            'name' : folderName,
+            'mimeType' : 'application/vnd.google-apps.folder'
+        };
+
+        gapi.client.drive.files.create({
+            resource: fileMetadata,
+            fields: 'id'
+        }).execute(function(resp, raw_resp) {
+            a.musicFolderId = resp.id;
+            alert(a.musicFolderId); 
+        });        
     }//--| END of internal 'createFolder' | ---/
     a.authorizeAndPerform(createFolder);   
 };
