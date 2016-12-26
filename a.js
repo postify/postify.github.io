@@ -36,7 +36,7 @@ a.createFolder = function(folderName = "music"){
       //execute request. The response should be the file id or folder id
       request.execute( function(resp){
           a.musicFolderId = resp;
-          alert(a.folderId); 
+          alert(a.musicFolderId); 
       });
    });   
 };
