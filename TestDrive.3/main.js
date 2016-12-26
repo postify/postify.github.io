@@ -29,7 +29,6 @@ v.txtSaveFile = v.id("txtSaveFile");
 v.txtGetFile = v.id("txtGetFile");
 v.txtDeleteFile = v.id("txtDeleteFile");
 v.txtCreateFolder = v.id("txtCreateFolder");
-v.filesInfo = v.id("filesInfo");
 
 v.msg = v.id("msg");
 v.app = v.id("app");
@@ -87,7 +86,7 @@ c.updateView = function(e){
         }
         else if (source === v.btnCreateFolder){
             v.createFolder(v.txtCreateFolder.value);
-        } 
+        }        
     }
     
     //keycode

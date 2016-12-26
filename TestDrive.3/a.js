@@ -45,24 +45,12 @@ a.createFolder = function(folderName){
 };
 
 a.showFiles = function (filepath ="dummy/path"){
-    a.authorizeAndPerform(loadDriveApi);     
-    function loadDriveApi(){
-        gapi.client.load('drive', 'v3', showFiles);
-    }
+    //-----| callback for showing files |----//
     function showFiles(){
-        var fileMetadata = {
-            'pageSize': 50,
-            'fields': "nextPageToken, files(id, name)"
-        };
-        var request = gapi.client.drive.files.list(fileMetadata);
-        request.execute(function(response){
-            v.filesInfo.innerHTML = "files:\n";
-            var filesArray = response.files;
-            filesArray.forEach(file=>{
-                v.filesInfo.innerHTML += `Filename: ${file.name}, FileID: ${file.id} \n `;
-            });
-        });
+        alert("You are Authorized to SHOW FILES: " + filepath);
     }
+    //--------------------------------------------//
+    a.authorizeAndPerform(showFiles);
 };
 
 a.getFile = function(filepath = "dummy/path/filename"){
