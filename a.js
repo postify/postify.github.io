@@ -28,7 +28,7 @@ a.createFolder = function(folderName = "music"){
     function createFolder(){
         //http://stackoverflow.com/questions/34905363/create-file-with-google-drive-api-v3-javascript
         var fileMetadata = {
-            'name' : '/' + folderName,
+            'name' : folderName,
             'mimeType' : 'application/vnd.google-apps.folder'
         };
         var request = gapi.client.drive.files.create({
