@@ -32,12 +32,13 @@ a.createFolder = function(folderName = "music"){
             'mimeType' : 'application/vnd.google-apps.folder'
         };
         var request = gapi.client.drive.files.create({
-            'resource': fileMetadata,
-            'fields': 'id'
+            resource: fileMetadata,
+            fields: 'id'
         });
         request.execute(function(resp, raw_resp) {
             a.musicFolderId = resp.id;
-            alert(a.musicFolderId); 
+            alert(a.musicFolderId);
+            alert(raw_resp);
         });        
     }//--| END of internal 'createFolder' | ---/
 };
