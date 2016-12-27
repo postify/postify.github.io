@@ -22,7 +22,6 @@ a.musicFolderId = null;
 
 a.createFolder = function(folderName){
     folderName = folderName || "music";
-    
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', createFolder);
@@ -117,7 +116,6 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
     else{
         a.authToken.immediate = false;        
     }
-    
     gapi.auth.authorize(a.authToken, function(authResult){
         a.handleAuthResult(authResult, callBack);
     });        
