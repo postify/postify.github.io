@@ -1,5 +1,8 @@
 <!doctype html>
 <html>
+    <!--
+    https://developers.google.com/drive/v3/web/savetodrive
+    -->
     <head>
         <!--<script src="https://apis.google.com/js/client.js"></script>--> 
         <script src="client.js"></script> 
@@ -23,8 +26,8 @@
             <div id="controls">
                 <button id="btnCreateFolder"> Create Folder </button> <input id="txtCreateFolder" type="text" ><br>
                 <button id="btnShowFiles"> Show Files </button> <input id="txtShowFiles" type="text" ><br>
-                <input type="file" id="fileElement"><br><button id="btnSaveFile"> Save File </button> <input id="txtSaveFile" type="text" ><br>
-                <button id="btnGetFile"> Get File </button> <input id="txtGetFile" type="text" accept="image/*, .mp3" ><br>
+                <input type="file" id="fileElement" accept="image/*, .mp3"><br><button id="btnSaveFile"> Save File </button> <input id="txtSaveFile" type="text" ><br>
+                <button id="btnGetFile"> Get File </button> <input id="txtGetFile" type="text"  ><br>
                 <button id="btnDeleteFile"> Delete File</button> <input id="txtDeleteFile" type="text"><br>
                 <br>
                 <div id="filesInfo"></div>
