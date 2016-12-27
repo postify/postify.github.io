@@ -19,6 +19,7 @@ var v = a; // "a" is our api object from file a.js loaded with index.html
 v.id = function(idString){
     return document.getElementById(idString);
 };
+v.fileElement = v.id("fileElement");
 v.btnShowFiles = v.id("btnShowFiles");
 v.btnSaveFile = v.id("btnSaveFile");
 v.btnGetFile = v.id("btnGetFile");
@@ -107,7 +108,12 @@ c.updateView = function(e){
         else if (source === v.txtCreateFolder){
             v.createFolder(v.txtCreateFolder.value);
         }
-    }    
+    }
+    
+    //file chosen
+    if(type == "change" && source == v.fileElement){
+        alert(v.fileElement.files[0].name + " chosen.");
+    }
 };
 
 //=============================//
