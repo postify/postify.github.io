@@ -54,13 +54,23 @@ a.showFiles = function (filepath ="dummy/path"){
             'fields': "nextPageToken, files(id, name)"
         };
         var request = gapi.client.drive.files.list(fileMetadata);
+        function handleResponse(response){
+            v.filesInfo.innerHTML = "Files Info: <br>";
+            //var filesArray = response.files;
+            response.files.forEach(file=>{
+                v.filesInfo.innerHTML += `Filename: ${file.name}, FileID: ${file.id} <br> `;
+            });            
+        }
+        request.execute(handleResponse);
+        /*
         request.execute(function(response){
             v.filesInfo.innerHTML = "Files Info: <br>";
-            var filesArray = response.files;
-            filesArray.forEach(file=>{
+            //var filesArray = response.files;
+            response.files.forEach(file=>{
                 v.filesInfo.innerHTML += `Filename: ${file.name}, FileID: ${file.id} <br> `;
             });
         });
+        */
     }
 };
 
