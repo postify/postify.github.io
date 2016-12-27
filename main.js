@@ -128,7 +128,8 @@ window.onload = function(){
      "mouseover",
      "mouseout",
      "resize",
-     "keypress"].forEach(eventType=>{
+     "keypress",
+     "change"].forEach(eventType=>{
         window.addEventListener(eventType, function(event){
            c.updateModel(event, c.updateView);
         });        
