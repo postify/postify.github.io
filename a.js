@@ -53,7 +53,8 @@ a.showFiles = function (filepath ="dummy/path"){
     function showFiles(){
         var fileMetadata = {
             'pageSize': 50,
-            'fields': "nextPageToken, files(id, name)"
+            'fields': "nextPageToken, files(id, name)",
+            'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         function handleResponse(response){
