@@ -70,13 +70,13 @@ a.getFile = function(filepath = "dummy/path/filename"){
     //-----| callback for getting file |----//
     var token = gapi.auth.getToken().access_token;
     function getFile(){
-        alert("Token: " + token);
+        alert("Token: \n" + token);
     }
     //--------------------------------------------//
     a.authorizeAndPerform(getFile);
 };
-a.saveFile = function(filepath = "dummy/path/filename"){
-
+a.saveFile = function(filepath, file){
+    a.authorizeAndPerform(saveFile);
     //-----| callback for saving file |----//
     function saveFile(){
         alert("You are Authorized to SAVE A FILE: " + filepath);
@@ -88,7 +88,7 @@ a.saveFile = function(filepath = "dummy/path/filename"){
     */        
     }
     //--------------------------------------------//
-    a.authorizeAndPerform(saveFile);
+
 };
 a.deleteFile = function(filepath = "dummy/path/filename"){
 

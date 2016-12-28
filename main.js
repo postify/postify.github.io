@@ -10,6 +10,8 @@
 //=============================//
 var m = {};
 m.songListJson = {};
+m.chosenFile = "";
+m.chosenFilename = "";
 
 //=============================//
 //==========| VIEW |===========//
@@ -49,7 +51,7 @@ c.initialize = function initialize(){
     //welcome new user
 };
 //------------------------//
-//-----| UPDATE MODEL |---//
+//-----| UPDATE model |---//
 //------------------------//
 c.updateModel = function(e, updateView){
     var target = e.target;//source of the event
@@ -64,7 +66,7 @@ c.updateModel = function(e, updateView){
     }
 };
 //------------------------//
-//-----| UPDATE VIEW |----//
+//-----| UPDATE view |----//
 //------------------------//
 c.updateView = function(e){
     var keyCode = e.which;
@@ -97,7 +99,7 @@ c.updateView = function(e){
             v.showFiles(v.txtShowFiles.value);
         }
         else if (source === v.txtSaveFile){
-            v.saveFile(v.txtSaveFile.value);
+            v.saveFile(v.txtSaveFile.value, m.chosenFile);
         }
         else if (source === v.txtGetFile){
             v.getFile(v.txtGetFile.value);
@@ -112,7 +114,10 @@ c.updateView = function(e){
     
     //file chosen
     if(type == "change" && source == v.fileElement){
-        alert(v.fileElement.files[0].name + " chosen.");
+        m.chosenFile = v.fileElement.files[0];
+        m.chosenFilename = v.fileElement.files[0].name;
+        v.txtSaveFile.value = m.chosenFilename;
+        
     }
 };
 
