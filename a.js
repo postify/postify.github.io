@@ -11,7 +11,7 @@
 var a = {};
 a.authToken = {
     client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
-    scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file',
+    scope: 'https://www.googleapis.com/auth/drive.appDataFolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file',
     immediate: null
 };
 a.authorized = true;
@@ -68,7 +68,7 @@ a.showFiles = function (filepath ="dummy/path"){
 
 a.getFile = function(filepath = "dummy/path/filename"){
     //-----| callback for getting file |----//
-    var token = gapi.auth.getToken().access_token;
+    //var token = gapi.auth.getToken().access_token;
     function getFile(){
         alert("Token: \n" + token);
     }
@@ -83,7 +83,6 @@ a.saveFile = function(filepath, file){
         gapi.client.drive.files.create({ "name" : filepath, "parents" : [a.musicFolderId] })
             .execute(function(file) { a.showFiles(); });
             //.execute(function(file) { alert("Created file " + filepath + " id: " + file.id); });
-
     /*
         1. Assume user is authenticated (immediate = true)
         2. Verify an existing music folder
