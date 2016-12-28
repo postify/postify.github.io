@@ -80,6 +80,8 @@ a.saveFile = function(filepath, file){
     //-----| callback for saving file |----//
     function saveFile(){
         alert("You are Authorized to SAVE A FILE: " + filepath);
+        gapi.client.drive.files.create({ "name" : filepath })
+            .execute(function(file) { alert("Created file " + filepath + " id: " + file.id); });        
     /*
         1. Assume user is authenticated (immediate = true)
         2. Verify an existing music folder
