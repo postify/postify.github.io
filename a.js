@@ -31,7 +31,8 @@ a.createFolder = function(folderName){
         //http://stackoverflow.com/questions/34905363/create-file-with-google-drive-api-v3-javascript
         var fileMetadata = {
             'name' : folderName,
-            'mimeType' : 'application/vnd.google-apps.folder'
+            'mimeType' : 'application/vnd.google-apps.folder',
+            'parents': ['appDataFolder']
         };
         var request = gapi.client.drive.files.create({
             resource: fileMetadata,
