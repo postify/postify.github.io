@@ -68,8 +68,9 @@ a.showFiles = function (filepath ="dummy/path"){
 
 a.getFile = function(filepath = "dummy/path/filename"){
     //-----| callback for getting file |----//
+    var token = gapi.auth.getToken().access_token;
     function getFile(){
-        alert("You are Authorized to GET A FILE: " + filepath);
+        alert("Token: " + token);
     }
     //--------------------------------------------//
     a.authorizeAndPerform(getFile);
