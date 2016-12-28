@@ -52,6 +52,7 @@ a.showFiles = function (filepath ="dummy/path"){
     }
     function showFiles(){
         var fileMetadata = {
+            'spaces': 'appDataFolder',            
             'pageSize': 50,
             'fields': "nextPageToken, files(id, name)",
             'parents' : ['appDataFolder']
