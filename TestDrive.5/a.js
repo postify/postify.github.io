@@ -12,7 +12,6 @@ a.authToken = {
     scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file',
     immediate: null
 };
-a.firstAuthRequest = true;
 a.authorized = true;
 a.musicFolderExists = null;
 a.pictureFolderExists = null;
@@ -122,10 +121,6 @@ a.deleteFile = function(filename = "dummy/path/filename"){
 a.handleAuthResult = function(authResult, callBack){
     if(authResult && ! authResult.error){
         //alert("you are authorized.");
-        if(a.firstAuthRequest){
-            a.firstAuthRequest = false;
-            verifyFolders();
-        }        
         a.authorized = true;
         v.authMsg.innerHTML = "";
         callBack();
@@ -134,10 +129,6 @@ a.handleAuthResult = function(authResult, callBack){
         a.authorized = false;
         a.authorizeAndPerform(callBack);       
     }
-    //---------------------
-    function verifyFolders(){
-        alert("first authorization request.");
-    }    
 };
 
 a.authorizeAndPerform = function authorizeAndPerform(callBack){
@@ -150,8 +141,7 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
     
     gapi.auth.authorize(a.authToken, function(authResult){
         a.handleAuthResult(authResult, callBack);
-    });
-
+    });        
 };
 //aliases, etc.
 a.makeFolder = a.createFolder;
