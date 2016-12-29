@@ -76,6 +76,7 @@ a.createFolder = function(folderName, callback){
                 a.pictureFolderExists = true;
                 v.btnShowFiles.style.visibility = "visible";
             }
+            v.showAllButtons();
             v.clearAllText();            
             a.showFiles();
         });
@@ -133,6 +134,7 @@ a.saveMusicFile = function(filename, file){
             .execute(function(file) {
                 a.showFiles();
             });
+        v.showAllButtons();            
         v.clearAllText();            
     }
 };
@@ -147,6 +149,7 @@ a.savePictureFile = function(filename, file){
             .execute(function(file) {
                 a.showFiles();
             });
+        v.showAllButtons();    
         v.clearAllText();
     }
 };

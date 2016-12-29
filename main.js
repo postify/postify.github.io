@@ -58,7 +58,12 @@ v.clearAllText = function clearAllText(){
         element.value = "";
     });
 };
-
+v.showAllButtons = function showAllButtons(){
+    var allButtons = document.querySelectorAll("button, input[type=button]");
+    allButtons.forEach(button=>{
+        button.style.visibility = "visible";
+    });
+};
 
 //=============================//
 //=======| CONTROLLER |========//
