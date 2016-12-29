@@ -26,7 +26,14 @@
             <div id="controls">
                 <button id="btnCreateFolder"> Create Folder </button> <input id="txtCreateFolder" type="text" ><br>
                 <button id="btnShowFiles"> Show Files </button> <input id="txtShowFiles" type="text" ><br>
-                <input type="file" id="fileElement" accept="image/*, .mp3"><br><button id="btnSaveFile"> Save File </button> <input id="txtSaveFile" type="text"  readonly><br>
+                
+                <input type="file" id="musicFileElement" accept=".mp3"><br>                
+                <input type="file" id="pictureFileElement" accept="image/*"><br>
+                
+                <button id="btnChooseMusic"> Choose Music File </button><input id="txtMusicFile" type="text"  readonly><br>
+                <button id="btnChoosePicture"> Choose Picture File </button><input id="txtPictureFile" type="text"  readonly><br>
+                
+                <button id="btnSaveFiles"> Save Files </button><br><br>
                 <button id="btnGetFile"> Get File </button> <input id="txtGetFile" type="text"  ><br>
                 <button id="btnDeleteFile"> Delete File</button> <input id="txtDeleteFile" type="text"><br>
                 <br>

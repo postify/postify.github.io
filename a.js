@@ -16,12 +16,14 @@ a.authToken = {
 };
 a.authorized = true;
 a.musicFolderExists = null;
+a.pictureFolderExixts = null;
 //most recently saved music file (which hopefully contains a picture)
-a.savedFile = "";
+a.savedPictureFile = "";
 a.musicFolderId = null;
+a.pictureFolderId = null;
 
 a.createFolder = function(folderName){
-    folderName = folderName || "music";
+    folderName = folderName || "New Folder";
     
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
@@ -39,13 +41,20 @@ a.createFolder = function(folderName){
             fields: 'id'
         });
         request.execute(function(resp, raw_resp) {
-            a.musicFolderId = resp.id;
+            if(folderName === "music"){
+                a.musicFolderId = resp.id;
+                a.musicFolderExists = true;
+            }
+            else if(folderName === "pictures"){
+                a.pictureFolderId = resp.id;
+                a.pictureFolderExixts = true;                 
+            }
             a.showFiles();
         });        
     }//--| END of internal 'createFolder' | ---/
 };
 
-a.showFiles = function (filepath ="dummy/path"){
+a.showFiles = function (filename ="dummy/path"){
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', showFiles);
@@ -69,42 +78,49 @@ a.showFiles = function (filepath ="dummy/path"){
     }
 };
 
-a.getFile = function(filepath = "dummy/path/filename"){
+a.getFile = function(filename = "dummy/path/filename"){
+    a.authorizeAndPerform(getFile);    
     //-----| callback for getting file |----//
     //var token = gapi.auth.getToken().access_token;
     function getFile(){
-        alert("Token: \n" + token);
+        //alert("Token: \n" + token);
+        alert("Token: NO TOKEN");
     }
-    //--------------------------------------------//
-    a.authorizeAndPerform(getFile);
 };
-a.saveFile = function(filepath, file){
-    a.authorizeAndPerform(saveFile);
+a.saveMusicFile = function(filename, file){
+    if(filename){
+        a.authorizeAndPerform(saveMusicFile);        
+    }
     //-----| callback for saving file |----//
-    function saveFile(){
-        //alert("You are Authorized to SAVE A FILE: " + filepath);
-        gapi.client.drive.files.create({ "name" : filepath, "parents" : [a.musicFolderId] })
-            .execute(function(file) { a.showFiles(); });
-            //.execute(function(file) { alert("Created file " + filepath + " id: " + file.id); });
-    /*
-        1. Assume user is authenticated (immediate = true)
-        2. Verify an existing music folder
-            if not, create a folder
-        3. save file to music folder
-    */        
+    function saveMusicFile(){
+        //alert("You are Authorized to SAVE MUSIC FILE: " + filename);
+        gapi.client.drive.files.create({ "name" : filename, "parents" : [a.musicFolderId] })
+            .execute(function(file) {
+                a.showFiles();
+            });
     }
-    //--------------------------------------------//
-
 };
-a.deleteFile = function(filepath = "dummy/path/filename"){
 
-    //-----| callback for deleting a file |----//
-    function deleteFile(){
-        alert("You are Authorized to DELETE A FILE: " + filepath);
+a.savePictureFile = function(filename, file){
+    if(filename){
+        a.authorizeAndPerform(savePictureFile);
     }
-    //--------------------------------------------//
+    function savePictureFile(){
+        //alert("You are Authorized to SAVE PICTURE FILE: " + filename);
+        gapi.client.drive.files.create({ "name" : filename, "parents" : [a.pictueFolderId] })
+            .execute(function(file) {
+                a.showFiles();
+            });
+    }
+};
+
+a.deleteFile = function(filename = "dummy/path/filename"){
     a.authorizeAndPerform(deleteFile);
+    function deleteFile(){
+        alert("You are Authorized to DELETE A FILE: " + filename);
+    }
 };
+
 a.handleAuthResult = function(authResult, callBack){
     if(authResult && ! authResult.error){
         //alert("you are authorized.");
@@ -117,6 +133,7 @@ a.handleAuthResult = function(authResult, callBack){
         a.authorizeAndPerform(callBack);       
     }
 };
+
 a.authorizeAndPerform = function authorizeAndPerform(callBack){
     if(a.authorized){
         a.authToken.immediate = true;

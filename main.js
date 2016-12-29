@@ -16,8 +16,11 @@
 //=============================//
 var m = {};
 m.songListJson = {};
-m.chosenFile = "";
-m.chosenFilename = "";
+m.chosenMusicFile = "";
+m.chosenPictureFile = "";
+m.chosenMusicFilename = "";
+m.chosenPictureFilename = "";
+
 
 //=============================//
 //==========| VIEW |===========//
@@ -27,14 +30,19 @@ var v = a; // "a" is our api object from file a.js loaded with index.html
 v.id = function(idString){
     return document.getElementById(idString);
 };
-v.fileElement = v.id("fileElement");
+v.musicFileElement = v.id("musicFileElement");
+v.pictureFileElement = v.id("pictureFileElement");
+v.btnChooseMusic = v.id("btnChooseMusic");
+v.btnChoosePicture = v.id("btnChoosePicture");
+v.btnSaveFiles = v.id("btnSaveFiles");
+
 v.btnShowFiles = v.id("btnShowFiles");
-v.btnSaveFile = v.id("btnSaveFile");
 v.btnGetFile = v.id("btnGetFile");
 v.btnCreateFolder = v.id("btnCreateFolder");
 v.btnDeleteFile = v.id("btnDeleteFile");
 v.txtShowFiles = v.id("txtShowFiles");
-v.txtSaveFile = v.id("txtSaveFile");
+v.txtMusicFile = v.id("txtMusicFile");
+v.txtPictureFile = v.id("txtPictureFile");
 v.txtGetFile = v.id("txtGetFile");
 v.txtDeleteFile = v.id("txtDeleteFile");
 v.txtCreateFolder = v.id("txtCreateFolder");
@@ -87,8 +95,9 @@ c.updateView = function(e){
         if (source === v.btnShowFiles){
             v.showFiles(v.txtShowFiles.value);
         }
-        else if (source === v.btnSaveFile){
-            v.saveFile(v.txtSaveFile.value);
+        else if (source === v.btnSaveFiles){
+            v.saveMusicFile(v.txtMusicFile.value);
+            v.savePictureFile(v.txtPictureFile.value);
         }
         else if (source === v.btnGetFile){
             v.getFile(v.txtGetFile.value);
@@ -98,7 +107,13 @@ c.updateView = function(e){
         }
         else if (source === v.btnCreateFolder){
             v.createFolder(v.txtCreateFolder.value);
-        } 
+        }
+        else if(source === v.btnChooseMusic){
+            v.musicFileElement.click();
+        }
+        else if(source === v.btnChoosePicture){
+            v.pictureFileElement.click();
+        }
     }
     
     //keycode
@@ -121,10 +136,17 @@ c.updateView = function(e){
     }
     
     //file chosen
-    if(type == "change" && id == "fileElement"){
-        m.chosenFile = v.fileElement.files[0];
-        m.chosenFilename = v.fileElement.files[0].name;
-        v.txtSaveFile.value = m.chosenFilename;
+    if(type == "change"){
+        if (id == "musicFileElement"){
+            m.chosenMusicFile = v.musicFileElement.files[0];
+            m.chosenMusicFilename = v.musicFileElement.files[0].name;
+            v.txtMusicFile.value = m.chosenMusicFilename;    
+        }
+        else if(id == "pictureFileElement"){
+            m.chosenPictureFile = v.pictureFileElement.files[0];
+            m.chosenPictureFilename = v.pictureFileElement.files[0].name;
+            v.txtPictureFile.value = m.chosenPictureFilename;
+        }
     }
 };
 
