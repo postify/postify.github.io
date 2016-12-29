@@ -20,6 +20,7 @@ a.pictureFolderExists = null;
 a.savedPictureFile = "";
 a.musicFolderId = null;
 a.pictureFolderId = null;
+a.allFilesArray = [];
 
 a.createFolder = function(folderName){
     folderName = folderName || "New Folder";
@@ -67,6 +68,7 @@ a.showFiles = function (filename ="dummy/path"){
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         function handleResponse(response){
+            a.allFilesArray = response.files;
             v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
             response.files.forEach(file=>{
                 v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
@@ -137,7 +139,13 @@ a.handleAuthResult = function(authResult, callBack){
     //---------------------
     function verifyFolders(){
         alert("first authorization request.");
-        //
+        a.showFiles();
+        var requiredFolders = a.allFilesArray.filter(file=>{
+            return file.name === "music" || file.name === "pictures";
+        });
+        setTimeout(function(){
+            alert(requiredFolders);
+        }, 10);
     }    
 };
 
