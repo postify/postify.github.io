@@ -66,14 +66,18 @@ c.initialize = function initialize(){
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
                 var properFolder = (file.name === "music" || file.name === "pictures");
-                alert (file.name);
+                //alert (file.name);
                 return properFolder;
             });
-            /*
-            setTimeout(function(){
-                alert(requiredFolders[0].name);
-            }, 2000); 
-            */
+            if(!requiredFolders.includes("music")){
+                alert("no music folder");
+            }
+            else if(!requiredFolders.includes("pictures")){
+                alert("no pictures folder");
+            }
+            else{
+                alert("has both folders");
+            }
         });
     }     
     //get authorized to verify a folder on the site named "music"
