@@ -53,12 +53,19 @@ v.authMsg = v.id("authMsg");
 v.window = this;
 v.window.id = "window";
 
+v.clearAllText = function clearAllText(){
+    document.querySelectorAll("input[type=text]").forEach(element=>{
+        element.value = "";
+    });
+};
+
 
 //=============================//
 //=======| CONTROLLER |========//
 //=============================//
 var c = {};
 c.initialize = function initialize(){
+    v.clearAllText();
     v.initialize(verifyFolders);
     function verifyFolders(){
         //alert("first authorization request.");
