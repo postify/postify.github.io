@@ -78,7 +78,7 @@ c.initialize = function initialize(){
                 v.createFolder("music");                
             }
             
-            if ( !requiredFolders.some(file=>file.name === "pictures") ){
+            if ( requiredFolders.some(file=>file.name === "pictures") ){
                 requiredFolders.forEach(file=>{
                     if(file.name === "pictures"){v.pictureFolderId = file.id}
                 });
