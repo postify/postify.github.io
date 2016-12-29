@@ -71,20 +71,15 @@ c.initialize = function initialize(){
             });
             if ( !requiredFolders.some(file=>file.name === "music") ){
                 //alert("no music folder");
-                v.createFolder("music", verifyFolders);
+                v.createFolder("music");
             }
             if ( !requiredFolders.some(file=>file.name === "pictures") ){
                 //alert("no pictures folder");
-                v.createFolder("pictures", verifyFolders);
+                v.createFolder("pictures");
             }
             if ( requiredFolders.some(file=>file.name === "music") && 
                  requiredFolders.some(file=>file.name === "pictures") ){
                 //alert("has both folders");
-                //capture the folder IDs sowm we can svae files to those folders
-                requiredFolders.forEach(file=>{
-                    if(file.name === "music"){v.musicFolderId = file.id}
-                    if(file.name === "pictures"){v.pictureFolderId = file.id}
-                });
             }
         });
     }     

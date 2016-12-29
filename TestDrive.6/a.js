@@ -48,7 +48,7 @@ a.initialize = function initialize(callback){
     }
 };
 
-a.createFolder = function(folderName, doAnother){
+a.createFolder = function(folderName){
     folderName = folderName || "New Folder";
     
     a.authorizeAndPerform(loadDriveApi);     
@@ -76,10 +76,7 @@ a.createFolder = function(folderName, doAnother){
                 a.pictureFolderExists = true;                 
             }
             a.showFiles();
-        });
-        setTimeout(function(){
-            if(doAnother){doAnother();}
-        },100);
+        });        
     }//--| END of internal 'createFolder' | ---/
 };
 
