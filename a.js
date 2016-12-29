@@ -107,7 +107,7 @@ a.savePictureFile = function(filename, file){
     }
     function savePictureFile(){
         //alert("You are Authorized to SAVE PICTURE FILE: " + filename);
-        gapi.client.drive.files.create({ "name" : filename, "parents" : [a.pictueFolderId] })
+        gapi.client.drive.files.create({ "name" : filename, "parents" : [a.pictureFolderId] })
             .execute(function(file) {
                 a.showFiles();
             });
