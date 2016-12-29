@@ -69,9 +69,11 @@ c.initialize = function initialize(){
                 alert (file.name);
                 return properFolder;
             });
+            /*
             setTimeout(function(){
                 alert(requiredFolders[0].name);
-            }, 2000);            
+            }, 2000); 
+            */
         });
     }     
     //get authorized to verify a folder on the site named "music"

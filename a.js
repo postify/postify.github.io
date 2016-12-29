@@ -27,7 +27,7 @@ a.initialize = function initialize(callback){
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', showFiles);
     }
-    function showFiles(callback){
+    function showFiles(){
         var fileMetadata = {
             'spaces': 'appDataFolder',            
             'fields': "nextPageToken, files(id, name)",
@@ -47,7 +47,6 @@ a.initialize = function initialize(callback){
         request.execute(handleResponse);
     }
 };
-
 
 a.createFolder = function(folderName){
     folderName = folderName || "New Folder";
