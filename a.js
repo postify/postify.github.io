@@ -76,7 +76,9 @@ a.createFolder = function(folderName, callback){
                 a.pictureFolderExists = true;
                 v.btnShowFiles.style.visibility = "visible";
             }
-            a.showFiles();            
+            v.txtCreateFolder.innerHTML = "";            
+            a.showFiles();
+
         });
         setTimeout(function(){
             if(callback){callback();}
