@@ -60,7 +60,7 @@ v.window.id = "window";
 //=============================//
 var c = {};
 c.initialize = function initialize(){
-    a.initialize(verifyFolders);
+    v.initialize(verifyFolders);
     function verifyFolders(){
         //alert("first authorization request.");
         a.showFiles(function(){
