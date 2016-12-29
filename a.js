@@ -75,6 +75,7 @@ a.createFolder = function(folderName, callback){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
                 v.btnShowFiles.style.visibility = "visible";
+                v.showAllButtons();                
             }
             v.showAllButtons();
             v.clearAllText();            
