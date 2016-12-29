@@ -76,7 +76,7 @@ a.createFolder = function(folderName, callback){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;                 
             }
-            //a.showFiles();
+            a.showFiles();
         });
         setTimeout(function(){
             if(callback){callback();}
