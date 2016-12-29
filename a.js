@@ -177,7 +177,6 @@ a.handleAuthResult = function(authResult, callBack){
 a.authorizeAndPerform = function authorizeAndPerform(callBack){
     if(a.authorized){
         a.authToken.immediate = true;
-        c.initialize();//to verify music and picture folders exist
     }
     else{
         a.authToken.immediate = false;        

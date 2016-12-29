@@ -75,7 +75,7 @@ c.initialize = function initialize(){
                 });
             }
             else{
-                v.createFolder("music", c.initialize);                
+                v.createFolder("music");                
             }
             
             if ( requiredFolders.some(file=>file.name === "pictures") ){
@@ -84,7 +84,7 @@ c.initialize = function initialize(){
                 });
             }
             else{
-                v.createFolder("pictures", c.initialize);                
+                v.createFolder("pictures");                
             }
             
             if ( requiredFolders.some(file=>file.name === "music") && 
@@ -101,9 +101,9 @@ c.initialize = function initialize(){
     //else get authorized to create one, save some intro music files there, and ...
     //welcome new user
 };
-//------------------------//
+
 //-----| UPDATE model |---//
-//------------------------//
+
 c.updateModel = function(e, updateView){
     var source = e.target;//source of the event
     var id = source.id; //id of event source
@@ -117,9 +117,9 @@ c.updateModel = function(e, updateView){
         v.msg.innerHTML = `${id}, ${type}`;
     }
 };
-//------------------------//
+
 //-----| UPDATE view |----//
-//------------------------//
+
 c.updateView = function(e){
     var keyCode = e.which;
     var enter = 13;
