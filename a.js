@@ -170,6 +170,7 @@ a.handleAuthResult = function(authResult, callBack){
         }        
         a.authorized = true;
         v.authMsg.innerHTML = "";
+        v.showAllButtons();
         callBack();
     }
     else{
