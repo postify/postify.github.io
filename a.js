@@ -62,7 +62,7 @@ a.showFiles = function (filepath ="dummy/path"){
             v.filesInfo.innerHTML = "Files Info: <br>";
             //var filesArray = response.files;
             response.files.forEach(file=>{
-                v.filesInfo.innerHTML += `Filename: ${file.name}, FileID: ${file.id} <br> `;
+                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br> `;
             });            
         }
         request.execute(handleResponse);
