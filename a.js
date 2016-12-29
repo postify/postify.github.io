@@ -144,8 +144,8 @@ a.handleAuthResult = function(authResult, callBack){
             return file.name === "music" || file.name === "pictures";
         });
         setTimeout(function(){
-            alert(requiredFolders);
-        }, 10);
+            alert(requiredFolders[0].name);
+        }, 2000);
     }    
 };
 
