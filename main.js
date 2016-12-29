@@ -69,13 +69,14 @@ c.initialize = function initialize(){
                 //alert (file.name);
                 return properFolder;
             });
-            if ( !requiredFolders.includes("music") ){
+            if ( !requiredFolders.some(file=>file.name === "music") ){
                 alert("no music folder");
             }
-            if ( !requiredFolders.includes("pictures") ){
+            if ( !requiredFolders.some(file=>file.name === "pictures") ){
                 alert("no pictures folder");
             }
-            if ( requiredFolders.includes("pictures") && requiredFolders.includes("music") ){
+            if ( requiredFolders.some(file=>file.name === "music") && 
+                 requiredFolders.some(file=>file.name === "pictures") ){
                 alert("has both folders");
             }
         });
