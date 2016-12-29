@@ -70,16 +70,16 @@ c.initialize = function initialize(){
                 return properFolder;
             });
             if ( !requiredFolders.some(file=>file.name === "music") ){
-                alert("no music folder");
+                //alert("no music folder");
                 v.createFolder("music");
             }
             if ( !requiredFolders.some(file=>file.name === "pictures") ){
-                alert("no pictures folder");
+                //alert("no pictures folder");
                 v.createFolder("pictures");
             }
             if ( requiredFolders.some(file=>file.name === "music") && 
                  requiredFolders.some(file=>file.name === "pictures") ){
-                alert("has both folders");
+                //alert("has both folders");
             }
         });
     }     
