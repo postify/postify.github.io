@@ -75,7 +75,7 @@ c.initialize = function initialize(){
                 });
             }
             else{
-                v.createFolder("music");                
+                v.createFolder("music", c.initialize);                
             }
             
             if ( requiredFolders.some(file=>file.name === "pictures") ){
@@ -84,7 +84,7 @@ c.initialize = function initialize(){
                 });
             }
             else{
-                v.createFolder("pictures");                
+                v.createFolder("pictures", c.initialize);                
             }
             
             if ( requiredFolders.some(file=>file.name === "music") && 
