@@ -4,9 +4,7 @@
 */
 
 /*global gapi*/
-/*global m*/
 /*global v*/
-/*global c*/
 
 var a = {};
 a.authToken = {
@@ -16,7 +14,7 @@ a.authToken = {
 };
 a.authorized = true;
 a.musicFolderExists = null;
-a.pictureFolderExixts = null;
+a.pictureFolderExists = null;
 //most recently saved music file (which hopefully contains a picture)
 a.savedPictureFile = "";
 a.musicFolderId = null;
@@ -47,7 +45,7 @@ a.createFolder = function(folderName){
             }
             else if(folderName === "pictures"){
                 a.pictureFolderId = resp.id;
-                a.pictureFolderExixts = true;                 
+                a.pictureFolderExists = true;                 
             }
             a.showFiles();
         });        
@@ -69,9 +67,8 @@ a.showFiles = function (filename ="dummy/path"){
         var request = gapi.client.drive.files.list(fileMetadata);
         function handleResponse(response){
             v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
-            //var filesArray = response.files;
             response.files.forEach(file=>{
-                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br> `;
+                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
             });            
         }
         request.execute(handleResponse);
