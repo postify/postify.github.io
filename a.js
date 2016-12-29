@@ -131,7 +131,6 @@ a.handleAuthResult = function(authResult, callBack){
         //alert("you are authorized.");
         if(a.firstAuthRequest){
             a.firstAuthRequest = false;
-            verifyFolders();
         }        
         a.authorized = true;
         v.authMsg.innerHTML = "";
@@ -142,17 +141,7 @@ a.handleAuthResult = function(authResult, callBack){
         a.authorizeAndPerform(callBack);       
     }
     //---------------------
-    function verifyFolders(){
-        //alert("first authorization request.");
-        a.showFiles(function(){
-            var requiredFolders = a.allFilesArray.filter(file=>{
-                return (file.name === "music" || file.name === "pictures");
-            });
-            setTimeout(function(){
-                alert(requiredFolders[0].name);
-            }, 2000);            
-        });
-    }    
+   
 };
 
 a.authorizeAndPerform = function authorizeAndPerform(callBack){
@@ -171,8 +160,7 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 //aliases, etc.
 a.makeFolder = a.createFolder;
 
-/*
-a.initialize = function initialize(){
+a.initialize = function initialize(callback){
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', showFiles);
@@ -186,17 +174,14 @@ a.initialize = function initialize(){
         var request = gapi.client.drive.files.list(fileMetadata);
         function handleResponse(response){
             a.allFilesArray = [];             
-            v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
+            v.filesInfo.innerHTML = "";
             response.files.forEach(file=>{
                 a.allFilesArray.push(file);
-                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
             });
+            if(callback){
+                callback();
+            }
         }
         request.execute(handleResponse);
-        
-        if(callback){
-            callback();
-        }
     }
 };
-*/

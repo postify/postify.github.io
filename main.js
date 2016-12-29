@@ -60,6 +60,18 @@ v.window.id = "window";
 //=============================//
 var c = {};
 c.initialize = function initialize(){
+    a.initialize(verifyFolders);
+    function verifyFolders(){
+        //alert("first authorization request.");
+        a.showFiles(function(){
+            var requiredFolders = a.allFilesArray.filter(file=>{
+                return (file.name === "music" || file.name === "pictures");
+            });
+            setTimeout(function(){
+                alert(requiredFolders[0].name);
+            }, 2000);            
+        });
+    }     
     //get authorized to verify a folder on the site named "music"
     //else get authorized to create one, save some intro music files there, and ...
     //welcome new user
