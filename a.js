@@ -59,7 +59,7 @@ a.showFiles = function (filename ="dummy/path"){
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', showFiles);
     }
-    function showFiles(){
+    function showFiles(callback){
         var fileMetadata = {
             'spaces': 'appDataFolder',            
             //'pageSize': 50,
@@ -68,13 +68,17 @@ a.showFiles = function (filename ="dummy/path"){
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         function handleResponse(response){
-            a.allFilesArray = response.files;
+            a.allFilesArray = response.files;             
             v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
             response.files.forEach(file=>{
                 v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
-            });            
+            });
         }
         request.execute(handleResponse);
+        
+        if(callback){
+            callback();
+        }
     }
 };
 
@@ -139,13 +143,14 @@ a.handleAuthResult = function(authResult, callBack){
     //---------------------
     function verifyFolders(){
         alert("first authorization request.");
-        a.showFiles();
-        var requiredFolders = a.allFilesArray.filter(file=>{
-            return file.name === "music" || file.name === "pictures";
+        a.showFiles(function(){
+            var requiredFolders = a.allFilesArray.filter(file=>{
+                return (file.name === "music" || file.name === "pictures");
+            });
+            setTimeout(function(){
+                alert(requiredFolders[0].name);
+            }, 2000);            
         });
-        setTimeout(function(){
-            alert(requiredFolders[0].name);
-        }, 2000);
     }    
 };
 
