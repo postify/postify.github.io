@@ -66,27 +66,8 @@ c.initialize = function initialize(){
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
                 var properFolder = !!(file.name === "music" || file.name === "pictures");
-                //alert (file.name);
                 return properFolder;
             });
-            if ( requiredFolders.some(file=>file.name === "music") ){
-                requiredFolders.forEach(file=>{
-                    if(file.name === "music"){v.musicFolderId = file.id}
-                });
-            }
-            else{
-                v.createFolder("music");                
-            }
-            
-            if ( requiredFolders.some(file=>file.name === "pictures") ){
-                requiredFolders.forEach(file=>{
-                    if(file.name === "pictures"){v.pictureFolderId = file.id}
-                });
-            }
-            else{
-                v.createFolder("pictures");                
-            }
-            
             if ( requiredFolders.some(file=>file.name === "music") && 
                  requiredFolders.some(file=>file.name === "pictures") ){
                 //capture the folder IDs sowm we can svae files to those folders
@@ -94,7 +75,26 @@ c.initialize = function initialize(){
                     if(file.name === "music"){v.musicFolderId = file.id}
                     if(file.name === "pictures"){v.pictureFolderId = file.id}
                 });
+            }            
+            if ( requiredFolders.some(file=>file.name === "music") ){
+                requiredFolders.forEach(file=>{
+                    if(file.name === "music"){v.musicFolderId = file.id}
+                });
             }
+            else{
+                v.createFolder("music", verifyPictureFolder);                
+            }//----------------
+            function verifyPictureFolder(){
+                if ( requiredFolders.some(file=>file.name === "pictures") ){
+                    requiredFolders.forEach(file=>{
+                        if(file.name === "pictures"){v.pictureFolderId = file.id}
+                    });
+                }
+                else{
+                    v.createFolder("pictures");                
+                }
+            }
+            //-----------------
         });
     }     
     //get authorized to verify a folder on the site named "music"
