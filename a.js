@@ -54,12 +54,12 @@ a.createFolder = function(folderName){
     }//--| END of internal 'createFolder' | ---/
 };
 
-a.showFiles = function (filename ="dummy/path"){
+a.showFiles = function (callback){
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', showFiles);
     }
-    function showFiles(callback){
+    function showFiles(){
         var fileMetadata = {
             'spaces': 'appDataFolder',            
             //'pageSize': 50,
@@ -171,4 +171,32 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 //aliases, etc.
 a.makeFolder = a.createFolder;
 
-
+/*
+a.initialize = function initialize(){
+    a.authorizeAndPerform(loadDriveApi);     
+    function loadDriveApi(){
+        gapi.client.load('drive', 'v3', showFiles);
+    }
+    function showFiles(callback){
+        var fileMetadata = {
+            'spaces': 'appDataFolder',            
+            'fields': "nextPageToken, files(id, name)",
+            'parents' : ['appDataFolder']
+        };
+        var request = gapi.client.drive.files.list(fileMetadata);
+        function handleResponse(response){
+            a.allFilesArray = [];             
+            v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
+            response.files.forEach(file=>{
+                a.allFilesArray.push(file);
+                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
+            });
+        }
+        request.execute(handleResponse);
+        
+        if(callback){
+            callback();
+        }
+    }
+};
+*/
