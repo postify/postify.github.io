@@ -34,17 +34,17 @@ a.initialize = function initialize(callback){
             'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
+        request.execute(handleResponse);        
         function handleResponse(response){
             a.allFilesArray = [];             
             v.filesInfo.innerHTML = "";
             response.files.forEach(file=>{
                 a.allFilesArray.push(file);
             });
-            if(callback){
+            if ( callback ){
                 callback();
             }
         }
-        request.execute(handleResponse);
     }
 };
 
@@ -75,6 +75,7 @@ a.createFolder = function(folderName, callback){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
                 v.btnShowFiles.style.visibility = "visible";
+                a.showFiles();
             }
         });
         setTimeout(function(){
@@ -96,6 +97,7 @@ a.showFiles = function (callback){
             'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
+        request.execute(handleResponse);        
         function handleResponse(response){
             a.allFilesArray = [];             
             v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
@@ -104,8 +106,6 @@ a.showFiles = function (callback){
                 v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
             });
         }
-        request.execute(handleResponse);
-        
         if(callback){
             callback();
         }
