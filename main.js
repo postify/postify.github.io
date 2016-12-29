@@ -65,17 +65,17 @@ c.initialize = function initialize(){
         //alert("first authorization request.");
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
-                var properFolder = (file.name === "music" || file.name === "pictures");
+                var properFolder = !!(file.name === "music" || file.name === "pictures");
                 //alert (file.name);
                 return properFolder;
             });
-            if(!requiredFolders.includes("music")){
+            if ( !requiredFolders.includes("music") ){
                 alert("no music folder");
             }
-            else if(!requiredFolders.includes("pictures")){
+            if ( !requiredFolders.includes("pictures") ){
                 alert("no pictures folder");
             }
-            else{
+            if ( requiredFolders.includes("pictures") && requiredFolders.includes("music") ){
                 alert("has both folders");
             }
         });
