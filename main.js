@@ -40,7 +40,6 @@ v.btnShowFiles = v.id("btnShowFiles");
 v.btnGetFile = v.id("btnGetFile");
 v.btnCreateFolder = v.id("btnCreateFolder");
 v.btnDeleteFile = v.id("btnDeleteFile");
-v.txtShowFiles = v.id("txtShowFiles");
 v.txtMusicFile = v.id("txtMusicFile");
 v.txtPictureFile = v.id("txtPictureFile");
 v.txtGetFile = v.id("txtGetFile");
@@ -130,7 +129,7 @@ c.updateView = function(e){
     //buttons
     if(type === "mousedown"){
         if (source === v.btnShowFiles){
-            v.showFiles(v.txtShowFiles.value);
+            v.showFiles();
         }
         else if (source === v.btnSaveFiles){
             v.saveMusicFile(v.txtMusicFile.value);
@@ -155,10 +154,7 @@ c.updateView = function(e){
     
     //keycode
     if(keyCode && keyCode === enter){
-        if (source === v.txtShowFiles){
-            v.showFiles(v.txtShowFiles.value);
-        }
-        else if (source === v.txtSaveFile){
+        if (source === v.txtSaveFile){
             v.saveFile(v.txtSaveFile.value, m.chosenFile);
         }
         else if (source === v.txtGetFile){
