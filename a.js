@@ -5,7 +5,6 @@
 
 /*global gapi*/
 /*global v*/
-/*global c*/
 
 var a = {};
 a.authToken = {
@@ -74,9 +73,9 @@ a.createFolder = function(folderName, callback){
             }
             else if(folderName === "pictures"){
                 a.pictureFolderId = resp.id;
-                a.pictureFolderExists = true;                 
+                a.pictureFolderExists = true;
+                v.btnShowFiles.style.visibility = "visible";
             }
-            //a.showFiles();
         });
         setTimeout(function(){
             if(callback){callback();}

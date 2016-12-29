@@ -69,11 +69,13 @@ c.initialize = function initialize(){
             });
             if ( requiredFolders.some(file=>file.name === "music") && 
                  requiredFolders.some(file=>file.name === "pictures") ){
+                v.btnShowFiles.style.visibility = "visible";                     
                 //capture the folder IDs sowm we can svae files to those folders
                 requiredFolders.forEach(file=>{
                     if(file.name === "music"){v.musicFolderId = file.id}
                     if(file.name === "pictures"){v.pictureFolderId = file.id}
                 });
+                
             }            
             if ( requiredFolders.some(file=>file.name === "music") ){
                 requiredFolders.forEach(file=>{
@@ -85,8 +87,10 @@ c.initialize = function initialize(){
             }//----------------
             function verifyPictureFolder(){
                 if ( requiredFolders.some(file=>file.name === "pictures") ){
+                    v.btnShowFiles.style.visibility = "visible";
                     requiredFolders.forEach(file=>{
                         if(file.name === "pictures"){v.pictureFolderId = file.id}
+                        
                     });
                 }
                 else{
