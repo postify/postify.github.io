@@ -142,7 +142,7 @@ a.handleAuthResult = function(authResult, callBack){
     }
     //---------------------
     function verifyFolders(){
-        alert("first authorization request.");
+        //alert("first authorization request.");
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
                 return (file.name === "music" || file.name === "pictures");
