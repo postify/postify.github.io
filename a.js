@@ -22,6 +22,33 @@ a.musicFolderId = null;
 a.pictureFolderId = null;
 a.allFilesArray = [];
 
+a.initialize = function initialize(callback){
+    a.authorizeAndPerform(loadDriveApi);     
+    function loadDriveApi(){
+        gapi.client.load('drive', 'v3', showFiles);
+    }
+    function showFiles(callback){
+        var fileMetadata = {
+            'spaces': 'appDataFolder',            
+            'fields': "nextPageToken, files(id, name)",
+            'parents' : ['appDataFolder']
+        };
+        var request = gapi.client.drive.files.list(fileMetadata);
+        function handleResponse(response){
+            a.allFilesArray = [];             
+            v.filesInfo.innerHTML = "";
+            response.files.forEach(file=>{
+                a.allFilesArray.push(file);
+            });
+            if(callback){
+                callback();
+            }
+        }
+        request.execute(handleResponse);
+    }
+};
+
+
 a.createFolder = function(folderName){
     folderName = folderName || "New Folder";
     
@@ -160,28 +187,3 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 //aliases, etc.
 a.makeFolder = a.createFolder;
 
-a.initialize = function initialize(callback){
-    a.authorizeAndPerform(loadDriveApi);     
-    function loadDriveApi(){
-        gapi.client.load('drive', 'v3', showFiles);
-    }
-    function showFiles(callback){
-        var fileMetadata = {
-            'spaces': 'appDataFolder',            
-            'fields': "nextPageToken, files(id, name)",
-            'parents' : ['appDataFolder']
-        };
-        var request = gapi.client.drive.files.list(fileMetadata);
-        function handleResponse(response){
-            a.allFilesArray = [];             
-            v.filesInfo.innerHTML = "";
-            response.files.forEach(file=>{
-                a.allFilesArray.push(file);
-            });
-            if(callback){
-                callback();
-            }
-        }
-        request.execute(handleResponse);
-    }
-};
