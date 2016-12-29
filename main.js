@@ -65,7 +65,9 @@ c.initialize = function initialize(){
         //alert("first authorization request.");
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
-                return (file.name === "music" || file.name === "pictures");
+                var properFolder = (file.name === "music" || file.name === "pictures");
+                alert (file.name);
+                return properFolder;
             });
             setTimeout(function(){
                 alert(requiredFolders[0].name);
