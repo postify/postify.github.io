@@ -172,6 +172,7 @@ a.deleteFile = function(fileId){
             else{
                 alert("Trouble deleting file.");
             }
+            a.showFiles();
         });        
     }
 };
