@@ -76,7 +76,7 @@ a.createFolder = function(folderName, callback){
             else if(folderName === "__pictures-diymusic"){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
-                v.btnShowFiles.style.visibility = "visible";
+                //v.btnShowFiles.style.visibility = "visible";
                 v.showAllButtons();                
             }
             v.showAllButtons();
