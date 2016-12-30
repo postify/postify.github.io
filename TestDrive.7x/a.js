@@ -83,7 +83,7 @@ a.createFolder = function(folderName, callback){
         });
         setTimeout(function(){
             if(callback){callback();}
-        },100);
+        },1500);
     }//--| END of internal 'createFolder' | ---/
 };
 
