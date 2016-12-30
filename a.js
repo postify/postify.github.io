@@ -166,6 +166,7 @@ a.deleteFile = function(fileId){
         });
         request.execute(function(response) {
             if(response && !response.error){
+                v.clearAllText();
                 alert("File deleted.");
             }
             else{
