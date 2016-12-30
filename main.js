@@ -30,12 +30,12 @@ var v = a; // "a" is our api object from file a.js loaded with index.html
 v.id = function(idString){
     return document.getElementById(idString);
 };
+/*
 v.musicFileElement = v.id("musicFileElement");
 v.pictureFileElement = v.id("pictureFileElement");
 v.btnChooseMusic = v.id("btnChooseMusic");
 v.btnChoosePicture = v.id("btnChoosePicture");
 v.btnSaveFiles = v.id("btnSaveFiles");
-
 v.btnShowFiles = v.id("btnShowFiles");
 v.btnGetFile = v.id("btnGetFile");
 v.btnCreateFolder = v.id("btnCreateFolder");
@@ -46,10 +46,13 @@ v.txtGetFile = v.id("txtGetFile");
 v.txtDeleteFile = v.id("txtDeleteFile");
 v.txtCreateFolder = v.id("txtCreateFolder");
 v.filesInfo = v.id("filesInfo");
-
 v.msg = v.id("msg");
 v.app = v.id("app");
 v.authMsg = v.id("authMsg");
+*/
+v.attachAllElementsById(v);
+
+
 v.window = this;
 v.window.id = "window";
 
@@ -62,6 +65,12 @@ v.showAllButtons = function showAllButtons(){
     var allButtons = document.querySelectorAll("button, input[type=button]");
     allButtons.forEach(button=>{
         button.style.visibility = "visible";
+    });
+};
+v.attachAllElementsById = function attachAllElementsById(attachHere){
+    var allElements = document.getElementsByTagName('*');
+    [].forEach.call(allElements,function(element){
+        attachHere[element.id] = element;
     });
 };
 
