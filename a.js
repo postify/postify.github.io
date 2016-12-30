@@ -67,11 +67,11 @@ a.createFolder = function(folderName, callback){
             fields: 'id'
         });
         request.execute(function(resp, raw_resp) {
-            if(folderName === "A0-music-diymusic"){
+            if(folderName === "__music-diymusic"){
                 a.musicFolderId = resp.id;
                 a.musicFolderExists = true;
             }
-            else if(folderName === "A0-pictures-diymusic"){
+            else if(folderName === "__pictures-diymusic"){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
                 v.btnShowFiles.style.visibility = "visible";

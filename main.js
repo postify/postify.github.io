@@ -66,39 +66,39 @@ c.initialize = function initialize(){
         //alert("first authorization request.");
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
-                var properFolder = !!(file.name === "A0-music-diymusic" || file.name === "A0-pictures-diymusic");
+                var properFolder = !!(file.name === "__music-diymusic" || file.name === "__pictures-diymusic");
                 return properFolder;
             });
-            if ( requiredFolders.some(file=>file.name === "A0-music-diymusic") && 
-                 requiredFolders.some(file=>file.name === "A0-pictures-diymusic") ){
+            if ( requiredFolders.some(file=>file.name === "__music-diymusic") && 
+                 requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
                 v.btnShowFiles.style.visibility = "visible";
                 a.showFiles();
                 //capture the folder IDs sowm we can svae files to those folders
                 requiredFolders.forEach(file=>{
-                    if(file.name === "A0-music-diymusic"){v.musicFolderId = file.id}
-                    if(file.name === "A0-pictures-diymusic"){v.pictureFolderId = file.id}
+                    if(file.name === "__music-diymusic"){v.musicFolderId = file.id}
+                    if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
                 });
                 
             }            
-            if ( requiredFolders.some(file=>file.name === "A0-music-diymusic") ){
+            if ( requiredFolders.some(file=>file.name === "__music-diymusic") ){
                 requiredFolders.forEach(file=>{
-                    if(file.name === "A0-music-diymusic"){v.musicFolderId = file.id}
+                    if(file.name === "__music-diymusic"){v.musicFolderId = file.id}
                 });
             }
             else{
-                v.createFolder("A0-music-diymusic", verifyPictureFolder);                
+                v.createFolder("__music-diymusic", verifyPictureFolder);                
             }//----------------
             function verifyPictureFolder(){
-                if ( requiredFolders.some(file=>file.name === "A0-pictures-diymusic") ){
+                if ( requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
                     v.btnShowFiles.style.visibility = "visible";
                     a.showFiles();
                     requiredFolders.forEach(file=>{
-                        if(file.name === "A0-pictures-diymusic"){v.pictureFolderId = file.id}
+                        if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
                         
                     });
                 }
                 else{
-                    v.createFolder("A0-pictures-diymusic");                
+                    v.createFolder("__pictures-diymusic");                
                 }
             }
             //-----------------
