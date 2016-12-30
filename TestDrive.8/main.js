@@ -71,6 +71,7 @@ c.initialize = function initialize(){
             });
             if ( requiredFolders.some(file=>file.name === "__music-diymusic") && 
                  requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
+                //v.btnShowFiles.style.visibility = "visible";
                 v.showAllButtons();
                 a.showFiles();
                 //capture the folder IDs sowm we can svae files to those folders
@@ -90,6 +91,7 @@ c.initialize = function initialize(){
             }//----------------
             function verifyPictureFolder(){
                 if ( requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
+                    //v.btnShowFiles.style.visibility = "visible";
                     v.showAllButtons();
                     a.showFiles();
                     requiredFolders.forEach(file=>{

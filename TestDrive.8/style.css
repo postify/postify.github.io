@@ -60,6 +60,9 @@ input[type="text"]{
 input[type="file"]{
     visibility: hidden;
 }
+#btnShowFiles{
+    visibility: hidden;    
+}
 button, input[type="button"]{
     visibility: hidden;
 }
