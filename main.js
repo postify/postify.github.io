@@ -30,6 +30,23 @@ var v = a; // "a" is our api object from file a.js loaded with index.html
 v.id = function(idString){
     return document.getElementById(idString);
 };
+v.clearAllText = function clearAllText(){
+    document.querySelectorAll("input[type=text]").forEach(element=>{
+        element.value = "";
+    });
+};
+v.showAllButtons = function showAllButtons(){
+    var allButtons = document.querySelectorAll("button, input[type=button]");
+    allButtons.forEach(button=>{
+        button.style.visibility = "visible";
+    });
+};
+v.attachAllElementsById = function attachAllElementsById(attachHere){
+    var allElements = document.getElementsByTagName('*');
+    [].forEach.call(allElements,function(element){
+        attachHere[element.id] = element;
+    });
+};
 /*
 v.musicFileElement = v.id("musicFileElement");
 v.pictureFileElement = v.id("pictureFileElement");
@@ -56,23 +73,7 @@ v.attachAllElementsById(v);
 v.window = this;
 v.window.id = "window";
 
-v.clearAllText = function clearAllText(){
-    document.querySelectorAll("input[type=text]").forEach(element=>{
-        element.value = "";
-    });
-};
-v.showAllButtons = function showAllButtons(){
-    var allButtons = document.querySelectorAll("button, input[type=button]");
-    allButtons.forEach(button=>{
-        button.style.visibility = "visible";
-    });
-};
-v.attachAllElementsById = function attachAllElementsById(attachHere){
-    var allElements = document.getElementsByTagName('*');
-    [].forEach.call(allElements,function(element){
-        attachHere[element.id] = element;
-    });
-};
+
 
 //=============================//
 //=======| CONTROLLER |========//

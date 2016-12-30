@@ -178,7 +178,6 @@ a.handleAuthResult = function(authResult, callBack){
         a.authorizeAndPerform(callBack);       
     }
     //---------------------
-   
 };
 
 a.authorizeAndPerform = function authorizeAndPerform(callBack){
