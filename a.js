@@ -29,9 +29,9 @@ a.initialize = function initialize(callback){
     }
     function showFiles(){
         var fileMetadata = {
-            'spaces': 'appDataFolder',            
+            //'spaces': 'appDataFolder',            
             'fields': "nextPageToken, files(id, name)",
-            'parents' : ['appDataFolder']
+            //'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         request.execute(handleResponse);        
@@ -60,18 +60,18 @@ a.createFolder = function(folderName, callback){
         var fileMetadata = {
             'name' : folderName,
             'mimeType' : 'application/vnd.google-apps.folder',
-            'parents': ['appDataFolder']
+            //'parents': ['appDataFolder']
         };
         var request = gapi.client.drive.files.create({
             resource: fileMetadata,
             fields: 'id'
         });
         request.execute(function(resp, raw_resp) {
-            if(folderName === "music"){
+            if(folderName === "A0-music-diymusic"){
                 a.musicFolderId = resp.id;
                 a.musicFolderExists = true;
             }
-            else if(folderName === "pictures"){
+            else if(folderName === "A0-pictures-diymusic"){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
                 v.btnShowFiles.style.visibility = "visible";
@@ -94,10 +94,10 @@ a.showFiles = function (callback){
     }
     function showFiles(){
         var fileMetadata = {
-            'spaces': 'appDataFolder',            
+            //'spaces': 'appDataFolder',            
             //'pageSize': 50,
             'fields': "nextPageToken, files(id, name)",
-            'parents' : ['appDataFolder']
+            //'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         request.execute(handleResponse);        
