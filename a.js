@@ -42,7 +42,9 @@ a.initialize = function initialize(callback){
                 a.allFilesArray.push(file);
             });
             if ( callback ){
-                callback();
+                setTimeout(function(){
+                    callback();                    
+                },2000);
             }
         }
     }
