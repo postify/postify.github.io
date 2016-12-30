@@ -160,14 +160,13 @@ a.savePictureFile = function(filename, file){
 a.deleteFile = function(fileId){
     a.authorizeAndPerform(deleteFile);
     function deleteFile(){
-        alert("You are Authorized to DELETE A FILE: " + fileId);
         var request = gapi.client.drive.files.delete({
             'fileId': fileId
         });
         request.execute(function(response) {
             if(response && !response.error){
                 v.clearAllText();
-                alert("File deleted.");
+                alert("File deleted: " + fileId);
             }
             else{
                 alert("Trouble deleting file.");
