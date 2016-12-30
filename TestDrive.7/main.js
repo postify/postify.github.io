@@ -47,11 +47,33 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
         attachHere[element.id] = element;
     });
 };
-
+/*
+v.musicFileElement = v.id("musicFileElement");
+v.pictureFileElement = v.id("pictureFileElement");
+v.btnChooseMusic = v.id("btnChooseMusic");
+v.btnChoosePicture = v.id("btnChoosePicture");
+v.btnSaveFiles = v.id("btnSaveFiles");
+v.btnShowFiles = v.id("btnShowFiles");
+v.btnGetFile = v.id("btnGetFile");
+v.btnCreateFolder = v.id("btnCreateFolder");
+v.btnDeleteFile = v.id("btnDeleteFile");
+v.txtMusicFile = v.id("txtMusicFile");
+v.txtPictureFile = v.id("txtPictureFile");
+v.txtGetFile = v.id("txtGetFile");
+v.txtDeleteFile = v.id("txtDeleteFile");
+v.txtCreateFolder = v.id("txtCreateFolder");
+v.filesInfo = v.id("filesInfo");
+v.msg = v.id("msg");
+v.app = v.id("app");
+v.authMsg = v.id("authMsg");
+*/
 v.attachAllElementsById(v);
+
 
 v.window = this;
 v.window.id = "window";
+
+
 
 //=============================//
 //=======| CONTROLLER |========//
