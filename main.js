@@ -1,7 +1,7 @@
 //====================================//
 //==========| START OF APP |==========//
 //====================================//
-
+// https://developers.google.com/drive/v3/web/manage-uploads
 // https://developers.google.com/drive/v3/web/savetodrive
 // http://stackoverflow.com/questions/10317638/inserting-file-to-google-drive-through-api
 // https://developers.google.com/drive/v3/web/appdata
@@ -138,8 +138,10 @@ c.updateView = function(e){
             v.showFiles();
         }
         else if (source === v.btnSaveFiles){
-            v.saveMusicFile(v.txtMusicFile.value);
-            v.savePictureFile(v.txtPictureFile.value);
+            v.saveMusicFile(m.chosenMusicFilename, m.chosenMusicFile );
+            v.savePictureFile(m.chosenPictureFilename, m.chosenMusicFile);
+            //v.saveMusicFile(v.txtMusicFile.value);            
+            //v.savePictureFile(v.txtPictureFile.value);
         }
         else if (source === v.btnGetFile){
             v.getFile(v.txtGetFile.value);
