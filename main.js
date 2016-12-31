@@ -1,6 +1,6 @@
-//===================================//
-//==========| START OF APP|==========//
-//===================================//
+//====================================//
+//==========| START OF APP |==========//
+//====================================//
 
 // https://developers.google.com/drive/v3/web/savetodrive
 // http://stackoverflow.com/questions/10317638/inserting-file-to-google-drive-through-api
@@ -78,8 +78,8 @@ c.initialize = function initialize(){
                     if(file.name === "__music-diymusic"){v.musicFolderId = file.id}
                     if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
                 });
-                
-            }            
+            }
+            
             if ( requiredFolders.some(file=>file.name === "__music-diymusic") ){
                 requiredFolders.forEach(file=>{
                     if(file.name === "__music-diymusic"){v.musicFolderId = file.id}
@@ -90,11 +90,10 @@ c.initialize = function initialize(){
             }//----------------
             function verifyPictureFolder(){
                 if ( requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
-                    v.showAllButtons();
-                    a.showFiles();
+                    //v.showAllButtons();
+                    //a.showFiles();
                     requiredFolders.forEach(file=>{
                         if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
-                        
                     });
                 }
                 else{
@@ -102,6 +101,25 @@ c.initialize = function initialize(){
                 }
             }
             //-----------------
+            if( requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
+                requiredFolders.forEach(file=>{
+                    if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
+                });                
+            }
+            else{
+                v.createFolder("__pictures-diymusic", verifyMusicFolder);
+            }
+            //-----------------            
+            function verifyMusicFolder(){
+                if( requiredFolders.some(file=>file.name === "__music-diymusic")  ){
+                    requiredFolders.forEach(file=>{
+                        if(file.name === "__music-diymusic"){v.musicFolderId = file.id}                        
+                    });                 
+                }
+                else{
+                    v.createFolder("__music-diymusic");                     
+                }
+            }
         });
     }     
     //get authorized to verify a folder on the site named "music"
