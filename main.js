@@ -80,44 +80,26 @@ c.initialize = function initialize(){
             if ( bothFoldersExist ){
                 v.showAllButtons();
                 a.showFiles();
-                //capture the folder IDs sowm we can svae files to those folders
+                recordFolderIds();
+            }
+            else if ( musicFolderMissing ){
+                v.createFolder(a.musicFolderName, recordFolderIds);
+            }
+            else if ( pictureFolderMissing ){
+                v.createFolder(a.pictureFolderName, recordFolderIds);  
+            }
+            else if( bothFoldersMissing ){
+                v.createFolder(a.musicFolderName, recordFolderIds);
+                v.createFolder(a.pictureFolderName, recordFolderIds);
+            }
+            //-----------------------------------
+            function recordFolderIds(){
+                //capture the folder IDs so we can save files to those folders
                 requiredFolders.forEach(file=>{
                     if(file.name === a.musicFolderName){v.musicFolderId = file.id}
                     if(file.name === a.pictureFolderName){v.pictureFolderId = file.id}
-                });
+                });                
             }
-            else if ( musicFolderMissing ){
-                v.createFolder(a.musicFolderName);
-            }
-            else if ( pictureFolderMissing ){
-                v.createFolder(a.pictureFolderName);  
-            }
-            else if( bothFoldersMissing ){
-                v.createFolder(a.musicFolderName);
-                v.createFolder(a.pictureFolderName);
-            }
-            /*
-            if ( requiredFolders.some(file=>file.name === a.musicFolderName) ){
-                requiredFolders.forEach(file=>{
-                    if(file.name === a.musicFolderName){v.musicFolderId = file.id}
-                });
-            }
-            else{
-                v.createFolder(a.musicFolderName, verifyPictureFolder);                
-            }//----------------
-            function verifyPictureFolder(){
-                if ( requiredFolders.some(file=>file.name === a.pictureFolderName) ){
-                    //v.showAllButtons();
-                    //a.showFiles();
-                    requiredFolders.forEach(file=>{
-                        if(file.name === a.pictureFolderName){v.pictureFolderId = file.id}
-                    });
-                }
-                else{
-                    v.createFolder(a.pictureFolderName);                
-                }
-            }
-            */
         });
     }     
     //get authorized to verify a folder on the site named "music"
