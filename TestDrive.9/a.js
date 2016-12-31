@@ -127,7 +127,7 @@ a.getFile = function(filename = "dummy/path/filename"){
         alert("Token: NO TOKEN");
     }
 };
-a.saveMusicFile = function(filename, rawFile){
+a.saveMusicFile = function(filename, file){
     if(filename){
         a.authorizeAndPerform(saveMusicFile);        
     }
@@ -136,26 +136,11 @@ a.saveMusicFile = function(filename, rawFile){
         //alert("You are Authorized to SAVE MUSIC FILE: " + filename);
         gapi.client.drive.files.create({ "name" : filename, "parents" : [a.musicFolderId] })
             .execute(function(file) {
-            //==============================================================//
-                var id = file.id;
-                a.addMusicContent(id, rawFile);
-            //==============================================================//
+                a.showFiles();
             });
         v.showAllButtons();            
         v.clearAllText();            
     }
-};
-
-a.addMusicContent = function addMusicContent(id, content){
-    gapi.client.request
-    ( { 
-     'path': '/upload/drive/v3/files/'+ id,
-     'method': 'PATCH',
-     'params': {'fileId': id, 'uploadType': 'multipart'},
-     'headers': { 'Content-Type': 'multipart/form-data' },
-     'body': content
-     }).execute(function(x){ alert(x.name); }); 
-                    
 };
 
 a.savePictureFile = function(filename, file){
