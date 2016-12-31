@@ -101,6 +101,7 @@ c.initialize = function initialize(){
                 }
             }
             //-----------------
+            /*
             if( requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
                 requiredFolders.forEach(file=>{
                     if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
@@ -120,6 +121,7 @@ c.initialize = function initialize(){
                     v.createFolder("__music-diymusic");                     
                 }
             }
+            */
         });
     }     
     //get authorized to verify a folder on the site named "music"
