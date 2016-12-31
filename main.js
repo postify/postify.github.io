@@ -66,59 +66,55 @@ c.initialize = function initialize(){
         //alert("first authorization request.");
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
-                var properFolder = !!(file.name === "__music-diymusic" || file.name === "__pictures-diymusic");
+                var properFolder = !!(file.name === a.musicFolderName || file.name === a.pictureFolderName);
                 return properFolder;
             });
-            if ( requiredFolders.some(file=>file.name === "__music-diymusic") && 
-                 requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
+            const bothFoldersExist =    requiredFolders.some(file=>file.name === a.musicFolderName) &&
+                                        requiredFolders.some(file=>file.name === a.pictureFolderName);
+            const musicFolderMissing =  !requiredFolders.some(file=>file.name === a.musicFolderName) &&
+                                        requiredFolders.some(file=>file.name === a.pictureFolderName);
+            const pictureFolderMissing= requiredFolders.some(file=>file.name === a.musicFolderName) &&
+                                        !requiredFolders.some(file=>file.name === a.pictureFolderName);
+            const bothFoldersMissing =  !requiredFolders.some(file=>file.name === a.musicFolderName) &&
+                                        !requiredFolders.some(file=>file.name === a.pictureFolderName);
+            if ( bothFoldersExist ){
                 v.showAllButtons();
                 a.showFiles();
                 //capture the folder IDs sowm we can svae files to those folders
                 requiredFolders.forEach(file=>{
-                    if(file.name === "__music-diymusic"){v.musicFolderId = file.id}
-                    if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
+                    if(file.name === a.musicFolderName){v.musicFolderId = file.id}
+                    if(file.name === a.pictureFolderName){v.pictureFolderId = file.id}
                 });
             }
-            
-            if ( requiredFolders.some(file=>file.name === "__music-diymusic") ){
+            else if ( musicFolderMissing ){
+                v.createFolder(a.musicFolderName);
+            }
+            else if ( pictureFolderMissing ){
+                v.createFolder(a.pictureFolderName);  
+            }
+            else if( bothFoldersMissing ){
+                v.createFolder(a.musicFolderName);
+                v.createFolder(a.pictureFolderName);
+            }
+            /*
+            if ( requiredFolders.some(file=>file.name === a.musicFolderName) ){
                 requiredFolders.forEach(file=>{
-                    if(file.name === "__music-diymusic"){v.musicFolderId = file.id}
+                    if(file.name === a.musicFolderName){v.musicFolderId = file.id}
                 });
             }
             else{
-                v.createFolder("__music-diymusic", verifyPictureFolder);                
+                v.createFolder(a.musicFolderName, verifyPictureFolder);                
             }//----------------
             function verifyPictureFolder(){
-                if ( requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
+                if ( requiredFolders.some(file=>file.name === a.pictureFolderName) ){
                     //v.showAllButtons();
                     //a.showFiles();
                     requiredFolders.forEach(file=>{
-                        if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
+                        if(file.name === a.pictureFolderName){v.pictureFolderId = file.id}
                     });
                 }
                 else{
-                    v.createFolder("__pictures-diymusic");                
-                }
-            }
-            //-----------------
-            /*
-            if( requiredFolders.some(file=>file.name === "__pictures-diymusic") ){
-                requiredFolders.forEach(file=>{
-                    if(file.name === "__pictures-diymusic"){v.pictureFolderId = file.id}
-                });                
-            }
-            else{
-                v.createFolder("__pictures-diymusic", verifyMusicFolder);
-            }
-            //-----------------            
-            function verifyMusicFolder(){
-                if( requiredFolders.some(file=>file.name === "__music-diymusic")  ){
-                    requiredFolders.forEach(file=>{
-                        if(file.name === "__music-diymusic"){v.musicFolderId = file.id}                        
-                    });                 
-                }
-                else{
-                    v.createFolder("__music-diymusic");                     
+                    v.createFolder(a.pictureFolderName);                
                 }
             }
             */

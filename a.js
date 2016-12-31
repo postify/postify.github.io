@@ -12,6 +12,8 @@ a.authToken = {
     scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file',
     immediate: null
 };
+a.musicFolderName = "__music-diymusic";
+a.pictureFolderName = "__pictures-diymusic";
 a.firstAuthRequest = true;
 a.authorized = true;
 a.musicFolderExists = null;
@@ -69,11 +71,11 @@ a.createFolder = function(folderName, callback){
             fields: 'id'
         });
         request.execute(function(resp, raw_resp) {
-            if(folderName === "__music-diymusic"){
+            if(folderName === a.musicFolderName){
                 a.musicFolderId = resp.id;
                 a.musicFolderExists = true;
             }
-            else if(folderName === "__pictures-diymusic"){
+            else if(folderName === a.pictureFolderName){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
                 v.showAllButtons();                
