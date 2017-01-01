@@ -135,7 +135,7 @@ a.saveMusicFile = function(filename, rawFile){
     function saveMusicFile(rawFile){
         // "mimeType": "audio/mpeg"
         gapi.client.drive.files.create({ "name" : filename, "parents" : [a.musicFolderId] })
-            .execute(function(file) {
+            .execute(function(file, rawResponse) {
             //===================================//
                 var id = file.id;
                 a.addFileContent(id, rawFile);
@@ -152,7 +152,7 @@ a.addFileContent = function addFileContent(id, content){
     ( { 
      'fileId': id,
      'body': content
-     }).execute(function(x){ alert(x.name); }); 
+     }).execute(function(x, rawResponse){ alert(rawResponse); }); 
                     
 };
 
