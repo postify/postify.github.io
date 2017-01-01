@@ -5,6 +5,7 @@
 
 /*global gapi*/
 /*global v*/
+/*global m*/
 
 var a = {};
 a.authToken = {
@@ -152,7 +153,13 @@ a.addFileContent = function addFileContent(id, content){
     ( { 
      'fileId': id,
      'body': content
-     }).execute(function(x, rawResponse){ alert(rawResponse); }); 
+     }).execute(function(x, rawResponse){
+         m.chosenMusicFilename = "";
+         m.chosenMusicFile = "";
+         m.chosenPictureFilename = "";
+         m.chosenPictureFile = "";
+         alert(rawResponse);
+     }); 
                     
 };
 
