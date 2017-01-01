@@ -151,9 +151,6 @@ a.addFileContent = function addFileContent(id, content){
     gapi.client.drive.files.update
     ( { 
      'fileId': id,
-     'method': 'PATCH',
-     'params': {'fileId': id, 'uploadType': 'multipart'},
-     'headers': { 'Content-Type': 'multipart/form-data' },
      'body': content
      }).execute(function(x){ alert(x.name); }); 
                     
