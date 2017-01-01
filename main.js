@@ -140,7 +140,7 @@ c.updateView = function(e){
         }
         else if (source === v.btnSaveFiles){
             v.saveMusicFile(m.chosenMusicFilename, m.chosenMusicFile );
-            v.savePictureFile(m.chosenPictureFilename, m.chosenMusicFile);
+            v.savePictureFile(m.chosenPictureFilename, m.chosenPictureFile);
             //v.saveMusicFile(v.txtMusicFile.value);            
             //v.savePictureFile(v.txtPictureFile.value);
         }
