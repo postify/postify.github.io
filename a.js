@@ -132,7 +132,8 @@ a.saveMusicFile = function(filename, rawFile){
         a.authorizeAndPerform(saveMusicFile);        
     }
     //-----| callback for saving file |----//
-    function saveMusicFile(){
+    function saveMusicFile(rawFile){
+        // "mimeType": "audio/mpeg"
         gapi.client.drive.files.create({ "name" : filename, "parents" : [a.musicFolderId] })
             .execute(function(file) {
             //===================================//
@@ -147,9 +148,9 @@ a.saveMusicFile = function(filename, rawFile){
 };
 
 a.addFileContent = function addFileContent(id, content){
-    gapi.client.request
+    gapi.client.drive.files.update
     ( { 
-     'path': '/upload/drive/v3/files/'+ id,
+     'fileId': id,
      'method': 'PATCH',
      'params': {'fileId': id, 'uploadType': 'multipart'},
      'headers': { 'Content-Type': 'multipart/form-data' },
@@ -158,11 +159,11 @@ a.addFileContent = function addFileContent(id, content){
                     
 };
 
-a.savePictureFile = function(filename, rawile){
+a.savePictureFile = function(filename, rawFile){
     if(filename){
         a.authorizeAndPerform(savePictureFile);
     }
-    function savePictureFile(){
+    function savePictureFile(rawFile){
         //alert("You are Authorized to SAVE PICTURE FILE: " + filename);
         gapi.client.drive.files.create({ "name" : filename, "parents" : [a.pictureFolderId] })
             .execute(function(file) {
