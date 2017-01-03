@@ -240,7 +240,8 @@ a.makeFolder = a.createFolder;
 //POST /upload/drive/v3/files?uploadType=media HTTP/1.1
 function uploadAudioFile(id, CONTENT){
     alert(CONTENT);
-  var blob = new window.Blob([CONTENT], {type: 'audio/*'});   
+  var blob = new window.Blob([CONTENT], {type: 'audio/*'});
+  var blobUrl = window.URL.createObjectURL(blob);
   var authToken = a.getAuthToken();    
   const boundary = '-------314159265358979323846';
   const delimiter = "\r\n--" + boundary + "\r\n";
@@ -250,7 +251,7 @@ function uploadAudioFile(id, CONTENT){
     delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
     "{'mimeType': 'audio/mpeg'}" +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
-    blob +
+    blobUrl +
     close_delim;
 
   gapi.client.request
