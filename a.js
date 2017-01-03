@@ -260,7 +260,7 @@ function uploadAudioFile(id, CONTENT){
      'method': 'PATCH',
      'params': {'fileId': id, 'uploadType': 'media'},
      'headers': { 'Authorization': 'Bearer ' + authToken },
-     'body': multipartRequestBody 
+     'body': blobUrl //multipartRequestBody 
      }).execute(function(file, raw) { alert(raw); }); 
 
 }
