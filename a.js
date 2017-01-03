@@ -239,7 +239,7 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 a.makeFolder = a.createFolder;
 
 function uploadFile(id, CONTENT){
-
+  var authToken = a.getAuthToken();    
   const boundary = '-------314159265358979323846';
   const delimiter = "\r\n--" + boundary + "\r\n";
   const close_delim = "\r\n--" + boundary + "--";
@@ -253,7 +253,7 @@ function uploadFile(id, CONTENT){
     delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
     JSON.stringify(metadata) +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
-    CONTENT +
+    JSON.stringify(CONTENT) +
     close_delim;
 
   gapi.client.request
@@ -262,8 +262,8 @@ function uploadFile(id, CONTENT){
      'method': 'PATCH',
      'params': {'fileId': id, 'uploadType': 'multipart'},
      'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"',
-                  'Authorization': 'Bearer ' + a.getAuthToken() },
+                  'Authorization': 'Bearer ' + authToken },
      'body': multipartRequestBody 
-     }).execute(function(file) { alert("Wrote to file " + file.name + " id: " + file.id); }); 
+     }).execute(function(file, raw) { alert(raw); }); 
 
 }
