@@ -247,9 +247,14 @@ function uploadAudioFile(id, CONTENT){
   const delimiter = "\r\n--" + boundary + "\r\n";
   const close_delim = "\r\n--" + boundary + "--";
 
+  var metadata = { 
+      description : 'fucking horrible google docs',
+      'mimeType': 'audio/mpeg'
+  };  
+
   var multipartRequestBody =
     delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
-    "{'mimeType': 'audio/mpeg'}" +
+    JSON.parse(metadata) +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
     blob +
     close_delim;
