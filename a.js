@@ -231,7 +231,7 @@ function uploadFile( CONTENT, parentFolder){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-            console.log(a.chosenMusicFilename, a.chosenPictureFilename, file.id);
+            console.log(m.chosenMusicFilename, m.chosenPictureFilename, file.id);
             v.showAllButtons();    
             v.clearAllText();          
         });
