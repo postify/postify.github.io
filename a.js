@@ -240,6 +240,8 @@ a.makeFolder = a.createFolder;
 //POST /upload/drive/v3/files?uploadType=media HTTP/1.1
 function uploadAudioFile(id, CONTENT){
     alert(CONTENT);
+    window.URL = window.URL || window.webkitURL;
+    var content = windowURL.createObjectURL(CONTENT);
   //function gd_updateFile(fileId, folderId, text, callback) {
     var blob = new window.Blob( [ CONTENT ], { type: 'audio/mpeg' } );
     var fileId = id;
@@ -255,18 +257,18 @@ function uploadAudioFile(id, CONTENT){
         delimiter +  'Content-Type: application/json\r\n\r\n' +
         JSON.stringify(metadata) +
         delimiter + 'Content-Type: ' + contentType + '\r\n' + '\r\n' +
-        CONTENT +
+        content +
         close_delim;
 
     //if (!callback) { callback = function(file, raw) { console.log("Result: " + raw) }; }
     var callback = function(file, raw) { console.log("Result: " + raw) }; 
 
     gapi.client.request({
-        'path': '/upload/drive/v3/files/'+ a.musicFolderId +"?fileId="+fileId+"&uploadType=media",
-        'method': 'POST',
+        'path': '/upload/drive/v3/files/'+ a.musicFolderId +"?fileId=" + fileId + "&uploadType=media",
+        'method': 'PUT',
         'params': {'fileId': fileId, 'uploadType': 'multipart'},
-        //'headers': {'Content-Type': 'multipart/form-data; boundary="' + boundary + '"'},
-        'body': blob,   //multipartRequestBody,
+        'headers': {'Content-Type': 'multipart/form-data; boundary="' + boundary + '"'},
+        'body': multipartRequestBody,
         callback:callback,
     });
     /*
