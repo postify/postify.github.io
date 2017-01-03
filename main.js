@@ -145,8 +145,6 @@ c.updateView = function(e){
         else if (source === v.btnSaveFiles){
             v.saveMusicFile(m.chosenMusicFile);
             v.savePictureFile(m.chosenPictureFile);
-            //v.saveMusicFile(v.txtMusicFile.value);            
-            //v.savePictureFile(v.txtPictureFile.value);
         }
         else if (source === v.btnGetFile){
             v.getFile(v.txtGetFile.value);
