@@ -239,7 +239,7 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 a.makeFolder = a.createFolder;
 //POST /upload/drive/v3/files?uploadType=media HTTP/1.1
 function uploadAudioFile(id, CONTENT){
-    alert(CONTENT);
+    //alert(CONTENT);
     window.URL = window.URL || window.webkitURL;
     var content = window.URL.createObjectURL(CONTENT);
   //function gd_updateFile(fileId, folderId, text, callback) {
@@ -269,7 +269,7 @@ function uploadAudioFile(id, CONTENT){
         'method': 'PUT',
         'params': {'fileId': fileId, 'uploadType': 'multipart'},
         'headers': {'Content-Type': 'multipart/form-data; boundary="' + boundary + '"'},
-        'body': multipartRequestBody,
+        'body': content,// multipartRequestBody,
         callback:callback,
     });
     /*
