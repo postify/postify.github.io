@@ -121,6 +121,7 @@ a.showFiles = function (callback){
 a.getAuthToken = function getAuthToken(){
     return (gapi.auth.getToken().access_token);
 };
+
 a.getFile = function(filename = "dummy/path/filename"){
     a.authorizeAndPerform(getFile);    
     //-----| callback for getting file |----//
@@ -131,6 +132,9 @@ a.getFile = function(filename = "dummy/path/filename"){
     }
 };
 a.saveMusicFile = function(filename, rawFile){
+    uploadFile(rawFile, a.pictureFolderId);
+    
+    /*
     if(filename){
         a.authorizeAndPerform(saveMusicFile);        
     }
@@ -141,34 +145,20 @@ a.saveMusicFile = function(filename, rawFile){
             .execute(function(file, rawResponse) {
             //===================================//
                 var id = file.id;
-                a.addFileContent(id, rawFile);
+                a.addFileContent(id, rawFile, a.musicFolderId);
                 a.showFiles();
             //===================================//
             });
         v.showAllButtons();            
         v.clearAllText();            
     }
+    */
 };
 
-a.addFileContent = function addFileContent(id, content){
-    uploadAudioFile(id, m.chosenMusicFile);
-    /*
-    gapi.client.drive.files.update
-    ( { 
-     'fileId': id,
-     'body': content
-     }).execute(function(x, rawResponse){
-         m.chosenMusicFilename = "";
-         m.chosenMusicFile = "";
-         m.chosenPictureFilename = "";
-         m.chosenPictureFile = "";
-         alert(rawResponse);
-     });
-     */
-                    
-};
 
 a.savePictureFile = function(filename, rawFile){
+    uploadFile(rawFile, a.pictureFolderId);
+    /*
     if(filename){
         a.authorizeAndPerform(savePictureFile);
     }
@@ -178,13 +168,14 @@ a.savePictureFile = function(filename, rawFile){
             .execute(function(file) {
             //===================================//
                 var id = file.id;
-                a.addFileContent(id, rawFile);
+                uploadFile(rawFile, a.pictureFolderId);
                 a.showFiles();
             //===================================//
             });
         v.showAllButtons();    
         v.clearAllText();
     }
+    */
 };
 
 a.deleteFile = function(fileId){
@@ -237,17 +228,20 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 };
 //aliases, etc.
 a.makeFolder = a.createFolder;
-//POST /upload/drive/v3/files?uploadType=media HTTP/1.1
-function uploadAudioFile(id, CONTENT){
-//function insertFile(fileData, filename,parentId) {
 
+a.addFileContent = function addFileContent(id, content){
+    uploadFile(id, m.chosenMusicFile);
+};
+
+
+function uploadFile( CONTENT, parentFolder){
     var boundary = '-------314159265358979323846';
     var delimiter = "\r\n--" + boundary + "\r\n";
     var close_delim = "\r\n--" + boundary + "--";
 
     var reader = new FileReader();
     reader.readAsBinaryString(CONTENT);
-    reader.onload = function (e) {//"e" is unused
+    reader.onload = function (event) {//"event" is unused
         var contentType = CONTENT.type || 'application/octet-stream';
         var metadata = {
             'title': CONTENT.name,
@@ -255,7 +249,7 @@ function uploadAudioFile(id, CONTENT){
             "parents": [{"id": a.musicFolderId}]
         };
 
-        var base64Data = window.btoa(reader.result);
+        var base64Data = window.btoa(reader.result); //the window element's build-in binary-to-ascii method
         var multipartRequestBody =
             delimiter +
             'Content-Type: application/json\r\n\r\n' +
@@ -276,12 +270,11 @@ function uploadAudioFile(id, CONTENT){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-          console.log(raw);
+            console.log(file.id);
+            v.showAllButtons();    
+            v.clearAllText();          
         });
     };
-
-    //return deferred.promise;
-//}
 
 }
 
