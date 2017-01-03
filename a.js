@@ -239,46 +239,14 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 a.makeFolder = a.createFolder;
 
 function uploadFile(id, CONTENT){
-  //var auth_token = gapi.auth.getToken().access_token;
-
-  const boundary = '-------314159265358979323846';
-  const delimiter = "\r\n--" + boundary + "\r\n";
-  const close_delim = "\r\n--" + boundary + "--";
-
-  var metadata = { 
-      'mimeType': 'audio/mpeg'
-  };  
-
-  var multipartRequestBody =
-    delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
-    JSON.stringify(metadata) +
-    delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
-    CONTENT +
-    close_delim;
-
-    /*
-  gapi.client.request
-    ( { 
-     'path': '/upload/drive/v3/files/'+ id,
-     'method': 'PATCH',
-     'params': {'fileId': id, 'uploadType': 'multipart'},
-     'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"' },
-     'body': multipartRequestBody 
-     }).execute(function(file) { alert("Wrote to file " + file.name + " id: " + file.id); });
-     
-     */  
-    gapi.client.drive.files.update
-    ( { 
-     'fileId': id,
-     'contentType' :"audio/mpeg",
-     'uploadType' : "media",
-     'body': CONTENT
-     }).execute(function(x, rawResponse){
-         m.chosenMusicFilename = "";
-         m.chosenMusicFile = "";
-         m.chosenPictureFilename = "";
-         m.chosenPictureFile = "";
-         alert(rawResponse);
-     });
-   
+    var fileId = id;
+    //var accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;// or this: gapi.auth.getToken().access_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", "https://www.googleapis.com/drive/v3/files/"+ fileId +'?alt=media', true);
+    xhr.setRequestHeader('Authorization','Bearer '+ a.getAuthToken());
+    //xhr.responseType = 'arraybuffer'
+    xhr.onload = function(){
+        alert(xhr.responseText);
+    };
+    xhr.send(CONTENT);
 }
