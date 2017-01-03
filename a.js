@@ -258,8 +258,8 @@ function uploadAudioFile(id, CONTENT){
     ( { 
      'path': '/upload/drive/v3/files/' + id,
      'method': 'PATCH',
-     'params': {'fileId': id, 'uploadType': 'media'},
-     'headers': { 'Authorization': 'Bearer ' + authToken },
+     'params': {'fileId': id, 'uploadType': 'multipart'},
+     'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"', 'Authorization': 'Bearer ' + authToken },
      'body': multipartRequestBody 
      }).execute(function(file, raw) { alert(raw); }); 
 
