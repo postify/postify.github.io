@@ -239,23 +239,106 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 a.makeFolder = a.createFolder;
 //POST /upload/drive/v3/files?uploadType=media HTTP/1.1
 function uploadAudioFile(id, CONTENT){
-//function insertFile(fileData, filename,parentId) {
+    //alert(CONTENT);
+    window.URL = window.URL || window.webkitURL;
+    var content = window.URL.createObjectURL(CONTENT);
+    content = window.btoa(content);
+    setTimeout(()=>{
+        alert(content);
+    }, 100);
+  //function gd_updateFile(fileId, folderId, text, callback) {
+    var blob = new window.Blob( [ CONTENT ], { type: 'audio/mpeg' } );
+    var fileId = id;
+    
+
+    const boundary = '-------314159265358979323846';
+    const delimiter = "\r\n--" + boundary + "\r\n";
+    const close_delim = "\r\n--" + boundary + "--";
+
+    var contentType = "audio/mpeg";
+    var metadata = {'mimeType': contentType,};
+
+    var multipartRequestBody =
+        delimiter +  'Content-Type: application/json\r\n\r\n' +
+        JSON.stringify(metadata) +
+        delimiter + 'Content-Type: ' + contentType + '\r\n' + '\r\n' +
+        content +
+        close_delim;
+
+    //if (!callback) { callback = function(file, raw) { console.log("Result: " + raw) }; }
+    var callback = function(file, raw) { console.log("Result: " + raw) }; 
+
+    gapi.client.request({
+        'path': '/upload/drive/v3/files/'+ a.musicFolderId +"?fileId=" + fileId + "&uploadType=media",
+        'method': 'PATCH',
+        'params': {'fileId': fileId, 'uploadType': 'multipart'},
+        'headers': {'Content-Type': 'multipart/form-data; boundary="' + boundary + '"'},
+        'body': multipartRequestBody,
+        callback:callback,
+    });
+    /*
+    var blob = new window.Blob( [ CONTENT ], { type: 'audio/mpeg' } );
+    var authToken = a.getAuthToken();
+    var fileId = id;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://www.googleapis.com/drive/v3/files/" + fileId , true);
+    xhr.setRequestHeader('Authorization','Bearer '+ authToken);
+    xhr.onload = function(){
+        alert(xhr.reponseText);
+    };
+    xhr.send(blob); 
+    */
+ 
+  /*
+  var blob = new window.Blob([CONTENT], {type: 'audio/*'});
+  var blobUrl = window.URL.createObjectURL(blob);
+  var authToken = a.getAuthToken();    
+  const boundary = '-------314159265358979323846';
+  const delimiter = "\r\n--" + boundary + "\r\n";
+  const close_delim = "\r\n--" + boundary + "--";
+
+  var metadata = { 
+      description : 'fucking horrible google docs',
+      'mimeType': 'audio/mpeg'
+  };  
+
+  var multipartRequestBody =
+    delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
+    JSON.stringify(metadata) +
+    delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
+    blob +
+    close_delim;
+
+  gapi.client.request
+    ( { 
+     'path': '/upload/drive/v3/files/' + id,
+     'method': 'PATCH',
+     'params': {'fileId': id, 'uploadType': 'multipart'},
+     'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"', 'Authorization': 'Bearer ' + authToken },
+     'body': multipartRequestBody 
+     }).execute(function(file, raw) { alert(raw); }); 
+  */     
+}
+
+/*
+function insertFile(fileData, filename,parentId) {
+    var deferred = $q.defer();
 
     var boundary = '-------314159265358979323846';
     var delimiter = "\r\n--" + boundary + "\r\n";
     var close_delim = "\r\n--" + boundary + "--";
 
     var reader = new FileReader();
-    reader.readAsBinaryString(CONTENT);
-    reader.onload = function (e) {//"e" is unused
-        var contentType = CONTENT.type || 'application/octet-stream';
+    reader.readAsBinaryString(fileData);
+    reader.onload = function (e) {
+        var contentType = fileData.type || 'application/octet-stream';
         var metadata = {
-            'title': CONTENT.name,
+            'title': filename,
             'mimeType': contentType,
-            "parents": [{"id": a.musicFolderId}]
+            "parents": [{"id":parentId}]
         };
 
-        var base64Data = window.btoa(reader.result);
+        var base64Data = btoa(reader.result);
         var multipartRequestBody =
             delimiter +
             'Content-Type: application/json\r\n\r\n' +
@@ -275,15 +358,14 @@ function uploadAudioFile(id, CONTENT){
                 'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
             },
             'body': multipartRequestBody});
-        request.execute(function(file, raw){
-          console.log(raw);
+        request.then(function(file){
+            deferred.resolve(file.result);
+        },function(reason){
+            deferred.reject(reason);
         });
     };
 
-    //return deferred.promise;
-//}
-
+    return deferred.promise;
 }
 
-
-
+*/
