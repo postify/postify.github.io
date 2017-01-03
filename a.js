@@ -263,9 +263,9 @@ function uploadAudioFile(id, CONTENT){
 
     gapi.client.request({
         'path': '/upload/drive/v3/files/'+ a.musicFolderId +"?fileId="+fileId+"&uploadType=multipart",
-        'method': 'PUT',
+        'method': 'POST',
         'params': {'fileId': fileId, 'uploadType': 'multipart'},
-        'headers': {'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'},
+        'headers': {'Content-Type': 'multipart/form-data; boundary="' + boundary + '"'},
         'body': multipartRequestBody,
         callback:callback,
     });
