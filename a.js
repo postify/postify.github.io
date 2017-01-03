@@ -268,7 +268,9 @@ function uploadFile(id, CONTENT){
     gapi.client.drive.files.update
     ( { 
      'fileId': id,
-     'body': multipartRequestBody
+     'contentType' :"audio/mpeg",
+     'uploadType' : "media",
+     'body': CONTENT
      }).execute(function(x, rawResponse){
          m.chosenMusicFilename = "";
          m.chosenMusicFile = "";
