@@ -255,7 +255,7 @@ function uploadAudioFile(id, CONTENT){
         delimiter +  'Content-Type: application/json\r\n\r\n' +
         JSON.stringify(metadata) +
         delimiter + 'Content-Type: ' + contentType + '\r\n' + '\r\n' +
-        blob +
+        CONTENT +
         close_delim;
 
     //if (!callback) { callback = function(file, raw) { console.log("Result: " + raw) }; }
