@@ -245,14 +245,9 @@ function uploadAudioFile(id, CONTENT){
   const delimiter = "\r\n--" + boundary + "\r\n";
   const close_delim = "\r\n--" + boundary + "--";
 
-  var metadata = { 
-      description : 'diymusic file',
-      'mimeType': 'audio/mpeg'
-  };  
-
   var multipartRequestBody =
     delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
-    JSON.stringify(metadata) +
+    "{'mimeType': 'audio/mpeg'}" +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
     blob +
     close_delim;
