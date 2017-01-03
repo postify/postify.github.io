@@ -231,9 +231,10 @@ function uploadFile( CONTENT, parentFolder){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-            console.log(m.chosenMusicFilename, m.chosenPictureFilename, file.id);
+            console.log(`'${m.chosenMusicFilename}', '${m.chosenPictureFilename}', ${file.id}`);
             v.showAllButtons();    
-            v.clearAllText();          
+            v.clearAllText();
+            v.showFiles();
         });
     };
 }
