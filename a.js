@@ -262,11 +262,11 @@ function uploadAudioFile(id, CONTENT){
     var callback = function(file, raw) { console.log("Result: " + raw) }; 
 
     gapi.client.request({
-        'path': '/upload/drive/v3/files/'+ a.musicFolderId +"?fileId="+fileId+"&uploadType=multipart",
+        'path': '/upload/drive/v3/files/'+ a.musicFolderId +"?fileId="+fileId+"&uploadType=media",
         'method': 'POST',
         'params': {'fileId': fileId, 'uploadType': 'multipart'},
-        'headers': {'Content-Type': 'multipart/form-data; boundary="' + boundary + '"'},
-        'body': multipartRequestBody,
+        //'headers': {'Content-Type': 'multipart/form-data; boundary="' + boundary + '"'},
+        'body': blob,   //multipartRequestBody,
         callback:callback,
     });
     /*
