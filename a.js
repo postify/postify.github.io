@@ -131,51 +131,12 @@ a.getFile = function(filename = "dummy/path/filename"){
         alert("Token: NO TOKEN");
     }
 };
-a.saveMusicFile = function(filename, rawFile){
-    uploadFile(rawFile, a.pictureFolderId);
-    
-    /*
-    if(filename){
-        a.authorizeAndPerform(saveMusicFile);        
-    }
-    //-----| callback for saving file |----//
-    function saveMusicFile(rawFile){
-        // "mimeType": "audio/mpeg"
-        gapi.client.drive.files.create({ "name" : filename, "parents" : [a.musicFolderId] })
-            .execute(function(file, rawResponse) {
-            //===================================//
-                var id = file.id;
-                a.addFileContent(id, rawFile, a.musicFolderId);
-                a.showFiles();
-            //===================================//
-            });
-        v.showAllButtons();            
-        v.clearAllText();            
-    }
-    */
+a.saveMusicFile = function(rawFile){
+    uploadFile(rawFile, a.musicFolderId);
 };
 
-
-a.savePictureFile = function(filename, rawFile){
+a.savePictureFile = function(rawFile){
     uploadFile(rawFile, a.pictureFolderId);
-    /*
-    if(filename){
-        a.authorizeAndPerform(savePictureFile);
-    }
-    function savePictureFile(rawFile){
-        //alert("You are Authorized to SAVE PICTURE FILE: " + filename);
-        gapi.client.drive.files.create({ "name" : filename, "parents" : [a.pictureFolderId] })
-            .execute(function(file) {
-            //===================================//
-                var id = file.id;
-                uploadFile(rawFile, a.pictureFolderId);
-                a.showFiles();
-            //===================================//
-            });
-        v.showAllButtons();    
-        v.clearAllText();
-    }
-    */
 };
 
 a.deleteFile = function(fileId){
@@ -246,7 +207,7 @@ function uploadFile( CONTENT, parentFolder){
         var metadata = {
             'title': CONTENT.name,
             'mimeType': contentType,
-            "parents": [{"id": a.musicFolderId}]
+            "parents": [{"id": parentFolder}]
         };
 
         var base64Data = window.btoa(reader.result); //the window element's build-in binary-to-ascii method
@@ -270,12 +231,11 @@ function uploadFile( CONTENT, parentFolder){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-            console.log(file.id);
+            console.log(file.name, file.id);
             v.showAllButtons();    
             v.clearAllText();          
         });
     };
-
 }
 
 
