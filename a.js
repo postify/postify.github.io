@@ -241,10 +241,11 @@ a.makeFolder = a.createFolder;
 function uploadAudioFile(id, CONTENT){
     alert(CONTENT);
     window.URL = window.URL || window.webkitURL;
-    var content = windowURL.createObjectURL(CONTENT);
+    var content = window.URL.createObjectURL(CONTENT);
   //function gd_updateFile(fileId, folderId, text, callback) {
     var blob = new window.Blob( [ CONTENT ], { type: 'audio/mpeg' } );
     var fileId = id;
+    
 
     const boundary = '-------314159265358979323846';
     const delimiter = "\r\n--" + boundary + "\r\n";
