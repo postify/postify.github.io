@@ -151,7 +151,7 @@ a.saveMusicFile = function(filename, rawFile){
 };
 
 a.addFileContent = function addFileContent(id, content){
-    uploadFile(id, content);
+    uploadAudioFile(id, content);
     /*
     gapi.client.drive.files.update
     ( { 
@@ -238,7 +238,8 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 //aliases, etc.
 a.makeFolder = a.createFolder;
 
-function uploadFile(id, CONTENT){
+function uploadAudioFile(id, CONTENT){
+  var blob = new window.Blob([CONTENT], {type: 'audio/*'});   
   var authToken = a.getAuthToken();    
   const boundary = '-------314159265358979323846';
   const delimiter = "\r\n--" + boundary + "\r\n";
@@ -253,7 +254,7 @@ function uploadFile(id, CONTENT){
     delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
     JSON.stringify(metadata) +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
-    JSON.stringify(CONTENT) +
+    blob +
     close_delim;
 
   gapi.client.request
