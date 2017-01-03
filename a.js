@@ -149,6 +149,8 @@ a.saveMusicFile = function(filename, rawFile){
 };
 
 a.addFileContent = function addFileContent(id, content){
+    uploadFile(id, content);
+    /*
     gapi.client.drive.files.update
     ( { 
      'fileId': id,
@@ -159,7 +161,8 @@ a.addFileContent = function addFileContent(id, content){
          m.chosenPictureFilename = "";
          m.chosenPictureFile = "";
          alert(rawResponse);
-     }); 
+     });
+     */
                     
 };
 
@@ -233,3 +236,31 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 //aliases, etc.
 a.makeFolder = a.createFolder;
 
+function uploadFile(id, CONTENT){
+  //var auth_token = gapi.auth.getToken().access_token;
+
+  const boundary = '-------314159265358979323846';
+  const delimiter = "\r\n--" + boundary + "\r\n";
+  const close_delim = "\r\n--" + boundary + "--";
+
+  var metadata = { 
+      description : 'savefile for my game',
+      'mimeType': 'audio/mpeg'
+  };  
+
+  var multipartRequestBody =
+    delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
+    JSON.stringify(metadata) +
+    delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
+    CONTENT +
+    close_delim;
+
+  gapi.client.request
+    ( { 
+     'path': '/upload/drive/v3/files/'+ id,
+     'method': 'PATCH',
+     'params': {'fileId': id, 'uploadType': 'multipart'},
+     'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"' },
+     'body': multipartRequestBody 
+     }).execute(function(file) { alert("Wrote to file " + file.name + " id: " + file.id); }); 
+}
