@@ -254,7 +254,7 @@ function uploadAudioFile(id, CONTENT){
 
   var multipartRequestBody =
     delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
-    JSON.parse(metadata) +
+    JSON.stringify(metadata) +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
     blob +
     close_delim;
