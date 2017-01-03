@@ -240,6 +240,7 @@ a.makeFolder = a.createFolder;
 //POST /upload/drive/v3/files?uploadType=media HTTP/1.1
 function uploadAudioFile(id, CONTENT){
     alert(CONTENT);
+    /*
     var blob = new window.Blob( [ CONTENT ], { type: 'audio/mpeg' } );
     var authToken = a.getAuthToken();
     var fileId = id;
@@ -249,8 +250,9 @@ function uploadAudioFile(id, CONTENT){
     xhr.onload = function(){
         alert(xhr.reponseText);
     };
-    xhr.send(blob);    
-   /*
+    xhr.send(blob); 
+    */
+ 
   var blob = new window.Blob([CONTENT], {type: 'audio/*'});
   var blobUrl = window.URL.createObjectURL(blob);
   var authToken = a.getAuthToken();    
@@ -264,8 +266,8 @@ function uploadAudioFile(id, CONTENT){
   };  
 
   var multipartRequestBody =
-    delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
-    JSON.stringify(metadata) +
+    //delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
+    //JSON.stringify(metadata) +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
     blob +
     close_delim;
@@ -278,7 +280,4 @@ function uploadAudioFile(id, CONTENT){
      'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"', 'Authorization': 'Bearer ' + authToken },
      'body': multipartRequestBody 
      }).execute(function(file, raw) { alert(raw); }); 
-     
-  */     
-
 }
