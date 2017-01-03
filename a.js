@@ -118,7 +118,9 @@ a.showFiles = function (callback){
         }
     }
 };
-
+a.getAuthToken = function getAuthToken(){
+    returngapi.auth.getToken().access_token;
+};
 a.getFile = function(filename = "dummy/path/filename"){
     a.authorizeAndPerform(getFile);    
     //-----| callback for getting file |----//
