@@ -249,7 +249,7 @@ function uploadAudioFile(id, CONTENT){
     delimiter +  'Content-Type: audio/mpeg\r\n\r\n' +
     "{'mimeType': 'audio/mpeg'}" +
     delimiter + 'Content-Type: audio/mpeg\r\n\r\n' +
-    blob +
+    CONTENT +
     close_delim;
 
   gapi.client.request
@@ -258,7 +258,7 @@ function uploadAudioFile(id, CONTENT){
      'method': 'PATCH',
      'params': {'fileId': id, 'uploadType': 'media'},
      'headers': { 'Authorization': 'Bearer ' + authToken },
-     'body': CONTENT //multipartRequestBody 
+     'body': multipartRequestBody 
      }).execute(function(file, raw) { alert(raw); }); 
 
 }
