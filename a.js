@@ -244,7 +244,7 @@ function uploadAudioFile(id, CONTENT){
     var authToken = a.getAuthToken();
     var fileId = id;
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://www.googleapis.com/drive/v3/files/" + fileId +'?alt=media', true);
+    xhr.open("POST", "https://www.googleapis.com/drive/v3/files/" + fileId +'?alt=multipart', true);
     xhr.setRequestHeader('Authorization','Bearer '+ authToken);
     xhr.onload = function(){
         alert(xhr.reponseText);
