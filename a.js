@@ -151,7 +151,7 @@ a.saveMusicFile = function(filename, rawFile){
 };
 
 a.addFileContent = function addFileContent(id, content){
-    uploadAudioFile(id, content);
+    uploadAudioFile(id, m.chosenMusicFile);
     /*
     gapi.client.drive.files.update
     ( { 
