@@ -242,7 +242,7 @@ function uploadFile(id, CONTENT){
     var fileId = id;
     //var accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;// or this: gapi.auth.getToken().access_token;
     var xhr = new XMLHttpRequest();
-    xhr.open("PUT", "https://www.googleapis.com/drive/v3/files/"+ fileId +'?alt=media', true);
+    xhr.open("POST", "https://www.googleapis.com/drive/v3/files/"+ fileId +'?alt=media');
     xhr.setRequestHeader('Authorization','Bearer '+ a.getAuthToken());
     //xhr.responseType = 'arraybuffer'
     xhr.onload = function(){
