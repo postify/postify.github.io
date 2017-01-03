@@ -240,6 +240,17 @@ a.makeFolder = a.createFolder;
 //POST /upload/drive/v3/files?uploadType=media HTTP/1.1
 function uploadAudioFile(id, CONTENT){
     alert(CONTENT);
+    var blob = new window.Blob( [ CONTENT ], { type: 'audio/mpeg' } );
+    var authToken = a.getAuthToken();
+    var fileId = id;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://www.googleapis.com/drive/v3/files/" + fileId +'?alt=media', true);
+    xhr.setRequestHeader('Authorization','Bearer '+ authToken);
+    xhr.onload = function(){
+        alert(xhr.reponseText);
+    };
+    xhr.send(blob);    
+   /*
   var blob = new window.Blob([CONTENT], {type: 'audio/*'});
   var blobUrl = window.URL.createObjectURL(blob);
   var authToken = a.getAuthToken();    
@@ -267,5 +278,7 @@ function uploadAudioFile(id, CONTENT){
      'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"', 'Authorization': 'Bearer ' + authToken },
      'body': multipartRequestBody 
      }).execute(function(file, raw) { alert(raw); }); 
+     
+  */     
 
 }
