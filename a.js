@@ -244,7 +244,6 @@ function uploadFile(id, CONTENT){
   const close_delim = "\r\n--" + boundary + "--";
 
   var metadata = { 
-      description : 'savefile for my game',
       'mimeType': 'audio/mpeg'
   };  
 
@@ -255,6 +254,7 @@ function uploadFile(id, CONTENT){
     CONTENT +
     close_delim;
 
+    /*
   gapi.client.request
     ( { 
      'path': '/upload/drive/v3/files/'+ id,
@@ -262,5 +262,19 @@ function uploadFile(id, CONTENT){
      'params': {'fileId': id, 'uploadType': 'multipart'},
      'headers': { 'Content-Type': 'multipart/form-data; boundary="' + boundary + '"' },
      'body': multipartRequestBody 
-     }).execute(function(file) { alert("Wrote to file " + file.name + " id: " + file.id); }); 
+     }).execute(function(file) { alert("Wrote to file " + file.name + " id: " + file.id); });
+     
+     */  
+    gapi.client.drive.files.update
+    ( { 
+     'fileId': id,
+     'body': multipartRequestBody
+     }).execute(function(x, rawResponse){
+         m.chosenMusicFilename = "";
+         m.chosenMusicFile = "";
+         m.chosenPictureFilename = "";
+         m.chosenPictureFile = "";
+         alert(rawResponse);
+     });
+   
 }
