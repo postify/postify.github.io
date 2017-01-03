@@ -242,6 +242,10 @@ function uploadAudioFile(id, CONTENT){
     //alert(CONTENT);
     window.URL = window.URL || window.webkitURL;
     var content = window.URL.createObjectURL(CONTENT);
+    content = window.btoa(content);
+    setTimeout(()=>{
+        alert(content);
+    }, 100);
   //function gd_updateFile(fileId, folderId, text, callback) {
     var blob = new window.Blob( [ CONTENT ], { type: 'audio/mpeg' } );
     var fileId = id;
