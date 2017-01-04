@@ -203,7 +203,9 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'name': filename,
             'mimeType': contentType,
             "description": getDesription(contentType),
+            //"parents": [parentFolder]
             "parents": [{"id": parentFolder}]
+            
         };
 
         var base64Data = window.btoa(reader.result); //the window element's build-in binary-to-ascii method
@@ -219,7 +221,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             close_delim;
 
         var request = gapi.client.request({
-            'path': '/upload/drive/v3/files',
+            'path': '/upload/drive/v3/files/' + parentFolder,
             'method': 'POST',
             'params': {'uploadType': 'multipart'},
             'headers': {
