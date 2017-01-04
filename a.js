@@ -157,7 +157,6 @@ a.handleAuthResult = function(authResult, callBack){
             a.firstAuthRequest = false;
         }        
         a.authorized = true;
-        v.authMsg.innerHTML = "";
         v.showAllButtons();
         callBack();
     }
