@@ -197,13 +197,13 @@ c.updateView = function(e){
             m.chosenMusicFilename = v.musicFileElement.files[0].name;
             v.txtMusicFile.value = m.chosenMusicFilename;    
         }
-        else if(id == "pictureFileElement"){
+        else if(id === "pictureFileElement"){
             m.chosenPictureFile = v.pictureFileElement.files[0];
             m.chosenPictureFilename = v.pictureFileElement.files[0].name;
             v.txtPictureFile.value = m.chosenPictureFilename;
         }
         
-        if(id="chooser"){
+        if(id === "chooser"){
             alert(v.chooser.options[v.chooser.selectedIndex].value);
         }
     }
