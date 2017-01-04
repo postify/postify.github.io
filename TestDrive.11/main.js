@@ -1,11 +1,6 @@
 //====================================//
 //==========| START OF APP |==========//
 //====================================//
-// 0BzFXj3py69BBZTNqeFlkOFpMdHM
-/*
-<audio controls="controls" src="https://drive.google.com/uc?export=download&id=0BzFXj3py69BBcUFNV3BsWkNJQk0" type='audio/mp3'>
-</audio>
-*/
 // http://stackoverflow.com/questions/37860901/how-to-use-google-drive-api-to-download-files-with-javascript
 // http://sourcey.com/html5-video-streaming-from-google-drive/
 // https://developers.google.com/web/fundamentals/getting-started/primers/promises
@@ -172,6 +167,9 @@ c.updateView = function(e){
         else if(source === v.btnChoosePicture){
             v.pictureFileElement.click();
         }
+        else if(source === v.btnAuthToken){
+            alert(v.getAuthToken());
+        }        
     }
     
     //keycode

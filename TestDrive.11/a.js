@@ -183,15 +183,19 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 //aliases, etc.
 a.makeFolder = a.createFolder;
 
+a.addFileContent = function addFileContent(id, content){
+    uploadFile(id, m.chosenMusicFile);
+};
+
 a.saveMusicFile = function(rawFile){
-    a.uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
+    uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
 };
 
 a.savePictureFile = function(rawFile){
-    a.uploadFile(rawFile, m.chosenPictureFilename, a.pictureFolderId);
+    uploadFile(rawFile, m.chosenPictureFilename, a.pictureFolderId);
 };
 
-a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
+function uploadFile( CONTENT, filename, parentFolder ){
     var boundary = '-------314159265358979323846';
     var delimiter = "\r\n--" + boundary + "\r\n";
     var close_delim = "\r\n--" + boundary + "--";
@@ -233,7 +237,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             v.showFiles();
         });
     };
-};
+}
 
 
 
