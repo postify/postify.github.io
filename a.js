@@ -132,11 +132,11 @@ a.getFile = function(filename = "dummy/path/filename"){
     }
 };
 a.saveMusicFile = function(rawFile){
-    uploadFile(rawFile, a.musicFolderId);
+    uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
 };
 
 a.savePictureFile = function(rawFile){
-    uploadFile(rawFile, a.pictureFolderId);
+    uploadFile(rawFile, m.chosenPictureFilename, a.pictureFolderId);
 };
 
 a.deleteFile = function(fileId){
@@ -195,7 +195,7 @@ a.addFileContent = function addFileContent(id, content){
 };
 
 
-function uploadFile( CONTENT, parentFolder){
+function uploadFile( CONTENT, filename, parentFolder ){
     var boundary = '-------314159265358979323846';
     var delimiter = "\r\n--" + boundary + "\r\n";
     var close_delim = "\r\n--" + boundary + "--";
@@ -205,7 +205,7 @@ function uploadFile( CONTENT, parentFolder){
     reader.onload = function (event) {//"event" is unused
         var contentType = CONTENT.type || 'application/octet-stream';
         var metadata = {
-            'title': CONTENT.name,
+            'title': filename,
             'mimeType': contentType,
             "parents": [{"id": parentFolder}]
         };
