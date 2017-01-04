@@ -202,6 +202,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
         var metadata = {
             'title': filename,
             'mimeType': contentType,
+            "description": getDesription(contentType),
             "parents": [{"id": parentFolder}]
         };
 
@@ -226,12 +227,23 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-            console.log(`'${filename}', ${file.id}`);
+            console.log(`'${filename}', ${file.id}, ${raw}`);
             v.showAllButtons();    
             v.clearAllText();
             v.showFiles();
         });
     };
+    //======helper======//
+    function getDesription(type){
+        var associateFilename = "";
+        if(type.indexOf("audio") == -1){
+            associateFilename = m.chosenMusicFilename;
+        }
+        else if(type.indexOf("image") == -1){
+            associateFilename = m.chosenPictureFilename;
+        }
+        return associateFilename;
+    }
 };
 
 
