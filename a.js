@@ -203,8 +203,8 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'name': filename,
             'mimeType': contentType,
             "description": getDesription(contentType),
-            //"parents": [parentFolder]
-            "parents": [{"id": parentFolder}]
+            "parents": parentFolder
+            //"parents": [{"id": parentFolder}]
             
         };
 
@@ -221,7 +221,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             close_delim;
 
         var request = gapi.client.request({
-            'path': '/upload/drive/v3/files/' + parentFolder,
+            'path': '/upload/drive/v3/files',
             'method': 'POST',
             'params': {'uploadType': 'multipart'},
             'headers': {
