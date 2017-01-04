@@ -143,6 +143,12 @@ c.updateView = function(e){
             v.showFiles();
         }
         else if (source === v.btnSaveFiles){
+            if(v.txtMusicFile.value !== ""){
+                m.chosenMusicFilename = v.txtMusicFile.value;
+            }
+            if(v.txtPictureFile.value !== ""){
+                m.chosenPictureFilename = v.txtPictureFile.value;
+            }
             v.saveMusicFile(m.chosenMusicFile);
             v.savePictureFile(m.chosenPictureFile);
         }

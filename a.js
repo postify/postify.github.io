@@ -131,13 +131,6 @@ a.getFile = function(filename = "dummy/path/filename"){
         alert("Token: NO TOKEN");
     }
 };
-a.saveMusicFile = function(rawFile){
-    uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
-};
-
-a.savePictureFile = function(rawFile){
-    uploadFile(rawFile, m.chosenPictureFilename, a.pictureFolderId);
-};
 
 a.deleteFile = function(fileId){
     a.authorizeAndPerform(deleteFile);
@@ -194,6 +187,13 @@ a.addFileContent = function addFileContent(id, content){
     uploadFile(id, m.chosenMusicFile);
 };
 
+a.saveMusicFile = function(rawFile){
+    uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
+};
+
+a.savePictureFile = function(rawFile){
+    uploadFile(rawFile, m.chosenPictureFilename, a.pictureFolderId);
+};
 
 function uploadFile( CONTENT, filename, parentFolder ){
     var boundary = '-------314159265358979323846';
@@ -231,7 +231,7 @@ function uploadFile( CONTENT, filename, parentFolder ){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-            console.log(`'${m.chosenMusicFilename}', '${m.chosenPictureFilename}', ${file.id}`);
+            console.log(`'${filename}', ${file.id}`);
             v.showAllButtons();    
             v.clearAllText();
             v.showFiles();
