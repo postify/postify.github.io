@@ -200,7 +200,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
     reader.onload = function (event) {//"event" is unused
         var contentType = CONTENT.type || 'application/octet-stream';
         var metadata = {
-            'title': filename,
+            'name': filename,
             'mimeType': contentType,
             "description": getDesription(contentType),
             "parents": [{"id": parentFolder}]
@@ -219,7 +219,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             close_delim;
 
         var request = gapi.client.request({
-            'path': '/upload/drive/v2/files',
+            'path': '/upload/drive/v3/files',
             'method': 'POST',
             'params': {'uploadType': 'multipart'},
             'headers': {
@@ -227,7 +227,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-            console.log(`'${file.title}', ${file.id}, ${file.description}`);
+            console.log(`'${file.name}', ${file.id}, ${file.description}`);
             v.showAllButtons();    
             v.clearAllText();
             v.showFiles();
