@@ -202,6 +202,10 @@ c.updateView = function(e){
             m.chosenPictureFilename = v.pictureFileElement.files[0].name;
             v.txtPictureFile.value = m.chosenPictureFilename;
         }
+        
+        if(id="chooser"){
+            alert(v.chooser.options[v.chooser.selectedIndex].value);
+        }
     }
 };
 
