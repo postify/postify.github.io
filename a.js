@@ -227,7 +227,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             },
             'body': multipartRequestBody});
         request.execute(function(file, raw){
-            console.log(`'${file.name}', ${file.id}, ${metadata.description}, ${file.getDescription()}`);
+            console.log(`'${file.name}', ${file.id}, ${metadata.description}`);
             v.showAllButtons();    
             v.clearAllText();
             v.showFiles();
