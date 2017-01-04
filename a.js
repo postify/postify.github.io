@@ -203,7 +203,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'name': filename,
             'mimeType': contentType,
             "description": getDesription(contentType),
-            "parents": parentFolder
+            "parents": [parentFolder]
             //"parents": [{"id": parentFolder}]
             
         };
