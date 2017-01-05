@@ -100,7 +100,7 @@ a.showFiles = function (callback){
         var fileMetadata = {
             //'spaces': 'appDataFolder',            
             //'pageSize': 50,
-            'fields': "nextPageToken, files(id, name)",
+            'fields': "nextPageToken, files(id, name, fullText)",
             //'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
@@ -222,7 +222,6 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             '\r\n' +
             base64Data +
             close_delim;
-        alert(metadata.description);
         var request = gapi.client.request({
             'path': '/upload/drive/v3/files',
             'method': 'POST',
