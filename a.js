@@ -130,8 +130,9 @@ a.getFile = function(ID = "dummyID"){
         var request = gapi.client.drive.files.get({
             'fileId': ID
         });
-        request.execute(function(response) {
-            v.txtGetFile.value = ('Description: ' + response.description);
+        request.execute(function(response, raw) {
+            //v.txtGetFile.value = ('Description: ' + response.description);
+            alert(raw)
         });
     }
 };
