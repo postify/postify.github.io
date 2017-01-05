@@ -131,7 +131,7 @@ a.getFile = function(ID = "dummyID"){
             'fileId': ID
         });
         request.execute(function(response) {
-            v.getFile.value = ('Description: ' + response.description);
+            v.txtGetFile.value = ('Description: ' + response.description);
         });
     }
 };
