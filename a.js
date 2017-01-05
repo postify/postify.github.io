@@ -122,17 +122,17 @@ a.getAuthToken = function getAuthToken(){
     return (gapi.auth.getToken().access_token);
 };
 
-a.getFile = function(filename = "dummy/path/filename"){
+a.getFile = function(ID = "dummyID"){
     a.authorizeAndPerform(getFile);    
     //-----| callback for getting file |----//
     //var token = gapi.auth.getToken().access_token;
     function getFile(){
-        //alert("Token: \n" + token);
-        var descriptions = [];
-        a.allFilesArray.forEach(object=>{
-            descriptions.push(object.description);
+        var request = gapi.client.drive.files.get({
+            'fileId': ID
         });
-        alert(descriptions);
+        request.execute(function(response) {
+            v.getFile.value = ('Description: ' + response.description);
+        });
     }
 };
 
