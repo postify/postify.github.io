@@ -155,8 +155,6 @@ a.handleAuthResult = function(authResult, callBack){
         //alert("you are authorized.");
         if(a.firstAuthRequest){
             a.firstAuthRequest = false;
-            window.location.assign("");
-            //window.Location.reload(true);
         }        
         a.authorized = true;
         v.showAllButtons();

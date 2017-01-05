@@ -155,8 +155,6 @@ a.handleAuthResult = function(authResult, callBack){
         //alert("you are authorized.");
         if(a.firstAuthRequest){
             a.firstAuthRequest = false;
-            window.location.assign("");
-            //window.Location.reload(true);
         }        
         a.authorized = true;
         v.showAllButtons();
@@ -206,7 +204,10 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'mimeType': contentType,
             "description": getDesription(contentType),
             "parents": [parentFolder]
+            //"parents": [{"id": parentFolder}]
+            
         };
+
         var base64Data = window.btoa(reader.result); //the window element's build-in binary-to-ascii method
         var multipartRequestBody =
             delimiter +
