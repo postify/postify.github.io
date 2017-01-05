@@ -128,7 +128,7 @@ a.getFile = function(filename = "dummy/path/filename"){
     //var token = gapi.auth.getToken().access_token;
     function getFile(){
         //alert("Token: \n" + token);
-        alert("Token: NO TOKEN");
+        alert(a.allFilesArray);
     }
 };
 
