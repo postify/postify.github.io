@@ -100,7 +100,7 @@ a.showFiles = function (callback){
         var fileMetadata = {
             //'spaces': 'appDataFolder',            
             //'pageSize': 50,
-            'fields': "nextPageToken, files(id, name, fullText)",
+            'fields': "nextPageToken, files(id, name)",
             //'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
