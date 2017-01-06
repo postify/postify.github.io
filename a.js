@@ -25,6 +25,9 @@ a.musicFolderId = null;
 a.pictureFolderId = null;
 a.allFilesArray = [];
 
+a.tuneToPix = "";
+a.tuneToPixFileId = null; //if first time, else
+
 a.initialize = function initialize(callback){
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
@@ -85,6 +88,9 @@ a.createFolder = function(folderName, callback){
             v.clearAllText();            
             a.showFiles();
         });
+        if(folderName === a.musicFolderName){
+            a.uploadFile( "", "tuneToPix.txt", a.musicFolderName );
+        }
         setTimeout(function(){
             if(callback){callback();}
         },2000);
@@ -131,7 +137,7 @@ a.getFile = function(ID = "dummyID"){
             'fileId': ID
         });
         request.execute(function(response, raw) {
-            //v.txtGetFile.value = ('Description: ' + response.description);
+            v.txtGetFile.value = ('Description: ' + response.description);
             alert(raw)
         });
     }
@@ -232,6 +238,9 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'body': multipartRequestBody});
         request.execute(function(file, raw){
             console.log(`'${file.name}', ${file.id}, ${metadata.description}`);
+            if(file.name === "tuneToPix.txt"){
+                a.tuneToPixFileId = file.id;
+            }
             v.showAllButtons();    
             v.clearAllText();
             v.showFiles();

@@ -6,6 +6,7 @@
 <audio controls="controls" src="https://drive.google.com/uc?export=download&id=0BzFXj3py69BBcUFNV3BsWkNJQk0" type='audio/mp3'>
 </audio>
 */
+// https://developers.google.com/drive/v2/reference/files/get
 // http://stackoverflow.com/questions/37860901/how-to-use-google-drive-api-to-download-files-with-javascript
 // http://sourcey.com/html5-video-streaming-from-google-drive/
 // https://developers.google.com/web/fundamentals/getting-started/primers/promises
@@ -30,7 +31,6 @@ m.chosenMusicFile = "";
 m.chosenPictureFile = "";
 m.chosenMusicFilename = "";
 m.chosenPictureFilename = "";
-
 
 //=============================//
 //==========| VIEW |===========//
@@ -108,7 +108,7 @@ c.initialize = function initialize(){
                 requiredFolders.forEach(file=>{
                     if(file.name === a.musicFolderName){v.musicFolderId = file.id}
                     if(file.name === a.pictureFolderName){v.pictureFolderId = file.id}
-                });                
+                });
             }
         });
     }     
