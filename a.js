@@ -156,7 +156,7 @@ a.getFile = function(ID = "dummyID"){
         });
         request.execute(function(response, raw) {
             v.txtGetFile.value = ('Description: ' + response.description);
-            alert(raw)
+            console.log(raw);
         });
     }
 };
@@ -214,7 +214,7 @@ a.makeFolder = a.createFolder;
 
 a.saveMusicFile = function(rawFile){
     a.uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
-    alert(Object.keys(a.tuneToPix));
+   //alert(Object.keys(a.tuneToPix));
 };
 
 a.savePictureFile = function(rawFile){

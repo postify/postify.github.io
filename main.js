@@ -106,7 +106,7 @@ c.initialize = function initialize(){
             a.allFilesArray.forEach(file=>{
                 if(file.name === "tuneToPix.txt"){
                     a.tuneToPixFileId = file.id;
-                    alert("a.tuneToPixFileId = " + file.id);
+                    //alert("a.tuneToPixFileId = " + file.id);
                 }
             });
             //-----------------------------------
