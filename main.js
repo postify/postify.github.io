@@ -103,6 +103,13 @@ c.initialize = function initialize(){
                 v.createFolder(a.pictureFolderName, recordFolderIds);
             }
             //-----------------------------------
+            a.allFilesArray.forEach(file=>{
+                if(file.name === "tuneToPix.txt"){
+                    a.tuneToPixFileId = file.id;
+                    alert("a.tuneToPixFileId = " + file.id);
+                }
+            });
+            //-----------------------------------
             function recordFolderIds(){
                 //capture the folder IDs so we can save files to those folders
                 requiredFolders.forEach(file=>{
