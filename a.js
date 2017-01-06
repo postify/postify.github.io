@@ -255,7 +255,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             console.log(`'${file.name}', ${file.id}, ${metadata.description}`);
             if(file.name === "tuneToPix.txt"){
                 a.tuneToPixFileId = file.id;
-                alert(`'${file.name}', ${file.id}, ${metadata.description}`);
+                //alert(`'${file.name}', ${file.id}, ${metadata.description}`);
             }
             v.showAllButtons();    
             v.clearAllText();
