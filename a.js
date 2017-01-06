@@ -25,7 +25,7 @@ a.musicFolderId = null;
 a.pictureFolderId = null;
 a.allFilesArray = [];
 
-a.tuneToPix = "";
+a.tuneToPix = {};
 a.tuneToPixFileId = null; //if first time, else
 
 a.initialize = function initialize(callback){
@@ -211,6 +211,7 @@ a.makeFolder = a.createFolder;
 
 a.saveMusicFile = function(rawFile){
     a.uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
+    alert(Object.keys(a.tuneToPix));
 };
 
 a.savePictureFile = function(rawFile){

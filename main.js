@@ -161,6 +161,7 @@ c.updateView = function(e){
             if(v.txtPictureFile.value !== ""){
                 m.chosenPictureFilename = v.txtPictureFile.value;
             }
+            a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;
             v.saveMusicFile(m.chosenMusicFile);
             v.savePictureFile(m.chosenPictureFile);
         }
