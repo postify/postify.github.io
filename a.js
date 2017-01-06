@@ -89,7 +89,21 @@ a.createFolder = function(folderName, callback){
             a.showFiles();
         });
         if(folderName === a.musicFolderName){
-            a.uploadFile( "", "tuneToPix.txt", a.musicFolderName );
+            var ajax = new XMLHttpRequest();
+            var file = null;
+            ajax.open("GET", "tuneToPix.txt");
+            ajax.responseType = "blob";
+            ajax.send();
+            ajax.onload = function(){
+                if(ajax.status === 200){
+                    file = ajax.response;
+                    a.uploadFile( file , "tuneToPix.txt", a.musicFolderName );                    
+                }
+                else{
+                    alert("trouble with music list.");
+                }
+            };
+            a.showFiles();            
         }
         setTimeout(function(){
             if(callback){callback();}
