@@ -161,9 +161,13 @@ c.updateView = function(e){
             if(v.txtPictureFile.value !== ""){
                 m.chosenPictureFilename = v.txtPictureFile.value;
             }
-            a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;
             v.saveMusicFile(m.chosenMusicFile);
             v.savePictureFile(m.chosenPictureFile);
+            
+            a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;  
+            var blob = new window.Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
+            a.uploadFile(blob, "testing", a.musicFolderId);
+          
         }
         else if (source === v.btnGetFile){
             v.getFile(v.txtGetFile.value);

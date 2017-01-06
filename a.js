@@ -96,6 +96,9 @@ a.createFolder = function(folderName, callback){
                 ajax.open("GET", "tuneToPix.txt");
                 ajax.responseType = "blob";
                 ajax.send();
+                /*
+                    var blob = new Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
+                */
                 ajax.onload = function(){
                     if(ajax.status === 200){
                         file = ajax.response;
