@@ -117,7 +117,7 @@ a.createFolder = function(folderName, callback){
                 ajax.onload = function(){
                     if(ajax.status === 200){
                         file = ajax.response;
-                        a.uploadFile( file , "tuneToPix.txt", a.musicFolderName );                    
+                        a.uploadFile( file , "tuneToPix.txt", a.musicFolderId );                    
                     }
                     else{
                         alert("trouble with music list.");
