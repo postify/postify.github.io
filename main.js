@@ -216,11 +216,11 @@ c.updateView = function(e){
         if(id === "chooser"){
             if(v.chooser.selectedIndex !== 0){
                 alert(v.player.id);
-                /*
+                
                 v.player.src = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value;
                 v.player.play();
                 alert(v.chooser.options[v.chooser.selectedIndex].value);
-                */
+                
             }
         }
     }
