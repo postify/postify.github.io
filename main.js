@@ -37,6 +37,7 @@ m.chosenMusicFile = "";
 m.chosenPictureFile = "";
 m.chosenMusicFilename = "";
 m.chosenPictureFilename = "";
+m.googleMusicSource = "https://drive.google.com/uc?export=download&id=";
 
 //=============================//
 //==========| VIEW |===========//
@@ -213,7 +214,11 @@ c.updateView = function(e){
         }
         
         if(id === "chooser"){
-            alert(v.chooser.options[v.chooser.selectedIndex].value);
+            if(v.chooser.selectedIndex !== 0){
+                m.player.src = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value;
+                m.player.play();
+                alert(v.chooser.options[v.chooser.selectedIndex].value);              
+            }
         }
     }
 };
