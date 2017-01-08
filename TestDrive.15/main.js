@@ -1,9 +1,3 @@
-/**
-<button id="btnDeleteFile"> Delete File</button> <input id="txtDeleteFile" type="text"><br>
-<button id="btnGetFile"> Get File </button> <input id="txtGetFile" type="text"  ><br>
-<button id="btnCreateFolder"> Create Folder </button> <input id="txtCreateFolder" type="text" ><br>
-<button id="https://drive.google.com/uc?export=download&id="> Show Files </button><br>
-*/
 //====================================//
 //==========| START OF APP |==========//
 //====================================//
@@ -174,6 +168,15 @@ c.updateView = function(e){
             var blob = new window.Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
             a.uploadFile(blob, "testing", a.musicFolderId);
           
+        }
+        else if (source === v.btnGetFile){
+            v.getFile(v.txtGetFile.value);
+        }
+        else if (source === v.btnDeleteFile){
+            v.deleteFile(v.txtDeleteFile.value);
+        }
+        else if (source === v.btnCreateFolder){
+            v.createFolder(v.txtCreateFolder.value);
         }
         else if(source === v.btnChooseMusic){
             v.musicFileElement.click();
