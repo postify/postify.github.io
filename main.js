@@ -210,7 +210,7 @@ c.updateView = function(e){
             v.pictureFileElement.click();
         }
         else if(source === v.btnGetFileContents){
-            a.getFileContents(v.fileContentId);
+            a.getFileContents(v.fileContentId.value);
         }
     }
     
