@@ -140,6 +140,21 @@ a.getFile = function(ID = "dummyID"){
     }
 };
 
+a.getFileContents = function(ID = "dummyID"){
+    a.authorizeAndPerform(getFile);    
+    //-----| callback for getting file |----//
+    //var token = gapi.auth.getToken().access_token;
+    function getFile(){
+        var request = gapi.client.drive.files.get({
+            'fileId': ID,
+            'alt': 'media'
+        });
+        request.execute(function(response, raw) {
+            v.txtGetFile.value = ('Filename: ' + response.name);
+            console.log(raw);
+        });
+    }
+};
 a.deleteFile = function(fileId){
     a.authorizeAndPerform(deleteFile);
     function deleteFile(){

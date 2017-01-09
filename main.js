@@ -141,7 +141,7 @@ c.updateModel = function(e, updateView){
     
     showEvent(e);
     updateView(e);
-    m.musicFolderExists;
+    m.musicFolderExists;//???
     //----| helpers |----//
     function showEvent(e){
         v.msg.innerHTML = `${id}, ${type}`;
@@ -197,7 +197,8 @@ c.updateView = function(e){
             /**
                 Use the functions defined above:
                 a.) deleteOldToPix to delete the old version(s) of file(s)
-                b.) then execute the callback saveNewToPix to replace them
+                b.) then execute the callback saveNewTuneToPix to replace them
+                c.) then execute the next callback getNewTuneToPixFileId to record the new fileId
             */
             deleteOLdTuneToPix(saveNewTuneToPix);
           
