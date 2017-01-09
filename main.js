@@ -38,6 +38,7 @@ m.chosenPictureFile = "";
 m.chosenMusicFilename = "";
 m.chosenPictureFilename = "";
 m.googleMusicSource = "https://drive.google.com/uc?export=download&id=";
+m.tuneToPixFilename = "tuneToPix.txt"
 
 //=============================//
 //==========| VIEW |===========//
@@ -111,7 +112,7 @@ c.initialize = function initialize(){
             }
             //-----------------------------------
             a.allFilesArray.forEach(file=>{
-                if(file.name === "tuneToPix.txt"){
+                if(file.name === m.tuneToPixFilename){
                     a.tuneToPixFileId = file.id;
                     //alert("a.tuneToPixFileId = " + file.id);
                 }
@@ -154,6 +155,21 @@ c.updateView = function(e){
     var source = e.target;
     var id = source.id; //id of event source    
     var type = e.type;
+
+    function deleteOLdTuneToPix(callback){
+        a.allFilesArray.forEach(file=>{
+            if(file.name === m.tuneToPixFilename){
+                a.deleteFile(file.id);
+            }
+        });
+        callback();
+    }    
+    
+    function saveNewTuneToPix (){
+        a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;  
+        var blob = new window.Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
+        a.uploadFile(blob, m.tuneToPixFilename, a.musicFolderId);                
+    }    
     
     //buttons
     if(type === "mousedown"){
@@ -170,9 +186,12 @@ c.updateView = function(e){
             v.saveMusicFile(m.chosenMusicFile);
             v.savePictureFile(m.chosenPictureFile);
             
-            a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;  
-            var blob = new window.Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
-            a.uploadFile(blob, "tuneToPix.txt", a.musicFolderId);
+            /**
+                Use the functions defined above:
+                a.) deleteOldToPix to delete the old version(s) of file(s)
+                b.) then execute the callback saveNewToPix to replace them
+            */
+            deleteOLdTuneToPix(saveNewTuneToPix);
           
         }
         else if(source === v.btnChooseMusic){

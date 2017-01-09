@@ -93,7 +93,7 @@ a.createFolder = function(folderName, callback){
             if(folderName === a.musicFolderName){
                 var ajax = new XMLHttpRequest();
                 var file = null;
-                ajax.open("GET", "tuneToPix.txt");
+                ajax.open("GET", m.tuneToPixFilename);
                 ajax.responseType = "blob";
                 ajax.send();
                 /*
@@ -102,7 +102,7 @@ a.createFolder = function(folderName, callback){
                 ajax.onload = function(){
                     if(ajax.status === 200){
                         file = ajax.response;
-                        a.uploadFile( file , "tuneToPix.txt", a.musicFolderId );                    
+                        a.uploadFile( file , m.tuneToPixFilename, a.musicFolderId );                    
                     }
                     else{
                         alert("trouble with music list.");
@@ -257,7 +257,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'body': multipartRequestBody});
         request.execute(function(file, raw){
             console.log(`'${file.name}', ${file.id}, ${metadata.description}`);
-            if(file.name === "tuneToPix.txt"){
+            if(file.name === m.tuneToPixFilename){
                 a.tuneToPixFileId = file.id;
                 //alert(`'${file.name}', ${file.id}, ${metadata.description}`);
             }
