@@ -90,15 +90,16 @@ a.createFolder = function(folderName, callback){
         });
         setTimeout(function(){
             //===================
+            /*
             if(folderName === a.musicFolderName){
                 var ajax = new XMLHttpRequest();
                 var file = null;
                 ajax.open("GET", m.tuneToPixFilename);
                 ajax.responseType = "blob";
                 ajax.send();
-                /*
-                    var blob = new Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
-                */
+                
+                //var blob = new Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
+                
                 ajax.onload = function(){
                     if(ajax.status === 200){
                         file = ajax.response;
@@ -110,6 +111,7 @@ a.createFolder = function(folderName, callback){
                 };
             }            
             //===================
+            */
             if(callback){callback();}
         },1000);
     }//--| END of internal 'createFolder' | ---/
