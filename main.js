@@ -162,15 +162,23 @@ c.updateView = function(e){
                 a.deleteFile(file.id);
             }
         });
-        callback();
+        callback(getNewTuneToPixFileId);
     }    
     
-    function saveNewTuneToPix (){
+    function saveNewTuneToPix (callback){
         a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;  
         var blob = new window.Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
-        a.uploadFile(blob, m.tuneToPixFilename, a.musicFolderId);                
+        a.uploadFile(blob, m.tuneToPixFilename, a.musicFolderId);
+        a.showFiles(callback);
     }    
     
+    function getNewTuneToPixFileId(){
+        a.allFilesArray.forEach(file=>{
+            if(file.name === m.tuneToPixFilename){
+                a.tuneToPixFileId = file.id;
+            }
+        });
+    }
     //buttons
     if(type === "mousedown"){
         if (source === v.btnShowFiles){
