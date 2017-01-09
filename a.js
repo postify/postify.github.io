@@ -151,8 +151,9 @@ a.getFileContents = function(ID = "dummyID"){
             'alt': 'media'
         });
         request.execute(function(response, raw) {
-            v.txtFileContentId.value = ('Filename: ' + response.name);
-            console.log(raw);
+            v.txtFileContentId.value = "";
+            console.log(`Raw Data: ${raw}
+            Response: ${response}`);
         });
     }
 };
