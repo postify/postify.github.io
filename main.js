@@ -209,6 +209,9 @@ c.updateView = function(e){
         else if(source === v.btnChoosePicture){
             v.pictureFileElement.click();
         }
+        else if(source === v.btnGetFileContents){
+            alert("will get file contents")
+        }
     }
     
     //keycode
