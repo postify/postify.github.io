@@ -212,7 +212,7 @@ c.updateView = function(e){
         else if(source === v.btnGetFileContents){
             setTimeout(function(){
                 a.getFileContents(v.txtFileContentId.value);                
-            },200);
+            },2000);
         }
     }
     
