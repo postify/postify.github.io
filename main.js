@@ -66,8 +66,6 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
     });
 };
 
-
-
 //=============================//
 //=======| CONTROLLER |========//
 //=============================//
