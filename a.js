@@ -134,7 +134,7 @@ a.getFile = function(ID = "dummyID"){
             'fileId': ID
         });
         request.execute(function(response, raw) {
-            v.txtGetFile.value = ('Description: ' + response.description);
+            //v.txtGetFile.value = ('Description: ' + response.description);
             console.log(raw);
         });
     }
@@ -144,7 +144,6 @@ a.getFileContents = function(ID = "dummyID"){
     a.authorizeAndPerform(getFile);    
     //-----| callback for getting file |----//
     //var token = gapi.auth.getToken().access_token;
-    alert(ID);
     function getFile(){
         var request = gapi.client.drive.files.get({
             'fileId': ID,
@@ -152,8 +151,9 @@ a.getFileContents = function(ID = "dummyID"){
         });
         request.execute(function(response, raw) {
             v.txtFileContentId.value = "";
-            console.log(`Raw Data: ${raw}
-            Response: ${response}`);
+            console.log(
+            `Raw Data: ${raw}
+             Response: ${response}`);
         });
     }
 };
