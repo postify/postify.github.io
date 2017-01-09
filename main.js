@@ -65,8 +65,8 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
     });
 };
 
-//Attach all elements with an id to the view.
-//Their property names will be the same as their ids
+//Attach to the view all elements with an id.
+//Their property names will be the same as their ids.
 v.attachAllElementsById(v);
 
 v.window = this;
@@ -147,8 +147,7 @@ c.updateModel = function(e, updateView){
     }
 };
 
-//-----| UPDATE view |----//
-
+//-----| UPDATE view |----// 
 c.updateView = function(e){
     var keyCode = e.which;
     var enter = 13;
@@ -173,7 +172,7 @@ c.updateView = function(e){
             
             a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;  
             var blob = new window.Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
-            a.uploadFile(blob, "testing", a.musicFolderId);
+            a.uploadFile(blob, "tuneToPix.txt", a.musicFolderId);
           
         }
         else if(source === v.btnChooseMusic){
@@ -212,7 +211,6 @@ c.updateView = function(e){
             m.chosenPictureFilename = v.pictureFileElement.files[0].name;
             v.txtPictureFile.value = m.chosenPictureFilename;
         }
-        
         if(id === "chooser"){
             if(v.chooser.selectedIndex !== 0){
                 v.player.src = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value;
