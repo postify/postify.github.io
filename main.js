@@ -66,18 +66,19 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
     });
 };
 
-//Attach to the view all elements with an id.
-//Their property names will be the same as their ids.
-v.attachAllElementsById(v);
 
-v.window = this;
-v.window.id = "window";
 
 //=============================//
 //=======| CONTROLLER |========//
 //=============================//
 var c = {};
 c.initialize = function initialize(){
+    //Attach to the view all elements with an id.
+    //Their property names will be the same as their ids.
+    v.attachAllElementsById(v);
+    v.window = this;
+    v.window.id = "window";
+    
     v.clearAllText();
     v.initialize(verifyFolders);
     function verifyFolders(){
@@ -210,9 +211,9 @@ c.updateView = function(e){
             v.pictureFileElement.click();
         }
         else if(source === v.btnGetFileContents){
-            setTimeout(function(){
+            //setTimeout(function(){
                 a.getFileContents(v.txtFileContentId.value);                
-            },2000);
+            //},2000);
         }
     }
     
