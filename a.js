@@ -144,6 +144,7 @@ a.getFileContents = function(ID = "dummyID"){
     a.authorizeAndPerform(getFile);    
     //-----| callback for getting file |----//
     //var token = gapi.auth.getToken().access_token;
+    alert(ID);
     function getFile(){
         var request = gapi.client.drive.files.get({
             'fileId': ID,
