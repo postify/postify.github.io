@@ -63,3 +63,9 @@ input[type="file"]{
 button, input[type="button"]{
     visibility: hidden;
 }
+#player{
+    width: 70%;
+}
+#chooser{
+    width: 30%;
+}
