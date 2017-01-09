@@ -89,29 +89,6 @@ a.createFolder = function(folderName, callback){
             a.showFiles();
         });
         setTimeout(function(){
-            //===================
-            /*
-            if(folderName === a.musicFolderName){
-                var ajax = new XMLHttpRequest();
-                var file = null;
-                ajax.open("GET", m.tuneToPixFilename);
-                ajax.responseType = "blob";
-                ajax.send();
-                
-                //var blob = new Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
-                
-                ajax.onload = function(){
-                    if(ajax.status === 200){
-                        file = ajax.response;
-                        a.uploadFile( file , m.tuneToPixFilename, a.musicFolderId );                    
-                    }
-                    else{
-                        alert("trouble with music list.");
-                    }
-                };
-            }            
-            //===================
-            */
             if(callback){callback();}
         },1000);
     }//--| END of internal 'createFolder' | ---/
