@@ -109,20 +109,21 @@ c.initialize = function initialize(){
                 v.createFolder(a.musicFolderName, recordFolderIds);
                 v.createFolder(a.pictureFolderName, recordFolderIds);
             }
-            //-----------------------------------
-            a.allFilesArray.forEach(file=>{
-                if(file.name === m.tuneToPixFilename){
-                    a.tuneToPixFileId = file.id;
-                    //alert("a.tuneToPixFileId = " + file.id);
-                }
-            });
-            //-----------------------------------
+
             function recordFolderIds(){
                 //capture the folder IDs so we can save files to those folders
                 requiredFolders.forEach(file=>{
                     if(file.name === a.musicFolderName){v.musicFolderId = file.id}
                     if(file.name === a.pictureFolderName){v.pictureFolderId = file.id}
                 });
+                //-----------------------------------
+                a.allFilesArray.forEach(file=>{
+                    if(file.name === m.tuneToPixFilename){
+                        a.tuneToPixFileId = file.id;
+                        //alert("a.tuneToPixFileId = " + file.id);
+                    }
+                });
+                //-----------------------------------
             }
         });
     }     
