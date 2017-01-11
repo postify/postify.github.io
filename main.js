@@ -166,7 +166,12 @@ c.updateView = function(e){
     }    
     
     function saveNewTuneToPix (callback){
-        a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;  
+        a.tuneToPix[m.chosenMusicFilename] = m.chosenPictureFilename;
+        //-----| test for, and save to localStorage |-------//
+        if(window.localStorage){
+            window.localStorage.setItem(a.tuneToPixFilename, JSON.stringify(a.tuneToPix));
+        }
+        //-------------------------------------------------//
         var blob = new window.Blob([JSON.stringify(a.tuneToPix)], {type : 'application/json'});
         a.uploadFile(blob, m.tuneToPixFilename, a.musicFolderId);
         a.showFiles(callback);

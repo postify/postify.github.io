@@ -115,6 +115,14 @@ a.showFiles = function (callback){
                 a.allFilesArray.push(file);
                 v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
             });
+            //------| check for, and use localstorage |-------//
+            if(window.localStorage){
+                if(!!window.localStorage.getItem(m.tuneToPixFilename)){
+                    a.tuneToPix = JSON.parse(window.localStorage.getItem(m.tuneToPixFilename));
+                }
+                console.log(a.tuneToPix);
+            }
+            //-----------------------------------------------//
         }
         if(callback){
             callback();
