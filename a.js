@@ -120,7 +120,10 @@ a.showFiles = function (callback){
                 if(!!window.localStorage.getItem(m.tuneToPixFilename)){
                     a.tuneToPix = JSON.parse(window.localStorage.getItem(m.tuneToPixFilename));
                 }
-                console.log(a.tuneToPix);
+                var tunes = Object.keys(a.tuneToPix);
+                tunes.forEach(tune=>{
+                    console.log(`Tune: ${tune}, Pix: ${a.tuneToPix[tune]}`);
+                });
             }
             //-----------------------------------------------//
         }
