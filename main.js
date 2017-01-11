@@ -76,6 +76,19 @@ c.initialize = function initialize(){
     v.attachAllElementsById(v);
     v.window = this;
     v.window.id = "window";
+    //------| check for, and use localstorage |-------//
+    if(window.localStorage){
+        if(!!window.localStorage.getItem(m.tuneToPixFilename)){
+            a.tuneToPix = JSON.parse(window.localStorage.getItem(m.tuneToPixFilename));
+        }
+        var tunes = Object.keys(a.tuneToPix);
+        tunes.forEach(tune=>{
+            console.log(
+               `Tune: ${tune}, 
+                Pix: ${a.tuneToPix[tune]}\n\n`);
+        });
+    }
+    //-----------------------------------------------//    
     
     v.clearAllText();
     v.initialize(verifyFolders);
