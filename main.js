@@ -81,15 +81,16 @@ c.initialize = function initialize(){
         if(!!window.localStorage.getItem(m.tuneToPixFilename)){
             a.tuneToPix = JSON.parse(window.localStorage.getItem(m.tuneToPixFilename));
         }
-        var tunes = Object.keys(a.tuneToPix);
-        tunes.forEach(tune=>{
-            console.log(
-               `Tune: ${tune}, 
-                Pix: ${a.tuneToPix[tune]}\n\n`);
-        });
+        setTimeout(function(){
+            var tunes = Object.keys(a.tuneToPix);
+            tunes.forEach(tune=>{
+                console.log(
+                   `Tune: ${tune}, 
+                    Pix: ${a.tuneToPix[tune]}`);
+            });
+        },2000);
     }
-    //-----------------------------------------------//    
-    alert();
+    //-----------------------------------------------//  
     v.clearAllText();
     v.initialize(verifyFolders);
     function verifyFolders(){
