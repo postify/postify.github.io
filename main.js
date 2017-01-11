@@ -89,7 +89,7 @@ c.initialize = function initialize(){
         });
     }
     //-----------------------------------------------//    
-    
+    alert();
     v.clearAllText();
     v.initialize(verifyFolders);
     function verifyFolders(){
