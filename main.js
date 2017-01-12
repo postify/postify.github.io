@@ -73,7 +73,7 @@ var c = {};
 c.initialize = function initialize(){
     //alert("initializing");
     a.getFilesMetaData(a.localFileMetaDataName, function(data){
-        alert(data);
+        alert(a.filesMetaData[0].name);
     });
     //Attach to the view all elements with an id.
     //Their property names will be the same as their ids.
