@@ -318,12 +318,13 @@ a.getFilesMetaData = function getFilesMetaData(localStorageName, actOnMetaData){
     //---------------------------     
     if(window.localStorage){
         if(window.localStorage.getItem(localStorageName)){
-            alert("ther is evidence of the stored info");
+            alert("there is evidence of the stored info");
             if(actOnMetaData){
                 actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))  );
             }
         }
     }else{
+        alert("NO locally stored info");        
         a.authorizeAndPerform(getFilesMetaData);
     }
     //--------------------------
