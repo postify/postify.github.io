@@ -298,7 +298,7 @@ a.filesMetaData = {};
     If the metaDate comes from local storage, JSON.parse() must first be applied
     since it is assumed it was placed there after JSON.stringify();
 */
-a.getFilesMetaData = function getFilesMetaData(localStorageName, actOnMetaData){
+a.getFilesMetaData = function (localStorageName, actOnMetaData){
     //-----------------------------    
     function getFilesMetaData(){
          gapi.client.load('drive', 'v3', performRequest);
