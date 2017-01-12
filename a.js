@@ -316,7 +316,6 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
     //---------------------------     
     if(!!window.localStorage){
         if(window.localStorage.getItem(localStorageName)){
-            alert("there is evidence of the stored info");
             if(actOnMetaData){
                 actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))  );
             }
