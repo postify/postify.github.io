@@ -75,7 +75,7 @@ c.initialize = function initialize(){
     a.getFilesMetaData(a.localFileMetaDataName, function(data){
         var list = "";
         data.forEach(dataObject=>{
-            list += dataObject.name + '<br>\n';
+            list += dataObject.name + '\n';
         });
         alert(list);
     });
@@ -247,8 +247,6 @@ c.updateView = function(e){
                 v.filesInfo.innerHTML = "";
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
-                    v.filesInfo.innerHTML += dataObject.name + '<br>';
-                    
                 });
                 alert(list);
             });           
