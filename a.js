@@ -303,9 +303,8 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
     function getFilesMetaData(){
          gapi.client.load('drive', 'v3', performRequest);
          function performRequest(){
-            gapi.client.drive.files.list(
-                {'fields': "nextPageToken, files(id, name)"}
-            ).execute(function(response){
+            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
+            request.execute(function(response){
                 a.filesMetaData = response.files;
                 alert(a.filesMetaData[0].name);
                 if(window.localStorage){
