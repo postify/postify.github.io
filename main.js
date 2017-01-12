@@ -71,6 +71,7 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
 //=============================//
 var c = {};
 c.initialize = function initialize(){
+    alert();
     a.getFilesMetaData(a.localFileMetaDataName, function(data){
         alert(data);
     });
