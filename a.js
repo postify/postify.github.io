@@ -315,15 +315,19 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
          }    
     }
     //---------------------------     
-    if(window.localStorage){
+    if(!!window.localStorage){
+        alert("local storage supported");        
         if(window.localStorage.getItem(localStorageName)){
             alert("there is evidence of the stored info");
             if(actOnMetaData){
                 actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))[0].name  );
             }
+        }else{
+            alert("NO locally stored info");        
+            a.authorizeAndPerform(getFilesMetaData);
         }
     }else{
-        alert("NO locally stored info");        
+        alert("local storage NOT supported.");        
         a.authorizeAndPerform(getFilesMetaData);
     }
     //--------------------------
