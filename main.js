@@ -72,6 +72,7 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
 var c = {};
 c.initialize = function initialize(){
     //alert("initializing");
+    /*
     a.getFilesMetaData(a.localFileMetaDataName, function(data){
         var list = "";
         data.forEach(dataObject=>{
@@ -79,6 +80,7 @@ c.initialize = function initialize(){
         });
         alert(list);
     });
+    */
     //Attach to the view all elements with an id.
     //Their property names will be the same as their ids.
     v.attachAllElementsById(v);
