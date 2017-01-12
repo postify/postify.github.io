@@ -71,6 +71,9 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
 //=============================//
 var c = {};
 c.initialize = function initialize(){
+    a.getFileMetaData(a.localFileMetaDataName, function(data){
+        alert(data);
+    });
     //Attach to the view all elements with an id.
     //Their property names will be the same as their ids.
     v.attachAllElementsById(v);

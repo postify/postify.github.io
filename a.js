@@ -24,6 +24,7 @@ a.savedPictureFile = "";
 a.musicFolderId = null;
 a.pictureFolderId = null;
 a.allFilesArray = [];
+a.localFileMetaDataName = "diymusicFileMetaData";
 
 a.tuneToPix = {};
 a.tuneToPixFileId = null; //if first time, else
