@@ -307,6 +307,7 @@ a.getFilesMetaData = function getFilesMetaData(localStorageName, actOnMetaData){
                 {'fields': "nextPageToken, files(id, name)"}
             ).execute(function(response){
                 a.filesMetaData = response.files;
+                alert(a.filesMetaData[0].name);
                 if(window.localStorage){
                     window.localStorage.setItem(localStorageName, JSON.stringify(response.files));
                 }
