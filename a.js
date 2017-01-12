@@ -334,12 +334,23 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
     to localStorage under the name supplied, and also
     stores it to a.filesMetaData
 */
-a.setFilesMetaData = function setFilesMetaData(localStorageName, actOnMetaData){
-    var filesMetaData;
-    // all the right stuff
+a.setFilesMetaData = function (localStorageName, actOnMetaData){
+    //-----------------------------    
+    function setFilesMetaData(){
+         gapi.client.load('drive', 'v3', performRequest);
+         function performRequest(){
+            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
+            request.execute(function(response){
+                a.filesMetaData = response.files;
+                if(window.localStorage){
+                    window.localStorage.setItem(localStorageName, JSON.stringify(response.files));
+                }
+                if(actOnMetaData){actOnMetaData(response.files)}
+            });
+         }    
+    }
     //---------------------------
-    if(actOnMetaData){actOnMetaData(filesMetaData)}
-    return filesMetaData;    
+    a.authorizeAndPerform(setFilesMetaData);
 };
 
 
