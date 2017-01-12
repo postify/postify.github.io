@@ -272,6 +272,13 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             v.showAllButtons();    
             v.clearAllText();
             v.showFiles();
+            a.setFilesMetaData(a.localFileMetaDataName, function(data){
+                var list = "";
+                data.forEach(dataObject=>{
+                    list += dataObject.name + '\n';
+                });
+                alert(list);
+            }); 
         });
     };
     //======helper======//
