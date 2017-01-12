@@ -250,6 +250,16 @@ c.updateView = function(e){
                 alert(list);
             });           
         }
+        else if(source === v.btnSetMetaData){
+            a.getFilesMetaData(a.localFileMetaDataName, function(data){
+                var list = "";
+                data.forEach(dataObject=>{
+                    list += dataObject.name + '\n';
+                });
+                alert(list);
+            });           
+        }
+        
     }
     
     //keycode
