@@ -244,8 +244,11 @@ c.updateView = function(e){
         else if(source === v.btnGetMetaData){
             a.getFilesMetaData(a.localFileMetaDataName, function(data){
                 var list = "";
+                v.filesInfo.innerHTML = "";
                 data.forEach(dataObject=>{
-                    list += dataObject.name + '<br>\n';
+                    list += dataObject.name + '\n';
+                    v.filesInfo.innerHTML += dataObject.name + '<br>';
+                    
                 });
                 alert(list);
             });           
