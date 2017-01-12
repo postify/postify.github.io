@@ -73,7 +73,11 @@ var c = {};
 c.initialize = function initialize(){
     //alert("initializing");
     a.getFilesMetaData(a.localFileMetaDataName, function(data){
-        alert(data);
+        var list = "";
+        data.forEach(dataObject=>{
+            list += dataObject.name + '<br>\n';
+        })
+        alert(list);
     });
     //Attach to the view all elements with an id.
     //Their property names will be the same as their ids.
