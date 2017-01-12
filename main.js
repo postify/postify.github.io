@@ -76,7 +76,7 @@ c.initialize = function initialize(){
         var list = "";
         data.forEach(dataObject=>{
             list += dataObject.name + '<br>\n';
-        })
+        });
         alert(list);
     });
     //Attach to the view all elements with an id.
@@ -243,8 +243,12 @@ c.updateView = function(e){
         }
         else if(source === v.btnGetMetaData){
             a.getFilesMetaData(a.localFileMetaDataName, function(data){
-                alert(data);
-            });            
+                var list = "";
+                data.forEach(dataObject=>{
+                    list += dataObject.name + '<br>\n';
+                });
+                alert(list);
+            });           
         }
     }
     
