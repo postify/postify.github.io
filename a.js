@@ -291,24 +291,45 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
 //==============================================================================//
 a.filesMetaData = {};
 /**
-    getFilesMetaData first checks localStorage,
-    failing that checks googleDrive for the files metadata
-    for this app, stores it in a.filesMetaData and also returns it
+    "getFilesMetaData" first checks localStorage,
+    failing that, goes to googleDrive for the files metadata
+    for this app, stores it in a.filesMetaData as well as in localStorage
     If the metaDate comes from local storage, JSON.parse() must first be applied
     since it is assumed it was placed there after JSON.stringify();
 */
 a.getFilesMetaData = function getFilesMetaData(localStorageName, actOnMetaData){
-    var filesMetaData;
-    // all the right stuff
-    //---------------------------
-    
-    if(actOnMetaData){actOnMetaData(filesMetaData)}
-    return filesMetaData;
+    if(window.localStorage){
+        if(window.localStorage[localStorageName]){
+            if(actOnMetaData){
+                actOnMetaData(  JSON.parse(window.localStorage[localStorageName])  );
+            }
+        }
+    }
+    else{
+        a.authorizeAndPerform(getFilesMetaData);
+        //-----------------------------
+        function getFilesMetaData(){
+             gapi.client.load('drive', 'v3', performRequest);
+             function performRequest(){
+                gapi.client.drive.files.list(
+                    {'fields': "nextPageToken, files(id, name)"}
+                ).execute(function(response){
+                    a.filesMetaData = response.files;
+                    if(window.localStorage){
+                        window.localStorage.setItem(localStorageName, JSON.stringify(response.files));
+                    }
+                    if(actOnMetaData){actOnMetaData(response.files)}
+                });
+        }
+        //---------------------------        
+    }
 };
 
 /**
     setFilesMetaData retreives this app's files metaData from
-    Google Drive, applies JSON.stringify()
+    Google Drive, applies JSON.stringify() and stores it
+    to localStorage under the name supplied, and also
+    stores it to a.filesMetaData
 */
 a.setFilesMetaData = function setFilesMetaData(localStorageName, actOnMetaData){
     var filesMetaData;
