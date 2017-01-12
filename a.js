@@ -109,10 +109,10 @@ a.showFiles = function (callback){
         var request = gapi.client.drive.files.list(fileMetadata);
         request.execute(handleResponse);        
         function handleResponse(response){
-            a.allFilesArray = [];             
+            a.allFilesArray = response.files;//[];             
             v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
             response.files.forEach(file=>{
-                a.allFilesArray.push(file);
+                //a.allFilesArray.push(file);
                 v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
             });
             //------| check for, and use localstorage |-------//
@@ -286,5 +286,36 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
     }
 };
 
+//==============================================================================//
+//==========| Attempt at adding a more useful superset of methods |=============//
+//==============================================================================//
+a.filesMetaData = {};
+/**
+    getFilesMetaData first checks localStorage,
+    failing that checks googleDrive for the files metadata
+    for this app, stores it in a.filesMetaData and also returns it
+    If the metaDate comes from local storage, JSON.parse() must first be applied
+    since it is assumed it was placed there after JSON.stringify();
+*/
+a.getFilesMetaData = function getFilesMetaData(localStorageName, actOnMetaData){
+    var filesMetaData;
+    // all the right stuff
+    //---------------------------
+    
+    if(actOnMetaData){actOnMetaData(filesMetaData)}
+    return filesMetaData;
+};
+
+/**
+    setFilesMetaData retreives this app's files metaData from
+    Google Drive, applies JSON.stringify()
+*/
+a.setFilesMetaData = function setFilesMetaData(localStorageName, actOnMetaData){
+    var filesMetaData;
+    // all the right stuff
+    //---------------------------
+    if(actOnMetaData){actOnMetaData(filesMetaData)}
+    return filesMetaData;    
+};
 
 
