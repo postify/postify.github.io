@@ -253,7 +253,7 @@ c.updateView = function(e){
             });           
         }
         else if(source === v.btnSetMetaData){
-            a.getFilesMetaData(a.localFileMetaDataName, function(data){
+            a.setFilesMetaData(a.localFileMetaDataName, function(data){
                 var list = "";
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
