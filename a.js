@@ -299,31 +299,32 @@ a.filesMetaData = {};
     since it is assumed it was placed there after JSON.stringify();
 */
 a.getFilesMetaData = function getFilesMetaData(localStorageName, actOnMetaData){
+    //-----------------------------    
+    function getFilesMetaData(){
+         gapi.client.load('drive', 'v3', performRequest);
+         function performRequest(){
+            gapi.client.drive.files.list(
+                {'fields': "nextPageToken, files(id, name)"}
+            ).execute(function(response){
+                a.filesMetaData = response.files;
+                if(window.localStorage){
+                    window.localStorage.setItem(localStorageName, JSON.stringify(response.files));
+                }
+                if(actOnMetaData){actOnMetaData(response.files)}
+            });
+         }    
+    }
+    //---------------------------     
     if(window.localStorage){
         if(window.localStorage[localStorageName]){
             if(actOnMetaData){
                 actOnMetaData(  JSON.parse(window.localStorage[localStorageName])  );
             }
         }
-    }
-    else{
+    }else{
         a.authorizeAndPerform(getFilesMetaData);
-        //-----------------------------
-        function getFilesMetaData(){
-             gapi.client.load('drive', 'v3', performRequest);
-             function performRequest(){
-                gapi.client.drive.files.list(
-                    {'fields': "nextPageToken, files(id, name)"}
-                ).execute(function(response){
-                    a.filesMetaData = response.files;
-                    if(window.localStorage){
-                        window.localStorage.setItem(localStorageName, JSON.stringify(response.files));
-                    }
-                    if(actOnMetaData){actOnMetaData(response.files)}
-                });
-        }
-        //---------------------------        
     }
+    //--------------------------
 };
 
 /**
