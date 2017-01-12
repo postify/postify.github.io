@@ -318,7 +318,7 @@ a.getFilesMetaData = function getFilesMetaData(localStorageName, actOnMetaData){
     if(window.localStorage){
         if(window.localStorage[localStorageName]){
             if(actOnMetaData){
-                actOnMetaData(  JSON.parse(window.localStorage[localStorageName])  );
+                actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))  );
             }
         }
     }else{
