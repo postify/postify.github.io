@@ -38,7 +38,7 @@ m.chosenPictureFile = "";
 m.chosenMusicFilename = "";
 m.chosenPictureFilename = "";
 m.googleMusicSource = "https://drive.google.com/uc?export=download&id=";
-m.tuneToPixFilename = "tuneToPix.txt"
+m.tuneToPixFilename = "tuneToPix.txt";
 
 //=============================//
 //==========| VIEW |===========//
@@ -71,7 +71,7 @@ v.attachAllElementsById = function attachAllElementsById(attachHere){
 //=============================//
 var c = {};
 c.initialize = function initialize(){
-    a.getFileMetaData(a.localFileMetaDataName, function(data){
+    a.getFilesMetaData(a.localFileMetaDataName, function(data){
         alert(data);
     });
     //Attach to the view all elements with an id.
