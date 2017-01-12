@@ -306,7 +306,6 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
             var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
             request.execute(function(response){
                 a.filesMetaData = response.files;
-                alert(a.filesMetaData[0].name);
                 if(window.localStorage){
                     window.localStorage.setItem(localStorageName, JSON.stringify(response.files));
                 }
@@ -316,18 +315,15 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
     }
     //---------------------------     
     if(!!window.localStorage){
-        alert("local storage supported");        
         if(window.localStorage.getItem(localStorageName)){
             alert("there is evidence of the stored info");
             if(actOnMetaData){
-                actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))[0].name  );
+                actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))  );
             }
         }else{
-            alert("NO locally stored info");        
             a.authorizeAndPerform(getFilesMetaData);
         }
     }else{
-        alert("local storage NOT supported.");        
         a.authorizeAndPerform(getFilesMetaData);
     }
     //--------------------------
