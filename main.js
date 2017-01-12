@@ -237,6 +237,11 @@ c.updateView = function(e){
                 a.getFileContents(v.txtFileContentId.value);                
             //},2000);
         }
+        else if(source === v.btnGetMetaData){
+            a.getFilesMetaData(a.localFileMetaDataName, function(data){
+                alert(data);
+            });            
+        }
     }
     
     //keycode
