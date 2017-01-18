@@ -83,8 +83,7 @@ c.initialize = function initialize(){
     */
     //Attach to the view all elements with an id.
     //Their property names will be the same as their ids.
-    /*global L*/
-    L.attachAllElementsById(v);
+    v.attachAllElementsById(v);
     v.window = this;
     v.window.id = "window";
     //------| check for, and use localstorage |-------//
