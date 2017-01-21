@@ -58,10 +58,10 @@ input[type="text"]{
     width: 40%;
 }
 input[type="file"]{
-    visibility: hidden;
+
 }
 button, input[type="button"]{
-    visibility: hidden;
+
 }
 #player{
     width: 70%;
