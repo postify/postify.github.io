@@ -1,32 +1,25 @@
-/**
-<button id="btnDeleteFile"> Delete File</button> <input id="txtDeleteFile" type="text"><br>
-<button id="btnGetFile"> Get File </button> <input id="txtGetFile" type="text"  ><br>
-<button id="btnCreateFolder"> Create Folder </button> <input id="txtCreateFolder" type="text" ><br>
-<button id="https://drive.google.com/uc?export=download&id="> Show Files </button><br>
-*/
-//====================================//
-//==========| START OF APP |==========//
-//====================================//
-// 0BzFXj3py69BBZTNqeFlkOFpMdHM
-/*
-<audio controls="controls" src="https://drive.google.com/uc?export=download&id=0BzFXj3py69BBcUFNV3BsWkNJQk0" type='audio/mp3'>
-</audio>
-*/
-// https://developers.google.com/drive/v2/reference/files/get
-// http://stackoverflow.com/questions/37860901/how-to-use-google-drive-api-to-download-files-with-javascript
-// http://sourcey.com/html5-video-streaming-from-google-drive/
-// https://developers.google.com/web/fundamentals/getting-started/primers/promises
-// http://www.itgo.me/a/689792261276346750/overwrite-an-image-file-with-google-apps-script/36806395
-// https://developers.google.com/apis-explorer/#p/drive/v3/
-// https://developers.google.com/drive/v3/web/manage-uploads
-// https://developers.google.com/drive/v3/web/savetodrive
-// http://stackoverflow.com/questions/10317638/inserting-file-to-google-drive-through-api
-// https://developers.google.com/drive/v3/web/appdata
-// http://stackoverflow.com/questions/13736532/google-drive-api-list-multiple-mime-types
-// http://gappstips.com/google-drive/find-specific-file-types-in-google-drive/
-// https://advancedweb.hu/2015/05/26/accessing-google-drive-in-javascript/
-// "a" is our api object from file a.js loaded with index.html
 /*global a*/
+/*global L*/
+//=============================//
+//=========| STARTUP|==========//
+//=============================//
+window.onload = function(){
+    
+    c.initialize();
+    
+    ["mousedown",
+     "mouseup",
+     "mouseover",
+     "mouseout",
+     "resize",
+     "keypress",
+     "change"].forEach(eventType=>{
+        window.addEventListener(eventType, function(event){
+           c.updateModel(event, c.updateView);
+        });        
+    });
+};
+
 
 //=============================//
 //=========| MODEL |===========//
@@ -44,49 +37,16 @@ m.tuneToPixFilename = "tuneToPix.txt";
 //==========| VIEW |===========//
 //=============================//
 //make v (our view) an alias for our api a
-var v = a; // "a" is our api object from file a.js loaded with index.html
-v.id = function(idString){
-    return document.getElementById(idString);
-};
-v.clearAllText = function clearAllText(){
-    document.querySelectorAll("input[type=text]").forEach(element=>{
-        element.value = "";
-    });
-};
-v.showAllButtons = function showAllButtons(){
-    var allButtons = document.querySelectorAll("button, input[type=button]");
-    allButtons.forEach(button=>{
-        button.style.visibility = "visible";
-    });
-};
-v.attachAllElementsById = function attachAllElementsById(attachHere){
-    var allElements = document.getElementsByTagName('*');
-    [].forEach.call(allElements,function(element){
-        attachHere[element.id] = element;
-    });
-};
+var v = {}; // "a" is our api object from file a.js loaded with index.html
+L.attachAllElementsById(v);
+v.window = this;
+v.window.id = "window";
 
 //=============================//
 //=======| CONTROLLER |========//
 //=============================//
 var c = {};
 c.initialize = function initialize(){
-    //alert("initializing");
-    /*
-    a.getFilesMetaData(a.localFileMetaDataName, function(data){
-        var list = "";
-        data.forEach(dataObject=>{
-            list += dataObject.name + '\n';
-        });
-        alert(list);
-    });
-    */
-    //Attach to the view all elements with an id.
-    //Their property names will be the same as their ids.
-    /*global L*/
-    L.attachAllElementsById(v);
-    v.window = this;
-    v.window.id = "window";
     //------| check for, and use localstorage |-------//
     if(window.localStorage){
         if(!!window.localStorage.getItem(m.tuneToPixFilename)){
@@ -102,10 +62,8 @@ c.initialize = function initialize(){
         },2000);
     }
     //-----------------------------------------------//  
-    v.clearAllText();
-    v.initialize(verifyFolders);
+    a.initialize(verifyFolders);
     function verifyFolders(){
-        //alert("first authorization request.");
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
                 var properFolder = !!(file.name === a.musicFolderName || file.name === a.pictureFolderName);
@@ -120,41 +78,36 @@ c.initialize = function initialize(){
             const bothFoldersMissing =  !requiredFolders.some(file=>file.name === a.musicFolderName) &&
                                         !requiredFolders.some(file=>file.name === a.pictureFolderName);
             if ( bothFoldersExist ){
-                v.showAllButtons();
                 a.showFiles();
                 recordFolderIds();
             }
             else if ( musicFolderMissing ){
-                v.createFolder(a.musicFolderName, recordFolderIds);
+                a.createFolder(a.musicFolderName, recordFolderIds);
             }
             else if ( pictureFolderMissing ){
-                v.createFolder(a.pictureFolderName, recordFolderIds);  
+                a.createFolder(a.pictureFolderName, recordFolderIds);  
             }
             else if( bothFoldersMissing ){
-                v.createFolder(a.musicFolderName, recordFolderIds);
-                v.createFolder(a.pictureFolderName, recordFolderIds);
+                a.createFolder(a.musicFolderName, recordFolderIds);
+                a.createFolder(a.pictureFolderName, recordFolderIds);
             }
 
             function recordFolderIds(){
                 //capture the folder IDs so we can save files to those folders
                 requiredFolders.forEach(file=>{
-                    if(file.name === a.musicFolderName){v.musicFolderId = file.id}
-                    if(file.name === a.pictureFolderName){v.pictureFolderId = file.id}
+                    if(file.name === a.musicFolderName){a.musicFolderId = file.id}
+                    if(file.name === a.pictureFolderName){a.pictureFolderId = file.id}
                 });
                 //-----------------------------------
                 a.allFilesArray.forEach(file=>{
                     if(file.name === m.tuneToPixFilename){
                         a.tuneToPixFileId = file.id;
-                        //alert("a.tuneToPixFileId = " + file.id);
                     }
                 });
                 //-----------------------------------
             }
         });
     }     
-    //get authorized to verify a folder on the site named "music"
-    //else get authorized to create one, save some intro music files there, and ...
-    //welcome new user
 };
 
 //-----| UPDATE model |---//
@@ -211,12 +164,9 @@ c.updateView = function(e){
     }
     //buttons
     if(type === "mousedown"){
-        if (source === v.btnShowFiles){
-            v.showFiles();
-        }
-        else if (source === v.btnSaveFiles){
+        if (source === v.btnSaveFiles){
             if(v.txtMusicFile.value !== ""){
-                m.chosenMusicFilename = v.txtMusicFile.value;
+                m.chosenMusicFilename = a.txtMusicFile.value;
             }
             if(v.txtPictureFile.value !== ""){
                 m.chosenPictureFilename = v.txtPictureFile.value;
@@ -300,26 +250,6 @@ c.updateView = function(e){
             }
         }
     }
-};
-
-//=============================//
-//=========| STARTUP|==========//
-//=============================//
-window.onload = function(){
-    
-    c.initialize();
-    
-    ["mousedown",
-     "mouseup",
-     "mouseover",
-     "mouseout",
-     "resize",
-     "keypress",
-     "change"].forEach(eventType=>{
-        window.addEventListener(eventType, function(event){
-           c.updateModel(event, c.updateView);
-        });        
-    });
 };
 //=================================//
 //==========| END OF APP|==========//
