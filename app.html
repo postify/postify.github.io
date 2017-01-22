@@ -3,14 +3,27 @@
     <head>
         <title>Music App</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" src="app.css">
+        <script src="L.js"></script>        
+        <link rel="stylesheet" href="app.css">
         <script src="prefixfree.js"></script>
-        <script src="L.js"></script>
     </head>
-    <body id="body">...
+    <body id="body">
     
         <div id="holder">
-            <div id="app">...</div>
+            <div id="app">
+                <div id="divEventInfo">(monitor events)</div>
+                <div id="controls">
+                    <select id="chooser">
+                        <option>Choose a Song</option>
+                        <option>1st Song</option>
+                        
+                    </select><br>
+                    <audio controls
+                        id="player" 
+                        src="https://HussMalik.github.io/music/Anugama - Call Of The Mountain.mp3">
+                    </audio>                    
+                </div>
+            </div>
         </div>
 
     <script src="app.js"></script>    
