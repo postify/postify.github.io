@@ -56,12 +56,9 @@ html{
 }
 input[type="text"]{
     width: 40%;
-}
-input[type="file"]{
-
-}
-button, input[type="button"]{
-
+}    
+.hiddenFileChooser{
+    visibility: hidden;
 }
 #player{
     width: 70%;

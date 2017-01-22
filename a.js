@@ -81,9 +81,7 @@ a.createFolder = function(folderName, callback){
             else if(folderName === a.pictureFolderName){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
-                v.showAllButtons();                
             }
-            v.showAllButtons();
             v.clearAllText();            
             a.showFiles();
         });
@@ -193,7 +191,6 @@ a.handleAuthResult = function(authResult, callBack){
             a.initialize();
         }        
         a.authorized = true;
-        v.showAllButtons();
         callBack();
     }
     else{
@@ -267,7 +264,6 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
                 a.tuneToPixFileId = file.id;
                 //alert(`'${file.name}', ${file.id}, ${metadata.description}`);
             }
-            v.showAllButtons();    
             v.clearAllText();
             v.showFiles();
             a.setFilesMetaData(a.localFileMetaDataName, function(data){
