@@ -24,6 +24,7 @@ v.window.id = "window";
 v.clearAllText = function clearAllText(){
     v.txtMusicFile.value = "";
     v.txtMusicFile.value = "";
+    v.txtDeleteFile.value = "";    
     v.filesInfo.innerHTML = "";
 };
 
@@ -199,8 +200,11 @@ c.updateView = function(e){
                 console.log(list);
             });           
         }
-        
-    }
+        else if(source === v.btnDeleteFile){
+            a.deleteFile(v.txtDeleteFile.value);
+            v.clearAllText();
+        }
+    }//----| END of mousedown handlers |----//
     
     //keycode
     if(keyCode && keyCode === enter){
