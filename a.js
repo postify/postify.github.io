@@ -185,7 +185,6 @@ a.deleteFile = function(fileId){
 
 a.handleAuthResult = function(authResult, callBack){
     if(authResult && ! authResult.error){
-        //alert("you are authorized.");
         if(a.firstAuthRequest){
             a.firstAuthRequest = false;
             a.initialize();
@@ -217,7 +216,6 @@ a.makeFolder = a.createFolder;
 
 a.saveMusicFile = function(rawFile){
     a.uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
-   //alert(Object.keys(a.tuneToPix));
 };
 
 a.savePictureFile = function(rawFile){
@@ -262,7 +260,6 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             console.log(`'${file.name}', ${file.id}, ${metadata.description}`);
             if(file.name === m.tuneToPixFilename){
                 a.tuneToPixFileId = file.id;
-                //alert(`'${file.name}', ${file.id}, ${metadata.description}`);
             }
             v.clearAllText();
             a.showFiles();
@@ -271,7 +268,6 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
                 });
-                alert(list);
             }); 
         });
     };
