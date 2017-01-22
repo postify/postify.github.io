@@ -2,6 +2,28 @@
 /*global L*/
 
 //=============================//
+//=========| STARTUP|==========//
+//=============================//
+window.onload = function(){
+    
+    c.initialize();
+    
+    ["mousedown",
+     "mouseup",
+     "mouseover",
+     "mouseout",
+     "resize",
+     "keypress",
+     "change"].forEach(eventType=>{
+        window.addEventListener(eventType, function(event){
+           c.updateModel(event, c.updateView);
+        });        
+    });
+};
+
+
+
+//=============================//
 //=========| MODEL |===========//
 //=============================//
 var m = {};
@@ -16,8 +38,7 @@ m.tuneToPixFilename = "tuneToPix.txt";
 //=============================//
 //==========| VIEW |===========//
 //=============================//
-//make v (our view) an alias for our api a
-var v = {}; // "a" is our api object from file a.js loaded with index.html
+var v = {}; 
 L.attachAllElementsById(v);
 v.window = this;
 v.window.id = "window";
@@ -240,27 +261,6 @@ c.updateView = function(e){
         }
     }
 };
-
-//=============================//
-//=========| STARTUP|==========//
-//=============================//
-window.onload = function(){
-    
-    c.initialize();
-    
-    ["mousedown",
-     "mouseup",
-     "mouseover",
-     "mouseout",
-     "resize",
-     "keypress",
-     "change"].forEach(eventType=>{
-        window.addEventListener(eventType, function(event){
-           c.updateModel(event, c.updateView);
-        });        
-    });
-};
-
 
 //=================================//
 //==========| END OF APP|==========//
