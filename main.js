@@ -185,7 +185,8 @@ c.updateView = function(e){
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
                 });
-                alert(list);
+                //alert(list);
+                console.log(list);
             });           
         }
         else if(source === v.btnSetMetaData){
@@ -194,7 +195,8 @@ c.updateView = function(e){
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
                 });
-                alert(list);
+                //alert(list);
+                console.log(list);
             });           
         }
         
