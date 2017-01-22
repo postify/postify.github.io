@@ -173,13 +173,13 @@ a.deleteFile = function(fileId){
         });
         request.execute(function(response) {
             if(response && !response.error){
-                a.setFilesMetaData(a.localFileMetaDataName,function(){});
                 v.clearAllText();
             }
             else{
                 alert("Trouble deleting file.");
             }
             a.showFiles();
+            a.setFilesMetaData(a.localFileMetaDataName,function(){});            
         });        
     }
 };
@@ -259,7 +259,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'body': multipartRequestBody});
         request.execute(function(file, raw){
             console.log(`'${file.name}', ${file.id}, ${metadata.description}`);
-                a.setFilesMetaData(a.localFileMetaDataName,function(){});
+            a.setFilesMetaData(a.localFileMetaDataName,function(){});
             if(file.name === m.tuneToPixFilename){
                 a.tuneToPixFileId = file.id;
             }
