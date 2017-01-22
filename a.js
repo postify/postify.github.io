@@ -265,7 +265,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
                 //alert(`'${file.name}', ${file.id}, ${metadata.description}`);
             }
             v.clearAllText();
-            v.showFiles();
+            a.showFiles();
             a.setFilesMetaData(a.localFileMetaDataName, function(data){
                 var list = "";
                 data.forEach(dataObject=>{

@@ -21,6 +21,11 @@ var v = {}; // "a" is our api object from file a.js loaded with index.html
 L.attachAllElementsById(v);
 v.window = this;
 v.window.id = "window";
+v.clearAllText = function clearAllText(){
+    v.txtMusicFile.value = "";
+    v.txtMusicFile.value = "";
+    v.filesInfo.innerHTML = "";
+};
 
 //=============================//
 //=======| CONTROLLER |========//
