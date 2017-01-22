@@ -1,25 +1,5 @@
 /*global a*/
 /*global L*/
-//=============================//
-//=========| STARTUP|==========//
-//=============================//
-window.onload = function(){
-    
-    c.initialize();
-    
-    ["mousedown",
-     "mouseup",
-     "mouseover",
-     "mouseout",
-     "resize",
-     "keypress",
-     "change"].forEach(eventType=>{
-        window.addEventListener(eventType, function(event){
-           c.updateModel(event, c.updateView);
-        });        
-    });
-};
-
 
 //=============================//
 //=========| MODEL |===========//
@@ -251,6 +231,28 @@ c.updateView = function(e){
         }
     }
 };
+
+//=============================//
+//=========| STARTUP|==========//
+//=============================//
+window.onload = function(){
+    
+    c.initialize();
+    
+    ["mousedown",
+     "mouseup",
+     "mouseover",
+     "mouseout",
+     "resize",
+     "keypress",
+     "change"].forEach(eventType=>{
+        window.addEventListener(eventType, function(event){
+           c.updateModel(event, c.updateView);
+        });        
+    });
+};
+
+
 //=================================//
 //==========| END OF APP|==========//
 //=================================//
