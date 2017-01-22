@@ -23,7 +23,7 @@ v.window = this;
 v.window.id = "window";
 v.clearAllText = function clearAllText(){
     v.txtMusicFile.value = "";
-    v.txtMusicFile.value = "";
+    v.txtPictureFile.value = "";
     v.txtDeleteFile.value = "";    
     v.filesInfo.innerHTML = "";
 };
