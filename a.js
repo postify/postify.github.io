@@ -174,12 +174,12 @@ a.deleteFile = function(fileId){
         request.execute(function(response) {
             if(response && !response.error){
                 v.clearAllText();
+                a.showFiles(a.setFilesMetaData(a.localFileMetaDataName,function(x){}));
             }
             else{
                 alert("Trouble deleting file.");
             }
-            a.showFiles();
-            a.setFilesMetaData(a.localFileMetaDataName,function(){});            
+           
         });        
     }
 };
