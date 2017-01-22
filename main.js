@@ -186,7 +186,6 @@ c.updateView = function(e){
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
                 });
-                //alert(list);
                 console.log(list);
             });           
         }
@@ -196,7 +195,6 @@ c.updateView = function(e){
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
                 });
-                //alert(list);
                 console.log(list);
             });           
         }
