@@ -151,8 +151,8 @@ c.updateView = function(e){
             if(v.txtPictureFile.value !== ""){
                 m.chosenPictureFilename = v.txtPictureFile.value;
             }
-            v.saveMusicFile(m.chosenMusicFile);
-            v.savePictureFile(m.chosenPictureFile);
+            a.saveMusicFile(m.chosenMusicFile);
+            a.savePictureFile(m.chosenPictureFile);
             
             /**
                 Use the functions defined above:
