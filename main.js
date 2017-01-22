@@ -166,7 +166,7 @@ c.updateView = function(e){
     if(type === "mousedown"){
         if (source === v.btnSaveFiles){
             if(v.txtMusicFile.value !== ""){
-                m.chosenMusicFilename = a.txtMusicFile.value;
+                m.chosenMusicFilename = v.txtMusicFile.value;
             }
             if(v.txtPictureFile.value !== ""){
                 m.chosenPictureFilename = v.txtPictureFile.value;
