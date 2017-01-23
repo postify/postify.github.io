@@ -132,7 +132,7 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
     //---------------------------------//
 
     
-    //----| END of helpers |----//
+    //----| END of helpers for c.adjustSizes() |----//
 };
 c.showEventInfo = function showEvent(eventObject, viewDiv){
     var source = eventObject.target;
@@ -164,8 +164,7 @@ c.showSplashScreens = function showSplashScreens(){
             .styles
                 ("visibility: hidden")
                 ("opacity: 0")
-        ;           
-       
+        ;
     },t3*1000);
     setTimeout(function(){
         L(v.controls)
@@ -188,8 +187,7 @@ c.showSplashScreens = function showSplashScreens(){
                 ("background-size: contain")
                 ("opacity: 1")
                 ("visibility: visible")
-        ;         
-                 
+        ;        
     },t4*1000);
 };
 
