@@ -19,13 +19,10 @@ a.firstAuthRequest = true;
 a.authorized = true;
 a.musicFolderExists = null;
 a.pictureFolderExists = null;
-//most recently saved music file (which hopefully contains a picture)
-a.savedPictureFile = "";
 a.musicFolderId = null;
 a.pictureFolderId = null;
 a.allFilesArray = [];
 a.localFileMetaDataName = "diymusicFileMetaData";
-
 a.tuneToPix = {};
 a.tuneToPixFileId = null; //if first time, else
 
@@ -36,7 +33,7 @@ a.initialize = function initialize(callback){
     }
     function showFiles(){
         var fileMetadata = {
-            'fields': "nextPageToken, files(id, name)"
+            'fields': "nextPageToken, files(id, name, description)"
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         request.execute(handleResponse);        
@@ -100,7 +97,7 @@ a.showFiles = function (callback){
         var fileMetadata = {
             //'spaces': 'appDataFolder',            
             //'pageSize': 50,
-            'fields': "nextPageToken, files(id, name)",
+            'fields': "nextPageToken, files(id, name, description)",
             //'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
@@ -110,7 +107,7 @@ a.showFiles = function (callback){
             v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
             response.files.forEach(file=>{
                 //a.allFilesArray.push(file);
-                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
+                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br> Album Art: ${file.description}<br><br>`;
             });
             //------| check for, and use localstorage |-------//
             if(window.localStorage){
@@ -302,7 +299,7 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
     function getFilesMetaData(){
          gapi.client.load('drive', 'v3', performRequest);
          function performRequest(){
-            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
+            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name, description)"} );
             request.execute(function(response){
                 a.filesMetaData = response.files;
                 if(window.localStorage){
@@ -338,7 +335,7 @@ a.setFilesMetaData = function (localStorageName, actOnMetaData){
     function setFilesMetaData(){
          gapi.client.load('drive', 'v3', performRequest);
          function performRequest(){
-            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
+            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name, description)"} );
             request.execute(function(response){
                 a.filesMetaData = response.files;
                 if(window.localStorage){

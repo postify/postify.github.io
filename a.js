@@ -302,7 +302,7 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
     function getFilesMetaData(){
          gapi.client.load('drive', 'v3', performRequest);
          function performRequest(){
-            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
+            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name, description)"} );
             request.execute(function(response){
                 a.filesMetaData = response.files;
                 if(window.localStorage){
@@ -338,7 +338,7 @@ a.setFilesMetaData = function (localStorageName, actOnMetaData){
     function setFilesMetaData(){
          gapi.client.load('drive', 'v3', performRequest);
          function performRequest(){
-            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
+            var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name, description)"} );
             request.execute(function(response){
                 a.filesMetaData = response.files;
                 if(window.localStorage){
@@ -351,5 +351,4 @@ a.setFilesMetaData = function (localStorageName, actOnMetaData){
     //---------------------------
     a.authorizeAndPerform(setFilesMetaData);
 };
-
 
