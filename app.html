@@ -8,24 +8,29 @@
         <script src="prefixfree.js"></script>
     </head>
     <body id="body">
-    
+
         <div id="holder">
+            <br>
+            <div id="divEventInfo">(monitor events)</div>             
             <div id="app">
-                <div id="divEventInfo">(monitor events)</div>
                 <div id="divPicture">(picture goes here)</div>
                 <div id="controls">
                     <select id="chooser">
                         <option>Choose a Song</option>
                         <option>1st Song</option>
-                        
                     </select><br>
                     <audio controls
                         id="player" 
                         src="https://HussMalik.github.io/music/Anugama - Call Of The Mountain.mp3">
                     </audio>                    
                 </div>
-            </div>
-        </div>
+                <div class="fullSize" id="splash2"></div>
+                <div class="fullSize" id="splash1"></div>    
+            </div><!--| END of app div |-->
+            
+            <div class="fullSize" id="divFullPicture"></div>
+
+        </div><!--| END of holder div |-->
 
     <script src="app.js"></script>    
     </body>

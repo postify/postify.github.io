@@ -10,7 +10,7 @@
             all completely from the client, with no server code.
             
  * Notes:
- *  To keep the global namespace sparseLy populated,
+ *  To keep the global namespace sparsely populated,
  *  only a few objects will be placed there:
  * 
  *  1.) Google's JavaScript Client API:
@@ -28,7 +28,7 @@
  *  5.) The MODEL, VIEW,  and CONTROLLER object for this app:
  *      "m", "v", and "c"
  * 
- *  That adds up to eight global variables:
+ *  That adds up to eight (8) global variables:
  *  gapi, a, StyleFix, PrefixFree, L, m, v, and c.
  * 
  *  This app.js file wil not directly access gapi, StyleFix, or PrefixFree
@@ -39,6 +39,11 @@
 //============|     MODEL     |===============//
 //============================================//
 var m = {};
+/**
+ * The audio player is added to the model
+ * because the player has so many state variables
+ * of its own.
+ */
 m.player = L("#player").getElement();
 
 //============================================//
@@ -54,13 +59,8 @@ L.attachAllElementsById(v);
 //============================================//
 var c = {};
 c.initialize = function initialize(){
-    //See if all "L"ibrary methods got atteched:
-    Object.keys(L).forEach(key=>{
-        var type = Object.prototype.toString.call(L[key]);
-        console.log(`${key}, Type: ${type }`);
-    });
     c.adjustSizes();
-
+    c.showSplashScreens();
 };
 c.updateModel = function updateModel(eventObject, updateView){
     var source = eventObject.target;
@@ -89,8 +89,9 @@ c.updateView = function updateView(eventObject){
     
 };
 c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
-    L.adjustRem(min, max, optionalWidowWidth);
+    //L.adjustRem(min, max, optionalWidowWidth);
     closeChooserPlayerGap();
+    fillSmallScreensNotLargeOnes();
     
     //--------| helpers |--------//
     function closeChooserPlayerGap(){
@@ -100,6 +101,36 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
                 ("bottom: " + playerHeight + "px")
             ;
     }
+    //----------------------------//
+    function fillSmallScreensNotLargeOnes(){
+        var windowWidth = window.innerWidth;
+        if( windowWidth <= 360){
+            L(v.app)
+                .styles
+                    ("width: 100%")
+                    ("height: 100%")
+            ;
+            L.adjustRem(10,30,320);
+        }
+        else if(windowWidth > 360 && windowWidth <= 640){
+            L(v.app)
+                .styles
+                    ("width: 100%")
+                    ("height: 100%")
+            ;
+            L.adjustRem(10,30);
+        }
+        else if(windowWidth > 640){
+            L(v.app)
+                .styles
+                    ("width: 60%")
+                    ("height: 80%")
+            ;
+            L.adjustRem(10,30);            
+        }
+    }
+    //---------------------------------//
+
     
     //----| END of helpers |----//
 };
@@ -110,6 +141,52 @@ c.showEventInfo = function showEvent(eventObject, viewDiv){
     
     var eventInfo = `${id}, ${type}`;
     viewDiv.innerHTML = eventInfo;
+};
+c.showSplashScreens = function showSplashScreens(){
+    var t1= 2.3; 
+    var t2 = 1.5*t1, t3 = 2.5*t1;
+    setTimeout(function(){
+        L(v.splash1)
+            .styles
+                ("visibility: hidden")
+                ("opacity: 0")
+        ;                    
+    },t1*1000);
+    setTimeout(function(){
+        L(v.splash2)
+            .styles
+                ("visibility: visible")
+                ("opacity: 1")
+        ;             
+    },t2*1000);
+    setTimeout(function(){
+        L(v.splash2)
+            .styles
+                ("visibility: hidden")
+                ("opacity: 0")
+        ;           
+        L(v.controls)
+            .styles
+                ("visibility: visible")
+                ("opacity: 1")
+        ;
+        L(v.divEventInfo)
+            .styles
+                ("opacity: 1")
+        ; 
+        L(v.app)
+            .styles
+                ("visibility: visible")
+                ("opacity: 1")
+        ;
+        L(v.divPicture)
+            .styles
+                ("background: url(StarGlobe.gif) no-repeat bottom")
+                ("background-size: contain")
+                ("opacity: 1")
+                ("visibility: visible")
+        ;        
+    },t3*1000);
 };
 
 //============================================//
