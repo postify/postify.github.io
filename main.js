@@ -205,7 +205,9 @@ c.updateView = function(e){
             a.getFilesMetaData(a.localFileMetaDataName, function(data){
                 var list = "";
                 data.forEach(dataObject=>{
-                    list += dataObject.name + '\n';
+                    //list += dataObject.name + '\n';
+                    var objectInfo = `name: ${dataObject.name}\nid: ${dataObject.id}\nalbumart: ${dataObject.description}\n\n`;
+                    list += objectInfo;
                 });
                 console.log(list);
             });           
