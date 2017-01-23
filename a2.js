@@ -36,7 +36,7 @@ a.initialize = function initialize(callback){
     }
     function showFiles(){
         var fileMetadata = {
-            'fields': "nextPageToken, files(id, name, description)"
+            'fields': "nextPageToken, files(id, name)"
         };
         var request = gapi.client.drive.files.list(fileMetadata);
         request.execute(handleResponse);        
@@ -100,7 +100,7 @@ a.showFiles = function (callback){
         var fileMetadata = {
             //'spaces': 'appDataFolder',            
             //'pageSize': 50,
-            'fields': "nextPageToken, files(id, name, description)",
+            'fields': "nextPageToken, files(id, name)",
             //'parents' : ['appDataFolder']
         };
         var request = gapi.client.drive.files.list(fileMetadata);
