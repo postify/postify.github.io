@@ -77,7 +77,8 @@ body{
 }
 #divEventInfo{
     position: absolute;
-    width: 98%;
+    height: 5%;
+    padding-left: 29.72222%; 
     margin: auto;
     left:0;
     right:0;
