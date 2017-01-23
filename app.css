@@ -84,7 +84,7 @@ body{
     text-align: center;
     background: url(YourMusic.png) no-repeat center;
     background-size: contain;
-    color: white;
+    color: transparent;
     z-index: 4;
     opacity: 0;
 }
