@@ -9,15 +9,15 @@
     var libraryObject = {};
     //===========================================================//
     function main(x){
-        
         if(typeof x === 'object' && {}.toString.call(x) !== '[object Array]'){
-        //if x is a general object, but not an array:
+            //if x is a general object, but not an array (nor anything else):
             element = x;
             elements = [];
             return libraryObject;
         }
         
         var collection = document.querySelectorAll(x);
+        
         if(collection.length === 1){
             element = collection[0];
             elements = [];

@@ -47,6 +47,7 @@ var m = {};
  * of its own.
  */
 m.player = L("#player").getElement();
+m.makePictureLarge = false;
 
 //============================================//
 //============|     VIEW      |===============//
@@ -68,7 +69,27 @@ c.updateModel = function updateModel(eventObject, updateView){
     var source = eventObject.target;
     var id = source.id;
     var type = eventObject.type;
-    //update model here
+    //update model here:
+    
+    //mousedown events handled:
+    if(type === "mousedown"){
+        //Enlarge or reduce picture size:
+        if(source === v.divLargePicture){
+            m.makePictureLarge = false;
+        }
+        else if(source === v.divPicture){
+            m.makePictureLarge = true;
+        }
+        //other mousedown events
+        else if(false){}
+        else if(false){}
+    }
+    //other events
+    else if(false){}
+    else if(false){}
+    else if(false){}
+    else if(false){}
+    else if(false){}    
     //-------------------
     updateView(eventObject);
 };
@@ -76,11 +97,48 @@ c.updateView = function updateView(eventObject){
     var source = eventObject.target;
     var id = source.id;
     var type = eventObject.type;
-    //update view here:
-    
-    if(type === "resize"){
+
+    //Adjust when window resizes
+    if(type === "resize" && source === window){
         c.adjustSizes();
     }
+    //Enlarge or reduce picture size:
+    if(m.makePictureLarge){
+        L(v.app)
+            .styles
+                ("visibility: hidden")
+                ("opacity: 0")
+        ;
+        L(v.divLargePicture)
+            .styles
+                ("visibility: visible")
+                ("opacity: 1")
+        ;
+    }
+    else{
+        L(v.app)
+            .styles
+                ("visibility: visible")
+                ("opacity: 1")
+        ;
+        L(v.divLargePicture)
+            .styles
+                ("visibility: hidden")
+                ("opacity: 0")
+        ;            
+    }
+    
+    //mousedown events handled:
+    if(type === "mousedown"){
+        if(false){}
+        else if(false){}
+        else if(false){}
+        else if(false){}
+        else if(false){}
+        else if(false){}
+        
+    }
+    //other events
     else if(false){}
     else if(false){}
     else if(false){}
@@ -112,7 +170,7 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
                     ("width: 100%")
                     ("height: 100%")
             ;
-            L.adjustRem(10,30,320);
+            L.adjustRem(10, 30, 360); //should be 360?
         }
         else if(windowWidth > 360 && windowWidth <= 640){
             L(v.app)
@@ -177,7 +235,7 @@ c.showSplashScreens = function showSplashScreens(){
         L(v.divEventInfo)
             .styles
                 ("opacity: 1")
-        ; 
+        ;
         L(v.app)
             .styles
                 ("visibility: visible")

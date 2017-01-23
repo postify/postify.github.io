@@ -47,7 +47,7 @@ body{
     color: transparent;
     position: absolute;
     margin: auto;
-    /*background: url(StarGlobe.gif) no-repeat bottom;*/
+    background: url(StarGlobe.gif) no-repeat bottom;
     background-size: contain;
     height: 79%;
     width: 100%;
@@ -109,7 +109,7 @@ option{
     background-color: black;
     opacity: 0.2;
 }
-#divFullPicture{
+#divLargePicture{
     transition: all 2.5s ease;
     opacity: 0;
     visibility: hidden;
