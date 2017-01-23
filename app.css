@@ -85,8 +85,10 @@ body{
     background: url(YourMusic.png) no-repeat center;
     background-size: contain;
     color: transparent;
-    z-index: 4;
     opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 4;
+
 }
 .fullSize{
     position: absolute;

@@ -143,8 +143,8 @@ c.showEventInfo = function showEvent(eventObject, viewDiv){
     viewDiv.innerHTML = eventInfo;
 };
 c.showSplashScreens = function showSplashScreens(){
-    var t1= 2.2; 
-    var t2 = 1.4*t1, t3 = 2.3*t1;
+    var t1= 2; 
+    var t2 = 1.3*t1, t3 = 2.2*t1, t4=2.7*t1;
     setTimeout(function(){
         L(v.splash1)
             .styles
@@ -165,6 +165,9 @@ c.showSplashScreens = function showSplashScreens(){
                 ("visibility: hidden")
                 ("opacity: 0")
         ;           
+       
+    },t3*1000);
+    setTimeout(function(){
         L(v.controls)
             .styles
                 ("visibility: visible")
@@ -185,8 +188,9 @@ c.showSplashScreens = function showSplashScreens(){
                 ("background-size: contain")
                 ("opacity: 1")
                 ("visibility: visible")
-        ;        
-    },t3*1000);
+        ;         
+                 
+    },t4*1000);
 };
 
 //============================================//
