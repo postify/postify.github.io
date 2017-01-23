@@ -110,7 +110,7 @@ a.showFiles = function (callback){
             v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
             response.files.forEach(file=>{
                 //a.allFilesArray.push(file);
-                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br><br>`;
+                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br> Album Art: ${file.description}<br><br>`;
             });
             //------| check for, and use localstorage |-------//
             if(window.localStorage){
