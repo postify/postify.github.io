@@ -1,3 +1,5 @@
+//https://developers.google.com/drive/v3/reference/files/get
+//https://developers.google.com/drive/v3/reference/files#resource
 /**
  * 
  * Author:  Abbas Abdulmalik
@@ -206,7 +208,7 @@ window.onload = function(){
         window.addEventListener(eventType, function(eventObject){
             eventObject.stopPropagation();            
             //Show most rescent event info: Target id and event type:
-            c.showEventInfo(eventObject, v.divEventInfo);
+            //c.showEventInfo(eventObject, v.divEventInfo);
             c.updateModel(eventObject, c.updateView);
         }, true);  //true => attempt to capture event object at the earliest time
     });
