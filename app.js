@@ -143,8 +143,8 @@ c.showEventInfo = function showEvent(eventObject, viewDiv){
     viewDiv.innerHTML = eventInfo;
 };
 c.showSplashScreens = function showSplashScreens(){
-    var t1= 2.3; 
-    var t2 = 1.5*t1, t3 = 2.5*t1;
+    var t1= 2.2; 
+    var t2 = 1.4*t1, t3 = 2.3*t1;
     setTimeout(function(){
         L(v.splash1)
             .styles
