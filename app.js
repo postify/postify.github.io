@@ -64,6 +64,10 @@ var c = {};
 c.initialize = function initialize(){
     c.adjustSizes();
     c.showSplashScreens();
+    //list properties and methods of gapi qrapper "a2":
+    Object.keys(a).sort().forEach(key=>{
+        console.log(key + ", type: " + {}.toString.call(a[key]) + "\n");
+    });
 };
 c.updateModel = function updateModel(eventObject, updateView){
     var source = eventObject.target;
