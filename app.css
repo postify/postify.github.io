@@ -6,6 +6,7 @@ html{
     
     font-family: sans-serif;
     font-weight: bold;
+    user-select: none;
 }
 body{
     height: 100%;
