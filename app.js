@@ -247,7 +247,7 @@ c.showSplashScreens = function showSplashScreens(){
         ;
         L(v.divPicture)
             .styles
-                ("background: url(StarGlobe.gif) no-repeat bottom")
+                ("background: url(whofront.jpg) no-repeat bottom")
                 ("background-size: contain")
                 ("opacity: 1")
                 ("visibility: visible")
