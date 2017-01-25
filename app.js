@@ -38,6 +38,29 @@
 /*global a*/ 
 /*global L*/
 //============================================//
+//============|    STARTUP    |===============//
+//============================================//
+window.onload = function(){
+    c.initialize();
+    //Listen for, and handle these DOM event types:
+    [   "mouseover",
+        "mousedown",
+        "change",
+        "input",
+        "resize",
+        "touchstart",
+        "touchend",
+        "touchmove"
+    ].forEach(eventType=>{
+        window.addEventListener(eventType, function(eventObject){
+            eventObject.stopPropagation();            
+            //Show most rescent event info: Target id and event type:
+            //c.showEventInfo(eventObject, v.divEventInfo);
+            c.updateModel(eventObject, c.updateView);
+        }, true);  //true => attempt to capture event object at the earliest time
+    });
+};
+//============================================//
 //============|     MODEL     |===============//
 //============================================//
 var m = {};
@@ -154,17 +177,17 @@ c.updateView = function updateView(eventObject){
 };
 c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
     //L.adjustRem(min, max, optionalWidowWidth);
-    closeChooserPlayerGap();
+    closeComponentsGaps();
     fillSmallScreensNotLargeOnes();
     
     //--------| helpers |--------//
-    function closeChooserPlayerGap(){
+
+    function closeComponentsGaps(){
+        var chooserHeight = v.chooser.getBoundingClientRect().height;
+        L('#player').styles("bottom: " + chooserHeight + "px");
         var playerHeight = v.player.getBoundingClientRect().height;
-        L('#chooser')
-            .styles
-                ("bottom: " + playerHeight + "px")
-            ;
-    }
+        L('#menu').styles("bottom: " + (playerHeight + chooserHeight) + "px");
+    }    
     //----------------------------//
     function fillSmallScreensNotLargeOnes(){
         var windowWidth = window.innerWidth;
@@ -255,27 +278,7 @@ c.showSplashScreens = function showSplashScreens(){
     },t4*1000);
 };
 
-//============================================//
-//============|    STARTUP    |===============//
-//============================================//
-window.onload = function(){
-    c.initialize();
-    //Listen for, and handle these DOM event types:
-    [   "mouseover",
-        "mousedown",
-        "change",
-        "input",
-        "resize",
-        "touchend"
-    ].forEach(eventType=>{
-        window.addEventListener(eventType, function(eventObject){
-            eventObject.stopPropagation();            
-            //Show most rescent event info: Target id and event type:
-            //c.showEventInfo(eventObject, v.divEventInfo);
-            c.updateModel(eventObject, c.updateView);
-        }, true);  //true => attempt to capture event object at the earliest time
-    });
-};
+
 
 //============================================//
 //============|   END OF APP  |===============//
