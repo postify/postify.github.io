@@ -76,7 +76,7 @@ c.updateModel = function updateModel(eventObject, updateView){
     //update model here:
     
     //mousedown events handled:
-    if(type === "mousedown"){
+    if(type === "mousedown" || type === "touchend"){
         //Enlarge or reduce picture size:
         if(source === v.divLargePicture){
             m.makePictureLarge = false;
@@ -265,7 +265,8 @@ window.onload = function(){
         "mousedown",
         "change",
         "input",
-        "resize"
+        "resize",
+        "touchend"
     ].forEach(eventType=>{
         window.addEventListener(eventType, function(eventObject){
             eventObject.stopPropagation();            
