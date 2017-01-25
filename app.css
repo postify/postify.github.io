@@ -163,3 +163,9 @@ option{
     background: url(FlashingIpod.gif) no-repeat center;
     background-size: cover;    
 }
+.arrow{
+    display: inline-block;
+}
+#leftArrow{
+    transform: rotateY(180deg);
+}
