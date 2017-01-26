@@ -27,6 +27,51 @@ body{
     background: radial-gradient(gray, black);
 
 }
+#bigMenu{
+    position: fixed;
+    margin: auto;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background: radial-gradient(gray, black);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s ease;
+}
+
+#menuItems{
+    position: fixed;
+    margin: auto;
+    overflow: hidden;
+    height: 80%;
+    width: 60%;
+    border-radius: 0.5rem;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background: teal;
+}
+#menuExit{
+    color: red;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    position: absolute;
+    margin: auto;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: 1px solid white;
+    top: 0;
+    bottom: 0;
+    right:0;
+    cursor: pointer;
+}
 #app{
     position: absolute;
     background-color: black;
@@ -111,19 +156,19 @@ option{
 #divEventInfo{
     position: absolute;
     height: 5%;
+    width: 40%;
     padding-left: 29.72222%; 
     margin: auto;
     top: 1.5%;
     left:0;
     right:0;
-    text-align: center;
+    text-align: left;
     background: url(YourMusic.png) no-repeat center;
     background-size: contain;
     color: transparent;
     opacity: 0;
     transition: all 0.5s ease;
     z-index: 4;
-
 }
 .fullSize{
     position: absolute;
@@ -139,7 +184,7 @@ option{
     opacity: 0.2;
 }
 #divLargePicture{
-    transition: all 2.5s ease;
+    transition: all 1s ease;
     opacity: 0;
     visibility: hidden;
     background: url(whofront.jpg) no-repeat center;

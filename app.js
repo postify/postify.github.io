@@ -55,7 +55,7 @@ window.onload = function(){
         window.addEventListener(eventType, function(eventObject){
             eventObject.stopPropagation();            
             //Show most rescent event info: Target id and event type:
-            //c.showEventInfo(eventObject, v.divEventInfo);
+            c.showEventInfo(eventObject, v.divEventInfo);
             c.updateModel(eventObject, c.updateView);
         }, true);  //true => attempt to capture event object at the earliest time
     });
@@ -87,9 +87,9 @@ var c = {};
 c.initialize = function initialize(){
     c.adjustSizes();
     //authorizeApp(c.showSplashScreens);
-    a.authorizeAndPerform(c.showSplashScreens);
+    //a.authorizeAndPerform(c.showSplashScreens);
     
-    //c.showSplashScreens();
+    c.showSplashScreens();
     //list properties and methods of gapi qrapper "a2":
     Object.keys(a).sort().forEach(key=>{
         console.log(key + ", type: " + {}.toString.call(a[key]) + "\n");
@@ -165,9 +165,12 @@ c.updateView = function updateView(eventObject){
         ;            
     }
     
-    //mousedown events handled:
-    if(type === "mousedown"){
-        if(false){}
+    //source events handled:
+    if(source === v.menu){
+        if(type === "touchstart" || type === "mousedown"){
+            L.toggleBackground(v.menu, "red", 100);
+            L.showBigMenu();
+        }
         else if(false){}
         else if(false){}
         else if(false){}
@@ -175,8 +178,11 @@ c.updateView = function updateView(eventObject){
         else if(false){}
         
     }
-    //other events
-    else if(false){}
+    else if(source === v.menuExit){
+        if(type === "touchstart" || type === "mousedown"){
+            L.hideBigMenu();
+        }           
+    }
     else if(false){}
     else if(false){}
     else if(false){}
@@ -207,6 +213,12 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
                     ("width: 100%")
                     ("height: 100%")
             ;
+            L(v.menuItems)
+                .styles
+                    ("width: 100%")
+                    ("height: 100%")
+            ;
+            
             L.adjustRem(10, 30, 360); //should be 360?
         }
         else if(windowWidth > 360 && windowWidth <= 640){
@@ -215,6 +227,12 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
                     ("width: 100%")
                     ("height: 100%")
             ;
+            L(v.menuItems)
+                .styles
+                    ("width: 100%")
+                    ("height: 100%")
+            ;
+            
             L.adjustRem(10,30);
         }
         else if(windowWidth > 640){
@@ -223,6 +241,12 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
                     ("width: 60%")
                     ("height: 80%")
             ;
+            L(v.menuItems)
+                .styles
+                    ("width: 60%")
+                    ("height: 80%")
+            ;
+            
             L.adjustRem(10,30);            
         }
     }
@@ -293,12 +317,38 @@ c.showSplashScreens = function showSplashScreens(){
 //============================================//
 //============|   END OF APP  |===============//
 //============================================//
+/*
+ * appending "global" helper methods to the L library
+ * 
+*/
+L.toggleBackground = (target, color, duration)=>{
+    L(target)
+        .styles
+            ("background-color " + color)
+            ("background: " + color)            
+    ;
+    setTimeout(()=>{
+    //http://stackoverflow.com/questions/3506050/how-to-reset-the-style-properties-to-their-css-defaults-in-javascript    
+       target.style.background = "";
+       target.style.backgroundColor = "";
+    }, duration);
+};
 
+L.hideBigMenu = ()=>{
+    L(v.bigMenu)
+        .styles
+            ("opacity: 0")
+            ("visibility: hidden")
+    ;            
+};
 
-
-
-
-
+L.showBigMenu = () =>{
+    L(v.bigMenu)
+        .styles
+            ("opacity: 0.95")
+            ("visibility: visible")
+    ;     
+};
 
 
 
