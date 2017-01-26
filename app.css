@@ -71,6 +71,7 @@ body{
     bottom: 0;
     right:0;
     left: 0;
+    line-height: 150%;
     cursor: pointer;
 }
 #app{
