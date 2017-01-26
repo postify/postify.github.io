@@ -39,7 +39,7 @@ a.initialize = function initialize(callback){
         request.execute(handleResponse);        
         function handleResponse(response){
             a.allFilesArray = [];             
-            v.filesInfo.innerHTML = "";
+            //v.filesInfo.innerHTML = "";
             response.files.forEach(file=>{
                 a.allFilesArray.push(file);
             });
