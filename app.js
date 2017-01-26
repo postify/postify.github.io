@@ -86,11 +86,21 @@ L.attachAllElementsById(v);
 var c = {};
 c.initialize = function initialize(){
     c.adjustSizes();
-    c.showSplashScreens();
+    //authorizeApp(c.showSplashScreens);
+    a.authorizeAndPerform(c.showSplashScreens);
+    
+    //c.showSplashScreens();
     //list properties and methods of gapi qrapper "a2":
     Object.keys(a).sort().forEach(key=>{
         console.log(key + ", type: " + {}.toString.call(a[key]) + "\n");
     });
+    //------| Helpers for inititalize |------//
+    function authorizeApp(gainEntry){
+        alert("authorise app");
+        gainEntry();
+    }
+    
+    //---| END of Helpers for initialize |---//
 };
 c.updateModel = function updateModel(eventObject, updateView){
     var source = eventObject.target;
