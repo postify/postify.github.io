@@ -345,7 +345,7 @@ L.hideBigMenu = ()=>{
 L.showBigMenu = () =>{
     L(v.bigMenu)
         .styles
-            ("opacity: 0.95")
+            ("opacity: 0.97")
             ("visibility: visible")
     ;     
 };
