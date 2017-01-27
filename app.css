@@ -129,8 +129,7 @@ body{
     font-weight: bold;
     padding-top: 0.05rem;
     padding-bottom: 0.05rem;
-    
-    
+    cursor: pointer;
 }
 
 #player{
@@ -147,6 +146,7 @@ body{
     overflow: hidden;
     text-align: center;
     bottom: 0;
+    cursor: pointer;    
 }
 option{
     text-align: center;
