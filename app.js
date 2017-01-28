@@ -1,5 +1,6 @@
 //https://developers.google.com/drive/v3/reference/files/get
 //https://developers.google.com/drive/v3/reference/files#resource
+//https://gusclass.com/blog/2014/08/18/using-page-tokens-to-retrieve-extended-results-from-google-apis/
 /**
  * 
  * Author:  Abbas Abdulmalik
@@ -24,7 +25,7 @@
  *  3.) Lea Verou's Prefixfree library adds:
  *      "StyleFix," and "PrefixFree"
  * 
- *  4.) My small library of helper methods:
+ *  4.) My small library (L.js) of helper methods:
  *      "L"
  * 
  *  5.) The MODEL, VIEW,  and CONTROLLER object for this app:
@@ -58,6 +59,25 @@ window.onload = function(){
             c.showEventInfo(eventObject, v.divEventInfo);
             c.updateModel(eventObject, c.updateView);
         }, true);  //true => attempt to capture event object at the earliest time
+    });
+    
+    //Listen for, and handle these audio element event types:
+    [
+        "durationchange",        
+        "ended",        
+        "error",
+        "pause",
+        "play",
+        "playing",
+        "timeupdate",
+        "volumechange"
+    ].forEach(eventType=>{
+        m.player.addEventListener(eventType, function(eventObject){
+            eventObject.stopPropagation();             
+            //Show most rescent event info: Target id and event type:
+            c.showEventInfo(eventObject, v.divEventInfo);
+            c.updateModel(eventObject, c.updateView);            
+        }, true);
     });
 };
 //============================================//
