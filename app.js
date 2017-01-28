@@ -86,8 +86,7 @@ L.attachAllElementsById(v);
 var c = {};
 c.initialize = function initialize(){
     c.adjustSizes();
-    //authorizeApp(c.showSplashScreens);
-    //a.authorizeAndPerform(c.showSplashScreens);
+    a.authorizeAndPerform(c.showSplashScreens);
     
     c.showSplashScreens();
     //list properties and methods of gapi qrapper "a2":
@@ -95,10 +94,6 @@ c.initialize = function initialize(){
         console.log(key + ", type: " + {}.toString.call(a[key]) + "\n");
     });
     //------| Helpers for inititalize |------//
-    function authorizeApp(gainEntry){
-        alert("authorise app");
-        gainEntry();
-    }
     
     //---| END of Helpers for initialize |---//
 };
