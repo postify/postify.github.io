@@ -330,6 +330,7 @@ c.showSplashScreens = function showSplashScreens(){
 //============================================//
 //============|   END OF APP  |===============//
 //============================================//
+
 /*
  * appending "global" helper methods to the L library
  * 
