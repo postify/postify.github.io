@@ -34,6 +34,8 @@ m.chosenMusicFilename = "";
 m.chosenPictureFilename = "";
 m.googleMusicSource = "https://drive.google.com/uc?export=download&id=";
 m.tuneToPixFilename = "tuneToPix.txt";
+m.metaDataArray = [];
+m.chooserPrompt = "Select a Song";
 
 //=============================//
 //==========| VIEW |===========//
@@ -202,14 +204,22 @@ c.updateView = function(e){
             //},2000);
         }
         else if(source === v.btnGetMetaData){
+            m.metaDataArray = []; //clear old metadate=a from array
             a.getFilesMetaData(a.localFileMetaDataName, function(data){
                 var list = "";
                 data.forEach(dataObject=>{
                     //list += dataObject.name + '\n';
                     var objectInfo = `name: ${dataObject.name}\nid: ${dataObject.id}\nalbumart: ${dataObject.description}\n\n`;
                     list += objectInfo;
+                    m.metaDataArray.push({
+                        filename: dataObject.name,
+                        fileId: dataObject.id,
+                        relatedFilename: dataObject.description
+                    });
+                    
                 });
                 console.log(list);
+                L.fillMusicChooser();
             });           
         }
         else if(source === v.btnSetMetaData){
@@ -267,3 +277,27 @@ c.updateView = function(e){
 //=================================//
 //==========| END OF APP|==========//
 //=================================//
+
+
+/**
+ * appending methods to L for this app
+ * 
+*/
+
+L.fillMusicChooser = ()=>{
+    v.chooser.innerHTML = "";
+    var option = document.createElement('option');
+    var textNode = document.createTextNode(m.chooserPrompt);
+    option.appendChild(textNode);
+    v.chooser.appendChild(option);
+    m.metaDataArray.forEach(dataObject=>{
+        let validMusicFile = dataObject.filename.match(/\.mp3$/i);
+        if(validMusicFile){
+            var option = document.createElement('option');
+            option.value = dataObject.fileId;
+            var textNode = document.createTextNode(dataObject.filename);
+            option.appendChild(textNode);
+            v.chooser.appendChild(option);
+        }
+    });
+};
