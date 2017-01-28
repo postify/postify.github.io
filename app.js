@@ -88,13 +88,11 @@ c.initialize = function initialize(){
     c.adjustSizes();
     a.authorizeAndPerform(c.showSplashScreens);
     
-    c.showSplashScreens();
     //list properties and methods of gapi qrapper "a2":
     Object.keys(a).sort().forEach(key=>{
         console.log(key + ", type: " + {}.toString.call(a[key]) + "\n");
     });
     //------| Helpers for inititalize |------//
-    
     //---| END of Helpers for initialize |---//
 };
 c.updateModel = function updateModel(eventObject, updateView){
