@@ -1,4 +1,3 @@
-//https://gusclass.com/blog/2014/08/18/using-page-tokens-to-retrieve-extended-results-from-google-apis/
 /*
     a.js is an attempt to wrap our own api around the JavaScript Google api
     to simplify using the Google Drive api
@@ -20,10 +19,13 @@ a.firstAuthRequest = true;
 a.authorized = true;
 a.musicFolderExists = null;
 a.pictureFolderExists = null;
+//most recently saved music file (which hopefully contains a picture)
+a.savedPictureFile = "";
 a.musicFolderId = null;
 a.pictureFolderId = null;
 a.allFilesArray = [];
 a.localFileMetaDataName = "diymusicFileMetaData";
+
 a.tuneToPix = {};
 a.tuneToPixFileId = null; //if first time, else
 
@@ -40,7 +42,7 @@ a.initialize = function initialize(callback){
         request.execute(handleResponse);        
         function handleResponse(response){
             a.allFilesArray = [];             
-            //v.filesInfo.innerHTML = "";
+            v.filesInfo.innerHTML = "";
             response.files.forEach(file=>{
                 a.allFilesArray.push(file);
             });
@@ -311,7 +313,7 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
          }    
     }
     //---------------------------     
-    if(window.localStorage){
+    if(!!window.localStorage){
         if(window.localStorage.getItem(localStorageName)){
             if(actOnMetaData){
                 actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))  );
@@ -349,5 +351,4 @@ a.setFilesMetaData = function (localStorageName, actOnMetaData){
     //---------------------------
     a.authorizeAndPerform(setFilesMetaData);
 };
-
 

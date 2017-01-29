@@ -91,6 +91,7 @@ var m = {};
  */
 m.player = L("#player").getElement();
 m.makePictureLarge = false;
+m.metaDataArray = [];
 
 //============================================//
 //============|     VIEW      |===============//
@@ -107,6 +108,8 @@ var c = {};
 c.initialize = function initialize(){
     c.adjustSizes();
     a.authorizeAndPerform(c.showSplashScreens);
+    L.updateLocalStorage();
+    L.updateMusicList();
     
     //list properties and methods of gapi qrapper "a2":
     Object.keys(a).sort().forEach(key=>{
@@ -364,8 +367,54 @@ L.showBigMenu = () =>{
     ;     
 };
 
+L.fillMusicChooser = ()=>{
+    v.chooser.innerHTML = "";
+    var option = document.createElement('option');
+    var textNode = document.createTextNode(m.chooserPrompt);
+    option.appendChild(textNode);
+    v.chooser.appendChild(option);
+    m.metaDataArray.forEach(dataObject=>{
+        let validMusicFile = dataObject.filename.match(/\.mp3$/i);
+        if(validMusicFile){
+            var option = document.createElement('option');
+            option.value = dataObject.fileId;
+            var textNode = document.createTextNode(dataObject.filename);
+            option.appendChild(textNode);
+            v.chooser.appendChild(option);
+        }
+    });
+};
 
+L.updateMusicList = function updateMusicList(){
+    m.metaDataArray = []; //clear old metadate=a from array
+    a.getFilesMetaData(a.localFileMetaDataName, function(data){
+        var list = "";
+        data.forEach(dataObject=>{
+            //list += dataObject.name + '\n';
+            var objectInfo = `name: ${dataObject.name}\nid: ${dataObject.id}\nalbumart: ${dataObject.description}\n\n`;
+            list += objectInfo;
+            m.metaDataArray.push({
+                filename: dataObject.name,
+                fileId: dataObject.id,
+                relatedFilename: dataObject.description
+            });
+            
+        });
+        L.fillMusicChooser();                
+        console.log(list);
+    });    
+};
 
+//to be called when app first starts
+L.updateLocalStorage  = function updateLocalStorage(){
+    a.setFilesMetaData(a.localFileMetaDataName, function(data){
+        var list = "";
+        data.forEach(dataObject=>{
+            list += dataObject.name + '\n';
+        });
+        console.log(list);
+    });     
+};
 
 
 
