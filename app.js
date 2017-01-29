@@ -388,7 +388,7 @@ L.fillMusicChooser = ()=>{
         if(validMusicFile){
             var option = document.createElement('option');
             option.value = dataObject.fileId;
-            var textNode = document.createTextNode(dataObject.filename);
+            var textNode = document.createTextNode(dataObject.filename.slice(0,-4));
             option.appendChild(textNode);
             v.chooser.appendChild(option);
         }
