@@ -75,7 +75,7 @@ window.onload = function(){
         m.player.addEventListener(eventType, function(eventObject){
             eventObject.stopPropagation();             
             //Show most rescent event info: Target id and event type:
-            c.showEventInfo(eventObject, v.divEventInfo);
+            //c.showEventInfo(eventObject, v.divEventInfo);
             c.updateModel(eventObject, c.updateView);            
         }, true);
     });
@@ -92,6 +92,9 @@ var m = {};
 m.player = L("#player").getElement();
 m.makePictureLarge = false;
 m.metaDataArray = [];
+m.chooserPrompt = "&#x0266A; Choose a Song &#x02935;";
+m.playerSourcePrefix = "https://drive.google.com/uc?export=download&id=";
+m.currentSongId = "0BzFXj3py69BBXzNuSURwU3pCYXM";
 
 //============================================//
 //============|     VIEW      |===============//
@@ -138,7 +141,13 @@ c.updateModel = function updateModel(eventObject, updateView){
         else if(false){}
     }
     //other events
-    else if(false){}
+    else if(source === v.chooser && type === "change"){
+        if(v.chooser.selectedIndex != 0){
+            m.currentSongId = v.chooser.options[v.chooser.selectedIndex].value;
+            m.player = m.playerSourcePrefix + m.currentSongId;
+            m.player.play();
+        }
+    }
     else if(false){}
     else if(false){}
     else if(false){}
@@ -204,7 +213,7 @@ c.updateView = function updateView(eventObject){
     else if(false){}
     else if(false){}
     else if(false){}
-    
+    // else if(source === v.chooser && type === "change")
     
 };
 c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
