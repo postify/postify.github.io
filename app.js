@@ -90,6 +90,7 @@ var m = {};
  * of its own.
  */
 m.player = L("#player").getElement();
+alert(mplayer.id)
 m.makePictureLarge = false;
 m.metaDataArray = [];
 m.chooserPrompt = "&#x0266A; Choose a Song &#x02935;";
@@ -144,7 +145,7 @@ c.updateModel = function updateModel(eventObject, updateView){
     else if(source === v.chooser && type === "change"){
         if(v.chooser.selectedIndex != 0){
             m.currentSongId = v.chooser.options[v.chooser.selectedIndex].value;
-            m.player = m.playerSourcePrefix + m.currentSongId;
+            m.player.src = m.playerSourcePrefix + m.currentSongId;
             m.player.play();
         }
     }
