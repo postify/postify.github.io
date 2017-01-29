@@ -90,7 +90,6 @@ var m = {};
  * of its own.
  */
 m.player = L("#player").getElement();
-alert(m.player.id);
 m.makePictureLarge = false;
 m.metaDataArray = [];
 m.chooserPrompt = "&#x0266A; Choose a Song &#x02935;";
@@ -381,7 +380,8 @@ L.fillMusicChooser = ()=>{
     v.chooser.innerHTML = "";
     var option = document.createElement('option');
     var textNode = document.createTextNode(m.chooserPrompt);
-    option.appendChild(textNode);
+    //option.appendChild(textNode);
+    option.innerHTML = m.chooserPrompt;
     v.chooser.appendChild(option);
     m.metaDataArray.forEach(dataObject=>{
         let validMusicFile = dataObject.filename.match(/\.mp3$/i);
