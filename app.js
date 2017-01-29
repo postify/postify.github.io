@@ -90,7 +90,7 @@ var m = {};
  * of its own.
  */
 m.player = L("#player").getElement();
-alert(mplayer.id)
+alert(m.player.id);
 m.makePictureLarge = false;
 m.metaDataArray = [];
 m.chooserPrompt = "&#x0266A; Choose a Song &#x02935;";
