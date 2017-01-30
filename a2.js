@@ -30,9 +30,9 @@ a.tuneToPixFileId = null; //if first time, else
 a.initialize = function initialize(callback){
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
-        gapi.client.load('drive', 'v3', showFiles);
+        gapi.client.load('drive', 'v3', getMetaData);
     }
-    function showFiles(){
+    function getMetaData(){
         var fileMetadata = {
             'fields': "nextPageToken, files(id, name, description)"
         };
@@ -40,7 +40,6 @@ a.initialize = function initialize(callback){
         request.execute(handleResponse);        
         function handleResponse(response){
             a.allFilesArray = [];             
-            //v.filesInfo.innerHTML = "";
             response.files.forEach(file=>{
                 a.allFilesArray.push(file);
             });
