@@ -196,7 +196,6 @@ option{
     transition: all 2.5s ease;
     opacity: 1;
     visibility: visible;    
-    visibility: hidden;
     background-color: black;
     background: url(YourMusic.png) no-repeat center;
     background-size: contain;
