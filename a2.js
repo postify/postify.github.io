@@ -189,7 +189,7 @@ a.handleAuthResult = function(authResult, callBack){
             a.initialize(callBack);
         }        
         a.authorized = true;
-        //callBack();
+        callBack();
     }
     else{
         a.authorized = false;
