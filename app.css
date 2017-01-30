@@ -194,11 +194,13 @@ option{
 }
 #splash2{
     transition: all 2.5s ease;
-    opacity: 0;
+    opacity: 1;
+    visibility: visible;    
     visibility: hidden;
     background-color: black;
     background: url(YourMusic.png) no-repeat center;
-    background-size: contain;    
+    background-size: contain;
+    z-index: 5;
 }
 #splash1{
     transition: all 2.5s ease;
@@ -208,7 +210,8 @@ option{
     visibility: visible;
     background-color: black;
     background: url(FlashingIpod.gif) no-repeat center;
-    background-size: cover;    
+    background-size: cover;
+    z-index: 6;    
 }
 .arrow{
     display: inline-block;

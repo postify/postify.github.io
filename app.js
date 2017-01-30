@@ -301,6 +301,7 @@ c.showSplashScreens = function showSplashScreens(){
                 ("opacity: 0")
         ;                    
     },t1*1000);
+    /*
     setTimeout(function(){
         L(v.splash2)
             .styles
@@ -308,6 +309,7 @@ c.showSplashScreens = function showSplashScreens(){
                 ("opacity: 1")
         ;             
     },t2*1000);
+    */
     setTimeout(function(){
         L(v.splash2)
             .styles
