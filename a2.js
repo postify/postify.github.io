@@ -186,7 +186,7 @@ a.handleAuthResult = function(authResult, callBack){
     if(authResult && ! authResult.error){
         if(a.firstAuthRequest){
             a.firstAuthRequest = false;
-            a.initialize(callback);
+            a.initialize(callBack);
         }        
         a.authorized = true;
         callBack();
