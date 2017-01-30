@@ -97,6 +97,7 @@ m.pictureIdMap = new Map();
 m.chooserPrompt = "&#x0266A; Choose a Song &#x02935;";
 m.playerSourcePrefix = "https://drive.google.com/uc?export=download&id=";
 m.currentSongId = "0BzFXj3py69BBXzNuSURwU3pCYXM";
+m.currentChosenIndex = 0;
 
 //============================================//
 //============|     VIEW      |===============//
