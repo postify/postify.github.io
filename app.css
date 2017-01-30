@@ -193,7 +193,7 @@ option{
     background-size: cover;
 }
 #splash2{
-    transition: all 2.5s ease;
+    transition: all 2.3s ease;
     opacity: 1;
     visibility: visible;    
     background-color: black;
@@ -202,7 +202,7 @@ option{
     z-index: 5;
 }
 #splash1{
-    transition: all 2.5s ease;
+    transition: all 2.3s ease;
     height: 100%;
     width: 100%;
     opacity: 1;
