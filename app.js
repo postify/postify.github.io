@@ -114,6 +114,7 @@ var c = {};
 c.initialize = function initialize(){
     c.adjustSizes();
     a.authorizeAndPerform(c.showSplashScreens);
+    //c.showSplashScreens();
     L.updateLocalStorage();
     L.updateMusicList();
     
@@ -230,7 +231,9 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
         var chooserHeight = v.chooser.getBoundingClientRect().height;
         L('#player').styles("bottom: " + chooserHeight + "px");
         var playerHeight = v.player.getBoundingClientRect().height;
-        L('#menu').styles("bottom: " + (playerHeight + chooserHeight) + "px");
+        //L('#menu').styles("bottom: " + (playerHeight + chooserHeight) + "px");
+        L('#auxControls').styles("bottom: " + (playerHeight + chooserHeight + 3) + "px");
+        
     }    
     //----------------------------//
     function fillSmallScreensNotLargeOnes(){
