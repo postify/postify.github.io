@@ -199,9 +199,11 @@ body{
 
 #backDiv{
     transform: rotateY(180deg);
+    position: absolute;
     left:0;
 }
 #forwardDiv{
+    position: absolute;    
     right:0;
 }
 
