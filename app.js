@@ -232,7 +232,7 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
         L('#player').styles("bottom: " + chooserHeight + "px");
         var playerHeight = v.player.getBoundingClientRect().height;
         //L('#menu').styles("bottom: " + (playerHeight + chooserHeight) + "px");
-        L('#auxControls').styles("bottom: " + (playerHeight + chooserHeight + 3) + "px");
+        L('#auxControls').styles("bottom: " + (playerHeight + chooserHeight) + "px");
         
     }    
     //----------------------------//

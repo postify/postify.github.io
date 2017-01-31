@@ -199,6 +199,10 @@ body{
 
 #backDiv{
     transform: rotateY(180deg);
+    left:0;
+}
+#forwardDiv{
+    right:0;
 }
 
 #player{
