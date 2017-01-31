@@ -87,8 +87,8 @@ body{
     left:0;
     right:0;
     box-shadow: 0.25rem 0.25rem 1rem black ;
-    visibility: hidden;
-    opacity: 0;
+    visibility: visible;
+    opacity: 1;
     transition: all 0.25s ease;
 }
 #divPicture{
