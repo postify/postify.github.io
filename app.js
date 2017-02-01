@@ -238,7 +238,7 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
     //----------------------------//
     function fillSmallScreensNotLargeOnes(){
         var windowWidth = window.innerWidth;
-        if( windowWidth <= 320){
+        if( windowWidth <= 360){
             L(v.app)
                 .styles
                     ("width: 100%")
@@ -250,9 +250,9 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
                     ("height: 100%")
             ;
             
-            L.adjustRem(10, 30, 320); //should be 360?
+            L.adjustRem(10, 30, 360); //should be 360?
         }
-        else if(windowWidth > 320 && windowWidth <= 640){
+        else if(windowWidth > 30 && windowWidth <= 640){
             L(v.app)
                 .styles
                     ("width: 100%")
