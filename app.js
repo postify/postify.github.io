@@ -252,7 +252,7 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
             
             L.adjustRem(10, 30, 360); //should be 360?
         }
-        else if(windowWidth > 30 && windowWidth <= 640){
+        else if(windowWidth > 360 && windowWidth <= 640){
             L(v.app)
                 .styles
                     ("width: 100%")
@@ -264,7 +264,7 @@ c.adjustSizes = function adjustSizes(min, max, optionalWidowWidth){
                     ("height: 100%")
             ;
             
-            L.adjustRem(10,30);
+            L.adjustRem(10,30, windowWidth);
         }
         else if(windowWidth > 640){
             L(v.app)
