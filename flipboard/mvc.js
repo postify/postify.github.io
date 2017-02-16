@@ -20,8 +20,8 @@ m.appWidthMax = 500; // in pixels
 
 
 //constants in camel case:
-m.flipTransitionTime = 50; //in milliseconds
-m.stepAngle = 2.5; //in degrees
+m.flipTransitionTime = 15; //in milliseconds
+m.stepAngle = 2; //in degrees
 m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime; // in milliseconds:
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
