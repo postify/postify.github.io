@@ -185,7 +185,7 @@ c.shadePage = function shadePage(degrees){
         let f = 1.75 - fraction;
         if( f < 0 ){ f = 0 }
         else if(f >1 ){f = 1}   
-        L(v.flipper).styles("background: hsl(0, 0%, " + ( f * 100 ) +"%" );
+        L(v.flipper).styles("background: hsl(0, 0%, " + ( f * 100 ) +"%)" );
         L(v.bottomHalf).styles("background: hsl(0, 0%,"+ 100 +"%)" ); 
     }
     else if (degrees < 90 && degrees >=0){
