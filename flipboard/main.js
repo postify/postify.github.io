@@ -48,6 +48,9 @@ c.initialize = function (){
     L.attachAllElementsById(v);
     
     L.adjustRemByArea(10,20);
+    let fakeEventObject = {};
+    fakeEventObject.type = 'resize'
+    c.adjustForScreenSize(fakeEventObject);
     
     //Continually show the model state
     setInterval(()=>{
