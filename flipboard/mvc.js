@@ -180,7 +180,7 @@ c.shadePage = function shadePage(degrees){
     if(degrees >= 90 && degrees <=180){
         let fraction =  ( 180 - degrees )  / 90;
         let fudgeFactor = 0.95;
-        m.modifiedFraction = fudgeFactor * fraction + 0.35;
+        m.modifiedFraction = fudgeFactor * fraction + 0.45;
         L(v.topHalf).styles("background-color: hsl(0, 0%,"+ (m.modifiedFraction * 100) +"%)" );
         L(v.flipper).styles("background: hsl(0, 0%," + (1.75 - fraction) * 100 +"%" );
         L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" ); 
@@ -188,7 +188,7 @@ c.shadePage = function shadePage(degrees){
     else if (degrees < 90 && degrees >=0){
         let fraction = (degrees / 90);
         let fudgeFactor = 0.95;
-        m.modifiedFraction = fudgeFactor * fraction + 0.35;
+        m.modifiedFraction = fudgeFactor * fraction + 0.45;
         L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ m.modifiedFraction * 100 +"%)" );
         L(v.flipper).styles("background: hsl(0, 0%," + ( 1.75 - fraction) * 100 + "%)" );            
         L(v.topHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );
