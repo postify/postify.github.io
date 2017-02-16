@@ -18,16 +18,14 @@ m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 
+
 //constants in camel case:
-m.flipTransitionTime = 10; //10; //in milliseconds
+m.flipTransitionTime = 10; //in milliseconds
 m.stepAngle = 4; //in degrees
 m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime; // in milliseconds:
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
-
-//temp vars for testing:
-m.modifiedFraction = 0;
 
 //==============================//
 //=========| VIEW |=============//
@@ -77,7 +75,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     m.currentAngle = 180;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
-                    m.autoFlipping = false;
                 }
             }
             else if ( m.direction === m.DOWN){
@@ -87,8 +84,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle <=0){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;                        
+                        m.busyFlipping = false;                 
                     }
                 }
                 else if(m.currentAngle > 120){
@@ -98,7 +94,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
-                        m.autoFlipping = false;                                                
                     }
                 }
             }
@@ -112,7 +107,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     m.currentAngle = 0;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
-                    m.autoFlipping = false;                                            
                 }
             }
             else if ( m.direction === m.UP){
@@ -122,8 +116,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;                                                
+                        m.busyFlipping = false;                 
                     }
                 }
                 else if ( m.currentAngle <= 60){
@@ -133,7 +126,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
-                        m.autoFlipping = false;                                                
                     }
                 }
             }            
@@ -179,19 +171,27 @@ c.flipAndShade = function flipAndShade(){
 c.shadePage = function shadePage(degrees){
     if(degrees >= 90 && degrees <=180){
         let fraction =  ( 180 - degrees )  / 90;
-        let fudgeFactor = 0.95;
-        m.modifiedFraction = fudgeFactor * fraction + 0.35;
-        L(v.topHalf).styles("background-color: hsl(0, 0%,"+ (m.modifiedFraction * 100) +"%)" );
-        L(v.flipper).styles("background: hsl(0, 0%," + (1.75 - fraction) * 100 +"%" );
-        L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" ); 
+        let offset = 0.35;
+        let modifiedFraction = fraction + offset;
+        L.browserPrefix.forEach(prefix=>{
+            L(v.topHalf).styles("background-color: hsl(0, 0%,"+ modifiedFraction * 110 +"%)" );
+            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65)  * 110 +"%" );
+        });
+        L.browserPrefix.forEach(prefix=>{
+            L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+        }); 
     }
     else if (degrees < 90 && degrees >=0){
         let fraction = (degrees / 90);
-        let fudgeFactor = 0.95;
-        m.modifiedFraction = fudgeFactor * fraction + 0.35;
-        L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ m.modifiedFraction * 100 +"%)" );
-        L(v.flipper).styles("background: hsl(0, 0%," + ( 1.75 - fraction) * 100 + "%)" );            
-        L(v.topHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );
+        let offset = 0.30;
+        let modifiedFraction = fraction + offset;        
+        L.browserPrefix.forEach(prefix=>{
+            L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ modifiedFraction * 100 +"%)" );
+            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65) * 100 +"%)" );
+        });
+        L.browserPrefix.forEach(prefix=>{
+            L(v.topHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+        });        
     }
 };
 c.showEvent = function showEvent(eventObject, here){
@@ -211,8 +211,7 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>currentAngle:</b>  ${m.currentAngle}&deg; <br>
         <b>currentY:</b>  ${m.currentY} <br>
         <b>priorY:</b>  ${m.priorY} <br>
-        <b>direction:</b>  ${m.direction} <br>
-        <b>modifiedFraction:</b> ${m.modifiedFraction}
+        <b>direction:</b>  ${m.direction} 
     `;
     targetContainer.innerHTML = currentStates;
 };

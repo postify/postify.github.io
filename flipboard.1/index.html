@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<!--
+/**
+    Author: Abbas Abdulmalik
+    Created: February 15, 2017
+    Revised: (N/A)
+    Title:  Flipboard Simulation
+    Purpose: To create a Flipboard-like evironment
+    for publishing content on a Flipboard magazine and get a 
+    real flipboard effect when "scrolling." The Flipboard
+    website does this only for the "big boys," and not for
+    regular articles blog posts.
+
+*/
+-->
+	<head>
+		<title>Postify FlipBoard</title>
+		<meta charset="utf-8">
+        <meta name="viewport" 
+            content="width=device-width
+            initial-scale=1
+            maximum-scale=1
+            minimum-scale=1
+            user-scalable=no">
+		<link rel="stylesheet" href="style.css">
+		<script src="prefixfree.js"></script>
+		<script src="L.js"></script>
+        <script src="mvc.js"></script>        
+	</head>
+	<body>
+		<div id="holder" class="fullScreen">
+	        <div id="app">
+		        <div id="topHalf" class="halfPage">
+		        	<div class="contentHolder topContentHolder" id="topContentHolder">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mattis’s visit to Seoul is the first stop in his
+					first overseas trip since he was sworn in as
+					President Trump’s defense secretary last
+					month.<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;His remarks seek to assuage concerns among Asian nations about the direction of
+					Trump’s foreign policy, after comments during the presidential campaign in which
+					Trump called on Japan and South Korea to pay more for U.S. military presence that
+					has been a fundamental aspect of U.S. policy in Asia for decades.<br>
+		        	</div>		        	
+		        </div>
+		        <div id="bottomHalf" class="halfPage">
+		        	<div class="contentHolder bottomContentHolder" id="bottomContentHolder">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are almost 30,000 U.S. troops stationed in South Korea and about 50,000 in
+					Japan.<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mattis, a retired Marine general whose
+					previous assignments included overseeing
+					coalition operations in Afghanistan, has
+					departed from Trump’s apparent skepticism
+					of traditional military alliances, giving a
+					strong defense in his confirmation hearing
+		        	</div>		        	
+		        </div>
+		        <div id="flipper" class="halfPage">
+		        	<div class="contentHolder bottomContent" id="flipperContentHolder"></div>
+		        </div>
+	        </div>
+	        <div id="topPane" class="pane"></div>
+	        <div id="bottomPane" class="pane"></div>
+            <div id="shroud" class="fullScreen"></div>
+        </div><!-----| END of holder |------>
+    <script src="main.js"></script>
+    
+	</body>
+</html>

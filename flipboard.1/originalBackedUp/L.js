@@ -3,8 +3,10 @@
     var element = null;
     var elements = [];
     
-    var minimumRem = 11.5; //used by the main.adjustRem(min, max) method;
-    var maximumRem = 25; //used by the main.adjustRem(min, max) method;
+    var minimumRem = 10; //used by the main.adjustRem(min, max) method;
+    var maximumRem = 30; //used by the main.adjustRem(min, max) method;
+    this.minimumRem = minimumRem;
+    this.maximumRem = maximumRem;
     
     var libraryObject = {};
     
@@ -30,8 +32,8 @@
         return libraryObject;
     }//----| END of main |-----//
     
-    main.browserPrefix = ["","-ms-","-o-","-webkit-","-moz-"];
-    libraryObject.browserPrefix = ["","-ms-","-o-","-webkit-","-moz-"];    
+    main.browserPrefix = ["","-webkit-","-moz-","-ms-","-o-"];
+    libraryObject.browserPrefix = ["","-webkit-","-moz-","-ms-","-o-"];    
     
     libraryObject.getElement = function getElement(){
         return element;
@@ -62,9 +64,7 @@
     main.attachAllElementsById = function attachAllElementsById(attachHere){
         var allElements = document.getElementsByTagName('*');
         [].forEach.call(allElements,function(element){
-            if(element.id){
-               attachHere[element.id] = element;
-            }
+            attachHere[element.id] = element;
         });
     };
     libraryObject.attachAllElementsById = main.attachAllElementsById;
@@ -103,34 +103,6 @@
     };
     libraryObject.adjustRem = main.adjustRem;
     //====| END of adjustRem |====//
-    
-    /*====| adjustRemByArea(min,max, optionalWindowWidth) called
-            when app loads & when screen size changes |====
-    ====*/   
-    main.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
-        if(typeof min === 'number' && typeof max === 'number' && max >= min){
-            minimumRem = min;
-            maximumRem = max;
-        }
-        const maxArea = 1920 * 900;
-        const fudgeFactor = 0.6;
-        var windowHeight = window.innerHeight;
-        var windowArea;
-        var windowWidth;
-        if(optionalWindowWidth !== undefined && typeof optionalWindowWidth === 'number'){
-            windowWidth = optionalWindowWidth;
-        }
-        else{
-            windowWidth = window.innerWidth;
-        }
-        windowArea = windowWidth * windowHeight;
-        var rootEm = (minimumRem + (maximumRem - minimumRem)* windowArea / (maxArea * fudgeFactor) );
-        document.documentElement.style.fontSize = rootEm + "px";
-        return rootEm;
-    };
-    libraryObject.adjustRemByArea = main.adjustRemByArea;    
-    //====| END of adjustRemByArea |====//
-    
     //====| secToMinSec() returns text like 10:34 when given seconds as number |====//
     main.secToMinSec = function secToMinSec(seconds){
         var min = Math.floor(seconds / 60);
