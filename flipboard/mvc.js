@@ -17,13 +17,12 @@ m.currentAngle = 1; // in degrees
 m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
-//m.autoStartY = 0;
 m.autoY = 0;
 
 //constants in camel case:
-m.flipTransitionTime = 10; //10; //in milliseconds
-m.stepAngle = 4; //in degrees
-m.linearStepFraction = 1/100;
+m.flipTransitionTime = 8; //10; //in milliseconds
+//m.stepAngle = 4; //in degrees
+m.linearStepFraction = 1/75;
 m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime; // in milliseconds:
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
@@ -78,7 +77,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
     m.flipperTimerId = setInterval(function(){
         if(m.started === m.UP){
             if ( m.direction === m.UP){
-                //m.currentAngle += m.stepAngle;
                 //-------------------------------//
                 m.autoY -= m.linearStepFraction * screenHeight;
                 m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);
@@ -93,7 +91,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.DOWN){
                 if(m.currentAngle <= 120){
-                    //m.currentAngle -= m.stepAngle;
                     //-------------------------------//
                     m.autoY += m.linearStepFraction * screenHeight;
                     m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
@@ -107,7 +104,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if(m.currentAngle > 120){
-                    //m.currentAngle += m.stepAngle;
                     //-------------------------------//
                     m.autoY -= m.linearStepFraction * screenHeight;
                     m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
@@ -125,7 +121,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
         //-----------------------------
         if(m.started === m.DOWN){
             if ( m.direction === m.DOWN){
-                //m.currentAngle -= m.stepAngle;
                 //-------------------------------//
                 m.autoY += m.linearStepFraction * screenHeight;
                 m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
@@ -140,7 +135,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.UP){
                 if(m.currentAngle > 60){
-                    //m.currentAngle += m.stepAngle;
                     //-------------------------------//
                     m.autoY -= m.linearStepFraction * screenHeight;
                     m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
@@ -154,7 +148,6 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if ( m.currentAngle <= 60){
-                    //m.currentAngle -= m.stepAngle;
                     //-------------------------------//
                     m.autoY += m.linearStepFraction * screenHeight;
                     m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
