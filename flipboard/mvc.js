@@ -1,3 +1,4 @@
+/*global L*/
 //==============================//
 //=========| MODEL |============//
 //==============================//
@@ -19,9 +20,9 @@ m.appWidthMax = 500; // in pixels
 
 
 //constants in camel case:
-m.flipTransitionTime = 500; //in milliseconds
+m.flipTransitionTime = 200; //in milliseconds
 m.stepAngle = 1; //in degrees
-m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime // in milliseconds:
+m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime; // in milliseconds:
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
@@ -41,18 +42,15 @@ let c = {};
 c.adjustForScreenSize = function adjustForScreenSize(eventObject){
     if(eventObject.type === 'resize'){
         if(window.innerWidth < m.appWidthMax){
-            L(v.app).styles("width: 100%")
+            L(v.app).styles("width: 100%");
             L.adjustRemByArea();
         }
         else if(window.innerWidth >= 500){
             L(v.app).styles("width: " + m.appWidthMax + "px");
             L.adjustRemByArea('','', m.appWidthMax);            
         }
-
-    }    
-    
-    
-}
+    }
+};
 
 
 c.flipAutomatically = function flipAutomatically(eventObject){
@@ -106,7 +104,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 m.currentAngle -= m.stepAngle;
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
-                    m.currentAngle = 0
+                    m.currentAngle = 0;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
                 }
@@ -150,7 +148,7 @@ c.moveFlipperWithFinger = function(){
         m.currentAngle = c.clientYToDeg(m.currentY, window.innerHeight);
         c.flipAndShade();
     }
-}
+};
 c.flipAndShade = function flipAndShade(){
     //flip it:
     L(v.flipper)
@@ -168,7 +166,7 @@ c.flipAndShade = function flipAndShade(){
     else if ( m.currentAngle < 90 && m.currentAngle >= 0 ){
         L(v.flipperContentHolder).styles("transform: rotateX(0deg)");
     }
- }
+ };
 //--------| Handle under-shading |----------------//
 c.shadePage = function shadePage(degrees){
     if(degrees >= 90 && degrees <=180){
@@ -197,11 +195,6 @@ c.shadePage = function shadePage(degrees){
     }
 };
 c.showEvent = function showEvent(eventObject, here){
-    let currentY = 0;
-    try{
-        currentY = eventObject.touches[0].clientY || eventObject.clientY;        
-    }catch(error){}
-    let degrees = c.clientYToDeg(currentY, window.innerHeight).toFixed(2) + '&deg;';   
 	here.innerHTML = '<br><center>'+ eventObject.target.id +", "+eventObject.type +'</center><br><br><br><br><br><br>' ;
 
 };
@@ -215,14 +208,13 @@ c.showModelStates = function showModelStates(targetContainer){
 
         <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
         <b>pressed:</b>  ${m.pressed} <br>
-        <b>currentAngle:</b>  ${m.currentAngle} <br>
+        <b>currentAngle:</b>  ${m.currentAngle}&deg; <br>
         <b>currentY:</b>  ${m.currentY} <br>
         <b>priorY:</b>  ${m.priorY} <br>
         <b>direction:</b>  ${m.direction} 
-    `
+    `;
     targetContainer.innerHTML = currentStates;
-    
-}
+};
 
 //--------------------//
 c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
