@@ -13,19 +13,23 @@ m.started = m.DOWN;
 m.direction = m.UP;
 m.firmlyPressed = false;
 m.pressed = false;
-m.currentAngle = 1; // in degrees
-m.currentY = 0;
+m.currentAngle = 0; // in degrees
+m.currentY = window.innerHeight;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
-
+m.autoY = 0;
 
 //constants in camel case:
-m.flipTransitionTime = 10; //in milliseconds
-m.stepAngle = 4; //in degrees
+m.flipTransitionTime = 5; //10; //in milliseconds
+//m.stepAngle = 4; //in degrees
+m.linearStepFraction = 1/66//;1/66;
 m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime; // in milliseconds:
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
+
+//temp vars for testing:
+m.modifiedFraction = 0;
 
 //==============================//
 //=========| VIEW |=============//
@@ -56,6 +60,9 @@ c.adjustForScreenSize = function adjustForScreenSize(eventObject){
 c.flipAutomatically = function flipAutomatically(eventObject){
     if ( !m.autoFlipping  || m.busyFlipping){return;}
     m.busyFlipping = true;
+    let screenHeight = window.innerHeight;
+    m.autoY = m.currentY;
+    
      /**
         1.) if started up and moving up: continue up
         2.) if started up and moving down
@@ -66,34 +73,47 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             a.) if angle > 60, keep going up
             b.) if angle <= 60, fall back down
     */
+    
     m.flipperTimerId = setInterval(function(){
         if(m.started === m.UP){
             if ( m.direction === m.UP){
-                m.currentAngle += m.stepAngle;
+                //-------------------------------//
+                m.autoY -= m.linearStepFraction * screenHeight;
+                m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);
+                //-------------------------------//
                 c.flipAndShade();                    
                 if (m.currentAngle >= 180){
                     m.currentAngle = 180;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
+                    m.autoFlipping = false;
                 }
             }
             else if ( m.direction === m.DOWN){
                 if(m.currentAngle <= 120){
-                    m.currentAngle -= m.stepAngle;
+                    //-------------------------------//
+                    m.autoY += m.linearStepFraction * screenHeight;
+                    m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
+                    //-------------------------------//                     
                     c.flipAndShade();                    
                     if (m.currentAngle <=0){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;                 
+                        m.busyFlipping = false;
+                        m.autoFlipping = false;                        
                     }
                 }
                 else if(m.currentAngle > 120){
-                    m.currentAngle += m.stepAngle;
+                    //-------------------------------//
+                    m.autoY -= m.linearStepFraction * screenHeight;
+                    m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
+                    //-------------------------------//                    
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
+                        m.autoFlipping = false;                                                
                     }
                 }
             }
@@ -101,31 +121,43 @@ c.flipAutomatically = function flipAutomatically(eventObject){
         //-----------------------------
         if(m.started === m.DOWN){
             if ( m.direction === m.DOWN){
-                m.currentAngle -= m.stepAngle;
+                //-------------------------------//
+                m.autoY += m.linearStepFraction * screenHeight;
+                m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
+                //-------------------------------//                
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
                     m.currentAngle = 0;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
+                    m.autoFlipping = false;                                            
                 }
             }
             else if ( m.direction === m.UP){
                 if(m.currentAngle > 60){
-                    m.currentAngle += m.stepAngle;
+                    //-------------------------------//
+                    m.autoY -= m.linearStepFraction * screenHeight;
+                    m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
+                    //-------------------------------//                    
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;                 
+                        m.busyFlipping = false;
+                        m.autoFlipping = false;                                                
                     }
                 }
                 else if ( m.currentAngle <= 60){
-                    m.currentAngle -= m.stepAngle;
+                    //-------------------------------//
+                    m.autoY += m.linearStepFraction * screenHeight;
+                    m.currentAngle = c.clientYToDeg(m.autoY, screenHeight);                    
+                    //-------------------------------//                    
                     c.flipAndShade();                    
                     if (m.currentAngle <= 0){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
+                        m.autoFlipping = false;                                                
                     }
                 }
             }            
@@ -137,10 +169,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 a.) if angle > 60, keep going up
                 b.) if angle <= 60, fall back down
         */
-    }, m.flipTimerInterval);
+    }, m.flipTimerInterval );//m.flipTimerInterval
     //--------------------------//
-
-}
+};
 
 
 c.moveFlipperWithFinger = function(){
@@ -171,27 +202,25 @@ c.flipAndShade = function flipAndShade(){
 c.shadePage = function shadePage(degrees){
     if(degrees >= 90 && degrees <=180){
         let fraction =  ( 180 - degrees )  / 90;
-        let offset = 0.35;
-        let modifiedFraction = fraction + offset;
-        L.browserPrefix.forEach(prefix=>{
-            L(v.topHalf).styles("background-color: hsl(0, 0%,"+ modifiedFraction * 110 +"%)" );
-            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65)  * 110 +"%" );
-        });
-        L.browserPrefix.forEach(prefix=>{
-            L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
-        }); 
+        let fudgeFactor = 0.95;
+        m.modifiedFraction = fudgeFactor * fraction + 0.45;
+        L(v.topHalf).styles("background: hsl(0, 0%, "+ (m.modifiedFraction * 100) +"%)" );
+        let f = 1.75 - fraction;
+        if( f < 0 ){ f = 0 }
+        else if(f >1 ){f = 1}   
+        L(v.flipper).styles("background: hsl(0, 0%, " + ( f * 100 ) +"%)" );
+        L(v.bottomHalf).styles("background: hsl(0, 0%,"+ 100 +"%)" ); 
     }
     else if (degrees < 90 && degrees >=0){
         let fraction = (degrees / 90);
-        let offset = 0.30;
-        let modifiedFraction = fraction + offset;        
-        L.browserPrefix.forEach(prefix=>{
-            L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ modifiedFraction * 100 +"%)" );
-            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65) * 100 +"%)" );
-        });
-        L.browserPrefix.forEach(prefix=>{
-            L(v.topHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
-        });        
+        let fudgeFactor = 0.95;
+        m.modifiedFraction = fudgeFactor * fraction + 0.45;
+        L(v.bottomHalf).styles("background: hsl(0, 0%, "+ m.modifiedFraction * 100 +"%)" );
+        let f = 1.75 - fraction;
+        if( f < 0 ){ f = 0 }
+        else if(f >1 ){f = 1}        
+        L(v.flipper).styles("background: hsl(0, 0%, " + f * 100 +"%)" );            
+        L(v.topHalf).styles("background: hsl(0, 0%, "+ 100 +"%)" );
     }
 };
 c.showEvent = function showEvent(eventObject, here){
@@ -211,7 +240,8 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>currentAngle:</b>  ${m.currentAngle}&deg; <br>
         <b>currentY:</b>  ${m.currentY} <br>
         <b>priorY:</b>  ${m.priorY} <br>
-        <b>direction:</b>  ${m.direction} 
+        <b>direction:</b>  ${m.direction} <br>
+        <b>modifiedFraction:</b> ${m.modifiedFraction}
     `;
     targetContainer.innerHTML = currentStates;
 };
