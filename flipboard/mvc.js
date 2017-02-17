@@ -22,7 +22,7 @@ m.autoY = 0;
 //constants in camel case:
 m.flipTransitionTime = 5; //10; //in milliseconds
 //m.stepAngle = 4; //in degrees
-m.linearStepFraction = 1/66;
+m.linearStepFraction = 1/100//;1/66;
 m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime; // in milliseconds:
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
@@ -169,7 +169,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 a.) if angle > 60, keep going up
                 b.) if angle <= 60, fall back down
         */
-    }, m.flipTimerInterval);
+    },1 );//m.flipTimerInterval
     //--------------------------//
 
 }
