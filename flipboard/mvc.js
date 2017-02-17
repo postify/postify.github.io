@@ -75,6 +75,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     m.currentAngle = 180;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
+                    m.autoFlipping = false;
                 }
             }
             else if ( m.direction === m.DOWN){
@@ -84,7 +85,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle <=0){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;                 
+                        m.busyFlipping = false; 
+                        m.autoFlipping = false;                        
                     }
                 }
                 else if(m.currentAngle > 120){
@@ -94,6 +96,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
+                        m.autoFlipping = false;                        
                     }
                 }
             }
@@ -107,6 +110,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     m.currentAngle = 0;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
+                    m.autoFlipping = false;                    
                 }
             }
             else if ( m.direction === m.UP){
@@ -116,7 +120,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;                 
+                        m.busyFlipping = false;
+                        m.autoFlipping = false;                        
                     }
                 }
                 else if ( m.currentAngle <= 60){
@@ -126,10 +131,10 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
+                        m.autoFlipping = false;                        
                     }
                 }
-            }            
-            
+            }
         }
         /**
             3.) if started down and moving down: continue down
@@ -139,8 +144,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
         */
     }, m.flipTimerInterval);
     //--------------------------//
-
-}
+};
 
 
 c.moveFlipperWithFinger = function(){
