@@ -38,6 +38,7 @@ let v = {};
 //==============================//
 let c = {};
 
+
 //===| controller methods |========//
 c.adjustForScreenSize = function adjustForScreenSize(eventObject){
     if(eventObject.type === 'resize'){
@@ -51,6 +52,7 @@ c.adjustForScreenSize = function adjustForScreenSize(eventObject){
         }
     }
 };
+
 
 c.flipAutomatically = function flipAutomatically(eventObject){
     if ( !m.autoFlipping  || m.busyFlipping){return;}
@@ -146,13 +148,13 @@ c.flipAutomatically = function flipAutomatically(eventObject){
     //--------------------------//
 };
 
+
 c.moveFlipperWithFinger = function(){
     if(m.fingerFlipping){
         m.currentAngle = c.clientYToDeg(m.currentY, window.innerHeight);
         c.flipAndShade();
     }
 };
-
 c.flipAndShade = function flipAndShade(){
     //flip it:
     L(v.flipper)
@@ -171,7 +173,6 @@ c.flipAndShade = function flipAndShade(){
         L(v.flipperContentHolder).styles("transform: rotateX(0deg)");
     }
  };
- 
 //--------| Handle under-shading |----------------//
 c.shadePage = function shadePage(degrees){
     if(degrees >= 90 && degrees <=180){
@@ -200,7 +201,8 @@ c.shadePage = function shadePage(degrees){
     }
 };
 c.showEvent = function showEvent(eventObject, here){
-	here.innerHTML = '<br><center>'+ eventObject.target.id +", "+eventObject.type +'</center><br><br><br><br><br><br>';
+	here.innerHTML = '<br><center>'+ eventObject.target.id +", "+eventObject.type +'</center><br><br><br><br><br><br>' ;
+
 };
 
 c.showModelStates = function showModelStates(targetContainer){
@@ -209,11 +211,12 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>autoFlipping:</b>  ${m.autoFlipping} <br>
         <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>
         <b>started:</b>  ${m.started} <br>
+
         <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
         <b>pressed:</b>  ${m.pressed} <br>
-        <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
-        <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
-        <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>
+        <b>currentAngle:</b>  ${m.currentAngle}&deg; <br>
+        <b>currentY:</b>  ${m.currentY} <br>
+        <b>priorY:</b>  ${m.priorY} <br>
         <b>direction:</b>  ${m.direction} 
     `;
     targetContainer.innerHTML = currentStates;
@@ -231,9 +234,20 @@ c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
     let radians = Math.asin(rawSin);
     let offsetAngle = 90;
     let degrees = 180 * radians / Math.PI  + offsetAngle;
-  
-    adjustAngleOffset();
     
+    //-------------------------------------//
+    /*
+    if ( m.fingerFlipping ){
+        if ( currentY > (screenHeight / 2) ){
+            degrees -= m.offsetAngle;
+        }
+        else if ( currentY < (screenHeight / 2) ){
+            degrees += m.offsetAngle;            
+        }
+    }
+    */
+    //-------------------------------------//    
+    adjustAngleOffset();
     return degrees;
     //-------| helper function(s) |--------//
     function adjustAngleOffset(){
@@ -264,8 +278,89 @@ c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
     //-------------------------------------//     
 };
 
+
+
 //========| possible to re-use some previous ideas below |===========//
 /*
+//--------------------//
+c.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
+
+    let type = eventObject.type;
+
+    if(type === "mouseup" || type === "touchend"){
+        L(v.flipperContent).attribs("class=bottomContentStyle");
+
+        //If flipper is slid enough, continue to flip, otherwise back-off 
+        
+        // Go up
+        if(m.pressed && m.direction === m.UP &&  m.currentAngle > 60){
+            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.flipperContent).styles("transform: rotateX(180deg)");
+            m.currentAngle = 180;
+            m.flipperPosition = m.UP;
+        }
+        // Stay Down
+        else if(m.pressed && m.direction === m.UP &&  m.currentAngle <= 60) {
+            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.flipperContent).styles("transform: rotateX(0deg)");
+            m.currentAngle = 0;
+            m.flipperPosition = m.DOWN;
+        }
+        // Go Down
+        else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle < 120){
+            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.flipperContent).styles('transform: rotateX(0deg)');
+            m.currentAngle = 0;
+            m.flipperPosition = m.DOWN;
+        }
+        // Stay Up
+        else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle >= 120){
+            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.flipperContent).styles('transform: rotateX(180deg)');
+            m.currentAngle = 180;
+            m.flipperPosition = m.UP; 
+        }
+        
+        c.addContentToFlipper();
+        m.pressed = false; 
+        m.finalPosition = true;        
+        
+        
+        setTimeout(function(){
+            L(v.flipper).styles("transition: all 0.0s ease");           // 'zero' seconds
+            L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds 
+            // you're either UP ...
+            if(m.finalPosition && m.currentAngle >= 90 && m.currentAngle <= 180  && m.flipperPosition === m.UP ){
+                L(v.flipperContent).styles('transform: rotateX(180deg)');
+                L(v.flipperContent).attribs("class=bottomContentStyle");
+                m.currentAngle = 180;
+                m.flipperPosition = m.UP;
+                //v.flipperContent.innerHTML = m.topContent;
+            }
+            // or you're DOWN ...
+            if(m.finalPosition && m.currentAngle < 90  && m.currentAngle >= 0 && m.flipperPosition === m.DOWN){
+                L(v.flipperContent).styles('transform: rotateX(0deg)');
+                L(v.flipperContent).attribs("class=bottomContentStyle");
+                m.currentAngle = 0;
+                m.flipperPosition = m.DOWN;
+                //v.flipperContent.innerHTML = m.bottomContent;
+            }
+            //------------------------------------------//
+            c.browserPrefix.forEach(prefix=>{
+                L(v.bottom).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+            });
+            c.browserPrefix.forEach(prefix=>{
+                L(v.top).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+            });            
+            //------------------------------------------//
+            
+        }, 100);
+        
+        L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
+        L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
+    }    
+};
+
 //------------------------------//
 c.moveFlipper = function moveFlipper(eventObject){
     let type = eventObject.type;
@@ -371,4 +466,45 @@ c.addBackgroundImageBottom = function addBackgroundImageBottom(url, target){
             ("padding-bottom: " + padding + "%")            
     ;     
 };
+//-------------| Handle screen resizing |------------//
+c.handleResize = function handleResize(maxWidth){
+    if(typeof maxWidth != 'number'){
+        console.log("A number is required for maximum app width.");
+        return;
+    }
+    if(window.innerWidth <= maxWidth){
+        L(v.app).styles("width: 100%");
+        L(v.topPane).styles("width: 100%");
+        L(v.bottomPane).styles("width: 100%");
+        c.adjustRemByArea();            
+    }else{
+        L(v.app).styles("width: "+ maxWidth +"px");
+        L(v.topPane).styles("width: "+ maxWidth +"px");
+        L(v.bottomPane).styles("width: "+ maxWidth +"px");            
+        L.adjustRemByArea("", "", maxWidth);
+    }
+};
+//--------| Handling undershading |----------------//
+c.shadePage = function shadePage(degrees){
+    if(degrees >= 90 && degrees <=180){
+        let fraction =   0.55 + ((180 - degrees)  / 90);
+        L.browserPrefix.forEach(prefix=>{
+            L(v.topHalf).styles("background-color: hsl(0, 0%,"+ fraction * 100 +"%)" );
+        });
+        L.browserPrefix.forEach(prefix=>{
+            L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+        }); 
+    }
+    else if (degrees < 90 && degrees >=0){
+        let fraction = 0.55 + (degrees / 90) ;
+        L.browserPrefix.forEach(prefix=>{
+            L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ fraction * 100 +"%)" );
+            
+        });
+        L.browserPrefix.forEach(prefix=>{
+            L(v.topHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+        });        
+    }
+};
+
 */
