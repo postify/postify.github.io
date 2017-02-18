@@ -23,7 +23,7 @@ m.appWidthMax = 500; // in pixels
 m.flipTransitionTime = 10; //in milliseconds
 m.angularStep = 4; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
-m.offsetAngle = 15; //to keep cursor within the page (not at the edge) while finger flipping
+m.offsetAngle = 30; //to keep cursor within the page (not at the edge) while finger flipping
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
@@ -236,6 +236,7 @@ c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
     let degrees = 180 * radians / Math.PI  + offsetAngle;
     
     //-------------------------------------//
+    /*
     if ( m.fingerFlipping ){
         if ( currentY > (screenHeight / 2) ){
             degrees -= m.offsetAngle;
@@ -244,9 +245,39 @@ c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
             degrees += m.offsetAngle;            
         }
     }
+    */
     //-------------------------------------//    
+    adjustAngleOffset();
     return degrees;
+    //-------| helper function(s) |--------//
+    function adjustAngleOffset(){
+        let halfScreen = screenHeight/2;
+        let deltaHalfScreen = (currentY - halfScreen );
+        let rawFraction = deltaHalfScreen / halfScreen;
+        let fraction = rawFraction * rawFraction;
+        
+        if ( m.fingerFlipping ){
+            if ( currentY > (screenHeight / 2) ){
+                let possibleAngle = degrees - fraction * m.offsetAngle;
+                if(possibleAngle < 0  || currentY > screenHeight){
+                    degrees = 0;
+                }else{
+                    degrees = possibleAngle;
+                }
+            }
+            else if ( currentY < (screenHeight / 2) ){
+                let possibleAngle = degrees + fraction * m.offsetAngle;
+                if(possibleAngle > 180  || currentY < 0 ){
+                    degrees = 180;
+                }else{
+                    degrees = possibleAngle;
+                }           
+            }
+        }    
+    }
+    //-------------------------------------//     
 };
+
 
 
 //========| possible to re-use some previous ideas below |===========//
