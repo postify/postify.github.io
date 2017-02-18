@@ -21,8 +21,9 @@ m.appWidthMax = 500; // in pixels
 
 //constants in camel case:
 m.flipTransitionTime = 10; //in milliseconds
-m.stepAngle = 4; //in degrees
-m.flipTimerInterval = (m.stepAngle / 180) * m.flipTransitionTime; // in milliseconds:
+m.offsetAngle = 4; //in degrees
+m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
+m.offsetAngle = 5; //to keep cursor within the page (not at the edge) while finger flipping
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
@@ -69,7 +70,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
     m.flipperTimerId = setInterval(function(){
         if(m.started === m.UP){
             if ( m.direction === m.UP){
-                m.currentAngle += m.stepAngle;
+                m.currentAngle += m.angularStep;
                 c.flipAndShade();                    
                 if (m.currentAngle >= 180){
                     m.currentAngle = 180;
@@ -80,7 +81,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.DOWN){
                 if(m.currentAngle <= 120){
-                    m.currentAngle -= m.stepAngle;
+                    m.currentAngle -= m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle <=0){
                         m.currentAngle = 0;
@@ -90,7 +91,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if(m.currentAngle > 120){
-                    m.currentAngle += m.stepAngle;
+                    m.currentAngle += m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
@@ -104,7 +105,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
         //-----------------------------
         if(m.started === m.DOWN){
             if ( m.direction === m.DOWN){
-                m.currentAngle -= m.stepAngle;
+                m.currentAngle -= m.angularStep;
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
                     m.currentAngle = 0;
@@ -115,7 +116,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.UP){
                 if(m.currentAngle > 60){
-                    m.currentAngle += m.stepAngle;
+                    m.currentAngle += m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
@@ -125,7 +126,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if ( m.currentAngle <= 60){
-                    m.currentAngle -= m.stepAngle;
+                    m.currentAngle -= m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle <= 0){
                         m.currentAngle = 0;
@@ -142,6 +143,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 a.) if angle > 60, keep going up
                 b.) if angle <= 60, fall back down
         */
+
     }, m.flipTimerInterval);
     //--------------------------//
 };
@@ -232,7 +234,17 @@ c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
     let radians = Math.asin(rawSin);
     let offsetAngle = 90;
     let degrees = 180 * radians / Math.PI  + offsetAngle;
-
+    
+    //-------------------------------------//
+    if ( m.fingerFlipping ){
+        if ( currentY > (screenHeight / 2) ){
+            degrees -= m.offsetAngle;
+        }
+        else if ( currentY < (screenHeight / 2) ){
+            degrees += m.offsetAngle;            
+        }
+    }
+    //-------------------------------------//    
     return degrees;
 };
 
