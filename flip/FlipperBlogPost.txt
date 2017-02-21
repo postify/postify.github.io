@@ -1,0 +1,5 @@
+<h3>Flipping Ain't Easy</h3>
+&nbsp;&nbsp;&nbsp;&nbsp; Have you noticed that only a few articles on Flipboard.com's website and app actually flip? Most articles scroll vertically. Only premium content gets the full flipping treatment. I suspect that the code that goes into converting a scrolling website into a flipping one is complex, so I wondered if I could make this very blogpost "flippy" in the simplest, most plain-vanilla way, using only front-end web tools and no JQuery.</br>
+
+&nbsp;&nbsp;&nbsp;&nbsp; It turns out not to be easy (is coding ever easy?).
+So in order to keep it from becoming a full-blown project, I’ve shamefully resorted to some manual techniques. Also, I tested the results mostly on my cheap <b>Samsung Galaxy</b>  On5  in portrait mode, and on an <b>iPad Air 2</b>, so results my vary. I wanted to accommodate both text and graphics. You’re looking at the results.</br>
