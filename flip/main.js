@@ -43,6 +43,7 @@ window.onload = function(){
  };//-----| END of window on-load handler |---------//
 
  //-----| INITIALIZE |------// 
+c.timerId = 0;
 c.initialize = function initialize(){
     //Refer to all elements with ids by name in the view object v.    
     L.attachAllElementsById(v);
@@ -133,10 +134,9 @@ c.updateView = function updateView(eventObject){
     //----------------------------------------------------// 	
     //--------|  Handle flipper crossing center |---------//
     //----------------------------------------------------//
+
     if(m.flipperCrossedCenter ){
-        setTimeout(()=>{
-            m.flipperCrossedCenter = false;
-        },3000);
+        m.flipperCrossedCenter = false;
     }
 
 };

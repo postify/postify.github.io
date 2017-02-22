@@ -25,7 +25,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 15;
+m.testVersion = 16;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 500; // in pixels
@@ -76,27 +76,25 @@ c.updateModel = function updateModel(eventObject, updateView){
     let finalAngle = (m.currentAngle === 0 || m.currentAngle === 180);
     
     //Record flipper crossing
-    /*
+    
     let halfHeight = window.innerHeight/2;
     if (m.currentY > halfHeight && m.priorY <= halfHeight && (m.firmlyPressed || m.autoFlipping)){
         m.flipperCrossedCenter = true;
         m.crossingDirection = m.DOWN;
     }
-    if (m.currentY < halfHeight && m.priorY >= halfHeight && (m.firmlyPressed || m.autoFlipping)){
+    else if (m.currentY <= halfHeight && m.priorY > halfHeight && (m.firmlyPressed || m.autoFlipping)){
         m.flipperCrossedCenter = true;
         m.crossingDirection = m.UP;
     }
-    */
+    
     if ( m.currentAngle < 90 && m.priorAngle >=90  && (m.firmlyPressed || m.autoFlipping)){
         m.flipperCrossedCenter = true;
         m.crossingDirection = m.DOWN;
     }
-    if ( m.currentAngle > 90 && m.priorAngle <=90 && (m.firmlyPressed || m.autoFlipping)){
+    else if ( m.currentAngle >= 90 && m.priorAngle < 90 && (m.firmlyPressed || m.autoFlipping)){
         m.flipperCrossedCenter = true;
         m.crossingDirection = m.UP;
-    }    
-
-    
+    }  
 
     //Set or clear m.pressed
     if(globallyPressed && validSource){
@@ -396,7 +394,7 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>Direction:</b>  ${m.direction} <br>
         <b>Location:</b> ${m.currentLocation}<br>        
         <b>Angle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
-        <b>Crossed Over:</b>  ${m.flipperCrossedCenter} <br>
+        <b>Direction Crossed:</b>  ${m.crossingDirection} <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
         <b>current page:</b> ${m.currentPage}<br>
         <b>Number of Pages:</b> ${m.numberOfPages}<br>        
