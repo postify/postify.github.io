@@ -89,8 +89,14 @@ c.initialize = function initialize(){
 
     //Continually show the model's state variables:
     setTimeout(()=>{
+        L(v.flipper).styles("visibility: hidden");        
         setInterval(()=>{
-            c.showModelStates(v.flipperContentHolder);//provide target element
+            if(m.fingerFlipping || m.autoFlipping){
+                L(v.flipper).styles("visibility: visible");                
+                c.showModelStates(v.flipperContentHolder);//provide target element                
+            }else{
+                L(v.flipper).styles("visibility: hidden");
+            }
             //update model
             let fakeEventObject = {};
             fakeEventObject.type = "foobar";

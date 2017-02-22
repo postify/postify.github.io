@@ -13,8 +13,8 @@ m.currentLocation = m.DOWN;
 m.direction = m.UP;
 m.firmlyPressed = false;
 m.pressed = false;
-m.currentAngle = 90; // in degrees
-m.priorAngle = 90; //in degrees
+m.currentAngle = 0; // in degrees
+m.priorAngle = 0; //in degrees
 m.currentY = 0;
 m.priorY = 0;
 m.currentPage = 5;
@@ -25,7 +25,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 16;
+m.testVersion = 1;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 500; // in pixels
