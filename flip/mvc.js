@@ -59,7 +59,7 @@ c.initialize = function initialize(){
     L.attachAllElementsById(v);    
     
     //Simulate resizing:
-    L.adjustRemByArea(9.5,20.5);//10,20 works well
+    L.adjustRemByArea(10.5,20.5);//10,20 works well
     let fakeEventObject = {};
     fakeEventObject.type = 'resize';
     c.adjustForScreenSize(fakeEventObject);    
