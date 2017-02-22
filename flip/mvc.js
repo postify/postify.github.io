@@ -25,18 +25,18 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 18;
+m.testVersion = 19;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 450; // in pixels
-m.flipTransitionTime = 100; //150 in milliseconds
-m.angularStep = 2; //in degrees
+m.flipTransitionTime = 150; //150 in milliseconds
+m.angularStep = 4; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
 m.offsetAngle = 40; //to keep cursor within the page (not at the edge) while finger flipping
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
-m.splashTime = 2.5; // in seconds
+m.splashTime = 2; // in seconds
 
 //contents:
 m.contents = [];
@@ -59,7 +59,7 @@ c.initialize = function initialize(){
     L.attachAllElementsById(v);    
     
     //Simulate resizing:
-    L.adjustRemByArea(10.5,20.5);//10,20 works well
+    L.adjustRemByArea(9.5,20.5);//10,20 works well
     let fakeEventObject = {};
     fakeEventObject.type = 'resize';
     c.adjustForScreenSize(fakeEventObject);    

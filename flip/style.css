@@ -225,18 +225,24 @@ footer{
 }
 
 #shroud{
+	font-size: 2.1rem;
+	line-height: 150%;
 	z-index: 5;
 	position: absolute;
-	height: 100%;
+	width: 100%;
+	padding-left: 32%;
+	padding-top: 5rem;
+    box-sizing: border-box;	
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	user-select: none;
-	color: #333;
+	color: #efefef;
+	text-shadow: 0 1px 0 black;
 	opacity: 1;
 	visibility: visible;
 	transition: opacity 1s ease, visibility 1s ease, background 1s ease;
-	background: lightgray url(img/WhaleFlip.jpg) no-repeat center;
+	background: #222 url(img/WhaleFlip.jpg) no-repeat center;
 	background-size: contain;	
 }
