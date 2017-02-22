@@ -13,18 +13,19 @@ m.currentLocation = m.DOWN;
 m.direction = m.UP;
 m.firmlyPressed = false;
 m.pressed = false;
-m.currentAngle = 0; // in degrees
+m.currentAngle = 90; // in degrees
+m.priorAngle = 90; //in degrees
 m.currentY = 0;
 m.priorY = 0;
 m.currentPage = 0;
 m.numberOfPages = 0;
-m.testVersion = 13;
 m.urlTop = "";
 m.urlBottom = "";
-m.flipperCrossedDown = false;
-m.flipperCrossedUp = false;
+m.flipperCrossedCenter = false;
+m.crossingDirection = m.UP;
 
 //constants, most in camel case:
+m.testVersion = 14;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 500; // in pixels
@@ -74,15 +75,28 @@ c.updateModel = function updateModel(eventObject, updateView){
                       );
     let finalAngle = (m.currentAngle === 0 || m.currentAngle === 180);
     
-    //check if flipper crossed the center
-    if(m.started === m.DOWN && m.currentLocation === m.UP){
-        m.flipperCrossedUp = true;
-        m.flipperCrossedDown = false;        
+    //Record flipper crossing
+    /*
+    let halfHeight = window.innerHeight/2;
+    if (m.currentY > halfHeight && m.priorY <= halfHeight && (m.firmlyPressed || m.autoFlipping)){
+        m.flipperCrossedCenter = true;
+        m.crossingDirection = m.DOWN;
     }
-    if(m.started == m.UP && m.currentLocation === m.DOWN){
-        m.flipperCrossedDown = true;
-        m.flipperCrossedUp = false;        
+    if (m.currentY < halfHeight && m.priorY >= halfHeight && (m.firmlyPressed || m.autoFlipping)){
+        m.flipperCrossedCenter = true;
+        m.crossingDirection = m.UP;
     }
+    */
+    if ( m.currentAngle < 90 && m.priorAngle >=90  && (m.firmlyPressed || m.autoFlipping)){
+        m.flipperCrossedCenter = true;
+        m.crossingDirection = m.DOWN;
+    }
+    if ( m.currentAngle > 90 && m.priorAngle <=90 && (m.firmlyPressed || m.autoFlipping)){
+        m.flipperCrossedCenter = true;
+        m.crossingDirection = m.UP;
+    }    
+
+    
 
     //Set or clear m.pressed
     if(globallyPressed && validSource){
@@ -206,9 +220,11 @@ c.flipAutomatically = function flipAutomatically(eventObject){
     m.flipperTimerId = setInterval(function(){
         if(m.started === m.UP){
             if ( m.direction === m.UP){
+                m.priorAngle = m.currentAngle;
                 m.currentAngle += m.angularStep;
                 c.flipAndShade();                    
                 if (m.currentAngle >= 180){
+                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle = 180;
                     c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
@@ -217,9 +233,11 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.DOWN){
                 if(m.currentAngle <= 120){
+                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle -= m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle <=0){
+                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 0;
                         c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
@@ -227,9 +245,11 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if(m.currentAngle > 120){
+                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle += m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
+                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 180;
                         c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
@@ -241,9 +261,11 @@ c.flipAutomatically = function flipAutomatically(eventObject){
         //-----------------------------
         if(m.started === m.DOWN){
             if ( m.direction === m.DOWN){
+                m.priorAngle = m.currentAngle;                
                 m.currentAngle -= m.angularStep;
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
+                    m.priorAngle = m.currentAngle;
                     m.currentAngle = 0;
                     c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
@@ -252,9 +274,11 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.UP){
                 if(m.currentAngle > 60){
+                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle += m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
+                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 180;
                         c.flipAndShade();
                         clearInterval(m.flipperTimerId);
@@ -262,9 +286,11 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if ( m.currentAngle <= 60){
+                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle -= m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle <= 0){
+                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 0;
                         c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
@@ -297,6 +323,7 @@ c.setFinalFLipperStatus = function setFinalFLipperStatus(){
 
 c.moveFlipperWithFinger = function(){
     if(m.fingerFlipping){
+        m.priorAngle = m.currentAngle;
         m.currentAngle = c.clientYToDeg(m.currentY, window.innerHeight);
         c.flipAndShade();
     }

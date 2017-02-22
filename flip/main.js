@@ -130,6 +130,14 @@ c.updateView = function updateView(eventObject){
     //----------------------------------------------------//
     c.adjustForScreenSize(eventObject);
 
+    //----------------------------------------------------// 	
+    //--------|  Handle flipper crossing center |---------//
+    //----------------------------------------------------//
+    if(m.flipperCrossedCenter ){
+        m.flipperCrossedCenter = false;
+        alert(m.crossingDirection);
+        //if crossed
+    }
 
 };
 //======================================//
