@@ -25,7 +25,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 14;
+m.testVersion = 15;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 500; // in pixels
@@ -396,6 +396,7 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>Direction:</b>  ${m.direction} <br>
         <b>Location:</b> ${m.currentLocation}<br>        
         <b>Angle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
+        <b>Crossed Over:</b>  ${m.flipperCrossedCenter} <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
         <b>current page:</b> ${m.currentPage}<br>
         <b>Number of Pages:</b> ${m.numberOfPages}<br>        

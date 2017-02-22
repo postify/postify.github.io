@@ -134,9 +134,9 @@ c.updateView = function updateView(eventObject){
     //--------|  Handle flipper crossing center |---------//
     //----------------------------------------------------//
     if(m.flipperCrossedCenter ){
-        m.flipperCrossedCenter = false;
-        alert(m.crossingDirection);
-        //if crossed
+        setTimeout(()=>{
+            m.flipperCrossedCenter = false;
+        },3000);
     }
 
 };
