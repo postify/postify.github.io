@@ -20,7 +20,7 @@ m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 m.currentPage = 4;
-m.testVersion = 10;
+m.testVersion = 11;
 m.urlTop = "";
 m.urlBottom = "";
 m.pageZeroTop = document.querySelector("#topContentHolder").innerHTML;
@@ -38,7 +38,8 @@ m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
 
 //contents:
-m.contents = [
+m.contents = [];
+/*
     {
         topHalf: {
             content: "top0.html",
@@ -99,7 +100,7 @@ m.contents = [
             type: "halfGraphic"
         }
     }
-];
+*/
 
 
 //==============================//
@@ -493,6 +494,77 @@ c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
         }    
     }
     //-------------------------------------//     
+};
+//=======| add current page |======================//
+c.fillPage = function fillPage(index){
+    let topUrl = m.contents[index].topHalf.content;
+    let topType = m.contents[index].topHalf.type;
+    let bottomUrl = m.contents[index].bottomHalf.content;
+    let bottomType = m.contents[index].bottomHalf.type;
+    //ask about the top
+    if(topType === "text"){
+        let urlPrefix = "contents/page." + index +"/";
+        let url = urlPrefix + topUrl;
+        //v.topContentHolder.innerHTML = get(urlPrefix + topUrl, fillTop);
+        get(url, fillTop);            
+    }
+    else if(topType === "halfGraphic"){
+        let urlPrefix = "img/";
+        let url = urlPrefix + topUrl;
+        setTopBackground(url, v.topContentHolder);
+    }
+    //ask about the bottom
+    if(bottomType === "text"){
+        let urlPrefix = "contents/page." + index +"/";
+        let url = urlPrefix + bottomUrl;
+        //v.bottomContentHolder.innerHTML = get(urlPrefix + bottomUrl, fillBottom);
+        get(url, fillBottom);
+    }
+    else if(bottomType === "halfGraphic"){
+        let urlPrefix = "img/";
+        let url = urlPrefix + bottomUrl;
+        setBottomBackground(url, v.bottomContentHolder);
+    }
+    //----------------------helpers---------------------//
+    function get(url, callback){
+        let getter = new XMLHttpRequest();
+        getter.open("GET", url);
+        getter.send();
+        
+        //handle response and error;            
+        getter.onload = function(){
+            let response = getter.responseText;                
+            if(callback){callback(response);}                
+        };
+        getter.onerror = function(){};
+    }
+    function fillTop(text){
+        v.topContentHolder.innerHTML = text;            
+    }
+    function fillBottom(text){
+        v.bottomContentHolder.innerHTML = text;
+    }
+    function setTopBackground(url, target){
+        target.innerHTML = "";
+        L(target)
+            .styles
+                ("background: url("+ url +") no-repeat bottom")
+                ("background-size: contain")
+                ("width: 100%")
+                ("padding-top: 100%")
+        ;                    
+    }
+    function setBottomBackground(url, target){
+        target.innerHTML = "";
+        L(target)
+            .styles
+                ("background: url("+ url +") no-repeat top")
+                ("background-size: contain")
+                ("width: 100%")
+                ("width: 100%")
+                ("padding-top: 100%")                    
+        ;                    
+    }
 };
 
 //========| possible to re-use some previous ideas below |===========//

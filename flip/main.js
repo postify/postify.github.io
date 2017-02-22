@@ -47,6 +47,35 @@ c.initialize = function initialize(){
     //Refer to all elements with ids by name in the view object v.    
     L.attachAllElementsById(v);
     
+    //Fill the JSON array m.contents
+    let getter = new XMLHttpRequest();
+    let index = 0;
+    
+    function fetch(index){
+        getter.open("GET","contents/page." + index + "/page" + index +".json" );
+        getter.send();        
+    }
+    
+    fetch(index);
+    getter.onload = function(){
+        if(this.status === 200){
+            m.contents.push(JSON.parse(this.response));
+            index++;
+            fetch(index);
+        }else{
+            let topUrls = "";
+            m.contents.forEach(page=>{
+                topUrls += page.topHalf.type + "\n";
+            });
+            //alert(topUrls);
+            c.fillPage(m.currentPage);
+        }
+    };
+    getter.onerror = function(){
+        alert("Table of Contents fetch complete: " + m.contents.length + " pages.");
+        c.fillPage(m.currentPage);        
+    };
+
     //Simulate resizing:
     L.adjustRemByArea(9.5,20.5);//10,20 works well
     let fakeEventObject = {};
@@ -56,29 +85,11 @@ c.initialize = function initialize(){
     //Hide the flipper:
     L(v.flipper).styles("visibility: hidden");
 
-    //Add initial content for testing purposes:
-    /*
-    let urlTop = m.contents[m.currentPage].topHalf.content;    
-    L(v.topContentHolder)
-        .styles
-            ("background: url(img/" + urlTop + ") no-repeat bottom")
-            ("background-size: contain")
-            ("height: 100%")
-            ("top-padding: 100%");
-    v.topContentHolder.innerHTML = "";    
-    let urlBottom = m.contents[m.currentPage].bottomHalf.content;
-    L(v.bottomContentHolder)
-        .styles
-            ("background: url(img/" + urlBottom + ") no-repeat top")
-            ("background-size: contain")
-            ("height: 100%")
-            ("top-padding: 100%");          
-    v.bottomContentHolder.innerHTML = ""; 
-    */
     //Continually show the model's state variables:
     setInterval(()=>{
         c.showModelStates(v.flipperContentHolder);//provide target element
-    },10);    
+    },10);
+    
 };
 //-----| END of INITIALIZE |------// 
 
