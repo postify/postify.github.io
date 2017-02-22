@@ -42,6 +42,72 @@ window.onload = function(){
   });
  };//-----| END of window on-load handler |---------//
 
+ //-----| INITIALIZE |------// 
+c.timerId = 0;
+c.initialize = function initialize(){
+    //Refer to all elements with ids by name in the view object v.    
+    L.attachAllElementsById(v);
+    
+    //Fill the JSON array m.contents
+    let getter = new XMLHttpRequest();
+    let index = 0;
+    
+    function fetch(index){
+        getter.open("GET","contents/page." + index + "/page" + index +".json" );
+        getter.send();        
+    }
+    
+    fetch(index);
+    getter.onload = function(){
+        if(this.status === 200){
+            m.contents.push(JSON.parse(this.response));
+            index++;
+            fetch(index);
+        }else{
+            let topUrls = "";
+            m.contents.forEach(page=>{
+                topUrls += page.topHalf.type + "\n";
+            });
+            m.numberOfPages = m.contents.length;
+            c.fillPage(m.currentPage);
+        }
+    };
+    getter.onerror = function(){
+        alert("Table of Contents fetch complete: " + m.contents.length + " pages.");
+        m.numberOfPages = m.contents.length;        
+        c.fillPage(m.currentPage);        
+    };
+
+    //Simulate resizing:
+    L.adjustRemByArea(9.5,20.5);//10,20 works well
+    let fakeEventObject = {};
+    fakeEventObject.type = 'resize';
+    c.adjustForScreenSize(fakeEventObject);
+    
+    //Hide the flipper:
+    L(v.flipper).styles("visibility: hidden");
+
+    //Continually show the model's state variables:
+    setTimeout(()=>{
+        L(v.flipper).styles("visibility: hidden");        
+        setInterval(()=>{
+            if(m.fingerFlipping || m.autoFlipping){
+                L(v.flipper).styles("visibility: visible");                
+                c.showModelStates(v.flipperContentHolder);//provide target element                
+            }else{
+                L(v.flipper).styles("visibility: hidden");
+            }
+            //update model
+            let fakeEventObject = {};
+            fakeEventObject.type = "foobar";
+            fakeEventObject.target = document.body;
+            c.updateModel(fakeEventObject, c.updateView);
+        },100);
+    }, 500);
+
+    
+};
+//-----| END of INITIALIZE |------// 
 
 //-----| UPDATE VIEW |------//
 c.updateView = function updateView(eventObject){

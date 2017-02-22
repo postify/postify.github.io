@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "NativeAmerican-1.jpg",
+        "type": "halfGraphic"
+    },
+    "bottomHalf": {
+        "content": "NativeAmerican-2.jpg",
+        "type": "halfGraphic"
+    }
+}

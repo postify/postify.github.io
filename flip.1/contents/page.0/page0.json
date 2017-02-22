@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "top0.html",
+        "type": "text"
+    },
+    "bottomHalf": {
+        "content": "bottom0.html",
+        "type": "text"
+    }
+}

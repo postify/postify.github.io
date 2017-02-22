@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "Japan-1.png",
+        "type": "halfGraphic"
+    },
+    "bottomHalf": {
+        "content": "Japan-2.png",
+        "type": "halfGraphic"
+    }
+}

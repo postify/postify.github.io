@@ -24,7 +24,6 @@ body{
 	overflow-y: hidden;	
 	user-select: none;
 	color: #444;
-    color: black;
 	line-height: 150%;
 	
 }
@@ -118,7 +117,7 @@ body{
 .contentHolder{
 	position: relative;
 	margin: auto;
-	width: 90%;
+	width: 85%;
 	left:0;
 	right:0;
 	background: white;
@@ -129,9 +128,6 @@ body{
 	font-family:'Bookman Old Style', Bookman, 'URW Bookman L', 'Palatino Linotype', serif;
 	
 	box-sizing: border-box;
-    
-    font-size: 1.1rem;
-    line-height: 175%;
 }
 
 .topContentHolder{
@@ -190,53 +186,4 @@ body{
 }
 #flipperContentHolder{
     background-color: transparent;
-    top: 0;
-}
-span{
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-footer{
-	position: absolute;
-	margin: auto;
-	height: 15%;
-	width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
-	left: 0;
-	right: 0;
-    bottom: 0;
-	background: transparent;
-    border-top: 1px solid gray;
-    box-sizing: border-box;
-}
-.div-wrapper {
-    position: absolute;
-    height: 10%;
-    width: 100%;
-    bottom: 0;
-}
-
-.div-wrapper img {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    bottom: 0;
-}
-
-#shroud{
-	z-index: 5;
-	position: absolute;
-	height: 100%;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	user-select: none;
-	color: #333;
-	opacity: 1;
-	visibility: visible;
-	transition: opacity 1s ease, visibility 1s ease, background 1s ease;
-	background: lightgray url(img/WhaleFlip.jpg) no-repeat center;
-	background-size: contain;	
 }

@@ -4,6 +4,8 @@
 //==============================//
 let m = {};
 //State variables and constants
+m.UP = "up";
+m.DOWN = "down";
 m.autoFlipping = false;
 m.fingerFlipping = false;
 m.busyFlipping = false;
@@ -14,32 +16,84 @@ m.direction = m.UP;
 m.firmlyPressed = false;
 m.pressed = false;
 m.currentAngle = 0; // in degrees
-m.priorAngle = 0; //in degrees
 m.currentY = 0;
 m.priorY = 0;
-m.currentPage = 6;
-m.numberOfPages = 0;
+m.appWidthMax = 500; // in pixels
+m.currentPage = 0;
+m.testVersion = 10;
 m.urlTop = "";
 m.urlBottom = "";
-m.flipperCrossedCenter = false;
-m.crossingDirection = m.UP;
+m.pageZeroTop = document.querySelector("#topContentHolder").innerHTML;
+m.pageZeroBottom = document.querySelector("#bottomContentHolder").innerHTML;
+m.flipperCrossedDown = false;
+m.flipperCrossedUp = false;
 
-//constants, most in camel case:
-m.testVersion = 18;
-m.UP = "up";
-m.DOWN = "down";
-m.appWidthMax = 450; // in pixels
-m.flipTransitionTime = 100; //150 in milliseconds
-m.angularStep = 2; //in degrees
+//constants in camel case:
+m.flipTransitionTime = 150; //150 in milliseconds
+m.angularStep = 4; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
 m.offsetAngle = 40; //to keep cursor within the page (not at the edge) while finger flipping
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
-m.splashTime = 2.5; // in seconds
+
 
 //contents:
-m.contents = [];
+m.contents = [
+    {
+        topHalf: {
+            content: "BoatsAerialView-1.jpg",
+            type: "halfGraphic"
+        },
+        bottomHalf: {
+            content: "BoatsAerialView-2.jpg",
+            type: "halfGraphic"
+        }
+    },
+    {
+        topHalf: {
+            content: "NativeAmerican-1.jpg",
+            type: "halfGraphic"
+        },
+        bottomHalf: {
+            content: "NativeAmerican-2.jpg",
+            type: "halfGraphic"
+        }
+    },
+    {
+        topHalf: {
+            content: "BrightRoom-1.jpg",
+            type: "halfGraphic"
+        },
+        bottomHalf: {
+            content: "BrightRoom-2.jpg",
+            type: "halfGraphic"
+        }
+    },
+    {
+        topHalf: {
+            content: "StreetLanterns-1.jpg",
+            type: "halfGraphic"
+        },
+        bottomHalf: {
+            content: "StreetLanterns-2.jpg",
+            type: "halfGraphic"
+        }
+    },
+    {
+        topHalf: {
+            content: "Japan-1.jpg",
+            type: "halfGraphic"
+        },
+        bottomHalf: {
+            content: "Japan-2.jpg",
+            type: "halfGraphic"
+        }
+    }
+    
+    
+];
+
 
 //==============================//
 //=========| VIEW |=============//
@@ -52,225 +106,23 @@ let v = {};
 let c = {};
 
 //===| controller methods |========//
-
-//-----| INITIALIZE |------// 
-c.initialize = function initialize(){
-    //Refer to all elements with ids by name in the view object v:    
-    L.attachAllElementsById(v);    
-    
-    //Simulate resizing:
-    L.adjustRemByArea(9.5,20.5);//10,20 works well
-    let fakeEventObject = {};
-    fakeEventObject.type = 'resize';
-    c.adjustForScreenSize(fakeEventObject);    
-    
-    //Fill the JSON array m.contents
-    c.getContentsMetaData();
-    
-    //fade splash page (shroud)
-    setTimeout(function(){
-        L(v.shroud)
-            .styles
-                ("opacity: 0")
-                ("visibility: hidden")
-        ;
-    }, m.splashTime * 1000);
-    
-    //Hide the flipper:
-    L(v.flipper).styles("visibility: hidden");
-
-    //Continually show the model's state variables:
-    setTimeout(()=>{
-        L(v.flipper).styles("visibility: hidden");        
-        setInterval(()=>{
-            if(m.fingerFlipping || m.autoFlipping){
-                L(v.flipper).styles("visibility: visible");                
-                c.showModelStates(v.flipperContentHolder);//provide target element                
-            }else{
-                L(v.flipper).styles("visibility: hidden");
-            }
-            //update model
-            let fakeEventObject = {};
-            fakeEventObject.type = "foobar";
-            fakeEventObject.target = document.body;
-            c.updateModel(fakeEventObject, c.updateView);
-        },100);
-    }, 500);
-};
-//-----| END of INITIALIZE |------// 
-
-//-----| UPDATE MODEL |------//
-c.updateModel = function updateModel(eventObject, updateView){
-    /*
-       Should check to modify all state variables in the MODEL
-       before updateView is is invoked
-    */
-    let source = eventObject.target;
-    let type = eventObject.type;
-    
-    let globallyPressed = (type === 'mousedown' || type === 'touchstart');
-    let globallyMoved = (type === 'mousemove' || type === 'touchmove');
-    let globallyReleased = (type === 'mouseup' || type === 'touchend');
-    let validSource = ( source === v.topHalf ||
-                        source === v.topContentHolder ||    
-                        source === v.bottomHalf ||
-                        source === v.bottomContentHolder ||                        
-                        source === v.flipper ||
-                        source === v.flipperContentHolder ||
-                        source === v.pageFooter || 
-                        source === v.flipperFooter    
-                      );
-    let finalAngle = (m.currentAngle === 0 || m.currentAngle === 180);
-    
-    //Record flipper crossing
-    
-    let halfHeight = window.innerHeight/2;
-    if (m.currentY > halfHeight && m.priorY <= halfHeight && (m.firmlyPressed || m.autoFlipping)){
-        m.flipperCrossedCenter = true;
-        m.crossingDirection = m.DOWN;
-    }
-    else if (m.currentY <= halfHeight && m.priorY > halfHeight && (m.firmlyPressed || m.autoFlipping)){
-        m.flipperCrossedCenter = true;
-        m.crossingDirection = m.UP;
-    }
-    
-    if ( m.currentAngle < 90 && m.priorAngle >=90  && (m.firmlyPressed || m.autoFlipping)){
-        m.flipperCrossedCenter = true;
-        m.crossingDirection = m.DOWN;
-    }
-    else if ( m.currentAngle >= 90 && m.priorAngle < 90 && (m.firmlyPressed || m.autoFlipping)){
-        m.flipperCrossedCenter = true;
-        m.crossingDirection = m.UP;
-    }  
-
-    //Set or clear m.pressed
-    if(globallyPressed && validSource){
-        m.pressed = true;
-        m.debounceTimerId = setTimeout(()=>{
-            if(m.pressed){
-                m.firmlyPressed = true;
-                //this is where the flipping can start
-                let height = window.innerHeight;
-                let y = height;
-                if(eventObject.touches){
-                    y = eventObject.touches[0].clientY;
-                }
-                else{
-                    y = eventObject.clientY;
-                }
-                m.started =  ( (y / height) <= 0.5 ) ? m.UP : m.DOWN ;
-            }
-        }, m.debounceDelayTime);            
-    }
-    else if(globallyReleased){
-        m.pressed = false;
-        m.firmlyPressed = false;
-        clearTimeout(m.debounceTimerId);
-    }
-    
-    //Set or clear finger flipping
-    if(m.firmlyPressed && globallyMoved){
-        m.fingerFlipping = true;  
-    }
-    else if(globallyReleased){
-        m.fingerFlipping = false;
-    }
-    
-    //check to auto flip
-    if( !m.pressed && !finalAngle && !m.fingerFlipping){
-        m.autoFlipping = true;
-    }else{
-         m.autoFlipping = false; 
-    }
-
-    //Set position and direction
-    if(globallyMoved && !m.autoFlipping){
-        m.priorY = m.currentY;
-        try{
-            m.currentY =  eventObject.clientY  || eventObject.touches[0].clientY;            
-        }
-        catch(error){}
-        m.direction = (m.currentY >= m.priorY) ? m.DOWN : m.UP;        
-    }
-
-    //determine current location
-    if(m.currentAngle >= 90 ){
-        m.currentLocation = m.UP;
-    }
-    else{
-        m.currentLocation = m.DOWN;
-    }
-    
-    //set final position:
-    if(m.currentAngle === 0 || m.currentAngle === 180){
-        m.flipperClosed = true;
-    }else{
-        m.flipperClosed = false;
-    }
-    
-    
-    //check to hide closed flipper
-    if(m.flipperClosed){
-        c.hideFlipper();
-    }
-    else{
-        c.showFlipper();
-    }    
-    if(false){}
-    if(false){}
-    if(false){}
-    
-
-	//---| now callback updateView() |----//
-    updateView(eventObject);
-};//-------| END of updateModel |--------//
-
 c.hideFlipper = function hideFlipper(){
     L(v.flipper).styles("visibility: hidden");
 };
-
 c.showFlipper = function showFlipper(){
     L(v.flipper).styles("visibility: visible");
 };
 
-//======| get all app page meta data content |==========//
-c.getContentsMetaData = function getContentsMetaData(){
-    let getter = new XMLHttpRequest();
-    let index = 0;
-    function fetch(index){
-        getter.open("GET","contents/page." + index + "/page" + index +".json" );
-        getter.send();        
-    }
-    getter.onload = function(){
-        if(this.status === 200){
-            m.contents.push(JSON.parse(this.response));
-            index++;
-            fetch(index);
-        }else{
-            let topUrls = "";
-            m.contents.forEach(page=>{
-                topUrls += page.topHalf.type + "\n";
-            });
-            m.numberOfPages = m.contents.length;
-            c.fillPage(m.currentPage);
-        }
-    };
-    getter.onerror = function(){
-        alert("Table of Contents fetch complete: " + m.contents.length + " pages.");
-        m.numberOfPages = m.contents.length;        
-        c.fillPage(m.currentPage);        
-    };
-    fetch(index);
-
-};//======| END getting app meta data  |==========//
-
+c.addContent = function addContent(){
+    
+};
 c.adjustForScreenSize = function adjustForScreenSize(eventObject){
     if(eventObject.type === 'resize'){
         if(window.innerWidth < m.appWidthMax){
             L(v.app).styles("width: 100%");
             L.adjustRemByArea();
         }
-        else if(window.innerWidth >= m.appWidthMax){
+        else if(window.innerWidth >= 500){
             L(v.app).styles("width: " + m.appWidthMax + "px");
             L.adjustRemByArea('','', m.appWidthMax);            
         }
@@ -294,11 +146,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
     m.flipperTimerId = setInterval(function(){
         if(m.started === m.UP){
             if ( m.direction === m.UP){
-                m.priorAngle = m.currentAngle;
                 m.currentAngle += m.angularStep;
                 c.flipAndShade();                    
                 if (m.currentAngle >= 180){
-                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle = 180;
                     c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
@@ -307,11 +157,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.DOWN){
                 if(m.currentAngle <= 120){
-                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle -= m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle <=0){
-                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 0;
                         c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
@@ -319,11 +167,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if(m.currentAngle > 120){
-                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle += m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
-                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 180;
                         c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
@@ -335,11 +181,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
         //-----------------------------
         if(m.started === m.DOWN){
             if ( m.direction === m.DOWN){
-                m.priorAngle = m.currentAngle;                
                 m.currentAngle -= m.angularStep;
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
-                    m.priorAngle = m.currentAngle;
                     m.currentAngle = 0;
                     c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
@@ -348,11 +192,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
             }
             else if ( m.direction === m.UP){
                 if(m.currentAngle > 60){
-                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle += m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
-                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 180;
                         c.flipAndShade();
                         clearInterval(m.flipperTimerId);
@@ -360,11 +202,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     }
                 }
                 else if ( m.currentAngle <= 60){
-                    m.priorAngle = m.currentAngle;                    
                     m.currentAngle -= m.angularStep;
                     c.flipAndShade();                    
                     if (m.currentAngle <= 0){
-                        m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 0;
                         c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
@@ -397,7 +237,6 @@ c.setFinalFLipperStatus = function setFinalFLipperStatus(){
 
 c.moveFlipperWithFinger = function(){
     if(m.fingerFlipping){
-        m.priorAngle = m.currentAngle;
         m.currentAngle = c.clientYToDeg(m.currentY, window.innerHeight);
         c.flipAndShade();
     }
@@ -418,11 +257,7 @@ c.flipAndShade = function flipAndShade(){
         L(v.flipperContentHolder).styles("transform: rotateX(180deg)");
     }
     else if ( m.currentAngle < 90 && m.currentAngle >= 0 ){
-        L(v.flipperContentHolder)
-            .styles
-            ("transform: rotateX(0deg)")
-            ("top: 0")
-        ;            
+        L(v.flipperContentHolder).styles("transform: rotateX(0deg)");
     }
  };
  
@@ -466,18 +301,25 @@ c.showModelStates = function showModelStates(targetContainer){
     m.urlTop = m.contents[m.currentPage].topHalf.content;
     m.urlBottom = m.contents[m.currentPage].bottomHalf.content;
     let currentStates = `
-        <b>Started:</b>  ${m.started} <br>
-        <b>Direction:</b>  ${m.direction} <br>
-        <b>Location:</b> ${m.currentLocation}<br>        
-        <b>Angle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
-        <b>Direction Crossed:</b>  ${m.crossingDirection} <br>
+        <br><br>
+        <b>started:</b>  ${m.started} <br>
+        <b>direction:</b>  ${m.direction} <br>
+        <b>current Location:</b> ${m.currentLocation}<br>        
+        <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
         <b>current page:</b> ${m.currentPage}<br>
-        <b>Number of Pages:</b> ${m.numberOfPages}<br>        
         <b>URL top:</b> ${m.urlTop}<br>
         <b>URL bottom:</b> ${m.urlBottom}<br>
+        <b>Flipper Closed:</b> ${m.flipperClosed}<br>
         <b>test version:</b> ${m.testVersion}
     `;
+    /*
+        <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
+        <b>pressed:</b>  ${m.pressed} <br>
+        <b>autoFlipping:</b>  ${m.autoFlipping} <br>
+        <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>  
+        <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>        
+    */
     targetContainer.innerHTML = currentStates;
 };
 
@@ -524,77 +366,6 @@ c.clientYToDeg = function clientYToDeg(currentY, screenHeight){
         }    
     }
     //-------------------------------------//     
-};
-//=======| add current page |======================//
-c.fillPage = function fillPage(index){
-    let topUrl = m.contents[index].topHalf.content;
-    let topType = m.contents[index].topHalf.type;
-    let bottomUrl = m.contents[index].bottomHalf.content;
-    let bottomType = m.contents[index].bottomHalf.type;
-    //ask about the top
-    if(topType === "text"){
-        let urlPrefix = "contents/page." + index +"/";
-        let url = urlPrefix + topUrl;
-        //v.topContentHolder.innerHTML = get(urlPrefix + topUrl, fillTop);
-        get(url, fillTop);            
-    }
-    else if(topType === "halfGraphic"){
-        let urlPrefix = "img/";
-        let url = urlPrefix + topUrl;
-        setTopBackground(url, v.topContentHolder);
-    }
-    //ask about the bottom
-    if(bottomType === "text"){
-        let urlPrefix = "contents/page." + index +"/";
-        let url = urlPrefix + bottomUrl;
-        //v.bottomContentHolder.innerHTML = get(urlPrefix + bottomUrl, fillBottom);
-        get(url, fillBottom);
-    }
-    else if(bottomType === "halfGraphic"){
-        let urlPrefix = "img/";
-        let url = urlPrefix + bottomUrl;
-        setBottomBackground(url, v.bottomContentHolder);
-    }
-    //----------------------helpers---------------------//
-    function get(url, callback){
-        let getter = new XMLHttpRequest();
-        getter.open("GET", url);
-        getter.send();
-        
-        //handle response and error;            
-        getter.onload = function(){
-            let response = getter.responseText;                
-            if(callback){callback(response);}                
-        };
-        getter.onerror = function(){};
-    }
-    function fillTop(text){
-        v.topContentHolder.innerHTML = text;            
-    }
-    function fillBottom(text){
-        v.bottomContentHolder.innerHTML = text;
-    }
-    function setTopBackground(url, target){
-        target.innerHTML = "";
-        L(target)
-            .styles
-                ("background: url("+ url +") no-repeat bottom")
-                ("background-size: contain")
-                ("width: 100%")
-                ("padding-top: 100%")
-        ;                    
-    }
-    function setBottomBackground(url, target){
-        target.innerHTML = "";
-        L(target)
-            .styles
-                ("background: url("+ url +") no-repeat top")
-                ("background-size: contain")
-                ("width: 100%")
-                ("width: 100%")
-                ("padding-top: 100%")                    
-        ;                    
-    }
 };
 
 //========| possible to re-use some previous ideas below |===========//

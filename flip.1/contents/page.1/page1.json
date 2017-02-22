@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "BoatsAerialView-1.jpg",
+        "type": "halfGraphic"
+    },
+    "bottomHalf": {
+        "content": "BoatsAerialView-2.jpg",
+        "type": "halfGraphic"
+    }
+}

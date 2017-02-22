@@ -17,7 +17,7 @@ m.currentAngle = 0; // in degrees
 m.priorAngle = 0; //in degrees
 m.currentY = 0;
 m.priorY = 0;
-m.currentPage = 6;
+m.currentPage = 5;
 m.numberOfPages = 0;
 m.urlTop = "";
 m.urlBottom = "";
@@ -25,18 +25,17 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 18;
+m.testVersion = 17;
 m.UP = "up";
 m.DOWN = "down";
-m.appWidthMax = 450; // in pixels
-m.flipTransitionTime = 100; //150 in milliseconds
-m.angularStep = 2; //in degrees
+m.appWidthMax = 500; // in pixels
+m.flipTransitionTime = 150; //150 in milliseconds
+m.angularStep = 4; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
 m.offsetAngle = 40; //to keep cursor within the page (not at the edge) while finger flipping
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
-m.splashTime = 2.5; // in seconds
 
 //contents:
 m.contents = [];
@@ -52,52 +51,6 @@ let v = {};
 let c = {};
 
 //===| controller methods |========//
-
-//-----| INITIALIZE |------// 
-c.initialize = function initialize(){
-    //Refer to all elements with ids by name in the view object v:    
-    L.attachAllElementsById(v);    
-    
-    //Simulate resizing:
-    L.adjustRemByArea(9.5,20.5);//10,20 works well
-    let fakeEventObject = {};
-    fakeEventObject.type = 'resize';
-    c.adjustForScreenSize(fakeEventObject);    
-    
-    //Fill the JSON array m.contents
-    c.getContentsMetaData();
-    
-    //fade splash page (shroud)
-    setTimeout(function(){
-        L(v.shroud)
-            .styles
-                ("opacity: 0")
-                ("visibility: hidden")
-        ;
-    }, m.splashTime * 1000);
-    
-    //Hide the flipper:
-    L(v.flipper).styles("visibility: hidden");
-
-    //Continually show the model's state variables:
-    setTimeout(()=>{
-        L(v.flipper).styles("visibility: hidden");        
-        setInterval(()=>{
-            if(m.fingerFlipping || m.autoFlipping){
-                L(v.flipper).styles("visibility: visible");                
-                c.showModelStates(v.flipperContentHolder);//provide target element                
-            }else{
-                L(v.flipper).styles("visibility: hidden");
-            }
-            //update model
-            let fakeEventObject = {};
-            fakeEventObject.type = "foobar";
-            fakeEventObject.target = document.body;
-            c.updateModel(fakeEventObject, c.updateView);
-        },100);
-    }, 500);
-};
-//-----| END of INITIALIZE |------// 
 
 //-----| UPDATE MODEL |------//
 c.updateModel = function updateModel(eventObject, updateView){
@@ -117,6 +70,7 @@ c.updateModel = function updateModel(eventObject, updateView){
                         source === v.bottomContentHolder ||                        
                         source === v.flipper ||
                         source === v.flipperContentHolder ||
+
                         source === v.pageFooter || 
                         source === v.flipperFooter    
                       );
@@ -228,49 +182,20 @@ c.updateModel = function updateModel(eventObject, updateView){
 c.hideFlipper = function hideFlipper(){
     L(v.flipper).styles("visibility: hidden");
 };
-
 c.showFlipper = function showFlipper(){
     L(v.flipper).styles("visibility: visible");
 };
 
-//======| get all app page meta data content |==========//
-c.getContentsMetaData = function getContentsMetaData(){
-    let getter = new XMLHttpRequest();
-    let index = 0;
-    function fetch(index){
-        getter.open("GET","contents/page." + index + "/page" + index +".json" );
-        getter.send();        
-    }
-    getter.onload = function(){
-        if(this.status === 200){
-            m.contents.push(JSON.parse(this.response));
-            index++;
-            fetch(index);
-        }else{
-            let topUrls = "";
-            m.contents.forEach(page=>{
-                topUrls += page.topHalf.type + "\n";
-            });
-            m.numberOfPages = m.contents.length;
-            c.fillPage(m.currentPage);
-        }
-    };
-    getter.onerror = function(){
-        alert("Table of Contents fetch complete: " + m.contents.length + " pages.");
-        m.numberOfPages = m.contents.length;        
-        c.fillPage(m.currentPage);        
-    };
-    fetch(index);
-
-};//======| END getting app meta data  |==========//
-
+c.addContent = function addContent(){
+    
+};
 c.adjustForScreenSize = function adjustForScreenSize(eventObject){
     if(eventObject.type === 'resize'){
         if(window.innerWidth < m.appWidthMax){
             L(v.app).styles("width: 100%");
             L.adjustRemByArea();
         }
-        else if(window.innerWidth >= m.appWidthMax){
+        else if(window.innerWidth >= 500){
             L(v.app).styles("width: " + m.appWidthMax + "px");
             L.adjustRemByArea('','', m.appWidthMax);            
         }
