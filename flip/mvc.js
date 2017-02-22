@@ -461,7 +461,10 @@ c.shadePage = function shadePage(degrees){
     }
 };
 c.showEvent = function showEvent(eventObject, here){
-	here.innerHTML = '<br><center>'+ eventObject.target.id +", "+eventObject.type +'</center><br><br><br><br><br><br>';
+    if(eventObject.type != 'foobar'){
+    	here.innerHTML = '<br><center>'+ eventObject.target.id +", "+eventObject.type +'</center><br><br><br><br><br><br>';        
+    }
+
 };
 
 c.showModelStates = function showModelStates(targetContainer){

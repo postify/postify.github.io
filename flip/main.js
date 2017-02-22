@@ -1,15 +1,15 @@
 /*
     Author: Abbas Abdulmalik
     Created: February 15, 2017
-    Revised: (N/A)
+    Revised: Februrary 22, 2017
     Title:  Flipboard Simulation
     Purpose: To create a Flipboard-like evironment
-    for publishing content on a Flipboard magazine and get a 
+    for publishing content to get a 
     real flipboard effect when "scrolling." The Flipboard
-    website does this only for the "big boys," and not for
-    regular articles blog posts.
-
+    website and app does this only for the "big boys,"
+    and not for regular articles blog posts.
 */
+
 //From file L.js:
 /*global L*/
 
@@ -24,9 +24,12 @@
 //==========| *** STARTUP ***|=========//
 //=====================================//
 window.onload = function(){
+    
+ //set
  c.initialize();
- [
- 	'touchstart',
+ 
+ //collection of monitored event types:
+ [  'touchstart',
  	'touchend',
   	'touchmove',
 	'mousedown',
@@ -40,7 +43,8 @@ window.onload = function(){
 		c.updateModel(eventObject, c.updateView);
   	}, true);
   });
- };//-----| END of window on-load handler |---------//
+};
+//-----| END of window on-load handler |---------//
 
 
 //-----| UPDATE VIEW |------//
@@ -61,12 +65,7 @@ c.updateView = function updateView(eventObject){
     //------------| Handle auto-flipping 	|------------//
     //---------------------------------------------------//
     c.flipAutomatically(eventObject);
-    
-    //---------------------------------------------------// 	
-    //--| Handle positioning flipper to top or bottom |--//
-    //---------------------------------------------------//     
-    //c.positionFlipper(eventObject);
-    
+
     //----------------------------------------------------// 	
     //-------------|  Handle screen resizing |------------//
     //----------------------------------------------------//
@@ -75,16 +74,13 @@ c.updateView = function updateView(eventObject){
     //----------------------------------------------------// 	
     //--------|  Handle flipper crossing center |---------//
     //----------------------------------------------------//
-
     if(m.flipperCrossedCenter ){
         m.flipperCrossedCenter = false;
+        //handle crossing here:
+        //change flipper content
     }
 
 };
 //======================================//
 //=======| *** END OF APP *** |=========//
 //======================================//
-
- 
- 
- 
