@@ -4,8 +4,6 @@
 //==============================//
 let m = {};
 //State variables and constants
-m.UP = "up";
-m.DOWN = "down";
 m.autoFlipping = false;
 m.fingerFlipping = false;
 m.busyFlipping = false;
@@ -18,17 +16,18 @@ m.pressed = false;
 m.currentAngle = 0; // in degrees
 m.currentY = 0;
 m.priorY = 0;
-m.appWidthMax = 500; // in pixels
-m.currentPage = 4;
-m.testVersion = 11;
+m.currentPage = 0;
+m.numberOfPages = 0;
+m.testVersion = 13;
 m.urlTop = "";
 m.urlBottom = "";
-m.pageZeroTop = document.querySelector("#topContentHolder").innerHTML;
-m.pageZeroBottom = document.querySelector("#bottomContentHolder").innerHTML;
 m.flipperCrossedDown = false;
 m.flipperCrossedUp = false;
 
-//constants in camel case:
+//constants, most in camel case:
+m.UP = "up";
+m.DOWN = "down";
+m.appWidthMax = 500; // in pixels
 m.flipTransitionTime = 150; //150 in milliseconds
 m.angularStep = 4; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
@@ -39,69 +38,6 @@ m.debounceDelayTime = 100;// in milliseconds
 
 //contents:
 m.contents = [];
-/*
-    {
-        topHalf: {
-            content: "top0.html",
-            type: "text"
-        },
-        bottomHalf: {
-            content: "bottom0.html",
-            type: "text"
-        }
-    },
-    {
-        topHalf: {
-            content: "BoatsAerialView-1.jpg",
-            type: "halfGraphic"
-        },
-        bottomHalf: {
-            content: "BoatsAerialView-2.jpg",
-            type: "halfGraphic"
-        }
-    },
-    {
-        topHalf: {
-            content: "NativeAmerican-1.jpg",
-            type: "halfGraphic"
-        },
-        bottomHalf: {
-            content: "NativeAmerican-2.jpg",
-            type: "halfGraphic"
-        }
-    },
-    {
-        topHalf: {
-            content: "BrightRoom-1.jpg",
-            type: "halfGraphic"
-        },
-        bottomHalf: {
-            content: "BrightRoom-2.jpg",
-            type: "halfGraphic"
-        }
-    },
-    {
-        topHalf: {
-            content: "StreetLanterns-1.jpg",
-            type: "halfGraphic"
-        },
-        bottomHalf: {
-            content: "StreetLanterns-2.jpg",
-            type: "halfGraphic"
-        }
-    },
-    {
-        topHalf: {
-            content: "Japan-1.jpg",
-            type: "halfGraphic"
-        },
-        bottomHalf: {
-            content: "Japan-2.jpg",
-            type: "halfGraphic"
-        }
-    }
-*/
-
 
 //==============================//
 //=========| VIEW |=============//
@@ -114,7 +50,6 @@ let v = {};
 let c = {};
 
 //===| controller methods |========//
-
 
 //-----| UPDATE MODEL |------//
 c.updateModel = function updateModel(eventObject, updateView){
@@ -430,24 +365,17 @@ c.showModelStates = function showModelStates(targetContainer){
     m.urlTop = m.contents[m.currentPage].topHalf.content;
     m.urlBottom = m.contents[m.currentPage].bottomHalf.content;
     let currentStates = `
-        <b>started:</b>  ${m.started} <br>
-        <b>direction:</b>  ${m.direction} <br>
-        <b>current Location:</b> ${m.currentLocation}<br>        
-        <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
+        <b>Started:</b>  ${m.started} <br>
+        <b>Direction:</b>  ${m.direction} <br>
+        <b>Location:</b> ${m.currentLocation}<br>        
+        <b>Angle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
         <b>current page:</b> ${m.currentPage}<br>
+        <b>Number of Pages:</b> ${m.numberOfPages}<br>        
         <b>URL top:</b> ${m.urlTop}<br>
         <b>URL bottom:</b> ${m.urlBottom}<br>
-        <b>Flipper Closed:</b> ${m.flipperClosed}<br>
         <b>test version:</b> ${m.testVersion}
     `;
-    /*
-        <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
-        <b>pressed:</b>  ${m.pressed} <br>
-        <b>autoFlipping:</b>  ${m.autoFlipping} <br>
-        <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>  
-        <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>        
-    */
     targetContainer.innerHTML = currentStates;
 };
 

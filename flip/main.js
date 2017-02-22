@@ -67,12 +67,13 @@ c.initialize = function initialize(){
             m.contents.forEach(page=>{
                 topUrls += page.topHalf.type + "\n";
             });
-            //alert(topUrls);
+            m.numberOfPages = m.contents.length;
             c.fillPage(m.currentPage);
         }
     };
     getter.onerror = function(){
         alert("Table of Contents fetch complete: " + m.contents.length + " pages.");
+        m.numberOfPages = m.contents.length;        
         c.fillPage(m.currentPage);        
     };
 
@@ -86,9 +87,17 @@ c.initialize = function initialize(){
     L(v.flipper).styles("visibility: hidden");
 
     //Continually show the model's state variables:
-    setInterval(()=>{
-        c.showModelStates(v.flipperContentHolder);//provide target element
-    },10);
+    setTimeout(()=>{
+        setInterval(()=>{
+            c.showModelStates(v.flipperContentHolder);//provide target element
+            //update model
+            let fakeEventObject = {};
+            fakeEventObject.type = "foobar";
+            fakeEventObject.target = document.body;
+            c.updateModel(fakeEventObject, c.updateView);
+        },100);
+    }, 500);
+
     
 };
 //-----| END of INITIALIZE |------// 
