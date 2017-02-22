@@ -25,7 +25,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 19;
+m.testVersion = 20;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 450; // in pixels
@@ -62,6 +62,8 @@ c.initialize = function initialize(){
     L.adjustRemByArea(9.5,20.5);//10,20 works well
     let fakeEventObject = {};
     fakeEventObject.type = 'resize';
+    fakeEventObject.target = {};
+    fakeEventObject.target.id = 'snafoo';
     c.adjustForScreenSize(fakeEventObject);    
     
     //Fill the JSON array m.contents
@@ -596,112 +598,3 @@ c.fillPage = function fillPage(index){
         ;                    
     }
 };
-
-//========| possible to re-use some previous ideas below |===========//
-/*
-//------------------------------//
-c.moveFlipper = function moveFlipper(eventObject){
-    let type = eventObject.type;
-    if (type === "mousemove" || type === "touchmove" ){
-        if(m.pressed){
-            m.finalPosition = false;
-            L(v.flipper).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
-            let degrees = c.clientYToDeg(m.currentY, window.innerHeight, m.direction);
-            m.currentAngle = degrees;
-            L(v.flipper)
-                .styles
-                    ("transform: rotateX(" + degrees +"deg)")
-            ;
-            c.shadePage(degrees);
-            if(degrees >= 90 && degrees <= 180 ){
-                L(v.flipperContent).styles("transform: rotateX(180deg)");
-                m.flipperPosition = m.UP;
-            }
-            else if( degrees < 90 && degrees >=0){
-                L(v.flipperContent).styles("transform: rotateX(0deg)");
-                m.flipperPosition = m.DOWN;
-            } 
-            c.addContentToFlipper();
-        }
-        //if no longer pressed:
-        
-        else if(!m.pressed){
-            m.finalPosition = true;
-            L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
-            c.addContentToFlipper();            
-        }
-        
-    }    
-};
-
-//--| Handle positioning flipper to top or bottom when screen is touched|--//
-c.positionFlipper = function positionFlipper(eventObject){
-    let source = eventObject.target;
-    let type = eventObject.type;
-    
-    let paneTouched = source === v.topPane || source === v.bottomPane;
-    
-    if (type === 'mousedown' || type === 'touchstart'){
-        if (paneTouched){
-            m.finalPosition = false;
-            m.pressed = true;
-        }
-        if( source === v.topPane ){
-            L(v.flipper).styles("transform: rotateX(180deg)");
-            m.flipperPosition = m.UP;
-            c.addContentToFlipper();
-         }
-        else if ( source === v.bottomPane ){
-            L(v.flipper).styles("transform: rotateX(0deg)");
-            m.flipperPosition = m.DOWN;
-            c.addContentToFlipper();
-        }
-        c.addContentToFlipper();
-    }
-};
-
-c.addContentToFlipper = function addContentToFlipper(){
-    L(v.flipperContent).attribs("class=bottomContentStyle");     
-    if(m.flipperPosition === m.UP){
-        v.flipperContent.innerHTML = "";
-        c.addBackgroundImageTop("img/BoatsAerialView-1.jpg", L.flipperContent);
-    }
-    else if(m.flipperPosition === m.DOWN){
-        c.addBackgroundImageTop("", L.flipperContent); 
-        L(v.flipperContent).styles("width: 85%");
-        v.flipperContent.innerHTML = m.bottomContent;
-    }
-};
-
-//========| Add background image |=========//
-c.addBackgroundImageTop = function addBackgroundImageTop(url, target){
-    L(v.flipperContent).attribs("class=bottomContentStyle");     
-    let padding = 100;
-    if(url === ""){
-        padding = 0;
-    }
-    L(target)
-        .styles
-            ("background: url("+ url +") no-repeat bottom")
-            ("background-size: contain")
-            ("width: 100%")
-            ("padding-top: " + padding + "%")
-    ;       
-};
-c.addBackgroundImageBottom = function addBackgroundImageBottom(url, target){
-    L(v.flipperContent).attribs("class=bottomContentStyle");     
-    let padding = 100;
-    if(url === ""){
-        padding = 0;
-        L(v.flipperContent).attribs("class=bottomContentStyle");          
-    }    
-    L(target)
-        .styles
-            ("background: url("+ url +") no-repeat top")
-            ("background-size: contain")
-            ("width: 100%")
-            ("padding-bottom: " + padding + "%")            
-    ;     
-};
-*/

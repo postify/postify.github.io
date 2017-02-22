@@ -49,7 +49,8 @@ c.updateView = function updateView(eventObject){
     //---------------------------------------------------// 	
     //---------| Option to display current event |-------//
     //---------------------------------------------------//    
- 	//c.showEvent(eventObject, v.topContentHolder);
+ 	c.showEvent(eventObject, v.flipperFooter);
+ 	c.showEvent(eventObject, v.pageFooter);
 
     //---------------------------------------------------// 	
     //------------|  Handle finger flipping  |-----------//
