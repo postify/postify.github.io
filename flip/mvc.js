@@ -26,7 +26,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 24;
+m.testVersion = 25;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 450; // in pixels
@@ -593,7 +593,7 @@ c.fillPage = function fillPage(index){
         target.innerHTML = "";
         L(target)
             .styles
-                ("background: url("+ url +") no-repeat bottom")
+                ("background: black url("+ url +") no-repeat bottom")
                 ("background-size: contain")
                 ("width: 100%")
                 ("padding-top: 100%")
@@ -603,7 +603,7 @@ c.fillPage = function fillPage(index){
         target.innerHTML = "";
         L(target)
             .styles
-                ("background: url("+ url +") no-repeat top")
+                ("background: black url("+ url +") no-repeat top")
                 ("background-size: contain")
                 ("width: 100%")
                 ("padding-top: 100%")                    
