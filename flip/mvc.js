@@ -26,7 +26,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 25;
+m.testVersion = 26;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 450; // in pixels
@@ -51,6 +51,30 @@ let v = {};
 //=======| CONTROLLER |=========//
 //==============================//
 let c = {};
+
+c.nextPage = function nextPage(){
+    let pageNumber;
+    //if the next page exceeds the largest index, point to page 0
+    if(m.currentPage +1 >= m.numberOfPages){
+        pageNumber = 0;
+    }
+    else{
+        pageNumber = m.currentPage +1;
+    }
+    return pageNumber;
+};
+
+c.priorPage = function priorPage(){
+    let pageNumber;
+    //if the prior page goes negative, point to final page
+    if(m.currentPage - 1 < 0){
+        pageNumber = m.numberOfPages -1;
+    }
+    else{
+        pageNumber = m.currentPage - 1;
+    }
+    return pageNumber;
+};
 
 //===| controller methods |========//
 
@@ -87,8 +111,17 @@ c.initialize = function initialize(){
         L(v.flipper).styles("visibility: hidden");        
         setInterval(()=>{
             if(m.fingerFlipping || m.autoFlipping){
-                L(v.flipper).styles("visibility: visible");                
-                c.showModelStates(v.flipperContentHolder);//provide target element                
+                //put proper half of page in the flipper:
+                if(m.started === m.UP && m.currentLocation === m.UP){
+                    L.fillTop(m.currentPage, v.flipperContentHolder);
+                    L.fillTop(c.priorPage(), v.topContentHolder);
+                }
+                else if(m.started === m.DOWN && m.currentLocation === m.DOWN){
+                    L.fillBottom(m.currentPage, v.flipperContentHolder);
+                    L.fillBottom(c.nextPage(), v.bottomContentHolder);
+                }
+                L(v.flipper).styles("visibility: visible");
+                //c.showModelStates(v.flipperContentHolder);//provide target element                
             }else{
                 L(v.flipper).styles("visibility: hidden");
             }
@@ -99,6 +132,7 @@ c.initialize = function initialize(){
             c.updateModel(fakeEventObject, c.updateView);
         },100);
     }, 500);
+    
 };
 //-----| END of INITIALIZE |------// 
 
@@ -473,7 +507,7 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>Angle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>Direction Crossed:</b>  ${m.crossingDirection} <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
-        <b>current page:</b> ${m.currentPage}<br>
+        <b>current page:</b> ${m.currentPage + 1}<br>
         <b>Number of Pages:</b> ${m.numberOfPages}<br>        
         <b>URL top:</b> ${m.urlTop}<br>
         <b>URL bottom:</b> ${m.urlBottom}<br>
@@ -612,38 +646,38 @@ c.fillPage = function fillPage(index){
 };
 
 c.handleFipperClosed = function handleFipperClosed(eventObject){
-        //----| local helpers |------//
-        function shiftPages(fillPage){
-            let newPage;
-            //if flipper started up and is now down: load prior page:
-            if(m.started === m.UP && m.currentLocation === m.DOWN){
-                if((m.currentPage - 1) < 0){
-                    newPage = m.numberOfPages - 1;
-                }
-                else{
-                    newPage = m.currentPage - 1;
-                } 
-                m.currentPage = newPage;
-                fillPage(m.currentPage);                
-            }                
-            //if flipper started down and is now up : load next page:
-            else if(m.started === m.DOWN && m.currentLocation === m.UP){
-                if((m.currentPage + 1) >= m.numberOfPages){
-                    newPage = 0;
-                }
-                else{
-                    newPage = m.currentPage + 1;
-                }  
-                m.currentPage = newPage;
-                fillPage(m.currentPage);                
+    //----| local helpers |------//
+    function shiftPages(fillPage){
+        let newPage;
+        //if flipper started up and is now down: load prior page:
+        if(m.started === m.UP && m.currentLocation === m.DOWN){
+            if((m.currentPage - 1) < 0){
+                newPage = m.numberOfPages - 1;
             }
+            else{
+                newPage = m.currentPage - 1;
+            } 
+            m.currentPage = newPage;
+            fillPage(m.currentPage);                
+        }                
+        //if flipper started down and is now up : load next page:
+        else if(m.started === m.DOWN && m.currentLocation === m.UP){
+            if((m.currentPage + 1) >= m.numberOfPages){
+                newPage = 0;
+            }
+            else{
+                newPage = m.currentPage + 1;
+            }  
+            m.currentPage = newPage;
+            fillPage(m.currentPage);                
         }
-        function addContentToPages(){
-            
-        }        
-        function addContentToFlipper(){
-    
-        }    
+    }
+    function addContentToPages(){
+        
+    }        
+    function addContentToFlipper(){
+
+    }    
     /*check to:
         1.) hide the closed flipper,
         2.) point to adjascent pages,

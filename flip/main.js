@@ -73,11 +73,7 @@ c.updateView = function updateView(eventObject){
     //----------------------------------------------------// 	
     //--------|  Handle flipper crossing center |---------//
     //----------------------------------------------------//
-    if(m.flipperCrossedCenter ){
-        m.flipperCrossedCenter = false;
-        //handle crossing here:
-        //change flipper content
-    }
+    L.handleFlipperCrossedCenter();
 
     //----------------------------------------------------// 	
     //------------|  Handle flipper closing |-------------//
@@ -87,3 +83,138 @@ c.updateView = function updateView(eventObject){
 //======================================//
 //=======| *** END OF APP *** |=========//
 //======================================//
+
+
+//=======| add indicated page bottom  |======================//
+L.fillBottom = function fillBottom(index, target){
+    let bottomUrl = m.contents[index].bottomHalf.content;
+    let bottomType = m.contents[index].bottomHalf.type;
+
+    //ask about the bottom
+    if(bottomType === "text"){
+        let urlPrefix = "contents/page." + index +"/";
+        let url = urlPrefix + bottomUrl;
+        //v.bottomContentHolder.innerHTML = get(urlPrefix + bottomUrl, fillBottom);
+        get(url, fill);
+    }
+    else if(bottomType === "halfGraphic"){
+        let urlPrefix = "img/";
+        let url = urlPrefix + bottomUrl;
+        setBottomBackground(url, target);
+    }
+    //----------------------helpers---------------------//
+    function get(url, fillTarget){
+        let getter = new XMLHttpRequest();
+        getter.open("GET", url);
+        getter.send();
+        
+        //handle response and error;            
+        getter.onload = function(){
+            let response = getter.responseText;                
+            if(fillTarget){fillTarget(response);}                
+        };
+        getter.onerror = function(){};
+    }
+    function fill(text){
+        target.innerHTML = text;
+        L(target)
+            .styles
+                ("background: none")
+                ("width: 85%")
+                ("padding-top: 0")                    
+        ;         
+    }
+    function setBottomBackground(url, target){
+        target.innerHTML = "";
+        L(target)
+            .styles
+                ("background: black url("+ url +") no-repeat top")
+                ("background-size: contain")
+                ("width: 100%")
+                ("padding-top: 100%")                    
+        ;                    
+    }
+};
+
+//=======| add indicated page top  |======================//
+L.fillTop = function fillTop(index, target){
+    let topUrl = m.contents[index].topHalf.content;
+    let topType = m.contents[index].topHalf.type;
+
+    //ask about the bottom
+    if(topType === "text"){
+        let urlPrefix = "contents/page." + index +"/";
+        let url = urlPrefix + topUrl;
+        get(url, fill);
+    }
+    else if(topType === "halfGraphic"){
+        let urlPrefix = "img/";
+        let url = urlPrefix + topUrl;
+        setTopBackground(url, target);
+    }
+    //----------------------helpers---------------------//
+    function get(url, fillTarget){
+        let getter = new XMLHttpRequest();
+        getter.open("GET", url);
+        getter.send();
+        
+        //handle response and error;            
+        getter.onload = function(){
+            let response = getter.responseText;                
+            if(fillTarget){fillTarget(response);}                
+        };
+        getter.onerror = function(){};
+    }
+    function fill(text){
+        target.innerHTML = text;
+        L(target)
+            .styles
+                ("background: none")
+                ("width: 85%")
+                ("padding-top: 0")                    
+        ;         
+    }
+    function setTopBackground(url, target){
+        target.innerHTML = "";
+        L(target)
+            .styles
+                ("background: black url("+ url +") no-repeat bottom")
+                ("background-size: contain")
+                ("width: 100%")
+                ("padding-top: 100%")                    
+        ;                    
+    }
+};
+
+
+
+L.handleFlipperCrossedCenter = function handleFlipperCrossedCenter(){
+    if(m.flipperCrossedCenter ){
+        m.flipperCrossedCenter = false;
+        if(m.started === m.DOWN && m.currentLocation === m.UP){
+            //Moving UP: show NEXT page top on flipper
+            let nextPage;
+            //if next page exceeds maximum index, goto page 0
+            if(m.currentPage + 1 >= m.numberOfPages){
+                nextPage = 0;
+            }
+            else{
+                nextPage = m.currentPage + 1;
+            }
+            L.fillTop(nextPage, v.flipperContentHolder);            
+        }
+        else if(m.started === m.UP && m.currentLocation === m.DOWN){
+            //Moving DOWN: show PRIOR page bottom on flipper
+            let priorPage;
+            //if prior page goes negative, goto last page
+            if(m.currentPage -1 < 0){
+                priorPage = m.numberOfPages -1;
+            }
+            else {
+                priorPage = m.currentPage - 1;
+            }
+            L.fillBottom(priorPage, v.flipperContentHolder);
+        }
+    }
+    
+};
