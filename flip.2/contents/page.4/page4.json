@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "StreetLanterns-1.jpg",
+        "type": "halfGraphic"
+    },
+    "bottomHalf": {
+        "content": "StreetLanterns-2.jpg",
+        "type": "halfGraphic"
+    }
+}
