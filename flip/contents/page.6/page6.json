@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "NightMountain-1.jpg",
+        "type": "halfGraphic"
+    },
+    "bottomHalf": {
+        "content": "NightMountain-2.jpg",
+        "type": "halfGraphic"
+    }
+}

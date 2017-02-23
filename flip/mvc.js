@@ -26,7 +26,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 22;
+m.testVersion = 23;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 450; // in pixels

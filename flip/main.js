@@ -52,8 +52,8 @@ c.updateView = function updateView(eventObject){
     //---------------------------------------------------// 	
     //---------| Option to display current event |-------//
     //---------------------------------------------------//    
- 	c.showEvent(eventObject, v.flipperFooter);
- 	c.showEvent(eventObject, v.pageFooter);
+ 	//c.showEvent(eventObject, v.flipperFooter);
+ 	//c.showEvent(eventObject, v.pageFooter);
 
     //---------------------------------------------------// 	
     //------------|  Handle finger flipping  |-----------//
@@ -83,7 +83,6 @@ c.updateView = function updateView(eventObject){
     //------------|  Handle flipper closing |-------------//
     //----------------------------------------------------// 
     c.handleFipperClosed(eventObject);
- 
 };
 //======================================//
 //=======| *** END OF APP *** |=========//
