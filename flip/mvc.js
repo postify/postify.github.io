@@ -26,7 +26,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 26;
+m.testVersion = 27;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 450; // in pixels
@@ -101,7 +101,7 @@ c.initialize = function initialize(){
                 ("opacity: 0")
                 ("visibility: hidden")
         ;
-    }, m.splashTime * 1000);
+    }, m.splashTime * 750);
     
     //Hide the flipper:
     L(v.flipper).styles("visibility: hidden");
