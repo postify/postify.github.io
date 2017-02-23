@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "BaliFishermen-1.jpg",
+        "type": "halfGraphic"
+    },
+    "bottomHalf": {
+        "content": "BaliFishermen-2.jpg",
+        "type": "halfGraphic"
+    }
+}

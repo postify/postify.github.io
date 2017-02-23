@@ -1,0 +1,10 @@
+{
+    "topHalf": {
+        "content": "MoonSpain-1.jpg",
+        "type": "halfGraphic"
+    },
+    "bottomHalf": {
+        "content": "MoonSpain-2.jpg",
+        "type": "halfGraphic"
+    }
+}
