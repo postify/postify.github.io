@@ -45,204 +45,21 @@ body{
 	overflow-y: hidden;
     background-color: transparent;
 }
-.pane{
-	position: absolute;
-	margin: auto;
-	height: 50%;
-	width: 60%;
-	left: 0;
-	right: 0;
-	background: gray;
-	opacity: 0;
-    visibility: hidden;
-}
-#topPane{
-	top: 0;
-}
-#bottomPane{
-	bottom:0;
-}
 
 #app{
-    box-shadow: 10px 10px 50px black;
 	position: absolute;
 	margin: auto;
 	height: 100%;
-	width: 500px;
+	padding-right: 100%;
 	top:0;
 	bottom:0;
 	left:0;
 	right:0;
-	background-color: transparent;
-	perspective: 145rem;
-}
-
-.halfPage{
-	position: absolute;
-	margin: auto;
-	height: 50%;
-	width: 100%;
-	left:0;
-	right:0;	
-	background: white;
-	text-align: left;
-    text-shadow: 0 0.5px 0 #ddd;
-    
-}
-
-#topHalf{
-	top: 0;
-	border-top-left-radius: 1rem;
-	border-top-right-radius: 1rem;
-
-}
-#bottomHalf{
-	bottom: 0;
-	border-bottom-left-radius: 1rem;
-	border-bottom-right-radius: 1rem;	
-}
-
-#flipper{
-	bottom:0;
-	background: white;
-	transform-origin: top;
-	border-bottom-left-radius: 1rem;
-	border-bottom-right-radius: 1rem;	
-	overflow: hidden;
-	opacity: 1;
-	box-shadow: none;
-	border-bottom: 1px solid gray;
-	box-sizing: border-box;
-}
-
-.contentHolder{
-	position: relative;
-	margin: auto;
-	width: 90%;
-	left:0;
-	right:0;
-	background: white;
-	text-align: left;
-
-	font-family:Constantina, Georgia, 'Nimbus Roman No9 L', serif;		
-	font-family:'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
-	font-family:'Bookman Old Style', Bookman, 'URW Bookman L', 'Palatino Linotype', serif;
-	
-	box-sizing: border-box;
-    
-    font-size: 1.1rem;
-    line-height: 175%;
-}
-
-.topContentHolder{
-	position: absolute;
-	margin: auto;
-	width: 85%;
-	bottom:0;
-	left:0;
-	right:0;
-	margin-bottom: 0;
-	background-color: transparent;		
-}
-.topContentStyle{
-	position: absolute;
-	margin: auto;
-	width: 85%;
-	bottom:0;
-	left:0;
-	right:0;
-	margin-bottom: 0;
-	background-color: transparent;
-	
-}
-
-.bottomContentHolder{
-	position: absolute;
-	margin: auto;
-	width: 85%;
-	left:0;
-	right:0;
-	top:0;
-	margin-top: 0;
-	background-color: transparent;		
-}
-.bottomContentStyle{
-    font-size: 1rem;
-	position: absolute;
-	margin: auto;
-	width: 85%;
-	left:0;
-	right:0;
-	top:0;
-	margin-top: 0;
-
-	background-color: transparent;	
-	text-align: left;
-
-	font-family:Constantina, Georgia, 'Nimbus Roman No9 L', serif;		
-	font-family:'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
-	font-family:'Bookman Old Style', Bookman, 'URW Bookman L', 'Palatino Linotype', serif;
-	
-
-	height: 50%;
-
-    text-shadow: 0 0.5px 0 #ddd;
-}
-#flipperContentHolder{
-    background-color: transparent;
-    top: 0;
-}
-span{
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-footer{
-	position: absolute;
-	margin: auto;
-	height: 15%;
-	width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
-	left: 0;
-	right: 0;
-    bottom: 0;
-	background: transparent;
-    border-top: 1px solid gray;
-    box-sizing: border-box;
-}
-.div-wrapper {
-    position: absolute;
-    height: 10%;
-    width: 100%;
-    bottom: 0;
-}
-
-.div-wrapper img {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    bottom: 0;
-}
-
-#shroud{
-	font-size: 2.1rem;
-	line-height: 150%;
-	z-index: 5;
-	position: absolute;
-	width: 100%;
-	padding-left: 32%;
-	padding-top: 5rem;
-    box-sizing: border-box;	
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	user-select: none;
-	color: #efefef;
-	text-shadow: 0 1px 0 black;
-	opacity: 1;
-	visibility: visible;
-	transition: opacity 1s ease, visibility 1s ease, background 1s ease;
-	background: #222 url(img/WhaleFlip.jpg) no-repeat center;
-	background-size: contain;	
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background-image: url(img/frame.png), url(img/101Linden/porch.jpg);
+    background-color: rgb(86, 91, 95);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
 }
