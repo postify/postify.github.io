@@ -126,8 +126,32 @@ c.handlePageTouched = function handlePageTouched(eventObject){
             L.fillBottom(m.currentPage, v.flipperContentHolder);  
         }
     }
-    
 };
+c.fillMovingFlipper = function fillMovingFlipper(location){
+    if(location === m.UP){
+        L(v.flipper)
+            .styles
+                ("transform: rotateX(180deg)")
+                ("background-location: bottom");
+        L(v.flipperContentHolder)
+            .styles
+                ("transform: rotateX(180deg)")
+                ("background-location: bottom");
+        L.fillTop(m.currentPage, v.flipperContentHolder);
+    }
+    else if(location === m.DOWN){
+        L(v.flipper)
+            .styles
+                ("transform: rotateX(0deg)")
+                ("background-location: top"); 
+        L(v.flipperContentHolder)
+            .styles
+                ("transform: rotateX(0deg)")
+                ("background-location: top");                
+        L.fillBottom(m.currentPage, v.flipperContentHolder);  
+    }    
+    
+}
 
 L.handleFlipperCrossedCenter = function handleFlipperCrossedCenter(){
     if(m.flipperCrossedCenter ){

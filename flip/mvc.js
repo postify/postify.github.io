@@ -335,7 +335,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     m.priorAngle = m.currentAngle;                    
                     m.currentAngle = 180;
                     c.flipAndShade();
-                    L.fillTop(m.currentPage, v.topContentHolder);
+                    //L.fillTop(m.currentPage, v.topContentHolder);
+                    c.fillMovingFlipper(m.UP);
                     clearInterval(m.flipperTimerId);
                     c.setFinalFLipperStatus();
                 }
@@ -424,9 +425,21 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 }
             }
         }
-        //if flipping is complete, unshade the pages
+        /*
+        m.flipperCrossedCenter = false;    
+         */
+         if(m.flipperCrossedCenter){
+             m.flipperCrossedCenter = false;
+            if(m.currentAngle > 90){
+                c.fillMovingFlipper(m.UP);
+            }
+            else if(m.currentAngle <= 90){
+                c.fillMovingFlipper(m.DOWN);        
+            }             
+         }
     }, m.flipTimerInterval);
     //--------------------------//
+
 };
 c.setFinalFLipperStatus = function setFinalFLipperStatus(){
     m.busyFlipping = false;
