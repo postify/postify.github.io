@@ -26,7 +26,7 @@ m.flipperCrossedCenter = false;
 m.crossingDirection = m.UP;
 
 //constants, most in camel case:
-m.testVersion = 27;
+m.testVersion = 28;
 m.UP = "up";
 m.DOWN = "down";
 m.appWidthMax = 450; // in pixels
@@ -104,13 +104,13 @@ c.initialize = function initialize(){
     }, m.splashTime * 750);
     
     //Hide the flipper:
-    L(v.flipper).styles("visibility: hidden");
+    //L(v.flipper).styles("visibility: hidden");
 
-    //Continually show the model's state variables:
+    //Continually check on things, etc.:
     setTimeout(()=>{
         L(v.flipper).styles("visibility: hidden");        
         setInterval(()=>{
-            if(m.fingerFlipping || m.autoFlipping){
+            if(m.fingerFlipping || m.autoFlipping || m.firmlyPressed){
                 //put proper half of page in the flipper:
                 if(m.started === m.UP && m.currentLocation === m.UP){
                     L.fillTop(m.currentPage, v.flipperContentHolder);
@@ -132,6 +132,7 @@ c.initialize = function initialize(){
             c.updateModel(fakeEventObject, c.updateView);
         },100);
     }, 500);
+    
     
 };
 //-----| END of INITIALIZE |------// 
@@ -160,7 +161,6 @@ c.updateModel = function updateModel(eventObject, updateView){
     let finalAngle = (m.currentAngle === 0 || m.currentAngle === 180);
     
     //Record flipper crossing
-    
     let halfHeight = window.innerHeight/2;
     if (m.currentY > halfHeight && m.priorY <= halfHeight && (m.firmlyPressed || m.autoFlipping)){
         m.flipperCrossedCenter = true;
@@ -312,7 +312,7 @@ c.adjustForScreenSize = function adjustForScreenSize(eventObject){
 c.flipAutomatically = function flipAutomatically(eventObject){
     if ( !m.autoFlipping  || m.busyFlipping ){return;}
     m.busyFlipping = true;
-
+    L.handleFlipperCrossedCenter(eventObject);
      /**
         1.) if started up and moving up: continue up
         2.) if started up and moving down
@@ -325,22 +325,28 @@ c.flipAutomatically = function flipAutomatically(eventObject){
     */
     m.flipperTimerId = setInterval(function(){
         if(m.started === m.UP){
+            // 1.) if started up and moving up: continue up
             if ( m.direction === m.UP){
                 m.priorAngle = m.currentAngle;
                 m.currentAngle += m.angularStep;
+                L.handleFlipperCrossedCenter(eventObject);       
                 c.flipAndShade();                    
                 if (m.currentAngle >= 180){
                     m.priorAngle = m.currentAngle;                    
                     m.currentAngle = 180;
-                    c.flipAndShade();                    
+                    c.flipAndShade();
+                    L.fillTop(m.currentPage, v.topContentHolder);
                     clearInterval(m.flipperTimerId);
                     c.setFinalFLipperStatus();
                 }
             }
+            // 2.) if started up and moving down
             else if ( m.direction === m.DOWN){
+                // a.) if angle <= 120, keep going down
                 if(m.currentAngle <= 120){
                     m.priorAngle = m.currentAngle;                    
                     m.currentAngle -= m.angularStep;
+                    L.handleFlipperCrossedCenter(eventObject);                           
                     c.flipAndShade();                    
                     if (m.currentAngle <=0){
                         m.priorAngle = m.currentAngle;                        
@@ -350,14 +356,17 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         c.setFinalFLipperStatus();                        
                     }
                 }
+                // b.) if angle > 120, fall back up
                 else if(m.currentAngle > 120){
                     m.priorAngle = m.currentAngle;                    
                     m.currentAngle += m.angularStep;
+                    L.handleFlipperCrossedCenter(eventObject);                           
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 180;
-                        c.flipAndShade();                        
+                        c.flipAndShade();
+                        L.fillTop(m.currentPage, v.topContentHolder);
                         clearInterval(m.flipperTimerId);
                         c.setFinalFLipperStatus();                       
                     }
@@ -366,22 +375,28 @@ c.flipAutomatically = function flipAutomatically(eventObject){
         }
         //-----------------------------
         if(m.started === m.DOWN){
+            // 3.) if started down and moving down: continue down
             if ( m.direction === m.DOWN){
                 m.priorAngle = m.currentAngle;                
                 m.currentAngle -= m.angularStep;
+                L.handleFlipperCrossedCenter(eventObject);                       
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
                     m.priorAngle = m.currentAngle;
                     m.currentAngle = 0;
-                    c.flipAndShade();                    
+                    c.flipAndShade();
+                    L.fillBottom(m.currentPage, v.bottomContentHolder);
                     clearInterval(m.flipperTimerId);
                     c.setFinalFLipperStatus();                   
                 }
             }
+            // 4.) if started down and moving up
             else if ( m.direction === m.UP){
+                // a.) if angle > 60, keep going up
                 if(m.currentAngle > 60){
                     m.priorAngle = m.currentAngle;                    
                     m.currentAngle += m.angularStep;
+                    L.handleFlipperCrossedCenter(eventObject);                      
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.priorAngle = m.currentAngle;                        
@@ -391,26 +406,24 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         c.setFinalFLipperStatus();                        
                     }
                 }
+                //  b.) if angle <= 60, fall back down
                 else if ( m.currentAngle <= 60){
                     m.priorAngle = m.currentAngle;                    
                     m.currentAngle -= m.angularStep;
+                    L.handleFlipperCrossedCenter(eventObject);                      
                     c.flipAndShade();                    
                     if (m.currentAngle <= 0){
                         m.priorAngle = m.currentAngle;                        
                         m.currentAngle = 0;
-                        c.flipAndShade();                        
+                        c.flipAndShade();
+                        L.fillBottom(m.currentPage, v.bottomContentHolder);
                         clearInterval(m.flipperTimerId);
                         c.setFinalFLipperStatus();
+                        
                     }
                 }
             }
         }
-        /**
-            3.) if started down and moving down: continue down
-            4.) if started down and moving up
-                a.) if angle > 60, keep going up
-                b.) if angle <= 60, fall back down
-        */
         //if flipping is complete, unshade the pages
     }, m.flipTimerInterval);
     //--------------------------//
