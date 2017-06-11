@@ -55,11 +55,11 @@ let c = {};
 c.nextPage = function nextPage(){
     let pageNumber;
     //if the next page exceeds the largest index, point to page 0
-    if(m.currentPage +1 >= m.numberOfPages){
+    if(m.currentPage + 1 >= m.numberOfPages){
         pageNumber = 0;
     }
     else{
-        pageNumber = m.currentPage +1;
+        pageNumber = m.currentPage + 1;
     }
     return pageNumber;
 };
@@ -68,7 +68,7 @@ c.priorPage = function priorPage(){
     let pageNumber;
     //if the prior page goes negative, point to final page
     if(m.currentPage - 1 < 0){
-        pageNumber = m.numberOfPages -1;
+        pageNumber = m.numberOfPages - 1;
     }
     else{
         pageNumber = m.currentPage - 1;
@@ -269,10 +269,12 @@ c.showFlipper = function showFlipper(){
 c.getContentsMetaData = function getContentsMetaData(){
     let getter = new XMLHttpRequest();
     let index = 0;
+    //------------------------------------------------------//
     function fetch(index){
         getter.open("GET","contents/page." + index + "/page" + index +".json" );
         getter.send();        
     }
+    //------------------------------------------------------//
     getter.onload = function(){
         if(this.status === 200){
             m.contents.push(JSON.parse(this.response));

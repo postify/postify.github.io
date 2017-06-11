@@ -7,7 +7,7 @@
     for publishing content to get a 
     real flipboard effect when "scrolling." The Flipboard
     website and app does this only for the "big boys,"
-    and not for regular articles blog posts.
+    and not for regular articles and blog posts.
 */
 
 //From file L.js:
