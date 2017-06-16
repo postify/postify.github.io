@@ -20,6 +20,10 @@ window.onload = function(){
            c.updateModel(event, c.updateView);
         });        
     });
+    
+    document.getElementById('player').onended = function(){
+        alert("song ended");
+    };
 };
 
 
