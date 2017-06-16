@@ -2,6 +2,22 @@
 /*global L*/
 
 //=============================//
+//==========| VIEW |===========//
+//=============================//
+var v = {}; 
+L.attachAllElementsById(v);
+v.window = this;
+v.window.id = "window";
+v.clearAllText = function clearAllText(){
+    v.txtMusicFile.value = "";
+    v.txtPictureFile.value = "";
+    v.txtDeleteFile.value = "";    
+    v.filesInfo.innerHTML = "";
+};
+
+
+
+//=============================//
 //=========| STARTUP|==========//
 //=============================//
 window.onload = function(){
@@ -42,19 +58,6 @@ m.tuneToPixFilename = "tuneToPix.txt";
 m.metaDataArray = [];
 m.chooserPrompt = "Select a Song";
 
-//=============================//
-//==========| VIEW |===========//
-//=============================//
-var v = {}; 
-L.attachAllElementsById(v);
-v.window = this;
-v.window.id = "window";
-v.clearAllText = function clearAllText(){
-    v.txtMusicFile.value = "";
-    v.txtPictureFile.value = "";
-    v.txtDeleteFile.value = "";    
-    v.filesInfo.innerHTML = "";
-};
 
 //=============================//
 //=======| CONTROLLER |========//
