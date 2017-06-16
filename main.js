@@ -37,9 +37,18 @@ window.onload = function(){
         });        
     });
     
-    document.getElementById('player').onended = function(){
-        alert("song ended");
-    };
+    v.player.addEventListener('ended', e =>{
+        let maxIndex = v.chooser.options.length - 1;
+        if(v.chooser.selectedIndex === maxIndex){
+            v.chooser.selectedIndex = 1;
+        }
+        else{
+           v.chooser.selectedIndex += 1; 
+        }
+        v.player.src = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value;
+        v.player.play();
+    });
+
 };
 
 
