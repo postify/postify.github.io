@@ -56,6 +56,11 @@ v.clearAllText = function clearAllText(){
 //=======| CONTROLLER |========//
 //=============================//
 var c = {};
+c.showEvent = function showEvent(e){
+    let id = e.target.id;
+    let type = e.type;
+    v.msg.innerHTML = `${id}, ${type}`;
+};
 c.initialize = function initialize(){
     //------| check for, and use localstorage |-------//
     if(window.localStorage){
@@ -145,8 +150,8 @@ c.updateModel = function(e, updateView){
     var id = source.id; //id of event source
     var type = e.type; //type of event
     
-    showEvent(e);
-    updateView(e);
+
+ 
     m.musicFolderExists;//???
     if(type === "ended" && source === v.player){
         let maxIndex = v.chooser.options.length - 1;
@@ -160,9 +165,13 @@ c.updateModel = function(e, updateView){
         v.player.play();
     }
     //----| helpers |----//
-    function showEvent(e){
+    c.showEvent = function showEvent(e){
         v.msg.innerHTML = `${id}, ${type}`;
-    }
+    };
+    //----------------------------//
+   c.showEvent(e);    
+   updateView(e);    
+    
 };
 
 //-----| UPDATE view |----// 
