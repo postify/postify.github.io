@@ -217,7 +217,7 @@ a.makeFolder = a.createFolder;
 
 a.saveMusicFile = function(rawFile){
     //have to make raw file into a blob
-    rawFile = new window.Blob([rawFile], {type: ''});
+    //rawFile = new window.Blob([rawFile], {type: ''});
     a.uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
 };
 
