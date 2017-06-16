@@ -116,7 +116,25 @@ c.initialize = function initialize(){
                 //-----------------------------------
             }
         });
-    }     
+    }
+    //============| load music list in dropdown chooser |===================//
+        m.metaDataArray = []; //clear old metadata from array
+        a.getFilesMetaData(a.localFileMetaDataName, function(data){
+            var list = "";
+            data.forEach(dataObject=>{
+                //list += dataObject.name + '\n';
+                var objectInfo = `name: ${dataObject.name}\nid: ${dataObject.id}\nalbumart: ${dataObject.description}\n\n`;
+                list += objectInfo;
+                m.metaDataArray.push({
+                    filename: dataObject.name,
+                    fileId: dataObject.id,
+                    relatedFilename: dataObject.description
+                });
+            });
+            console.log(list);
+            L.fillMusicChooser();
+        });    
+    //=====================================================================//
 };
 
 //-----| UPDATE model |---//
@@ -204,7 +222,7 @@ c.updateView = function(e){
             //},2000);
         }
         else if(source === v.btnGetMetaData){
-            m.metaDataArray = []; //clear old metadate=a from array
+            m.metaDataArray = []; //clear old metadata from array
             a.getFilesMetaData(a.localFileMetaDataName, function(data){
                 var list = "";
                 data.forEach(dataObject=>{
