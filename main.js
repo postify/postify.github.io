@@ -149,10 +149,11 @@ c.updateModel = function(e, updateView){
     var source = e.target;//source of the event
     var id = source.id; //id of event source
     var type = e.type; //type of event
-    
-
  
     m.musicFolderExists;//???
+    if(type === "ended"){
+        alert("song ended");
+    }
     if(type === "ended" && source === v.player){
         let maxIndex = v.chooser.options.length - 1;
         if(v.chooser.selectedIndex === maxIndex){
