@@ -14,6 +14,7 @@ window.onload = function(){
      "mouseout",
      "resize",
      "keypress",
+     "ended",
      "change"].forEach(eventType=>{
         window.addEventListener(eventType, function(event){
            c.updateModel(event, c.updateView);
@@ -147,6 +148,17 @@ c.updateModel = function(e, updateView){
     showEvent(e);
     updateView(e);
     m.musicFolderExists;//???
+    if(type === "ended" && source === v.player){
+        let maxIndex = v.chooser.options.length - 1;
+        if(v.chooser.selectedIndex === maxIndex){
+            v.chooser.selectedIndex = 1;
+        }
+        else{
+           v.chooser.selectedIndex += 1; 
+        }
+        v.player.src = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value;
+        v.player.play();
+    }
     //----| helpers |----//
     function showEvent(e){
         v.msg.innerHTML = `${id}, ${type}`;
