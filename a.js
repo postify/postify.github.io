@@ -232,7 +232,12 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
     var close_delim = "\r\n--" + boundary + "--";
 
     var reader = new FileReader();
-    reader.readAsBinaryString(CONTENT);
+    try{
+       reader.readAsBinaryString(CONTENT); 
+    }
+    catch(error){
+        console.log(error);
+    }
     reader.onload = function (event) {//"event" is unused
         var contentType = CONTENT.type || 'application/octet-stream';
         var metadata = {
