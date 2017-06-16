@@ -216,10 +216,13 @@ a.authorizeAndPerform = function authorizeAndPerform(callBack){
 a.makeFolder = a.createFolder;
 
 a.saveMusicFile = function(rawFile){
+    //have to make raw file into a blob
+    rawFile = new window.Blob([rawFile], {type: ''});
     a.uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
 };
 
 a.savePictureFile = function(rawFile){
+    //have to make raw file into a blob
     a.uploadFile(rawFile, m.chosenPictureFilename, a.pictureFolderId);
 };
 
