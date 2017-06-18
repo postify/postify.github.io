@@ -327,8 +327,8 @@ c.updateView = function(e){
                 let musicFile = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value
                 v.player.src = musicFile;
                 v.player.play();
-                //---------//
-                var musicBlob = new window.Blob([musicFi],{type: "audio/*"});
+                //----------------------//
+                var musicBlob = new window.Blob([musicFile],{type: "audio/*"});
                 let src = window.URL.createObjectURL(musicBlob);
                 c.getPictureFromMp3(src, function(picture, base64String){
                    v.image.src = picture;
