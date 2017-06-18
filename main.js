@@ -328,11 +328,12 @@ c.updateView = function(e){
                 v.player.src = musicFile;
                 v.player.play();
                 //---------//
+                //var musicBlob = new window.Blob([musicFile],{type: "audio/*"});
+                var musicBlob = new window.Blob([musicFile],{type: ""});
                 
-                var musicBlob = new window.Blob([musicFile],{type: "audio/*"});
-                
-                c.getPictureFromMp3(musicFile, function(picture){
+                c.getPictureFromMp3(musicBlob, function(picture, base64String){
                     v.image.src = picture;
+                    
                 });
             }
         }
@@ -386,7 +387,7 @@ c.getPictureFromMp3 = function(url, yea, nay){
         var base64String = "";
         image.data.forEach(function (datum){ base64String += String.fromCharCode(datum) });
         var pictureData = "data:" + image.format + ";base64," + window.btoa(base64String);
-        if(yea){yea(pictureData);}
+        if(yea){yea(pictureData, base64String);}
       }
       else{//no image
         if(nay){nay();}
