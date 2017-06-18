@@ -5,9 +5,10 @@
 //==========| VIEW |===========//
 //=============================//
 var v = {}; 
-L.attachAllElementsById(v);
 v.window = this;
 v.window.id = "window";
+L.attachAllElementsById(v);
+
 v.clearAllText = function clearAllText(){
     v.txtMusicFile.value = "";
     v.txtPictureFile.value = "";
@@ -323,8 +324,11 @@ c.updateView = function(e){
         }
         if(id === "chooser"){
             if(v.chooser.selectedIndex !== 0){
-                v.player.src = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value;
+                let musicFile = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value
+                v.player.src = musicFile;
                 v.player.play();
+                //---------//
+                var musicContent = new window.Blob([musicFile],{type: "audio/*"});
             }
         }
     }
@@ -357,3 +361,37 @@ L.fillMusicChooser = ()=>{
         }
     });
 };
+
+//==================================================//
+c.getPictureFromMp3 = function(url, yea, nay){
+  var jsmediatags = window.jsmediatags  ;
+  if(!jsmediatags){
+    console.log("Can't find the 'jsmediatags' object.");
+    console.log("Try https://github.com/aadsm/jsmediatags/tree/master/dist");
+    return;
+  }
+  // url from local host
+  jsmediatags.read(url, {
+    onSuccess: function(tag) {
+      console.log(tag);
+      let tags = tag.tags;
+      //========================//
+      var image = tags.picture;
+      if (image) {
+        var base64String = "";
+        image.data.forEach(function (datum){ base64String += String.fromCharCode(datum) });
+        var pictureData = "data:" + image.format + ";base64," + window.btoa(base64String);
+        if(yea){yea(pictureData);}
+      }
+      else{//no image
+        if(nay){nay();}
+      }       
+      //=========================//
+    },
+    onError: function(error) {
+      console.log(error);
+      return null;
+    }
+  });
+};
+//======| END getPictureFromMp3 |=================//
