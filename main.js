@@ -328,18 +328,11 @@ c.updateView = function(e){
                 v.player.src = musicFile;
                 v.player.play();
                 //---------//
-                var ajax = new XMLHttpRequest();
-                ajax.responseType = 'blob';
-                ajax.open('GET', musicFile);
-                ajax.send();                
-                ajax.onload = function(){
-                   if(ajax.status === 200){
-                     var musicBlob = new window.Blob([ajax.response],{type: "audio/*"});
-                     c.getPictureFromMp3(musicBlob, function(picture, base64String){
-                        v.image.src = picture;
-                     });                         
-                   }
-                 }
+                var musicBlob = new window.Blob([musicFi],{type: "audio/*"});
+                let src = window.URL.createObjectURL(musicBlob);
+                c.getPictureFromMp3(src, function(picture, base64String){
+                   v.image.src = picture;
+                });
             }
         }
     }
