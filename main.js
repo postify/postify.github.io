@@ -328,7 +328,10 @@ c.updateView = function(e){
                 v.player.src = musicFile;
                 v.player.play();
                 //---------//
-                var musicContent = new window.Blob([musicFile],{type: "audio/*"});
+                var musicBlob = new window.Blob([musicFile],{type: "audio/*"});
+                c.getPictureFromMp3(musicBlob, function(picture){
+                    v.image.src = picture;
+                });
             }
         }
     }
