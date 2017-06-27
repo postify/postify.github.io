@@ -326,9 +326,9 @@ c.updateView = function(e){
                 v.player.src = musicFile;
                 v.player.play();
                 //----------------------//
+                /*                
                 var musicBlob = new window.Blob([musicFile],{type: "audio/*"});
                 let src = window.URL.createObjectURL(musicBlob);
-                
                 c.getPictureFromMp3(src, function(picture, base64String){
                    v.image.src = picture;
                 });
