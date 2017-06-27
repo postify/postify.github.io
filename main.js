@@ -328,9 +328,11 @@ c.updateView = function(e){
                 //----------------------//
                 var musicBlob = new window.Blob([musicFile],{type: "audio/*"});
                 let src = window.URL.createObjectURL(musicBlob);
+                
                 c.getPictureFromMp3(src, function(picture, base64String){
                    v.image.src = picture;
                 });
+                */
                 //=======================| try to get the actual file contents |====================//
                 //"https://drive.google.com/uc?export=download&id=";
                 const contentsPath = 'https://www.googleapis.com/drive/v3/files/' +
