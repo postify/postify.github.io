@@ -339,7 +339,7 @@ c.updateView = function(e){
                 v.chooser.options[v.chooser.selectedIndex].value +
                 'music?alt=media';
                 let contentsGetter = new XMLHttpRequest();
-                contentsGetter("GET", contentsPath);
+                contentsGetter.open("GET", contentsPath);
                 contentsGetter.send();
                 contentsGetter.onload = ()=>{alert(contentsGetter.status)};
                 //==================================================================================//
