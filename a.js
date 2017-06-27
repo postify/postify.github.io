@@ -155,14 +155,16 @@ a.getFileContents = function(ID = "dummyID", callback){
     function getFile(){
         var request = gapi.client.drive.files.get({
             'fileId': ID,
-            'alt': 'media'
+            //'alt': 'media'
         });
         request.execute(function(response, raw) {
             v.txtFileContentId.value = "";
             console.log(
             `Raw Data: ${raw}
              Response: ${response}`);
-             callback(response, raw);
+             if(callback){
+                callback(response, raw);
+             }
         });
     }
 };
