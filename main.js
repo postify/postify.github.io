@@ -254,11 +254,9 @@ c.updateView = function(e){
             v.pictureFileElement.click();
         }
         else if(source === v.btnGetFileContents){
-            //setTimeout(function(){
-                a.getFileContents(v.txtFileContentId.value, function(res, raw){
-                    alert('response: ' + res + '\nraw data: '+ raw);
-                });                
-            //},2000);
+            a.getFileContents(v.txtFileContentId.value, function(res, raw){
+                alert('response: ' + res + '\nraw data: '+ raw);
+            }); 
         }
         else if(source === v.btnGetMetaData){
             m.metaDataArray = []; //clear old metadata from array
@@ -343,7 +341,7 @@ c.updateView = function(e){
                 let contentsGetter = new XMLHttpRequest();
                 contentsGetter.open("GET", contentsPath);
                 contentsGetter.send();
-                contentsGetter.onload = ()=>{alert(contentsGetter.status)};
+                //contentsGetter.onload = ()=>{alert(contentsGetter.status)};//403 error: forbidden access!
                 //==================================================================================//
             }
         }
