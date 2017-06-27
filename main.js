@@ -256,7 +256,7 @@ c.updateView = function(e){
         else if(source === v.btnGetFileContents){
             //setTimeout(function(){
                 a.getFileContents(v.txtFileContentId.value, function(res, raw){
-                    alert(res);
+                    alert('response: ' + res + '\nraw data: '+ raw);
                 });                
             //},2000);
         }
