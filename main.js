@@ -52,8 +52,6 @@ window.onload = function(){
 
 };
 
-
-
 //=============================//
 //=========| MODEL |===========//
 //=============================//
@@ -324,7 +322,7 @@ c.updateView = function(e){
         }
         if(id === "chooser"){
             if(v.chooser.selectedIndex !== 0){
-                let musicFile = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value
+                let musicFile = m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value;
                 v.player.src = musicFile;
                 v.player.play();
                 //----------------------//
@@ -333,6 +331,16 @@ c.updateView = function(e){
                 c.getPictureFromMp3(src, function(picture, base64String){
                    v.image.src = picture;
                 });
+                //=======================| try to get the actual file contents |====================//
+                //"https://drive.google.com/uc?export=download&id=";
+                const contentsPath = 'https://www.googleapis.com/drive/v3/files/' +
+                v.chooser.options[v.chooser.selectedIndex].value +
+                'music?alt=media';
+                let contentsGetter = new XMLHttpRequest();
+                contentsGetter("GET", contentsPath);
+                contentsGetter.send();
+                contentsGetter.onload = ()=>{alert(contentsGetter.status)};
+                //==================================================================================//
             }
         }
     }
