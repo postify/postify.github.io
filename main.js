@@ -255,7 +255,9 @@ c.updateView = function(e){
         }
         else if(source === v.btnGetFileContents){
             //setTimeout(function(){
-                a.getFileContents(v.txtFileContentId.value);                
+                a.getFileContents(v.txtFileContentId.value, function(res, raw){
+                    alert(res);
+                });                
             //},2000);
         }
         else if(source === v.btnGetMetaData){

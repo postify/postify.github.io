@@ -148,7 +148,7 @@ a.getFile = function(ID = "dummyID"){
     }
 };
 
-a.getFileContents = function(ID = "dummyID"){
+a.getFileContents = function(ID = "dummyID", callback){
     a.authorizeAndPerform(getFile);    
     //-----| callback for getting file |----//
     //var token = gapi.auth.getToken().access_token;
@@ -162,6 +162,7 @@ a.getFileContents = function(ID = "dummyID"){
             console.log(
             `Raw Data: ${raw}
              Response: ${response}`);
+             callback(response, raw);
         });
     }
 };
@@ -302,7 +303,7 @@ a.filesMetaData = {};
     "getFilesMetaData" first checks localStorage,
     failing that, goes to googleDrive for the files metadata
     for this app, stores it in a.filesMetaData as well as in localStorage
-    If the metaDate comes from local storage, JSON.parse() must first be applied
+    If the metaData comes from local storage, JSON.parse() must first be applied
     since it is assumed it was placed there after JSON.stringify();
 */
 a.getFilesMetaData = function (localStorageName, actOnMetaData){
@@ -321,7 +322,7 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
          }    
     }
     //---------------------------     
-    if(!!window.localStorage){
+    if(window.localStorage){
         if(window.localStorage.getItem(localStorageName)){
             if(actOnMetaData){
                 actOnMetaData(  JSON.parse(window.localStorage.getItem(localStorageName))  );
