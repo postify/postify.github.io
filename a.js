@@ -156,6 +156,7 @@ a.getFileContents = function(ID = "dummyID", callback){
         var request = gapi.client.drive.files.get({
             'fileId': ID
             //,'alt': 'media'//THIS property caused the error (now commented out)
+            ,'encoding' : null
         });
         request.execute(function(response, raw) {
             v.txtFileContentId.value = "";
