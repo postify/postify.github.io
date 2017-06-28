@@ -256,8 +256,8 @@ c.updateView = function(e){
         else if(source === v.btnGetFileContents){
             a.getFileContents(v.txtFileContentId.value, function(response, raw){
                 try{
-                    alert(Object.keys(response.result));
-                    var musicContent = new window.Blob([response.result],{type: "audio/mp3"});
+                    alert(Object.keys(response.result.type));
+                    var musicContent = new window.Blob([response.result.type],{type: "audio/mp3"});
                     //var url = window.URL.createObjectURL(musicContent);
                     c.getPictureFromMp3(musicContent, function(pictureData){
                         L(v.image)
