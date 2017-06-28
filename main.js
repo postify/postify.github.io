@@ -261,7 +261,7 @@ c.updateView = function(e){
                 c.getPictureFromMp3(src, function(pictureData){
                     L(v.image)
                         .styles
-                            ("background: url(" + src + ") no-repeat center")
+                            ("background: url(" + pictureData + ") no-repeat center")
                             ("background-size: cover")
                     ;
                 }); 
