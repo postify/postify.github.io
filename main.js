@@ -198,7 +198,7 @@ c.updateView = function(e){
     var id = source.id; //id of event source    
     var type = e.type;
 
-    function deleteOLdTuneToPix(callback){
+    function deleteOldTuneToPix(callback){
         a.allFilesArray.forEach(file=>{
             if(file.name === m.tuneToPixFilename){
                 a.deleteFile(file.id);
@@ -244,7 +244,7 @@ c.updateView = function(e){
                 b.) then execute the callback saveNewTuneToPix to replace them
                 c.) then execute the next callback getNewTuneToPixFileId to record the new fileId
             */
-            deleteOLdTuneToPix(saveNewTuneToPix);
+            deleteOldTuneToPix(saveNewTuneToPix);
           
         }
         else if(source === v.btnChooseMusic){
@@ -254,8 +254,17 @@ c.updateView = function(e){
             v.pictureFileElement.click();
         }
         else if(source === v.btnGetFileContents){
-            a.getFileContents(v.txtFileContentId.value, function(res, raw){
-                alert('response: ' + res + '\nraw data: '+ raw);
+            a.getFileContents(v.txtFileContentId.value, function(response, raw){
+                alert('response: ' + response + '\nraw data: '+ raw);
+                var musicContent = new window.Blob([response],{type: "audio/*"});
+                var src = window.URL.createObjectURL(musicContent);
+                c.getPictureFromMp3(src, function(pictureData){
+                    L(v.image)
+                        .styles
+                            ("background: url(" + src + ") no-repeat center")
+                            ("background-size: cover")
+                    ;
+                }); 
             }); 
         }
         else if(source === v.btnGetMetaData){
