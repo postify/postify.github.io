@@ -258,7 +258,7 @@ c.updateView = function(e){
 
                 try{
                     //var musicContent = new window.Blob([response.result],{type: "audio/mp3"});                    
-                    var musicContent = new window.Blob([response],{type: ""});
+                    var musicContent = new window.Blob([response],{type: "audio/mp3"});
                     var url = window.URL.createObjectURL(musicContent);
                     c.getPictureFromMp3(musicContent, function(pictureData){
                         L(v.image)
