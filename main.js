@@ -258,7 +258,7 @@ c.updateView = function(e){
                 alert('keys of response.result.kind[0]:  ' + Object.keys(response.result.kind[0]));                
                 alert('response: ' + response + '\nraw data: '+ raw);
                 //var musicContent = new window.Blob([response.result],{type: "audio/mp3"});
-                var musicContent = new window.Blob([response.result.kind],{type: "audio/mp3"});
+                var musicContent = new window.Blob([response],{type: "audio/mp3"});
                 var url = window.URL.createObjectURL(musicContent);
                 c.getPictureFromMp3(response, function(pictureData){
                     L(v.image)
