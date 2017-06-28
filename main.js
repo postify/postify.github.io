@@ -258,8 +258,8 @@ c.updateView = function(e){
                 alert('response: ' + response + '\nraw data: '+ raw);
                 var musicContent = new window.Blob([response.result],{type: "audio/mp3"});
                 var url = window.URL.createObjectURL(musicContent);
-                alert('response keys: ' + Object.keys(response));
-                c.getPictureFromMp3(musicContent, function(pictureData){
+                alert('response.result:  ' + response.result);
+                c.getPictureFromMp3(url, function(pictureData){
                     L(v.image)
                         .styles
                             ("background: url(" + pictureData + ") no-repeat center")
