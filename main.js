@@ -271,6 +271,11 @@ c.updateView = function(e){
                 }
                 catch(error){
                     console.log(error);
+                    L(v.image)
+                        .styles
+                            ("background: url(YourMusic.png) no-repeat center")
+                            ("background-size: cover")
+                    ;
                 }
             }); 
         }
