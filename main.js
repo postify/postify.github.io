@@ -257,8 +257,8 @@ c.updateView = function(e){
             a.getFileContents(v.txtFileContentId.value, function(response, raw){
                 try{
                     alert(Object.keys(response));
-                    var musicContent = new window.Blob([raw],{type: "audio/mp3"});
-                    //var url = window.URL.createObjectURL(musicContent);
+                    var btoa = window.btoa(response);
+                    var musicContent = new window.Blob([btoa],{type: "audio/mp3"});
                     c.getPictureFromMp3(musicContent, function(pictureData){
                         L(v.image)
                             .styles
