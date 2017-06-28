@@ -256,9 +256,9 @@ c.updateView = function(e){
         else if(source === v.btnGetFileContents){
             a.getFileContents(v.txtFileContentId.value, function(response, raw){
                 try{
-                    alert(Object.keys(response));
-                    var btoa = window.btoa(response);
-                    var musicContent = new window.Blob([btoa],{type: "audio/mp3"});
+                    //alert(Object.keys(response));
+                    //var btoa = window.btoa(response);
+                    var musicContent = new window.Blob([response],{type: "audio/mp3"});
                     c.getPictureFromMp3(musicContent, function(pictureData){
                         L(v.image)
                             .styles
@@ -410,6 +410,7 @@ c.getPictureFromMp3 = function(url, yea, nay){
     onSuccess: function(tag) {
       console.log(tag);
       let tags = tag.tags;
+      alert(Object.keys(tags));
       //========================//
       var image = tags.picture;
       if (image) {
