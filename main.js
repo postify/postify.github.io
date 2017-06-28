@@ -260,7 +260,8 @@ c.updateView = function(e){
                 var musicContent = new window.Blob([response.result],{type: "audio/mp3"});
                 var url = window.URL.createObjectURL(musicContent);
  
-                c.getPictureFromMp3(url, function(pictureData){
+                c.getPictureFromMp3( m.googleMusicSource + v.chooser.options[v.chooser.selectedIndex].value, function(pictureData){
+                //c.getPictureFromMp3(url, function(pictureData){
                     L(v.image)
                         .styles
                             ("background: url(" + pictureData + ") no-repeat center")
