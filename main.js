@@ -255,7 +255,7 @@ c.updateView = function(e){
         }
         else if(source === v.btnGetFileContents){
             a.getFileContents(v.txtFileContentId.value, function(response, raw){
-                alert('keys of response.result.kind:  ' + Object.keys(response.result.kind));                
+                alert('keys of response.result.kind[0]:  ' + Object.keys(response.result.kind[0]));                
                 alert('response: ' + response + '\nraw data: '+ raw);
                 var musicContent = new window.Blob([response.result],{type: "audio/mp3"});
                 var url = window.URL.createObjectURL(musicContent);
