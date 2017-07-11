@@ -7,6 +7,14 @@
 /*global v*/
 /*global m*/
 
+/**
+    secret and client id for sweetspot.glitch.com:
+    
+    Dj5FJf5BXLnqQhDP2ozfzs9I
+    
+    645142504795-m7qg1ei4832vrn8b1qm5t4sg9r684hvg.apps.googleusercontent.com
+*/
+
 var a = {};
 a.authToken = {
     client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
@@ -153,6 +161,7 @@ a.getFileContents = function(ID = "dummyID", callback){
     //-----| callback for getting file |----//
     //var token = gapi.auth.getToken().access_token;
     function getFile(){
+        //https://www.googleapis.com/drive/v3/files/fileId/export
         var request = gapi.client.drive.files.get({
             'fileId': ID
             //,'alt': 'media'//THIS property caused the error (now commented out)

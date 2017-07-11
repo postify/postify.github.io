@@ -1,5 +1,6 @@
 /*global a*/
 /*global L*/
+//https://developers.google.com/api-client-library/javascript/
 //https://gist.github.com/mkaminsky11/8624150
 //=============================//
 //==========| VIEW |===========//
@@ -96,7 +97,7 @@ c.initialize = function initialize(){
     function verifyFolders(){
         a.showFiles(function(){
             var requiredFolders = a.allFilesArray.filter(file=>{
-                var properFolder = !!(file.name === a.musicFolderName || file.name === a.pictureFolderName);
+                var properFolder = !!(file.name === a.musicFolderName);
                 return properFolder;
             });
             const bothFoldersExist =    requiredFolders.some(file=>file.name === a.musicFolderName) &&
