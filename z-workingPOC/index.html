@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <!--
+    https://developers.google.com/drive/v3/web/savetodrive
+    -->
+    <head>
+        <script src="https://apis.google.com/js/client.js"></script>
+        <!--<script src="client.js"></script>-->
+        <meta charset="utf-8">
+        <meta name="viewport" 
+            content="width=device-width
+            initial-scale=1
+            maximum-scale=1
+            minimum-scale=1
+            user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+        <title>Test Custom Google Drive API</title> 
+        <link rel="stylesheet" href="style.css">
+        <script src="prefixfree.js"></script>
+        <script src="L.js"></script>
+        <script src="a.js"></script>        
+    </head>
+    <body>
+        <input type="file" id="musicFileElement" accept=".mp3" class="hiddenFileChooser">             
+        <input type="file" id="pictureFileElement" accept="image/*" class="hiddenFileChooser">    
+        <div id="app">
+            <div id="msg" ></div>             
+            <div id="controls">
+                <img id="image" alt="Album Art">
+                <center>
+                    <button id="btnGetFileContents"  >Get File Contents</button>                    
+                    <input type="text" id="txtFileContentId" placeholder="Paste File ID here"><br>
+                    <button id="btnGetMetaData" >GET Meta Data</button><br>
+                    <button id="btnSetMetaData" >SET Meta Data</button><br>
+                </center>
+                <button id="btnChooseMusic"> Choose Music File </button><input id="txtMusicFile" type="text"><br>
+                <button id="btnChoosePicture"> Choose Picture File </button><input id="txtPictureFile" type="text"><br>
+                <button id="btnSaveFiles"> Save Files </button><br>
+
+                <audio controls id="player" src="https://drive.google.com/uc?export=download&id=0B4HC-e3WTADpZ1d3RlU5b0lZSXc"></audio><br>
+                <select id="chooser">
+                    <option value="0">Select a Song</option>
+                </select>
+                <button id="btnDeleteFile"> Delete File </button><input id="txtDeleteFile" type="text"><br>
+
+                <div id="filesInfo"></div>
+            </div>
+        </div>
+    <script src="jsmediatags.js"></script>
+    <script src="main.js"></script>   
+    </body>
+</html>

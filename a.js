@@ -2,42 +2,52 @@
     a.js is an attempt to wrap our own api around the JavaScript Google api
     to simplify using the Google Drive api
 */
+//https://developers.google.com/identity/protocols/OpenIDConnect#userinfocall
 
 /*global gapi*/
 /*global v*/
 /*global m*/
 
 /**
-    secret and client id for sweetspot.glitch.com:
-    
-    Dj5FJf5BXLnqQhDP2ozfzs9I
-    
+    client id for sweetspot.glitch.com:    
     645142504795-m7qg1ei4832vrn8b1qm5t4sg9r684hvg.apps.googleusercontent.com
+*/
+/**
+    client id for postify.github.io
+    637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com
 */
 
 var a = {};
+//======================================//
+//============| STATE DATA |============//
+//======================================//
+a.firstTime = true;
 a.authToken = {
     client_id: '637721329784-nm1n6dd1m05hgbc2o10e8hjj2md5ft59.apps.googleusercontent.com',
-    scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file',
+    scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file',    
     immediate: null
 };
-a.musicFolderName = "__music-diymusic";
-a.pictureFolderName = "__pictures-diymusic";
+a.musicFolderName = "__music-sweetspot";
 a.firstAuthRequest = true;
-a.authorized = true;
+a.authorized = false;//true;
 a.musicFolderExists = null;
 a.pictureFolderExists = null;
+
 //most recently saved music file (which hopefully contains a picture)
 a.savedPictureFile = "";
-a.musicFolderId = null;
+a.musicFolderId =  null;
 a.pictureFolderId = null;
+a.NO_PICTURE_ID = 'No picture Id';
+a.pictureId = a.NO_PICTURE_ID;
 a.allFilesArray = [];
-a.localFileMetaDataName = "diymusicFileMetaData";
 
-a.tuneToPix = {};
-a.tuneToPixFileId = null; //if first time, else
+a.localFileMetaDataName = "sweetspotFileMetaData";
 
-a.initialize = function initialize(callback){
+//======================================//
+//=============| METHODS |==============//
+//======================================//
+
+a.initialize = function initialize(callback, callbackDelay){
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', showFiles);
@@ -50,18 +60,47 @@ a.initialize = function initialize(callback){
         request.execute(handleResponse);        
         function handleResponse(response){
             a.allFilesArray = [];             
-            v.filesInfo.innerHTML = "";
             response.files.forEach(file=>{
                 a.allFilesArray.push(file);
             });
             if ( callback ){
                 setTimeout(function(){
                     callback();                    
-                },2000);
+                },callbackDelay);
             }
         }
     }
 };
+
+
+a.authorizeAndPerform = function authorizeAndPerform(callBack){
+  if(a.authorized){
+      a.authToken.immediate = true;
+  }
+  else{
+      a.authToken.immediate = false;        
+  }
+
+  gapi.auth.authorize(a.authToken, function(authResult){
+      a.handleAuthResult(authResult, callBack);
+  });
+};
+
+a.handleAuthResult = function(authResult, callBack){
+    if(authResult && ! authResult.error){
+        if(a.firstAuthRequest){
+            a.firstAuthRequest = false;
+            a.initialize();
+        }        
+        a.authorized = true;
+        callBack();
+    }
+    else{
+        a.authorized = false;
+        a.authorizeAndPerform(callBack);       
+    }
+};
+
 
 a.createFolder = function(folderName, callback){
     folderName = folderName || "New Folder";
@@ -89,8 +128,7 @@ a.createFolder = function(folderName, callback){
             else if(folderName === a.pictureFolderName){
                 a.pictureFolderId = resp.id;
                 a.pictureFolderExists = true;
-            }
-            v.clearAllText();            
+            }         
             a.showFiles();
         });
         setTimeout(function(){
@@ -99,7 +137,7 @@ a.createFolder = function(folderName, callback){
     }//--| END of internal 'createFolder' | ---/
 };
 
-a.showFiles = function (callback){
+a.showFiles = function (callback, placeToShow){
     a.authorizeAndPerform(loadDriveApi);     
     function loadDriveApi(){
         gapi.client.load('drive', 'v3', showFiles);
@@ -114,26 +152,16 @@ a.showFiles = function (callback){
         var request = gapi.client.drive.files.list(fileMetadata);
         request.execute(handleResponse);        
         function handleResponse(response){
-            a.allFilesArray = response.files;//[];             
-            v.filesInfo.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
-            response.files.forEach(file=>{
-                //a.allFilesArray.push(file);
-                v.filesInfo.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br> Album Art: ${file.description}<br><br>`;
-            });
-            //------| check for, and use localstorage |-------//
-            if(window.localStorage){
-                if(!!window.localStorage.getItem(m.tuneToPixFilename)){
-                    a.tuneToPix = JSON.parse(window.localStorage.getItem(m.tuneToPixFilename));
-                }
-                var tunes = Object.keys(a.tuneToPix);
-                tunes.forEach(tune=>{
-                    console.log(`Tune: ${tune}, Pix: ${a.tuneToPix[tune]}`);
-                });
+            a.allFilesArray = response.files;//[];
+            if(callback){
+              callback(response.files);
+            }          
+            if(placeToShow){
+              placeToShow.innerHTML = "<center>FILES &  FOLDERS: </center><br>";
+              response.files.forEach(file=>{
+                placeToShow.innerHTML += `Filename: ${file.name}<br>FileID: ${file.id}<br>PictureID: ${file.description}<br><br>`;
+              });              
             }
-            //-----------------------------------------------//
-        }
-        if(callback){
-            callback();
         }
     }
 };
@@ -170,8 +198,9 @@ a.getFileContents = function(ID = "dummyID", callback){
         request.execute(function(response, raw) {
             v.txtFileContentId.value = "";
             console.log(
-            `Raw Data: ${raw}
-             Response: ${response}`);
+              `Raw Data: ${raw}
+               Response: ${response}`)
+            ;
              if(callback){
                 callback(response, raw);
              }
@@ -186,45 +215,17 @@ a.deleteFile = function(fileId){
         });
         request.execute(function(response) {
             if(response && !response.error){
-                v.clearAllText();
                 a.showFiles(a.setFilesMetaData(a.localFileMetaDataName,function(x){}));
             }
             else{
                 alert("Trouble deleting file.");
             }
-           
         });        
     }
 };
 
-a.handleAuthResult = function(authResult, callBack){
-    if(authResult && ! authResult.error){
-        if(a.firstAuthRequest){
-            a.firstAuthRequest = false;
-            a.initialize();
-        }        
-        a.authorized = true;
-        callBack();
-    }
-    else{
-        a.authorized = false;
-        a.authorizeAndPerform(callBack);       
-    }
-};
 
-a.authorizeAndPerform = function authorizeAndPerform(callBack){
-    if(a.authorized){
-        a.authToken.immediate = true;
-    }
-    else{
-        a.authToken.immediate = false;        
-    }
-    
-    gapi.auth.authorize(a.authToken, function(authResult){
-        a.handleAuthResult(authResult, callBack);
-    });
 
-};
 //aliases, etc.
 a.makeFolder = a.createFolder;
 
@@ -234,12 +235,7 @@ a.saveMusicFile = function(rawFile){
     a.uploadFile(rawFile, m.chosenMusicFilename, a.musicFolderId);
 };
 
-a.savePictureFile = function(rawFile){
-    //have to make raw file into a blob
-    a.uploadFile(rawFile, m.chosenPictureFilename, a.pictureFolderId);
-};
-
-a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
+a.uploadFile = function uploadFile( CONTENT, filename, parentFolder, callback ){
     var boundary = '-------314159265358979323846';
     var delimiter = "\r\n--" + boundary + "\r\n";
     var close_delim = "\r\n--" + boundary + "--";
@@ -256,7 +252,7 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
         var metadata = {
             'name': filename,
             'mimeType': contentType,
-            "description": getDesription(contentType),
+            "description": a.pictureId,
             "parents": [parentFolder]
         };
         var base64Data = window.btoa(reader.result); //the window element's build-in binary-to-ascii method
@@ -277,38 +273,24 @@ a.uploadFile = function uploadFile( CONTENT, filename, parentFolder ){
             'headers': {
                 'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
             },
-            'body': multipartRequestBody});
+            'body': multipartRequestBody});             
         request.execute(function(file, raw){
-            console.log(`'${file.name}', ${file.id}, ${metadata.description}`);
+            console.log(`'${file.name}', ${file.id}, ${file.description}`);
             a.setFilesMetaData(a.localFileMetaDataName,function(){});
-            if(file.name === m.tuneToPixFilename){
-                a.tuneToPixFileId = file.id;
-            }
-            v.clearAllText();
             a.showFiles();
             a.setFilesMetaData(a.localFileMetaDataName, function(data){
                 var list = "";
                 data.forEach(dataObject=>{
                     list += dataObject.name + '\n';
                 });
-            }); 
-        });
+            });
+          if(callback){callback(file, multipartRequestBody)}
+        }); 
     };
-    //======helper======//
-    function getDesription(type){
-        var associateFilename = "";
-        if(type.indexOf("audio") == -1){
-            associateFilename = m.chosenMusicFilename;
-        }
-        else if(type.indexOf("image") == -1){
-            associateFilename = m.chosenPictureFilename;
-        }
-        return associateFilename;
-    }
 };
 
 //==============================================================================//
-//==========| Attempt at adding a more useful superset of methods |=============//
+//======================| getting and setting files metadata |==================//
 //==============================================================================//
 a.filesMetaData = {};
 /**
@@ -347,9 +329,8 @@ a.getFilesMetaData = function (localStorageName, actOnMetaData){
     }
     //--------------------------
 };
-
 /**
-    setFilesMetaData retreives this app's files metaData from
+    setFilesMetaData retreives  files metaData for this app from
     Google Drive, applies JSON.stringify() and stores it
     to localStorage under the name supplied, and also
     stores it to a.filesMetaData
@@ -360,6 +341,7 @@ a.setFilesMetaData = function (localStorageName, actOnMetaData){
          gapi.client.load('drive', 'v3', performRequest);
          function performRequest(){
             var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name, description)"} );
+            //var request = gapi.client.drive.files.list( {'fields': "nextPageToken, files(id, name)"} );
             request.execute(function(response){
                 a.filesMetaData = response.files;
                 if(window.localStorage){
@@ -372,4 +354,3 @@ a.setFilesMetaData = function (localStorageName, actOnMetaData){
     //---------------------------
     a.authorizeAndPerform(setFilesMetaData);
 };
-

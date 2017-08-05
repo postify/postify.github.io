@@ -1,0 +1,533 @@
+* {
+  box-sizing: border-box;
+}
+#player{
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+}
+
+html{
+  font-size: calc(calc(1vh + 1vw) + 5px);
+  /*user-select: none;*/
+  tap-highlight-color: rgba(0,0,0,0);
+  user-select: none;
+}
+
+body {
+  /*font-family: helvetica, arial, sans-serif;*/
+  font-family: Bentham, serif;
+  /*font-family: Century Gothic, sans-serif;*/
+  margin: 25px;
+  font-weight: normal;
+}
+
+input{
+  cursor: pointer;
+}
+
+#memo{
+  float: right;
+  visibility: hidden;
+  border: 1px solid teal;
+  z-index: 15;
+}
+#holder{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  hsla: hsla(60, 100%, 99%, 1);
+  background-size: cover;
+}
+
+#info{
+  position: absolute;
+  top: 20%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #222;
+  text-shadow: 0 1px 0 #ddd;
+  z-index: 15;
+  visibility: hidden;  
+}
+
+#newShroud{
+  position: fixed;
+  margin: auto;
+  background: black url(FlashingIpod.gif) no-repeat center;
+  background-size: cover;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 1s ease;
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+}
+
+#app{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: hsla(60, 100%, 99%, 1);
+  background-size: cover;
+  width: 100%;
+  height: 100%;  
+  overflow-x: hidden;
+  z-index: 3;
+}
+
+
+#controls{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 85%;
+  box-shadow: inset 3px 3px 60px #333;
+  background: linear-gradient(-220deg,hsla(180, 50%, 50%,0.4),lightblue ,hsla(180, 50%, 50%,0.4),transparent, transparent);  
+  border-top-left-radius: 100%;
+  opacity: 0.7;
+  visibility: visible; 
+}
+
+#controlsToggler{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 35%; 
+  border-top-left-radius: 100%;
+  box-shadow: -4px -4px 50px #333;
+  background-color: transparent;
+  opacity: 1;  
+}
+
+.playerVertical{
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0.25%;
+  width: 99.5%; 
+  border-radius: 0.25rem;
+  box-shadow: 0 0 5px gray;
+  opacity: 0.4;
+}
+
+.playerHorizontal{
+  display: block;  
+  position: absolute;
+  bottom: 0;
+  left: 0.5%;
+  width: 48%;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 5px gray;
+  opacity: 0.4;
+}
+
+.menuLine{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 0.3rem;
+  background-color: black;
+  transform-origin: left;
+}
+
+.center{  
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%); 
+  border-radius: 50%;
+
+}
+
+/*
+.center:active{
+  background: hsl(180, 100%, 20%);
+  color: white;
+  text-shadow: 0 1px 0 black;  
+}
+*/
+.roundButton{
+  position: absolute;
+  color: black;
+  text-shadow: 0 1px 0 white; 
+  text-align: center; 
+  line-height: 150%;  
+  border-radius: 50%;
+  font-size: 1.68rem;
+  height: 4rem;
+  width: 4rem;
+  box-shadow: 0 0 12px #333;
+  cursor: pointer;
+  background: linear-gradient(45deg,hsla(240, 50%, 50%, 0.2), lightblue,hsla(120, 50%, 50%, 0.2));
+  visiblity: visible; 
+  user-select: none;
+}
+
+.roundButton span{
+  border-radius: 50%; 
+}
+
+
+.roundButton:active{
+  background-color: hsla(120, 100%, 20%, 0.8);
+  color: white;
+  text-shadow: 0 1px 0 black;
+}
+
+
+#btnNext{
+  font-size: 1.68rem;
+  letter-spacing: -0.35rem;  
+  left:78%;
+  top: 40%;
+}
+
+#btnBack{
+  font-size: 1.68rem;
+  letter-spacing: -0.35rem;
+  left: 42%;
+  top: 40%; 
+}
+
+#btnBack span{
+  transform: rotateY(180deg) translate(50%, -50%);
+}
+
+#btnPlay{
+  left: 60%;
+  top: 40%;
+  line-height: 1.6;
+  text-align: center;
+  background: linear-gradient(45deg,hsla(240, 50%, 50%, 0.4), lightblue,hsla(120, 50%, 50%, 0.4));  
+}
+
+#spanBtnPlay{
+  padding-top: 0.75rem;
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 53%;
+  height: 4.1rem;
+  width: 4.1rem;  
+  transform: translate(-50%, -50%);
+  font-size: 1.68rem; 
+  letter-spacing: 0.25rem;
+}
+
+#btnNonStop{
+  letter-spacing: 0;
+  text-shadow: 0 1px 0 #aaa; 
+  top: 62%;
+  left: 61%;
+  font-size: 0.85rem;
+  font-weight: bold;
+  line-height: 89%;
+  height: 3rem;
+  width: 3rem;  
+}
+/*
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Background_and_Borders/Using_CSS_multiple_backgrounds
+*/
+#btnShuffle{
+  left: 42%;
+  top:  62%;/*68.5%;*/
+  height: 3rem;
+  width: 3rem; 
+}  
+
+.blackShuffle{
+  display: inline-block;
+  /*
+  background:  url(https://cdn.glitch.com/c4bb4807-9a96-4540-b15b-646d08ef48ea%2FShuffleBlack.png?1493945051283)no-repeat center; 
+  background-size: 70% 70%;
+  */
+  background-image: url(blackShuffle.png), linear-gradient(45deg,hsla(240, 50%, 50%, 0.2), lightblue,hsla(120, 50%, 50%, 0.2));
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-size: 70% 70%, cover;
+  width: 4rem;
+  padding-top: 2.1rem; 
+}
+.whiteShuffle{
+  display: inline-block;
+  background: teal url(whiteShuffle.png) no-repeat center;
+  /*linear-gradient(-220deg,hsla(180, 50%, 50%,0.4),lightblue ,hsla(180, 50%, 50%,0.4),transparent, transparent) no-repeat center cover;*/
+  background-size: 70% 70%;
+  width: 4rem;
+  padding-top: 2.1rem; 
+}
+
+
+#filesInfo{
+  position: absolute;
+  top: 10%;
+  left: 0;
+  height: 35%;
+  width: 99%;
+  overflow-y: scroll;
+  text-shadow: 0 1px 0 #777;
+  color: white;
+  padding: 0.25rem;
+  background: transparent;
+  border-radius: 0.25rem;
+  z-index: 0;
+  text-shadow: 0 2px 0 black;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px black;
+  visibility: hidden;
+}
+
+#menu{
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  box-shadow: none;
+  z-index: 20;
+  transition: opacity 0.5s ease;
+  visibility: hidden;
+  opacity: 1;
+}
+
+#fileChooser{
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  opacity:0;
+  z-index: 20;
+}
+
+#menuBox{
+  position: absolute;
+  letter-spacing: 0;
+  text-shadow: 0 1px 0 #ccc;   
+  padding-top: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  line-height: 90%;  
+  transition: background 0.5s ease;
+}
+/*
+#menuBox:active{
+  background: teal;
+  color: white;
+  text-shadow: 0 1px 0 black;  
+}
+*/
+#uploadBlocker{
+  visibility: hidden;
+  font-size: 0.9rem;
+  z-index: 5;
+  cursor: auto;
+}
+
+#artistAndTitle{
+  position: absolute;
+  z-index: 6;
+  padding: 0.25rem;
+  top: 1rem;
+  left: 0.5rem;
+  font-size: 1.5rem;
+  color: #242424;
+  text-shadow: 0 1px 0 white;
+  font-weight: bold;
+  width: 99%;
+  tradition:  all 0.25s ease; 
+}
+
+#timeInfoHolder{
+  position: absolute;
+  z-index: 6;
+  padding: 0.25rem;
+  bottom: 13%;
+  right: 0.5rem;
+  font-size: 1.5rem;
+  color: #242424;
+  text-shadow: 0 1px 0 white;
+  font-weight: bold;
+  width: 50%;
+  text-align:right;
+}
+
+#timeInfo{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#songChooserGroup{
+  position: absolute;
+  font-size: 0.9rem;  
+  letter-spacing: 0;
+  line-height: 0.85;
+  left: 20%;
+  bottom: 11%;
+  text-align: center;
+  color: black;
+  height: 3.2rem;
+  width: 3.rem; 
+  padding-top: 0.1rem;
+  z-index: 20;   
+}
+#songChooser{
+  display: inline-block;
+  position: absolute;
+  font-size: 0.85rem;  
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.0;
+  height: 3.2rem;
+  width: 3.2rem;
+  z-index: 7;  
+}
+
+#songChooserCover{
+  position: absolute;
+  top: 0;
+  left: 0;  
+  position: absolute;
+  color: black;
+  text-shadow: 0 1px 0 white; 
+  text-align: center;
+  font-size: 0.85rem;
+  box-shadow: 0 0 12px #333;
+  cursor: pointer;
+  background: linear-gradient(-220deg,hsla(180, 50%, 50%,0.4),lightblue ,hsla(180, 50%, 50%,0.4),transparent, transparent);
+  overflow: hidden;
+  font-weight: bold;
+  height: 3.2rem;
+  width: 3.2rem;
+  z-index: 6;   
+}
+#songList{
+  font-size: 0.85rem;  
+  letter-spacing: 0;
+  line-height: 1.1;  
+  display: block;
+  color: black;
+  text-shadow: 0 1px 0 white;  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;   
+}
+
+.stop{
+  background-image: linear-gradient(45deg,hsla(240, 50%, 50%, 0.2), lightblue,hsla(120, 50%, 50%, 0.2));
+  color: black;
+}
+.nonStop{
+  background-color: teal;
+  background-image: none;
+  color: white;
+}
+
+#msg{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  text-shadow: 0 1px 0 black;
+  color: white;
+  opacity: 0.6;
+}
+
+#newMenuGroup{
+  visibility: visible;
+  opacity: 1;
+  top: 18%;
+  right: 3%;
+  height: 3.5rem;
+  width: 3.5rem;
+  z-index: 20;
+}
+#menuLines{
+  position: absolute;
+  top: 50%;
+  /*left: 68%;*/
+  left: 59%;
+  transform: translate(-50%, -50%);
+  height: 2.5rem;
+  width: 2.5rem;
+  background: none;
+  box-shadow: none;
+}
+.line{
+  position: absolute;
+  height: 0.35rem;
+  width: 79.1%;
+  background-color: #222;
+  transition: transform 0.5s ease, left 0.5s ease;  
+}
+#topLine{
+  top: 15%;
+  transform-origin: left;
+  /*transform: rotateZ(45deg);*/
+}
+#middleLine{
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  /*transform: rotateY(90deg);*/
+}
+#bottomLine{
+  bottom: 15.5%;
+  transform-origin: left; 
+  /*transform: rotateZ(-45deg);*/
+}
+#menuGlass{
+  cursor: pointer;
+  background: none;
+  z-index: 10;
+  box-shadow: none;  
+}
+#menuCurtain{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100;
+  background: linear-gradient(-45deg,teal, lightgray, teal);
+  opacity: 0.4;
+  visibility: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  z-index: 19;
+}
+
+#cmp3{
+  z-index: 21;
+}
+
+#offLineInfo{
+  position: absolute;
+  padding: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: hsla(0, 80%, 40%,0.75);
+  z-index: 19; 
+  visibility: hidden;
+}

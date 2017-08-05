@@ -1,0 +1,20 @@
+[27-Dec-2016 20:31:28 UTC] PHP Warning:  file_put_contents(/home/ubuntu/workspace/YiheyisUpload/uploads/php.ini): failed to open stream: No such file or directory in /home/ubuntu/workspace/YiheyisUpload/getFile.php on line 14
+[27-Dec-2016 20:31:28 UTC] PHP Stack trace:
+[27-Dec-2016 20:31:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
+[27-Dec-2016 20:31:28 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14
+[27-Dec-2016 20:33:58 UTC] PHP Warning:  file_put_contents(/home/ubuntu/workspace/YiheyisUpload/uploads/Red Hot Chili Peppers - Dani California.mp3): failed to open stream: No such file or directory in /home/ubuntu/workspace/YiheyisUpload/getFile.php on line 14
+[27-Dec-2016 20:33:59 UTC] PHP Stack trace:
+[27-Dec-2016 20:33:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
+[27-Dec-2016 20:33:59 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14
+[27-Dec-2016 22:38:29 UTC] PHP Warning:  file_put_contents(/home/ubuntu/workspace/YiheyisUpload/uploads/Kraftwerk - Computer Love.mp3): failed to open stream: No such file or directory in /home/ubuntu/workspace/fileupload/getFile.php on line 14
+[27-Dec-2016 22:38:29 UTC] PHP Stack trace:
+[27-Dec-2016 22:38:29 UTC] PHP   1. {main}() /home/ubuntu/workspace/fileupload/getFile.php:0
+[27-Dec-2016 22:38:29 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/fileupload/getFile.php:14
+[27-Dec-2016 22:39:18 UTC] PHP Warning:  file_put_contents(/home/ubuntu/workspace/YiheyisUpload/uploads/Kraftwerk - Computer Love.mp3): failed to open stream: No such file or directory in /home/ubuntu/workspace/fileupload/getFile.php on line 14
+[27-Dec-2016 22:39:18 UTC] PHP Stack trace:
+[27-Dec-2016 22:39:18 UTC] PHP   1. {main}() /home/ubuntu/workspace/fileupload/getFile.php:0
+[27-Dec-2016 22:39:18 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/fileupload/getFile.php:14
+[27-Dec-2016 22:40:15 UTC] PHP Warning:  file_put_contents(/home/ubuntu/workspace/YiheyisUpload/uploads/Kraftwerk - Computer Love.mp3): failed to open stream: No such file or directory in /home/ubuntu/workspace/fileupload/getFile.php on line 14
+[27-Dec-2016 22:40:15 UTC] PHP Stack trace:
+[27-Dec-2016 22:40:15 UTC] PHP   1. {main}() /home/ubuntu/workspace/fileupload/getFile.php:0
+[27-Dec-2016 22:40:15 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/fileupload/getFile.php:14
