@@ -27,7 +27,7 @@ a.authToken = {
     scope: 'https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file',    
     immediate: null
 };
-a.musicFolderName = "__music-sweetspot";
+a.musicFolderName = "__music-postify";
 a.firstAuthRequest = true;
 a.authorized = false;//true;
 a.musicFolderExists = null;
